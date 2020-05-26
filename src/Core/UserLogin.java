@@ -3,16 +3,35 @@ package Core;
 /**
  * 此类是一个登录界面调用类，包括了登录时所含的所有参数
  * 此类有登录、注册、找回密码等方法
+ *
+ * @author Fosyme
  */
 public class UserLogin {
-    private String username;          //用户名
-    private String password;          //密码
-    private boolean rememberPassword; //记住密码
-    private boolean autoLogin;        //自动登录
+    private String userId;              //用户id
+    private String username;            //用户名
+    private String password;            //密码
+    private boolean rememberPassword;   //记住密码 (默认否)
+    private boolean autoLogin;          //自动登录 (默认否)
+
+    {
+        userId = null;
+        username = null;
+        password = null;
+        rememberPassword = false;
+        autoLogin = false;
+    }
+
+    public UserLogin() {
+
+    }
 
     public UserLogin(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public void setUsername(String username) {
@@ -38,8 +57,11 @@ public class UserLogin {
     }
 
     //注册方法
-    public int signUp() {
-
+    public int signUp(String[] userMsg) {
+        String[] infoProcessed = new String[11];
+        if (userMsg.length == 11) {
+            
+        }
         return ResultStatus.NONE;
     }
 
@@ -64,4 +86,5 @@ public class UserLogin {
                 ", autoLogin=" + autoLogin +
                 '}';
     }
+
 }
