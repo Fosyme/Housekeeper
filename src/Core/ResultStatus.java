@@ -10,7 +10,7 @@ public interface ResultStatus {
 
     int PASSWORD_ERROR = -1;            //登录，密码错误
     int USER_NOT_EXIST = -2;            //登录或找回密码，用户名不存在
-    int USER_NAME_EXIST = -3;           //注册，用户名存在
+    int USER_IS_EXIST = -3;             //注册，用户已存在
     int INFO_AGAINST_RULES = -4;        //注册，用户信息不符合规范
     int USER_PHONE_ERROR = -5;          //找回密码，用户手机号错误
     int ENCRYPTED_QUESTION_ERROR = -6;  //找回密码，密保问题错误
