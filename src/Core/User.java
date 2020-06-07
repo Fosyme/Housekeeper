@@ -1,91 +1,126 @@
 package Core;
 
+import Dao.AccessOperation;
+import com.sun.javafx.binding.StringFormatter;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class User {
-    private String userID;
-    private String userName;            //用户名
-    private String password;            //密码
-    private boolean rememberPassword;   //记住密码 (默认否)
-    private boolean autoLogin;          //自动登录 (默认否)
-    private String[] bookID;
-    private String[] orderID;
-    private UserLogin userLogin;
+    private final String userID;                        //用户ID
+    private String userName;                            //用户名
+    private String userRegTime;                         //用户注册时间
+    private String userLastTime;                        //用户上次登录时间
+    private String userSex;                             //用户性别
+    private int userAge;                                //用户年龄
+    private String userPhone;                           //用户手机号
+    private String userAddress;                         //用户地址
+    private byte[] userHeadThumb;                       //用户头像
+    private HashMap<String, ArrayList<String>> booksID; //账本ID
+    private ArrayList<String>[] ordersID;               //账单ID
+
 
     {
-        userID = null;
         userName = null;
-        password = null;
-        rememberPassword = false;
-        autoLogin = false;
-        bookID = null;
-        orderID = null;
-        userLogin = null;
+        userRegTime = null;
+        userLastTime = null;
+        userSex = null;
+        userAge = 0;
+        userPhone = null;
+        userAddress = null;
+        userHeadThumb = null;
+        booksID = null;
+        booksID = new HashMap<>();
+        ordersID = null;
     }
 
-    public User(String userId) {
-        this.userID = userId;
+    public User(String userID) {
+        this.userID = userID;
+        initialization();
     }
 
     public String getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getUserRegTime() {
+        return userRegTime;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserLastTime() {
+        return userLastTime;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getUserSex() {
+        return userSex;
     }
 
-    public boolean isRememberPassword() {
-        return rememberPassword;
+    public int getUserAge() {
+        return userAge;
     }
 
-    public void setRememberPassword(boolean rememberPassword) {
-        this.rememberPassword = rememberPassword;
+    public String getUserPhone() {
+        return userPhone;
     }
 
-    public boolean isAutoLogin() {
-        return autoLogin;
+    public String getUserAddress() {
+        return userAddress;
     }
 
-    public void setAutoLogin(boolean autoLogin) {
-        this.autoLogin = autoLogin;
+    public byte[] getUserHeadThumb() {
+        return userHeadThumb;
     }
 
-    public String[] getBookID() {
-        return bookID;
+    public HashMap<String, ArrayList<String>> getBooksID() {
+        return booksID;
     }
 
-    public void setBookID(String[] bookID) {
-        this.bookID = bookID;
+    public ArrayList<String>[] getOrdersID() {
+        return ordersID;
     }
 
-    public String[] getOrderID() {
-        return orderID;
-    }
+    //初始化方法, 用户登录时将用户所有数据存放到类中
+     private void initialization() {
+         ResultSet userRS;
+         ResultSet bookRS;
+         ResultSet[] ordersRS;
 
-    public void setOrderID(String[] orderID) {
-        this.orderID = orderID;
-    }
-
-    public UserLogin getUserLogin() {
-        return userLogin;
-    }
-
-    public void setUserLogin(UserLogin userLogin) {
-        this.userLogin = userLogin;
+         try {
+             userRS = AccessOperation.query("user", userID);
+             if (userRS.next()) {
+                 userName = userRS.getString("user_name");
+                 userRegTime = userRS.getString("user_reg_time");
+                 userLastTime = userRS.getString("user_last_time");
+                 userSex = userRS.getString("user_sex");
+                 userAge = userRS.getInt("user_age");
+                 userPhone = userRS.getString("user_phone");
+                 userAddress = userRS.getString("user_address");
+                 userHeadThumb = userRS.getBytes("user_head_thumb");
+             }
+             bookRS = AccessOperation.query("book", userID);
+             bookRS.last();
+             int rsLength = bookRS.getRow();
+             ordersID = new ArrayList[rsLength];
+             ordersRS = new ResultSet[rsLength];
+             bookRS.beforeFirst();
+             for (int i = 0; bookRS.next(); i++) {
+                 booksID.put(bookRS.getString("book_id"), ordersID[i]);
+                 ordersRS[i] = AccessOperation.query("order", bookRS.getString("book_id"));
+                 ordersID[i] = new ArrayList<>();
+                 while (ordersRS[i].next()) {
+                     //TODO 这个查询的方法有问题，导致只能从一个表中查询索引ID的结果，始终为一项，不符合要求
+                     String temp = ordersRS[i].getString("order_name");
+                     ordersID[i].add(temp);
+                 }
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
     }
 }

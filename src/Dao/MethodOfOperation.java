@@ -16,10 +16,10 @@ public class MethodOfOperation {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
     private static Connection connection = jdbcUtil.getConnection();
-    private static final int FINAL_INT_ONE=1;
-    private static final int FINAL_INT_Five=5;
-    private static final int FINAL_INT_TWO=2;
-    
+    private static final int FINAL_INT_ONE = 1;
+    private static final int FINAL_INT_Five = 5;
+    private static final int FINAL_INT_TWO = 2;
+
     /**
      * 添加用户的方法
      * 参数table为需要添加数据的表名,返回用户id信息
@@ -34,8 +34,8 @@ public class MethodOfOperation {
             preparedStatement.setString(2, data[1]);
             preparedStatement.setString(3, data[2]);
             preparedStatement.setString(4, data[3]);
-            preparedStatement.setLong(5, Long.parseLong(data[4]));
-            preparedStatement.setLong(6, Long.parseLong(data[5]));
+            preparedStatement.setString(5, data[4]);
+            preparedStatement.setString(6, data[5]);
             preparedStatement.setString(7, data[6]);
             preparedStatement.setInt(8, Integer.parseInt(data[7]));
             preparedStatement.setString(9, data[8]);
@@ -64,8 +64,8 @@ public class MethodOfOperation {
             preparedStatement.setInt(1, Integer.parseInt(data[0]));
             preparedStatement.setString(2, data[1]);
             preparedStatement.setString(3, data[2]);
-            preparedStatement.setLong(4, Long.parseLong(data[3]));
-            preparedStatement.setLong(5, Long.parseLong(data[4]));
+            preparedStatement.setString(4, data[3]);
+            preparedStatement.setString(5, data[4]);
             preparedStatement.execute();
             preparedStatement.clearParameters();
             id = MethodOfOperation.queryMaxId(connection, table);
@@ -90,7 +90,7 @@ public class MethodOfOperation {
             preparedStatement.setString(3, data[2]);
             preparedStatement.setString(4, data[3]);
             preparedStatement.setString(5, data[4]);
-            preparedStatement.setLong(6, Long.parseLong(data[5]));
+            preparedStatement.setString(6, data[5]);
             preparedStatement.setString(7, data[6]);
             preparedStatement.setString(8, data[7]);
             preparedStatement.setString(9, data[8]);
@@ -108,7 +108,7 @@ public class MethodOfOperation {
      */
     private static String queryMaxId(Connection connection, String table) {
         String id = null;
-        resultSet=null;
+        resultSet = null;
         String sqlAboutId = table + "_id";
         String sql = "select max(`" + sqlAboutId + "`)  from  `" + table + "`";
         try {
@@ -162,7 +162,7 @@ public class MethodOfOperation {
             sql = "update `user` set `user_last_time`=? where `user_id`=?";
             try {
                 preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setLong(1, Long.parseLong(newData[0]));
+                preparedStatement.setString(1, newData[0]);
                 preparedStatement.setInt(2, Integer.parseInt(id));
                 existence = preparedStatement.executeUpdate();
                 preparedStatement.clearParameters();
@@ -171,7 +171,7 @@ public class MethodOfOperation {
             }
         }
         if (newData.length == FINAL_INT_Five) {
-            sql = "update `user` set `user_sex`=?,`user_age`=?,`user_phone`=?,`user_address`=?,`user_head_thumb`=?  where `user_id`= ?";
+            sql = "update `user` set `user_sex`=?,`user_age`=?,`user_phone`=?,`user_address`=?,`user_head_thumb`=? where `user_id`= ?";
             try {
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, newData[0]);
@@ -207,7 +207,7 @@ public class MethodOfOperation {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, newData[0]);
             preparedStatement.setString(2, newData[1]);
-            preparedStatement.setLong(3, Long.parseLong(newData[2]));
+            preparedStatement.setString(3, newData[2]);
             preparedStatement.setInt(4, Integer.parseInt(id));
             existence = preparedStatement.executeUpdate();
             preparedStatement.clearParameters();
@@ -237,7 +237,7 @@ public class MethodOfOperation {
             preparedStatement.setString(2, newData[1]);
             preparedStatement.setString(3, newData[2]);
             preparedStatement.setString(4, newData[3]);
-            preparedStatement.setLong(5, Long.parseLong(newData[4]));
+            preparedStatement.setString(5, newData[4]);
             preparedStatement.setString(6, newData[5]);
             preparedStatement.setString(7, newData[6]);
             preparedStatement.setString(8, newData[7]);
@@ -296,19 +296,20 @@ public class MethodOfOperation {
         return returnValue;
     }
 
-    /**登录验证，参数table 为表名，
+    /**
+     * 登录验证，参数table 为表名，
      * 参数data为数组类型，数组第一个数据为用户名，第二个数据为密码;
      * 如果执行成功且有返回值，则返回id，否则返回null;
-     * */
-    static String loginAuthentications(String table, String[] data) {
+     */
+    static String loginAuthentications(String userName, String userPassword) {
         String id = null;
         String sql = null;
-        resultSet=null;
+        resultSet = null;
         sql = "select `user_id` from `user` where `user_name` = ? and `user_pwd` = ?";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, data[0]);
-            preparedStatement.setString(2, data[1]);
+            preparedStatement.setString(1, userName);
+            preparedStatement.setString(2, userPassword);
             resultSet = preparedStatement.executeQuery();
             preparedStatement.clearParameters();
             if (resultSet.next()) {
@@ -322,21 +323,39 @@ public class MethodOfOperation {
 
     }
 
-/** 参数table为所要查询的表名，
- * 参数id为所要查询记录的id，
- * 如果执行成功，就返回该条记录的结果集，
- * 否则就返回null*/
+    /**
+     * 参数table为所要查询的表名，
+     * 参数id为所要查询记录的id，
+     * 如果执行成功，就返回该条记录的结果集，
+     * 否则就返回null
+     */
     static ResultSet queryData(String table, String id) {
-         resultSet=null;
-         String sql="select * from `"+table+"` where `"+table+"_id`=?";
+        resultSet = null;
+        String sql = "select * from `" + table + "` where `" + table + "_id`=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,id);
-            resultSet=preparedStatement.executeQuery();
+            preparedStatement.setString(1, id);
+            resultSet = preparedStatement.executeQuery();
             preparedStatement.clearParameters();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return resultSet;
+    }
+
+    /**
+     * @param userName 用户名
+     * @return 返回是否查询到此用户
+     * */
+    public static boolean CheckUserExists(String userName) {
+        String sql = "select * from `user` where user_name = ?";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, userName);
+            return preparedStatement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

@@ -23,7 +23,7 @@ public class jdbcUtil {
             username = "root";
             password = "123456";
             driver = "com.mysql.cj.jdbc.Driver";
-            url = "jdbc:mysql://localhost:3306/housekeeper?serverTimezone=GMT";
+            url = "jdbc:mysql://localhost:3306/house_keeper?serverTimezone=GMT";
             Class.forName(driver);
         } catch (Exception e) {
             System.err.println("连接失败，请检查连接参数");
