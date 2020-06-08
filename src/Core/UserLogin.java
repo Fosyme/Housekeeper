@@ -21,6 +21,7 @@ public class UserLogin {
     public static final int TRANSMIT_USER_INFORMATION_LENGTH = 11;  //向数据库传输用户信息长度
 
     public UserLogin() {
+
     }
 
     public User getUser() {
@@ -72,26 +73,41 @@ public class UserLogin {
                     j++;
                 }
             }
-            String addUserID = AccessOperation.addData("user", userInfo);
-            System.out.println(addUserID);
-            return ResultStatus.SIGN_UP_SUCCESS;
+            boolean regResult = AccessOperation.regAccount(userInfo);
+            System.out.println(regResult);
+            if (regResult) {
+                return ResultStatus.SIGN_UP_SUCCESS;
+            } else {
+                return ResultStatus.INFO_AGAINST_RULES;
+            }
         }
         return ResultStatus.DATA_ERROR;
     }
 
     //登出方法
     public ResultStatus signOut() {
-
-        return ResultStatus.UNKNOWN_ERROR;
+        if (setUserLastTime(user.getUserID(), System.currentTimeMillis())) {
+            return ResultStatus.SIGN_OUT_SUCCESS;
+        }
+        return ResultStatus.INCORRECT_WAY;
     }
 
     //找回密码
-    public ResultStatus recoverPassword(String userName, String userEncryptedAnswer) {
+    public ResultStatus recoverPassword(String userName, String userEncryptedQuestion, String userEncryptedAnswer, String newPassword) {
         boolean verifyId = AccessOperation.checkUserExist(userName);
         if (verifyId) {
-
+           String userID = AccessOperation
+                   .userEncryptedVerify(userName, userEncryptedQuestion, getMD5String(userEncryptedAnswer));
+            if (userID.isEmpty()) {
+                return ResultStatus.ENCRYPTED_ERROR;
+            }
+            if (AccessOperation.changeUserPassword(userID, newPassword)) {
+                return ResultStatus.RECOVER_PASSWORD_SUCCESS;
+            } else {
+                return ResultStatus.UNKNOWN_ERROR;
+            }
         }
-        return ResultStatus.UNKNOWN_ERROR;
+        return ResultStatus.USER_NOT_EXIST;
     }
 
     //MD5加密方法
