@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.AddClassificationController">
+   <children>
+      <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="收入分类">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="43.0" layoutY="70.0" prefHeight="45.0" prefWidth="145.0" text="分类名称">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="outputClassificationNameTextField" layoutX="238.0" layoutY="62.0" prefHeight="62.0" prefWidth="345.0" promptText="请输入收入分类名称">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="addOutputButton" layoutX="303.0" layoutY="160.0" mnemonicParsing="false" onAction="#addOutputButtonEvent" prefHeight="53.0" prefWidth="195.0" style="-fx-background-color: #0de0d9;" text="添加收入" textFill="#090bed">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="56.0" layoutY="240.0" text="收入分类列表" textFill="#7d7d7d">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="inputClassificationListView" layoutY="279.0" onEditCommit="#inputClassificationListViewCommitEvent" prefHeight="200.0" prefWidth="800.0">
+                           <contextMenu>
+                              <ContextMenu>
+                                 <items>
+                                    <MenuItem fx:id="input_editContextMenu" mnemonicParsing="false" onAction="#input_editContextMenuEvent" text="编辑" />
+                                    <MenuItem fx:id="input_deleteMenuItem" mnemonicParsing="false" onAction="#input_deleteMenuItemEvent" text="删除" />
+                                 </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </ListView>
+                        <Button fx:id="inputClassificationReturnButton" layoutX="350.0" layoutY="510.0" mnemonicParsing="false" onAction="#inputClassificationReturnButtonEvent" prefHeight="50.0" prefWidth="102.0" text="返回" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="支出分类">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="43.0" layoutY="70.0" prefHeight="45.0" prefWidth="145.0" text="分类名称">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="inputClassificationNameTextField" layoutX="238.0" layoutY="62.0" prefHeight="62.0" prefWidth="345.0" promptText="请输入支出分类名称">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="addInputButton" layoutX="303.0" layoutY="160.0" mnemonicParsing="false" onAction="#addInputButtonEvent" prefHeight="53.0" prefWidth="195.0" style="-fx-background-color: #0de0d9;" text="添加支出" textFill="#090bed">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="56.0" layoutY="240.0" text="支出分类列表" textFill="#7d7d7d">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="outputClassificationListView" layoutY="279.0" onEditCommit="#outputClassificationListViewCommitEvent" prefHeight="200.0" prefWidth="800.0">
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem fx:id="output_editContextMenu" mnemonicParsing="false" onAction="#output_editContextMenuEvent" text="编辑" />
+                                    <MenuItem fx:id="output_deleteMenuItem" mnemonicParsing="false" onAction="#output_deleteMenuItemEvent" text="删除" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </ListView>
+                        <Button fx:id="outputClassificationReturnButton" layoutX="350.0" layoutY="510.0" mnemonicParsing="false" onAction="#outputClassificationReturnButtonEvent" prefHeight="50.0" prefWidth="102.0" text="返回" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

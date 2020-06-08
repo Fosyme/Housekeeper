@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.dateCheckController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="-3.0" prefHeight="136.0" prefWidth="808.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="20.0" prefWidth="52.0" text="从：">
+               <HBox.margin>
+                  <Insets left="90.0" />
+               </HBox.margin>
+            </Label>
+            <DatePicker fx:id="starDatePicker" prefHeight="30.0" prefWidth="198.0" promptText="从选中起始日期：">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </DatePicker>
+            <Label prefHeight="20.0" prefWidth="52.0" text="到：">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <DatePicker fx:id="endDatePicker" prefHeight="30.0" prefWidth="198.0" promptText="请选择终止日期：">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </DatePicker>
+            <Button fx:id="dateCheckButton" alignment="CENTER" mnemonicParsing="false" onAction="#dateCheckButtonEvent" text="查询">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Button>
+         </children></HBox>
+      <HBox alignment="CENTER" layoutX="-2.0" layoutY="130.0" prefHeight="43.0" prefWidth="808.0">
+         <children>
+            <Separator prefHeight="0.0" prefWidth="797.0" />
+         </children>
+      </HBox>
+      <TableView layoutY="160.0" prefHeight="633.0" prefWidth="806.0" tableMenuButtonVisible="true">
+        <columns>
+          <TableColumn fx:id="check_idColumn" prefWidth="104.0" text="序号" />
+          <TableColumn fx:id="check_typeColumn" prefWidth="127.0" text="类型" />
+            <TableColumn fx:id="check_moneyColumn" prefWidth="115.0" text="金额" />
+            <TableColumn fx:id="check_classificationColumn" prefWidth="131.0" text="分类" />
+            <TableColumn fx:id="check_memoColumn" prefWidth="134.0" text="备注" />
+            <TableColumn fx:id="check_dateColumn" prefWidth="178.0" text="日期" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

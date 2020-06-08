@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainPageController">
+   <children>
+      <SplitPane layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.topAnchor="-3.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="742.0" prefWidth="860.0">
+               <children>
+                  <MenuBar layoutX="39.0" layoutY="1.0" prefHeight="32.0" prefWidth="1161.0">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="文件">
+                        <items>
+                          <MenuItem fx:id="importMenuItem" mnemonicParsing="false" onAction="#importMenuItemEvent" text="导入" />
+                              <MenuItem fx:id="exportMenuItem" mnemonicParsing="false" onAction="#exportMenuItemEvent" text="导出" />
+                              <MenuItem fx:id="backupMenuItem" mnemonicParsing="false" onAction="#backupMenuItemEvent" text="恢复" />
+                              <MenuItem fx:id="recoverMenuItem" mnemonicParsing="false" onAction="#recoverMenuItemEvent" text="备份" />
+                              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitMenuItemEvent" text="退出" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="编辑">
+                        <items>
+                          <MenuItem fx:id="addMenuItem" mnemonicParsing="false" onAction="#addMenuItemEvent" text="添加" />
+                              <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteMenuItemEvent" text="删除" />
+                              <MenuItem fx:id="alterMenuItem" mnemonicParsing="false" onAction="#alterMenuItemEvent" text="修改" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="图表">
+                        <items>
+                          <MenuItem fx:id="lineChartMenuItem" mnemonicParsing="false" onAction="#lineChartMenuItemEvent" text="折线图" />
+                              <MenuItem fx:id="barChartMenuItem" mnemonicParsing="false" onAction="#barChartMenuItemEvent" text="条形图" />
+                              <MenuItem fx:id="pieChartMenuItem" mnemonicParsing="false" onAction="#pieChartMenuItemEvent" text="饼图" />
+                        </items>
+                      </Menu>
+                        <Menu mnemonicParsing="false" text="查询">
+                          <items>
+                              <MenuItem fx:id="check" mnemonicParsing="false" text="查询" />
+                              <Menu mnemonicParsing="false" text="条件查询">
+                                <items>
+                                    <MenuItem fx:id="memoCheckMenuItem" mnemonicParsing="false" onAction="#memoCheckMenuItemEvent" text="备注查询" />
+                                    <MenuItem fx:id="dateCheckMenuItem" mnemonicParsing="false" onAction="#dateCheckMenuItemEvent" text="日期查询" />
+                                    <MenuItem fx:id="classificationCheckMenuItem" mnemonicParsing="false" onAction="#classificationCheckMenuItemEvent" text="分类查询" />
+                                </items>
+                              </Menu>
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="主题">
+                          <items>
+                              <RadioMenuItem fx:id="defaultRadioMenuItem" mnemonicParsing="false" onAction="#defaultRadioMenuItemEvent" text="默认" />
+                              <RadioMenuItem fx:id="blackRadioMenuItem" mnemonicParsing="false" onAction="#blackRadioMenuItemEvent" text="经典黑" />
+                              <RadioMenuItem fx:id="whiteRadioMenuItem" mnemonicParsing="false" onAction="#whiteRadioMenuItemEvent" text="优雅白" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="选项">
+                          <items>
+                            <MenuItem fx:id="addClassificationMenuItem" mnemonicParsing="false" onAction="#addClassificationMenuItemEvent" text="添加分类" />
+                              <MenuItem fx:id="userInfoMenuItem" mnemonicParsing="false" onAction="#userInfoMenuItemEvent" text="用户信息" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="帮助">
+                          <items>
+                            <MenuItem fx:id="abutSoftMenuItem" mnemonicParsing="false" onAction="#abutSoftMenuItemEvent" text="关于软件" />
+                              <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#helpMenuItemEvent" text="帮助" />
+                          </items>
+                        </Menu>
+                    </menus>
+                  </MenuBar>
+                  <Separator layoutY="33.0" prefHeight="17.0" prefWidth="1200.0" />
+                  <TabPane layoutX="-2.0" layoutY="48.0" prefHeight="750.0" prefWidth="1198.0" rotateGraphic="true" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="收入">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TabPane prefHeight="750.0" prefWidth="1161.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+                                      <tabs>
+                                        <Tab text="Untitled Tab 1">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                          </content>
+                                        </Tab>
+                                        <Tab text="Untitled Tab 2">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                          </content>
+                                        </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children></AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab closable="false" text="支出">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="754.0" prefWidth="1161.0" />
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+                  <ImageView fitHeight="44.0" fitWidth="39.0" layoutX="1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/记账.png" />
+                     </image></ImageView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
