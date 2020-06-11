@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.LoginController">
+   <children>
+      <AnchorPane prefHeight="683.0" prefWidth="810.0">
+         <children>
+            <VBox layoutX="219.0" layoutY="-8.0" prefHeight="806.0" prefWidth="377.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="99.0" prefWidth="462.0">
+                     <children>
+                        <Label alignment="CENTER" text="注册">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="387.0">
+                     <children>
+                        <Label text="用户名：    " />
+                        <TextField fx:id="nameTextField" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="250.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="411.0">
+                     <children>
+                        <Label text="密码：       " />
+                        <TextField fx:id="passwordTextField" prefHeight="30.0" prefWidth="250.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="411.0">
+                     <children>
+                        <Label text="性别：       " />
+                        <TextField fx:id="SexTextField" prefHeight="30.0" prefWidth="250.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
+                     <children>
+                        <Label text="年龄：       " />
+                        <TextField fx:id="ageTextField" prefHeight="30.0" prefWidth="250.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
+                     <children>
+                        <Label text="密保问题： " />
+                        <TextField fx:id="SecretprotectionproblemTextField" prefHeight="30.0" prefWidth="250.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
+                     <children>
+                        <Label text="答案：       " />
+                        <TextField fx:id="answerTextField" prefHeight="30.0" prefWidth="250.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
+                     <children>
+                        <Label text="手机号：    " />
+                        <TextField fx:id="CellPhonenumberTextField" prefHeight="30.0" prefWidth="249.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
+                     <children>
+                        <Label text="地址：       " />
+                        <TextField fx:id="AddressTextField" prefHeight="30.0" prefWidth="249.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="LoginButton" mnemonicParsing="false" onAction="#LoginButtonEvent" prefHeight="52.0" prefWidth="104.0" text="注册" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

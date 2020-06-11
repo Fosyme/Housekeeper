@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="519.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.AddAccountController">
+   <children>
+      <AnchorPane prefHeight="545.0" prefWidth="684.0">
+         <children>
+            <Label layoutX="179.0" layoutY="195.0" text="金额：" />
+            <Label alignment="CENTER" layoutX="331.0" layoutY="49.0" text="添加">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label layoutX="179.0" layoutY="130.0" text="类型：" />
+            <Label layoutX="179.0" layoutY="265.0" text="分类：" />
+            <Label layoutX="179.0" layoutY="330.0" text="备注：" />
+            <Label layoutX="179.0" layoutY="395.0" text="日期：" />
+            <RadioButton fx:id="outputRadioButton" layoutX="253.0" layoutY="130.0" mnemonicParsing="false" onAction="#outputRadioButtonEvent" text="支出" />
+            <RadioButton fx:id="inputRadioButton" layoutX="399.0" layoutY="130.0" mnemonicParsing="false" onAction="#inputRadioButtonEvent" text="收入" />
+            <TextField fx:id="moneyTextField" layoutX="253.0" layoutY="190.0" prefHeight="30.0" prefWidth="233.0" promptText="请填入金额：" />
+            <ComboBox fx:id="classificationComboBox" layoutX="253.0" layoutY="260.0" onAction="#classificationComboBoxEvetn" prefHeight="30.0" prefWidth="233.0" promptText="请选择分类" />
+            <DatePicker fx:id="datePickerTextField" layoutX="253.0" layoutY="390.0" prefHeight="30.0" prefWidth="233.0" promptText="请选择日期" />
+            <Button fx:id="addButton" layoutX="318.0" layoutY="448.0" mnemonicParsing="false" onAction="#addButtonEvent" prefHeight="45.0" prefWidth="97.0" text="添加">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <TextArea layoutX="253.0" layoutY="318.0" prefHeight="45.0" prefWidth="233.0" promptText="请填入备注：" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

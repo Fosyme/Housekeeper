@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.reportController">
+   <children>
+      <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="日报告">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="154.0" prefWidth="800.0">
+                           <children>
+                              <ComboBox fx:id="thisDayComboBox" onAction="#thisDayComboBoxEvent" prefHeight="36.0" prefWidth="212.0" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="thisDayOutputLabel" layoutX="134.0" layoutY="175.0" text="本日支出：" />
+                        <Label fx:id="thisDayInputLabel" layoutX="134.0" layoutY="297.0" text="本日收入：" />
+                        <Label fx:id="thisDayBalanceLabel" layoutX="297.0" layoutY="416.0" text="余额：" />
+                        <Label fx:id="thisDayBalanceShowLabel" layoutX="372.0" layoutY="408.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="thisDayInputShowLabel" layoutX="128.0" layoutY="354.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="thisDayOutputShowLabel" layoutX="128.0" layoutY="225.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="周报告">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="154.0" prefWidth="800.0">
+                           <children>
+                              <ComboBox fx:id="thisWeekComboBox1" onAction="#thisWeekComboBoxEvent" prefHeight="36.0" prefWidth="212.0" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="thisWeekOutputLabel1" layoutX="134.0" layoutY="175.0" text="本周支出：" />
+                        <Label fx:id="thisWeekInputLabel1" layoutX="134.0" layoutY="297.0" text="本周收入：" />
+                        <Label fx:id="thisWeekBalanceLabel1" layoutX="297.0" layoutY="416.0" text="余额：" />
+                        <Label fx:id="thisWeekBalanceShowLabel1" layoutX="372.0" layoutY="408.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="thisWeekInputShowLabel1" layoutX="128.0" layoutY="354.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="thisWeekOutputShowLabel1" layoutX="128.0" layoutY="225.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="月报告">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="154.0" prefWidth="800.0">
+                           <children>
+                              <ComboBox fx:id="thisMonthComboBox3" onAction="#thisMonthComboBoxEvent" prefHeight="36.0" prefWidth="212.0" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="thisMonthOutputLabel3" layoutX="134.0" layoutY="175.0" text="本月支出：" />
+                        <Label fx:id="thisMonthInputLabel3" layoutX="134.0" layoutY="297.0" text="本月收入：" />
+                        <Label fx:id="thisMonthBalanceLabel3" layoutX="297.0" layoutY="416.0" text="余额：" />
+                        <Label fx:id="thisMonthBalanceShowLabel3" layoutX="372.0" layoutY="408.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="thisMonthInputShowLabel3" layoutX="128.0" layoutY="354.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="thisMonthOutputShowLabel3" layoutX="128.0" layoutY="225.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="季报告">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="154.0" prefWidth="800.0">
+                           <children>
+                              <ComboBox fx:id="thisSeasonComboBox4" onAction="#thisSeasonComboBoxEvent" prefHeight="36.0" prefWidth="212.0" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="thisSeasonOutputLabel4" layoutX="134.0" layoutY="175.0" text="本季支出：" />
+                        <Label fx:id="thisSeasonInputLabel4" layoutX="134.0" layoutY="297.0" text="本季收入：" />
+                        <Label fx:id="thisSeasonBalanceLabel3" layoutX="297.0" layoutY="416.0" text="余额：" />
+                        <Label fx:id="thisSeasonBalanceShowLabel4" layoutX="372.0" layoutY="408.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="thisSeasonInputShowLabel4" layoutX="128.0" layoutY="354.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="thisSeasonOutputShowLabel4" layoutX="128.0" layoutY="225.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="年报告">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="154.0" prefWidth="800.0">
+                           <children>
+                              <ComboBox fx:id="thisYearComboBox5" onAction="#thisYearComboBoxEvent" prefHeight="36.0" prefWidth="212.0" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="thisYearOutputLabel5" layoutX="134.0" layoutY="175.0" text="本年支出：" />
+                        <Label fx:id="thisYearInputLabel5" layoutX="134.0" layoutY="297.0" text="本年收入：" />
+                        <Label fx:id="thisYearBalanceLabel5" layoutX="297.0" layoutY="416.0" text="余额：" />
+                        <Label fx:id="thisYearBalanceShowLabel5" layoutX="372.0" layoutY="408.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="thisYearInputShowLabel5" layoutX="128.0" layoutY="354.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="thisYearOutputShowLabel" layoutX="128.0" layoutY="225.0" textFill="#04e87a">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

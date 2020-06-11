@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="637.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.DeleteAccountController">
+   <children>
+      <VBox alignment="CENTER_LEFT" layoutX="205.0" layoutY="88.0" prefHeight="144.0" prefWidth="362.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="序号：">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="idTextField" prefHeight="40.0" prefWidth="270.0" promptText="请输入账目记录的序号：" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button fx:id="checkButton" layoutX="291.0" layoutY="484.0" mnemonicParsing="false" onAction="#checkButtonEvent" prefHeight="40.0" prefWidth="87.0" text="查询" textFill="#27ee09" />
+      <Button fx:id="deleteButton" layoutX="418.0" layoutY="484.0" mnemonicParsing="false" onAction="#deleteButtonEvent" prefHeight="40.0" prefWidth="87.0" text="删除" textFill="#f20707" />
+      <Label fx:id="contentLabel" layoutX="291.0" layoutY="232.0" />
+   </children>
+</AnchorPane>

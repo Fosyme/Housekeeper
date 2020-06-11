@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="475.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.SoftInformationController">
+   <children>
+      <ImageView fitHeight="221.0" fitWidth="217.0" layoutX="87.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/记账.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="347.0" layoutY="85.0" text="HouseKeeper">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="407.0" layoutY="174.0" text="版本1.0">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="374.0" layoutY="250.0" text="开发者：向世杰 李建强 权友政" textFill="#82eb0b" />
+      <Button fx:id="closeButton" layoutX="578.0" layoutY="334.0" mnemonicParsing="false" onAction="#closeButtonEvent" prefHeight="51.0" prefWidth="86.0" text="关闭">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

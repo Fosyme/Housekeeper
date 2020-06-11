@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="660.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.AlterAccountController">
+   <children>
+      <VBox layoutX="215.0" layoutY="25.0" prefHeight="636.0" prefWidth="339.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="339.0">
+               <children>
+                  <Label text="序号：" />
+                  <TextField fx:id="idTextField" prefHeight="30.0" prefWidth="273.0" promptText="请输入记录的序号：" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="81.0" prefWidth="339.0">
+               <children>
+                  <Label text="类型：    " />
+                  <RadioButton fx:id="outputRadioButton" alignment="CENTER_RIGHT" disable="true" lineSpacing="50.0" mnemonicParsing="false" onAction="#outputRadioButtonEvent" text="支出" wrapText="true">
+                     <HBox.margin>
+                        <Insets right="75.0" />
+                     </HBox.margin>
+                  </RadioButton>
+                  <RadioButton fx:id="inputRadioButton" alignment="CENTER_RIGHT" disable="true" mnemonicParsing="false" onAction="#inputRadioButtonEvent" text="收入">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="81.0" prefWidth="339.0">
+               <children>
+                  <Label text="金额：" />
+                  <TextField fx:id="moneyTextField" disable="true" prefHeight="30.0" prefWidth="273.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="87.0" prefWidth="339.0">
+               <children>
+                  <Label text="分类：" />
+                  <ComboBox fx:id="classificationComboBox" disable="true" onAction="#classificationComboBoxEvent" prefHeight="30.0" prefWidth="273.0" promptText="请选择分类" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="339.0">
+               <children>
+                  <Label text="备注：" />
+                  <TextArea fx:id="memoTextArea" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="41.0" prefWidth="272.0" promptText="请输入备注：">
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
+                  </TextArea>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="88.0" prefWidth="339.0">
+               <children>
+                  <Label text="日期：" />
+                  <DatePicker fx:id="datePickerText" disable="true" prefHeight="30.0" prefWidth="273.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <Button fx:id="checkButton" alignment="CENTER" mnemonicParsing="false" onAction="#checkButtonEvent" prefHeight="47.0" prefWidth="80.0" text="查询" textAlignment="CENTER" />
+                  <Button fx:id="alterButton" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#alterButtonEvent" prefHeight="47.0" prefWidth="80.0" text="更改" textAlignment="CENTER" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

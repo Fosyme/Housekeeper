@@ -14,8 +14,7 @@ public enum ResultStatus {
     USER_IS_EXIST,              //注册，用户已存在
     INFO_AGAINST_RULES,         //注册，用户信息不符合规范
     USER_PHONE_ERROR,           //找回密码，用户手机号错误
-    ENCRYPTED_QUESTION_ERROR,   //找回密码，密保问题错误
-    ENCRYPTED_ANSWER_ERROR,     //找回密码，密保答案错误
+    ENCRYPTED_ERROR,            //找回密码，密保错误
     DATA_NOT_SAVED,             //登出，数据未保存
     INCORRECT_WAY               //登出，非正常方式
 }
