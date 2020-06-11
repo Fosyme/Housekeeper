@@ -10,7 +10,7 @@ create table `user`
     `user_encrypted_question` varchar(50),
     `user_encrypted_answer`   varchar(32),
     `user_reg_time`           varchar(10) not null,
-    `user_last_time`          varchar(10) not null,
+    `user_last_time`          varchar(10) default null,
     `user_sex`                enum ('男','女','保密') default '保密',
     `user_age`                int,
     `user_phone`              varchar(11) not null,

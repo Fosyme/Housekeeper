@@ -3,7 +3,7 @@ package Dao;
 import java.sql.*;
 
 /**
- * @author 无
+ * @author 李建强
  */
 public class jdbcUtil {
 
@@ -37,7 +37,7 @@ public class jdbcUtil {
      */
     protected static Connection getConnection() {
         try {
-               connection = DriverManager.getConnection(url, username, password);
+               connection = DriverManager.getConnection(url,username,password);
         } catch (Exception e) {
             System.err.println("获取连接失败");
             e.printStackTrace();
