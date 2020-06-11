@@ -14,7 +14,7 @@ public class BookOperation {
      * @param data 字符串数组（用户id、账本名、账本、描述、添加时间、最后修改时间）
      * @return String，账本id
      */
-    static String addBook(String[] data) {
+    public static String addBook(String[] data) {
         String id = null;
         String sql = "insert into `book` ( `user_id`, `book_name`, `book_desc`, `book_add_time`, `book_last_time`) " +
                 "values(?,?,?,?,?)";
@@ -38,16 +38,20 @@ public class BookOperation {
      * @param id 账本id
      * @return boolean
     * */
-    static boolean deleteBook(String id) {
-        String sql ="delete from `book` where `book_id`=" + id;
-        int existence = 0;
+    public static boolean deleteBook(String id) {
+         String sql ="delete from `order` where `book_id`=" + id;
+        int existences=0;
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
-            existence = preparedStatement.executeUpdate();
+            preparedStatement.execute();
+            preparedStatement.clearParameters();
+            sql="delete from `book` where `book_id`="+id;
+            preparedStatement=CONNECTION.prepareStatement(sql);
+            existences=preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (existence !=0) {
+            if (existences!=0) {
                 return true;
             }
         }
@@ -60,7 +64,7 @@ public class BookOperation {
      * @param newData 字符串数组（账本名、账本描述、上次更改时间）
      * @return boolean
      * */
-    static boolean changeBookInfo(String id, String[] newData) {
+    public static boolean changeBookInfo(String id, String[] newData) {
         boolean returnValue = false;
         int existence = 0;
         String sql = null;

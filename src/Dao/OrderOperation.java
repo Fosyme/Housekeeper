@@ -14,7 +14,7 @@ public class OrderOperation {
      * @param data 字符串数组（账本id、账单名、金额、支付方式、收支模式、时间、分类、描述、图片）
      * @return orderId，账单id
      **/
-    static String addOrder(String[] data) {
+    public static String addOrder(String[] data) {
         String id = null;
         String sql = "insert into `order`(`book_id`,`order_name`,`order_price`,`order_way`,`order_mod`,`order_time`,`order_cate`,`order_desc`,`order_image_src`)" +
                 "values(?,?,?,?,?,?,?,?,?)";
@@ -45,7 +45,7 @@ public class OrderOperation {
      * @param id 账单id
      * @return boolean
      * */
-    static boolean deleteOrder(String id) {
+    public static boolean deleteOrder(String id) {
         String sql ="delete from `order` where `order_id`=" + id;
         int existence = 0;
         try {
@@ -68,7 +68,7 @@ public class OrderOperation {
      * @return boolean
      * */
 
-    static boolean changeOrderInfo(String id, String[] newData) {
+    public static boolean changeOrderInfo(String id, String[] newData) {
         String sql = null;
         boolean returnValue = false;
         int existence = 0;

@@ -127,19 +127,16 @@ public class Main {
         System.out.println(R);
 */
 
-
 /*        //测试删除账本的方法
-        String table="book";
-        String id="7";
-        boolean R=false;
-        R=AccessOperation.deleteData(table,id);
+        String id="1";
+        Boolean R=BookOperation.deleteBook(id);
         System.out.println(R);*/
 
 /*        //测试删除账单单的方法
         String table="order";
-        String id="1";
+        String id="2";
         boolean R=false;
-        R=AccessOperation.deleteData(table,id);
+        R=OrderOperation.deleteOrder(id);
         System.out.println(R);*/
 
 

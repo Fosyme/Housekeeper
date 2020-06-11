@@ -133,7 +133,7 @@ public class UserOperation {
      * @return boolean
     * */
 
-    static boolean deleteUser(String id) {
+    public static boolean deleteUser(String id) {
         boolean returnValue = false;
         String sql = null;
         int existence = 0;
