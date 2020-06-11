@@ -4,7 +4,8 @@ import java.sql.*;
 
 /**
  * @author 李建强
- */
+ * @date 2020-6-11
+ * */
 public class jdbcUtil {
 
     /**

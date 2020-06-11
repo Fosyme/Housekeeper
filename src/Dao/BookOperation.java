@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * @author 李建强
+ * @date 2020-6-11
+* */
+
 public class BookOperation {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;

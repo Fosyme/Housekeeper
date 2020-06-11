@@ -7,7 +7,8 @@ import java.sql.SQLException;
 
 /**
  * @author 李建强
- */
+ * @date 2020-6-11
+ * */
 public class UserOperation {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;

@@ -7,7 +7,8 @@ import java.sql.*;
 
 /**
  * @author 李建强
- */
+ * @date 2020-6-11
+ * */
 public class MethodOfOperation {
     /**
      * 在大多情况下，使用PreparedStatement 来代替Statement,防止sql注入
