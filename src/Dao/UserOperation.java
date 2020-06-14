@@ -103,18 +103,16 @@ public class UserOperation {
      * 验证用户密保是否正确,
      * 如果验证结果为正确，返回该用户id，否则返回null。
      * * @param userName 用户名,
-     * * @param userEncryptedQuestion 密保问题,
      * * @param userEncryptedAnswer 密保答案,
      */
-    public static String userEncryptedVerify(String userName, String userEncryptedQuestion, String userEncryptedAnswer) {
+    public static String userEncryptedVerify(String userName, String userEncryptedAnswer) {
         String uerId = null;
         resultSet = null;
-        String sql = "select user_id from `user` where `user_name`=? and `user_encrypted_question`=? and  user_encrypted_answer=?";
+        String sql = "select user_id from `user` where `user_name`=? and user_encrypted_answer=?";
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setString(1, userName);
-            preparedStatement.setString(2, userEncryptedQuestion);
-            preparedStatement.setString(3, userEncryptedAnswer);
+            preparedStatement.setString(2, userEncryptedAnswer);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 uerId = resultSet.getString(1);
@@ -257,6 +255,34 @@ public class UserOperation {
         }
         return false;
     }
+
+    /**
+     * 查找用户密保问题
+     *
+     * @param userName 用户名
+     * @return 用户密保问题
+     *          如果失败返回{@code null}
+     * */
+    public static String queryEncryptedQuestion(String userName){
+        String userEncryptedQuestion=null;
+        resultSet=null;
+        String sql="select `user_encrypted_question` from `user` where  `user_name`=? ";
+        try {
+            preparedStatement=CONNECTION.prepareStatement(sql);
+            preparedStatement.setString(1,userName);
+            resultSet=preparedStatement.executeQuery();
+            if (resultSet.next())
+            {
+               userEncryptedQuestion=resultSet.getString(1);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return userEncryptedQuestion;
+    }
+
 
     /**
      * 查询用户信息

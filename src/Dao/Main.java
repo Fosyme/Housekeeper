@@ -139,6 +139,12 @@ public class Main {
         R=OrderOperation.deleteOrder(id);
         System.out.println(R);*/
 
+/*        //查询密保问题
+        String un="1";
+        String question=UserOperation.queryEncryptedQuestion(un);
+        System.out.println(question);*/
+
+
 
     }
 }
