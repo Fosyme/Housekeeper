@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="830.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainPage1Controller">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="文件">
+          <items>
+            <MenuItem fx:id="importMenuItem" mnemonicParsing="false" onAction="#importMenuItemEvent" text="导入" />
+                  <MenuItem fx:id="exportMenuItem" mnemonicParsing="false" onAction="#exportMenuItemEvent" text="导出" />
+                  <MenuItem fx:id="backupMenuItem" mnemonicParsing="false" onAction="#backupMenuItemEvent" text="恢复" />
+                  <MenuItem fx:id="recoverMenuItem" mnemonicParsing="false" onAction="#recoverMenuItemEvent" text="备份" />
+                  <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitMenuItemEvent" text="退出" />
+          </items>
+        </Menu>
+            <Menu mnemonicParsing="false" text="查询">
+               <items>
+                  <MenuItem fx:id="addMenuItem" mnemonicParsing="false" onAction="#addMenuItemEvent" text="添加" />
+                  <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteMenuItemEVent" text="删除" />
+                  <MenuItem fx:id="alterMenuItem" mnemonicParsing="false" onAction="#alterMenuItemEvent" text="修改" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="主题">
+               <items>
+                  <RadioMenuItem fx:id="defaultRadioMenuItem" mnemonicParsing="false" onAction="#defaultRadioMenuItemEvent" text="默认" />
+                  <RadioMenuItem fx:id="blackRadioMenuItem" mnemonicParsing="false" onAction="#blackRadioMenuItemEvent" text="经典黑" />
+                  <RadioMenuItem fx:id="whiteRadioMenuItem" mnemonicParsing="false" onAction="#whiteRadioMenuItemEvent" text="优雅白" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="选项">
+               <items>
+                  <MenuItem fx:id="addClassificationMenuItem" mnemonicParsing="false" onAction="#addClassificationMenuItemEvent" text="添加分类" />
+                  <MenuItem mnemonicParsing="false" text="用户信息" />
+               </items>
+            </Menu>
+        <Menu mnemonicParsing="false" text="帮助">
+          <items>
+            <MenuItem fx:id="abutSoftMenuItem" mnemonicParsing="false" onAction="#abutSoftMenuItemEvent" text="关于软件" />
+                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#helpMenuItemEvent" text="帮助" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <SplitPane dividerPositions="0.09059233449477352, 0.4547038327526132" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <items>
+        <AnchorPane prefHeight="746.0" prefWidth="73.0">
+               <children>
+                  <ImageView fitHeight="93.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../src/记账.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutY="93.0" prefHeight="653.0" prefWidth="100.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Label" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButtonEvent" text="搜索" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="statementButton" mnemonicParsing="false" onAction="#statementButtonEvent" text="报表" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="calendarBuuton" mnemonicParsing="false" onAction="#calendarBuutonEvent" text="日历" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="synchronousEvent" mnemonicParsing="false" onAction="#synchronousEventEvent" text="云同步" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="moreButton" mnemonicParsing="false" onAction="#moreButtonEvent" text="更多" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="setButton" mnemonicParsing="false" onAction="#setButtonEvent" text="设置" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+        </AnchorPane>
+        <AnchorPane disable="true" prefHeight="777.0" prefWidth="388.0" style="-fx-border-radius: 50px;">
+               <children>
+                  <ListView fx:id="accountbookListView" onEditCommit="#accountbookListViewEvent" prefHeight="777.0" prefWidth="410.0">
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                              <MenuItem fx:id="accountbook_editMenuItem" mnemonicParsing="false" onAction="#accountbook_editMenuItemEvent" text="编辑" />
+                            <MenuItem fx:id="accountbook_deleteMenuItem" mnemonicParsing="false" onAction="#accountbook_deleteMenuItemEvent" text="删除" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </ListView>
+                  <Label layoutX="183.0" layoutY="21.0" text="账本" />
+               </children>
+        </AnchorPane>
+        <ScrollPane prefHeight="756.0" prefWidth="605.0">
+          <content>
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="677.0" prefWidth="480.0" style="-fx-border-radius: 20px;">
+              <children>
+                        <TableView layoutX="-9.0" prefHeight="779.0" prefWidth="622.0" tableMenuButtonVisible="true">
+                          <columns>
+                            <TableColumn fx:id="idColumn" prefWidth="77.0" text="序号" />
+                            <TableColumn fx:id="typeColumn" prefWidth="85.0" text="类型" />
+                              <TableColumn fx:id="moneyColumn" prefWidth="76.0" text="金额" />
+                              <TableColumn fx:id="classificationColumn" prefWidth="87.0" text="分类" />
+                              <TableColumn fx:id="memoColumn" prefWidth="104.0" text="备注" />
+                              <TableColumn fx:id="dateColumn" prefWidth="176.0" text="日期" />
+                          </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem fx:id="bill_editMenuItem" mnemonicParsing="false" onAction="#bill_editMenuItemEvent" text="编辑" />
+                                    <MenuItem fx:id="bill_deleteMenuItem" mnemonicParsing="false" onAction="#bill_deleteMenuItemEvent" text="删除" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </TableView>
+              </children>
+            </AnchorPane>
+          </content>
+        </ScrollPane>
+      </items>
+    </SplitPane>
+    <HBox id="HBox" alignment="CENTER_LEFT" prefWidth="907.0" spacing="5.0" VBox.vgrow="NEVER">
+      <children>
+        <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
+          <font>
+            <Font size="11.0" fx:id="x3" />
+          </font>
+          <textFill>
+            <Color blue="0.625" green="0.625" red="0.625" fx:id="x4" />
+          </textFill>
+        </Label>
+        <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
+      </children>
+      <padding>
+        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+      </padding>
+    </HBox>
+  </children>
+</VBox>
