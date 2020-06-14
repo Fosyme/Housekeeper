@@ -8,12 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="475.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.SoftInformationController">
+<AnchorPane prefHeight="475.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.SoftInformationController">
    <children>
       <ImageView fitHeight="221.0" fitWidth="217.0" layoutX="87.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Image/记账.png" />
+            <Image url="@../src/记账.png" />
          </image>
       </ImageView>
       <Label layoutX="347.0" layoutY="85.0" text="HouseKeeper">

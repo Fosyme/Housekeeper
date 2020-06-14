@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.AddClassificationController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddClassificationController">
    <children>
       <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -79,7 +79,7 @@
                            <contextMenu>
                               <ContextMenu>
                                 <items>
-                                  <MenuItem fx:id="output_editContextMenu" mnemonicParsing="false" onAction="#output_editContextMenuEvent" text="编辑" />
+                                  <MenuItem fx:id="output_editMenuItem" mnemonicParsing="false" onAction="#output_editContextMenuEvent" text="编辑" />
                                     <MenuItem fx:id="output_deleteMenuItem" mnemonicParsing="false" onAction="#output_deleteMenuItemEvent" text="删除" />
                                 </items>
                               </ContextMenu>

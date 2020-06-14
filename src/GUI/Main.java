@@ -12,13 +12,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("mainpage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/MainPage1.fxml"));
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 1150, 830));
         primaryStage.show();
     }
 
-    @Override
+/*    @Override
     public void init() {
         File file = new File("config.xml");
         ConfigText configText = new ConfigText(file);
@@ -34,7 +34,7 @@ public class Main extends Application {
                 System.out.println("文件创建失败！");
             }
         }
-    }
+    }*/
 
     public static void main(String[] args) {
         launch(args);

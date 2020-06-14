@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="637.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.DeleteAccountController">
+<AnchorPane prefHeight="637.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.DeleteAccountController">
    <children>
       <VBox alignment="CENTER_LEFT" layoutX="205.0" layoutY="88.0" prefHeight="144.0" prefWidth="362.0">
          <children>

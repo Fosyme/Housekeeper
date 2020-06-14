@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.dateCheckController">
+<AnchorPane prefHeight="769.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.dateCheckController">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="-3.0" prefHeight="136.0" prefWidth="808.0">
          <children>
@@ -42,7 +42,7 @@
             <Separator prefHeight="0.0" prefWidth="797.0" />
          </children>
       </HBox>
-      <TableView layoutY="160.0" prefHeight="633.0" prefWidth="806.0" tableMenuButtonVisible="true">
+      <TableView layoutY="160.0" prefHeight="611.0" prefWidth="806.0" tableMenuButtonVisible="true">
         <columns>
           <TableColumn fx:id="check_idColumn" prefWidth="104.0" text="序号" />
           <TableColumn fx:id="check_typeColumn" prefWidth="127.0" text="类型" />
