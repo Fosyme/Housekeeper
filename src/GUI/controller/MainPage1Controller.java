@@ -2,15 +2,13 @@ package GUI.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class MainPage1Controller<TableData> {
+    @FXML
+    private Label username;
 
     @FXML
     private MenuItem importMenuItem;
@@ -28,16 +26,19 @@ public class MainPage1Controller<TableData> {
     private MenuItem exitMenuItem;
 
     @FXML
-    private MenuItem addMenuItem;
+    private MenuItem dateCheckMenuItem;
 
     @FXML
-    private MenuItem deleteMenuItem;
+    private MenuItem classificationCheckMenuItem;
 
     @FXML
-    private MenuItem alterMenuItem;
+    private MenuItem memoCheckMenuItem;
 
     @FXML
     private RadioMenuItem defaultRadioMenuItem;
+
+    @FXML
+    private ToggleGroup RadioMenuItem;
 
     @FXML
     private RadioMenuItem blackRadioMenuItem;
@@ -47,6 +48,9 @@ public class MainPage1Controller<TableData> {
 
     @FXML
     private MenuItem addClassificationMenuItem;
+
+    @FXML
+    private MenuItem userinfo;
 
     @FXML
     private MenuItem abutSoftMenuItem;
@@ -61,13 +65,13 @@ public class MainPage1Controller<TableData> {
     private Button statementButton;
 
     @FXML
-    private Button calendarBuuton;
+    private Button addBuuton;
 
     @FXML
-    private Button synchronousEvent;
+    private Button deleteButton;
 
     @FXML
-    private Button moreButton;
+    private Button alterBuutton;
 
     @FXML
     private Button setButton;
@@ -76,10 +80,19 @@ public class MainPage1Controller<TableData> {
     private ListView<?> accountbookListView;
 
     @FXML
-    private MenuItem accountbook_editMenuItem;
+    private MenuItem accountbook_refreshContextMenu;
 
     @FXML
-    private MenuItem accountbook_deleteMenuItem;
+    private MenuItem accountbook_addContextMenu;
+
+    @FXML
+    private MenuItem accountbook_deleteContextMenu;
+
+    @FXML
+    private MenuItem accountbook_alterContextMenu;
+
+    @FXML
+    private TableView<?> tableView;
 
     @FXML
     private TableColumn<TableData, String> idColumn;
@@ -100,10 +113,16 @@ public class MainPage1Controller<TableData> {
     private TableColumn<TableData, String> dateColumn;
 
     @FXML
-    private MenuItem bill_editMenuItem;
+    private MenuItem bill_refreshContextMenu;
 
     @FXML
-    private MenuItem bill_deleteMenuItem;
+    private MenuItem bill_addContextMenu;
+
+    @FXML
+    private MenuItem bill_deleteContextMenu;
+
+    @FXML
+    private MenuItem bill_alterContextMenu;
 
     @FXML
     private Font x3;
@@ -122,12 +141,27 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void accountbook_deleteMenuItemEvent(ActionEvent event) {
+    void accountbook_addContextMenuEVent(ActionEvent event) {
 
     }
 
     @FXML
-    void accountbook_editMenuItemEvent(ActionEvent event) {
+    void accountbook_alterContextMenuEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void accountbook_deleteContextMenuEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void accountbook_refreshContextMenuEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void addBuutonEvent(ActionEvent event) {
 
     }
 
@@ -137,12 +171,7 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void addMenuItemEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void alterMenuItemEvent(ActionEvent event) {
+    void alterBuuttonEvent(ActionEvent event) {
 
     }
 
@@ -152,12 +181,22 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void bill_deleteMenuItemEvent(ActionEvent event) {
+    void bill_addContextMenuEvent(ActionEvent event) {
 
     }
 
     @FXML
-    void bill_editMenuItemEvent(ActionEvent event) {
+    void bill_alterContextMenuEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void bill_deleteContextMenuEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void bill_refreshContextMenuEvent(ActionEvent event) {
 
     }
 
@@ -167,7 +206,12 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void calendarBuutonEvent(ActionEvent event) {
+    void classificationCheckMenuItemEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void dateCheckMenuItemEvent(ActionEvent event) {
 
     }
 
@@ -177,13 +221,14 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void deleteMenuItemEVent(ActionEvent event) {
+    void deleteButtonEvent(ActionEvent event) {
 
     }
 
     @FXML
     void exitMenuItemEvent(ActionEvent event) {
 
+        System.exit(0);
     }
 
     @FXML
@@ -202,7 +247,7 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void moreButtonEvent(ActionEvent event) {
+    void memoCheckMenuItemEvent(ActionEvent event) {
 
     }
 
@@ -227,7 +272,7 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void synchronousEventEvent(ActionEvent event) {
+    void userinfoEvent(ActionEvent event) {
 
     }
 
@@ -235,5 +280,14 @@ public class MainPage1Controller<TableData> {
     void whiteRadioMenuItemEvent(ActionEvent event) {
 
     }
+    @FXML
+    void initialize(ActionEvent event){
+
+    }
 
 }
+
+
+
+
+
