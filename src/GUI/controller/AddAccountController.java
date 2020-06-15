@@ -6,35 +6,46 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 public class AddAccountController {
-
-    @FXML
-    private RadioButton outputRadioButton;
-
-    @FXML
-    private DatePicker datePickerTextField;
 
     @FXML
     private TextField moneyTextField;
 
     @FXML
-    private RadioButton inputRadioButton;
+    private ComboBox<?> classificationComboBox;
+
+    @FXML
+    private DatePicker datePickerTextField;
 
     @FXML
     private Button addButton;
 
     @FXML
-    private ComboBox<?> classificationComboBox;
+    private TextArea memoTextArea;
 
     @FXML
-    void outputRadioButtonEvent(ActionEvent event) {
+    private RadioButton outputRadioButton;
+
+    @FXML
+    private ToggleGroup RadioButton;
+
+    @FXML
+    private RadioButton inputRadioButton;
+
+    @FXML
+    private ComboBox<?> accountbookComboBox;
+
+    @FXML
+    void accountbookComboBoxEvent(ActionEvent event) {
 
     }
 
     @FXML
-    void inputRadioButtonEvent(ActionEvent event) {
+    void addButtonEvent(ActionEvent event) {
 
     }
 
@@ -44,7 +55,12 @@ public class AddAccountController {
     }
 
     @FXML
-    void addButtonEvent(ActionEvent event) {
+    void inputRadioButtonEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void outputRadioButtonEvent(ActionEvent event) {
 
     }
 

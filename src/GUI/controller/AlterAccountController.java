@@ -1,5 +1,6 @@
 package GUI.controller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +9,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
+import java.util.ArrayList;
 
 public class AlterAccountController {
 
@@ -36,7 +39,7 @@ public class AlterAccountController {
     private TextArea memoTextArea;
 
     @FXML
-    private ComboBox<?> classificationComboBox;
+    private ComboBox<String> classificationComboBox;
 
     @FXML
     void outputRadioButtonEvent(ActionEvent event) {
@@ -62,5 +65,4 @@ public class AlterAccountController {
     void alterButtonEvent(ActionEvent event) {
 
     }
-
 }
