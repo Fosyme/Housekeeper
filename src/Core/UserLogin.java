@@ -34,14 +34,14 @@ public class UserLogin {
      * @param userPassword 用户输入密码(明文)
      * @return 登录结果
      * */
-    public ResultStatus signIn(@NotNull String userName, String userPassword) {
+    public LoginStatus signIn(@NotNull String userName, String userPassword) {
         String userID;
         userID = UserOperation.loginAuthentication(userName, getMD5String(userPassword));
         if (userID.isEmpty()) {
-            return ResultStatus.USERNAME_OR_PASSWORD_ERROR;
+            return LoginStatus.USERNAME_OR_PASSWORD_ERROR;
         }
         user = new User(userID);
-        return ResultStatus.SIGN_IN_SUCCESS;
+        return LoginStatus.SIGN_IN_SUCCESS;
     }
 
     /**
@@ -51,7 +51,7 @@ public class UserLogin {
      *                用户密保答案(明文), 性别, 年龄, 手机号, 地址, 头像
      * @return 注册结果
      */
-    public ResultStatus signUp(@NotNull String[] userMsg) {
+    public LoginStatus signUp(@NotNull String[] userMsg) {
         final int userPassword = 1;         //用户密码索引
         final int userEncryptedAnswer = 3;  //用户密保索引
         final int userRegTime = 4;          //用户注册时间索引
@@ -60,7 +60,7 @@ public class UserLogin {
         if (userMsg.length == RECEIVE_USER_INFORMATION_LENGTH) {
             boolean verifyId = UserOperation.checkUserExist(userMsg[0]);
             if (!verifyId) {
-                return ResultStatus.USER_IS_EXIST;
+                return LoginStatus.USER_IS_EXIST;
             }
             for (int i = 0, j = 0; j < RECEIVE_USER_INFORMATION_LENGTH; i++) {
                 if (i == userPassword || i == userEncryptedAnswer) {
@@ -75,23 +75,23 @@ public class UserLogin {
             boolean regResult = UserOperation.regAccount(userInfo);
             System.out.println(regResult);
             if (regResult) {
-                return ResultStatus.SIGN_UP_SUCCESS;
+                return LoginStatus.SIGN_UP_SUCCESS;
             } else {
-                return ResultStatus.INFO_AGAINST_RULES;
+                return LoginStatus.INFO_AGAINST_RULES;
             }
         }
-        return ResultStatus.DATA_ERROR;
+        return LoginStatus.DATA_ERROR;
     }
 
     /**
      * 登出方法, 用于用户登出账号或切换账号
      * @return 账号登出结果
      * */
-    public ResultStatus signOut() {
+    public LoginStatus signOut() {
         if (UserOperation.setUserLastTime(user.getUserID(), String.valueOf(System.currentTimeMillis() / 1000))) {
-            return ResultStatus.SIGN_OUT_SUCCESS;
+            return LoginStatus.SIGN_OUT_SUCCESS;
         }
-        return ResultStatus.INCORRECT_WAY;
+        return LoginStatus.INCORRECT_WAY;
     }
 
     /**
@@ -111,15 +111,15 @@ public class UserLogin {
      * @param newPassword 用户新密码
      * @return 返回找回密码结果
      * */
-    public ResultStatus recoverPassword(String userName, String userEncryptedAnswer, String newPassword) {
+    public LoginStatus recoverPassword(String userName, String userEncryptedAnswer, String newPassword) {
         String userID = UserOperation.userEncryptedVerify(userName, userEncryptedAnswer);
         if (userID == null) {
-            return ResultStatus.ENCRYPTED_ERROR;
+            return LoginStatus.ENCRYPTED_ERROR;
         }
         if (UserOperation.changeUserPassWord(userID, getMD5String(newPassword))) {
-            return ResultStatus.RECOVER_PASSWORD_SUCCESS;
+            return LoginStatus.RECOVER_PASSWORD_SUCCESS;
         } else {
-            return ResultStatus.UNKNOWN_ERROR;
+            return LoginStatus.UNKNOWN_ERROR;
         }
     }
 
