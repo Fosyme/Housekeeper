@@ -17,9 +17,6 @@ import java.security.MessageDigest;
 public class UserLogin {
     private User user;  //用户信息
 
-    public static final int RECEIVE_USER_INFORMATION_LENGTH = 9;    //从前端接受用户数据长度
-    public static final int TRANSMIT_USER_INFORMATION_LENGTH = 10;  //向数据库传输用户信息长度
-
     public UserLogin() {
 
     }
@@ -52,9 +49,11 @@ public class UserLogin {
      * @return 注册结果
      */
     public LoginStatus signUp(@NotNull String[] userMsg) {
-        final int userPassword = 1;         //用户密码索引
-        final int userEncryptedAnswer = 3;  //用户密保索引
-        final int userRegTime = 4;          //用户注册时间索引
+        final int RECEIVE_USER_INFORMATION_LENGTH = 9;    //从前端接受用户数据长度
+        final int TRANSMIT_USER_INFORMATION_LENGTH = 10;  //向数据库传输用户信息长度
+        final int USER_PASSWORD = 1;                      //用户密码索引
+        final int USER_ENCRYPTED_ANSWER = 3;              //用户密保索引
+        final int USER_REG_TIME = 4;                      //用户注册时间索引
 
         String[] userInfo = new String[TRANSMIT_USER_INFORMATION_LENGTH];
         if (userMsg.length == RECEIVE_USER_INFORMATION_LENGTH) {
@@ -63,9 +62,9 @@ public class UserLogin {
                 return LoginStatus.USER_IS_EXIST;
             }
             for (int i = 0, j = 0; j < RECEIVE_USER_INFORMATION_LENGTH; i++) {
-                if (i == userPassword || i == userEncryptedAnswer) {
+                if (i == USER_PASSWORD || i == USER_ENCRYPTED_ANSWER) {
                     userInfo[i] = getMD5String(userMsg[j++]);
-                } else if (i == userRegTime) {
+                } else if (i == USER_REG_TIME) {
                     userInfo[i] = String.valueOf((System.currentTimeMillis() / 1000));
                 } else {
                     userInfo[i] = userMsg[j++];
