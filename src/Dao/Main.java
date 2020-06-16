@@ -144,7 +144,10 @@ public class Main {
         String question=UserOperation.queryEncryptedQuestion(un);
         System.out.println(question);*/
 
-
+/*        //验证checkBookExist方法
+        Boolean b=false;
+        b=BookOperation.checkBookExist("book");
+        System.out.println(b);*/
 
     }
 }
