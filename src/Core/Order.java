@@ -3,9 +3,8 @@ package Core;
 import java.util.Arrays;
 
 public class Order {
-    private final int orderID;      //账单ID
-
-    private int bookID;             //所属账本ID
+    private final String orderID;   //账单ID
+    private String bookID;          //所属账本ID
     private String orderName;       //账单名
     private double orderPrice;      //账单金额
     private String orderWay;        //账单支付方式
@@ -15,20 +14,20 @@ public class Order {
     private String orderDesc;       //账单详细描述
     private byte[] orderImageSrc;   //账单图片
 
-    public Order(int orderID) {
+    public Order(String orderID) {
         this.orderID = orderID;
     }
 
-    public int getOrderID() {
+    public String getOrderID() {
         return orderID;
     }
 
-    public int getBookID() {
-        return bookID;
+    public void setBookID(String bookID) {
+        this.bookID = bookID;
     }
 
-    public void setBookID(int bookID) {
-        this.bookID = bookID;
+    public String getBookID() {
+        return bookID;
     }
 
     public String getOrderName() {

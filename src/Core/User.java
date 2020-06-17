@@ -57,80 +57,40 @@ public class User {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getUserRegTime() {
         return userRegTime;
-    }
-
-    public void setUserRegTime(String userRegTime) {
-        this.userRegTime = userRegTime;
     }
 
     public String getUserLastTime() {
         return userLastTime;
     }
 
-    public void setUserLastTime(String userLastTime) {
-        this.userLastTime = userLastTime;
-    }
-
     public String getUserSex() {
         return userSex;
-    }
-
-    public void setUserSex(String userSex) {
-        this.userSex = userSex;
     }
 
     public int getUserAge() {
         return userAge;
     }
 
-    public void setUserAge(int userAge) {
-        this.userAge = userAge;
-    }
-
     public String getUserPhone() {
         return userPhone;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
     }
 
     public String getUserAddress() {
         return userAddress;
     }
 
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
-    }
-
     public byte[] getUserHeadThumb() {
         return userHeadThumb;
-    }
-
-    public void setUserHeadThumb(byte[] userHeadThumb) {
-        this.userHeadThumb = userHeadThumb;
     }
 
     public ArrayList<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(ArrayList<Book> books) {
-        this.books = books;
-    }
-
     public ArrayList<ArrayList<Order>> getOrders() {
         return orders;
-    }
-
-    public void setOrders(ArrayList<ArrayList<Order>> orders) {
-        this.orders = orders;
     }
 
     //初始化方法, 用户登录时将用户所有数据存放到类中
@@ -155,7 +115,7 @@ public class User {
             //在数据库中搜索用户账本信息, 将一个账本信息保存到账本类中, 将用户的所有账本信息保存到ArrayList中
             bookRS = BookOperation.queryBookMsg(userID);
             while (bookRS.next()) {
-                Book book = new Book(bookRS.getInt("book_id"));
+                Book book = new Book(bookRS.getString("book_id"));
                 book.setBookName(bookRS.getString("book_name"));
                 book.setBookDesc(bookRS.getString("book_desc"));
                 book.setBookAddTime(bookRS.getString("book_add_time"));
@@ -165,8 +125,8 @@ public class User {
                 ordersRS = OrderOperation.queryOrderMsg(bookRS.getString("book_id"));
                 ArrayList<Order> arrayList = new ArrayList<>();
                 while (ordersRS.next()) {
-                    Order order = new Order(ordersRS.getInt("order_id"));
-                    order.setBookID(ordersRS.getInt("book_id"));
+                    Order order = new Order(ordersRS.getString("order_id"));
+                    order.setBookID(ordersRS.getString("book_id"));
                     order.setOrderName(ordersRS.getString("order_name"));
                     order.setOrderPrice(ordersRS.getDouble("order_price"));
                     order.setOrderWay(ordersRS.getString("order_way"));

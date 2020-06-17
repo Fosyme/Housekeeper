@@ -1,18 +1,28 @@
 package Core;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Book {
-    private final int bookID;       //账本ID
+    private final String bookID;       //账本ID
 //    private String userID;          //所属用户ID, 可舍去
     private String bookName;        //账本名
     private String bookDesc;        //账本描述
     private String bookAddTime;     //账本添加时间
     private String bookLastTime;    //账本最后修改时间
 
-    public Book(int book_id) {
-        this.bookID = book_id;
+    public Book(String bookID) {
+        this.bookID = bookID;
     }
 
-    public int getBookID() {
+    //整体设置book类的实例域
+    public void setBook(@NotNull String[] bookMsg) {
+            bookName = bookMsg[1];
+            bookDesc = bookMsg[2];
+            bookAddTime = bookMsg[3];
+            bookLastTime = bookMsg[4];
+    }
+
+    public String getBookID() {
         return bookID;
     }
 

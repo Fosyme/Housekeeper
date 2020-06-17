@@ -27,6 +27,7 @@ public class UserLogin {
 
     /**
      * 登录方法, 用于用户登录认证
+     *
      * @param userName 用户名, 不能为空
      * @param userPassword 用户输入密码(明文)
      * @return 登录结果
@@ -43,6 +44,7 @@ public class UserLogin {
 
     /**
      * 注册方法, 用于用户注册账户
+     *
      * @param userMsg 从前端接受来的用户信息数组
      *                包含: 用户名, 用户密码(明文), 用户密保问题,
      *                用户密保答案(明文), 性别, 年龄, 手机号, 地址, 头像
@@ -84,6 +86,7 @@ public class UserLogin {
 
     /**
      * 登出方法, 用于用户登出账号或切换账号
+     *
      * @return 账号登出结果
      * */
     public LoginStatus signOut() {
@@ -95,6 +98,7 @@ public class UserLogin {
 
     /**
      * 查询用户密保问题
+     *
      * @param userName 用户名
      * @return 用户密保问题, 返回{@code null}标识无此用户
      * */
@@ -105,6 +109,7 @@ public class UserLogin {
 
     /**
      * 根据密保问题及答案, 找回用户密码
+     *
      * @param userName 用户名
      * @param userEncryptedAnswer 用户密码答案
      * @param newPassword 用户新密码
@@ -122,7 +127,7 @@ public class UserLogin {
         }
     }
 
-    //MD5加密方法
+    //对字符串进行MD5加密
     public static String getMD5String(String plainText) {
         String cipherText = "";
         try {
@@ -142,6 +147,7 @@ public class UserLogin {
         return cipherText;
     }
 
+    //对16位MD5码进行32位转换
     private static String fillMD5(String md5) {
         return md5.length() == 32 ? md5 : fillMD5("0" + md5);
     }
