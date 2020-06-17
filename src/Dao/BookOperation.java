@@ -21,15 +21,14 @@ public class BookOperation {
      */
     public static String addBook(String[] data) {
         String id = null;
-        String sql = "insert into `book` ( `user_id`, `book_name`, `book_desc`, `book_add_time`, `book_last_time`) " +
-                "values(?,?,?,?,?)";
+        String sql = "insert into `book` ( `user_id`, `book_name`, `book_desc`, `book_add_time`) " +
+                "values(?,?,?,?)";
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setInt(1, Integer.parseInt(data[0]));
             preparedStatement.setString(2, data[1]);
             preparedStatement.setString(3, data[2]);
             preparedStatement.setString(4, data[3]);
-            preparedStatement.setString(5, data[4]);
             preparedStatement.execute();
             id = MethodOfOperation.queryMaxId("book");
         } catch (Exception e) {
@@ -55,10 +54,9 @@ public class BookOperation {
             existences=preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
+        }
             if (existences!=0) {
                 return true;
-            }
         }
         return false;
     }
@@ -72,14 +70,12 @@ public class BookOperation {
     public static boolean changeBookInfo(String id, String[] newData) {
         boolean returnValue = false;
         int existence = 0;
-        String sql = null;
-        sql = "update  `book` set  `book_name`=?,`book_desc`=?,`book_last_time`=?  where book_id=?";
+        String sql ="update  `book` set  `book_name`=?,`book_desc`=?  where book_id=?";
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setString(1, newData[0]);
             preparedStatement.setString(2, newData[1]);
-            preparedStatement.setString(3, newData[2]);
-            preparedStatement.setInt(4, Integer.parseInt(id));
+            preparedStatement.setInt(3, Integer.parseInt(id));
             existence = preparedStatement.executeUpdate();
             preparedStatement.clearParameters();
         } catch (Exception e) {
