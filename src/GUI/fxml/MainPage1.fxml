@@ -68,9 +68,9 @@
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.09059233449477352, 0.4547038327526132" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.09059233449477352, 0.3945993031358885" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane prefHeight="746.0" prefWidth="73.0">
+        <AnchorPane prefHeight="777.0" prefWidth="143.0">
                <children>
                   <ImageView fitHeight="93.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -110,9 +110,9 @@
                   </VBox>
                </children>
         </AnchorPane>
-        <AnchorPane prefHeight="777.0" prefWidth="388.0" style="-fx-border-radius: 50px;">
+        <AnchorPane prefHeight="777.0" prefWidth="345.0">
                <children>
-                  <ListView fx:id="accountbookListView" layoutY="86.0" onEditCommit="#accountbookListViewEvent" prefHeight="691.0" prefWidth="410.0">
+                  <ListView fx:id="accountbookListView" layoutY="86.0" onEditCommit="#accountbookListViewEvent" prefHeight="691.0" prefWidth="341.0">
                      <contextMenu>
                         <ContextMenu>
                           <items>
@@ -124,20 +124,20 @@
                         </ContextMenu>
                      </contextMenu>
                   </ListView>
-                  <Pane prefHeight="86.0" prefWidth="410.0">
+                  <Pane prefHeight="86.0" prefWidth="334.0">
                      <children>
-                        <Label layoutX="41.0" layoutY="33.0" text="关键字：" />
-                        <TextField fx:id="keywordTextField" layoutX="104.0" layoutY="28.0" onAction="#keywordTextFieldEvent" promptText="请输入关键字：" />
-                        <Button fx:id="searchButton" layoutX="325.0" layoutY="28.0" mnemonicParsing="false" onAction="#searchButtonEvent" text="搜索" />
+                        <Label layoutX="15.0" layoutY="33.0" text="关键字：" />
+                        <TextField fx:id="keywordTextField" layoutX="74.0" layoutY="28.0" onAction="#keywordTextFieldEvent" promptText="请输入关键字：" />
+                        <Button fx:id="searchButton" layoutX="283.0" layoutY="28.0" mnemonicParsing="false" onAction="#searchButtonEvent" text="搜索" />
                      </children>
                   </Pane>
                </children>
         </AnchorPane>
-        <ScrollPane prefHeight="756.0" prefWidth="605.0">
+        <ScrollPane prefHeight="777.0" prefWidth="695.0">
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="677.0" prefWidth="480.0" style="-fx-border-radius: 20px;">
               <children>
-                        <TableView fx:id="tableView" layoutX="-3.0" prefHeight="779.0" prefWidth="616.0" tableMenuButtonVisible="true">
+                        <TableView fx:id="tableView" editable="true" layoutX="-3.0" prefHeight="779.0" prefWidth="691.0" tableMenuButtonVisible="true">
                           <columns>
                             <TableColumn fx:id="idColumn" prefWidth="77.0" text="序号" />
                             <TableColumn fx:id="typeColumn" prefWidth="85.0" text="类型" />
