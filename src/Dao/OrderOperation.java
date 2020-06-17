@@ -26,7 +26,7 @@ public class OrderOperation {
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setInt(1, Integer.parseInt(data[0]));
-            preparedStatement.setString(2, data[1]);
+            preparedStatement.setDouble(2, Double.parseDouble(data[1]));
             preparedStatement.setString(3, data[2]);
             preparedStatement.setString(4, data[3]);
             preparedStatement.setString(5, data[4]);
@@ -35,7 +35,6 @@ public class OrderOperation {
             preparedStatement.setString(8, data[7]);
             preparedStatement.setString(9, data[8]);
             preparedStatement.execute();
-            preparedStatement.clearParameters();
             id = MethodOfOperation.queryMaxId("order");
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,7 +81,7 @@ public class OrderOperation {
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setString(1, newData[0]);
-            preparedStatement.setString(2, newData[1]);
+            preparedStatement.setDouble(2, Double.parseDouble(newData[1]));
             preparedStatement.setString(3, newData[2]);
             preparedStatement.setString(4, newData[3]);
             preparedStatement.setString(5, newData[4]);

@@ -110,10 +110,11 @@ public class Main {
         System.out.println(b);*/
 
 /*                //测试changeOrderInfo方法
-        String id = "1";
+        String id = "3";
         String table ="order";
         String[] strings=new String[8];
         strings[0]="name";
+        strings[1]="11.0";
         strings[4]="4";
         strings[5]="5";
         boolean b = OrderOperation.changeOrderInfo(id, strings);
