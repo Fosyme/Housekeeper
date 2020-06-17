@@ -23,7 +23,6 @@ create table `book` (
     `book_name`      varchar(50) not null,
     `book_desc`      tinytext,
     `book_add_time`  varchar(10) not null,
-    `book_last_time` varchar(10) not null,
     unique (user_id, book_name)
 );
 
@@ -47,13 +46,13 @@ insert into `user` values (0, 'd', md5(123), null, null, unix_timestamp(now()), 
 insert into `user` values (0, 'e', md5(123), null, null, unix_timestamp(now()), null, null, 35, 13000000000, '四川成都', null);
 insert into `user` values (0, 'f', md5(123), null, null, unix_timestamp(now()), null, null, 11, 13000000000, '四川成都', null);
 
-insert into `book` values (0, 1, 'book_1', '家庭账本', unix_timestamp(now()), unix_timestamp(now()));
-insert into `book` values (0, 1, 'book_2', '家庭账本', unix_timestamp(now()), unix_timestamp(now()));
-insert into `book` values (0, 2, 'book_1', '家庭账本', unix_timestamp(now()), unix_timestamp(now()));
-insert into `book` values (0, 3, 'book_0', '家庭账本', unix_timestamp(now()), unix_timestamp(now()));
-insert into `book` values (0, 3, 'book_1', '家庭账本', unix_timestamp(now()), unix_timestamp(now()));
-insert into `book` values (0, 3, 'book_2', '家庭账本', unix_timestamp(now()), unix_timestamp(now()));
-insert into `book` values (0, 4, 'book_4', '家庭账本', unix_timestamp(now()), unix_timestamp(now()));
+insert into `book` values (0, 1, 'book_1', '家庭账本', unix_timestamp(now()));
+insert into `book` values (0, 1, 'book_2', '家庭账本', unix_timestamp(now()));
+insert into `book` values (0, 2, 'book_1', '家庭账本', unix_timestamp(now()));
+insert into `book` values (0, 3, 'book_0', '家庭账本', unix_timestamp(now()));
+insert into `book` values (0, 3, 'book_1', '家庭账本', unix_timestamp(now()));
+insert into `book` values (0, 3, 'book_2', '家庭账本', unix_timestamp(now()));
+insert into `book` values (0, 4, 'book_4', '家庭账本', unix_timestamp(now()));
 
 insert into `order` values (0, 1, '书籍购买', 50.89, null, null, unix_timestamp(now()), '学习', null, null);
 insert into `order` values (0, 1, '午餐', 12, null, null, unix_timestamp(now()), '餐饮', null, null);
