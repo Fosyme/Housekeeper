@@ -7,17 +7,35 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.Properties;
+
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/AlterAccount.fxml"));
-
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/MainPage1.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 1150, 830));
         primaryStage.show();
     }
+//    public String getStyleValue() throws IOException {
+//        File file=new File("src\\GUI\\src\\styles.theme");
+//        Properties properties=new Properties();
+//        FileInputStream fileInputStream=new FileInputStream(file);
+//        properties.load(fileInputStream);
+//        Iterator<String> iterator=properties.stringPropertyNames().iterator();
+//        String Key="";
+//        while (iterator.hasNext()){
+//            Key=iterator.next();
+//        }
+//        return properties.getProperty(Key,"");
+//
+//    }
+
 
 /*    @Override
     public void init() {

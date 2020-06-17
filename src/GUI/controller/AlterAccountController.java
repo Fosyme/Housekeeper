@@ -9,6 +9,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -64,5 +65,8 @@ public class AlterAccountController {
     @FXML
     void alterButtonEvent(ActionEvent event) {
 
+    }
+
+    public void setDialogStage(Stage mainFrameStage) {
     }
 }

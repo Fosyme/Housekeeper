@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="604.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AlterAccountController">
+<AnchorPane prefHeight="604.0" prefWidth="429.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AlterAccountController">
    <children>
       <VBox layoutX="56.0" layoutY="14.0" prefHeight="590.0" prefWidth="339.0">
          <children>
-            <Label alignment="CENTER" prefHeight="41.0" prefWidth="320.0" text="修改订单" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="41.0" prefWidth="320.0" text="修改账单" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>

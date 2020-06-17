@@ -101,14 +101,10 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="alterBuutton" mnemonicParsing="false" onAction="#alterBuuttonEvent" text="修改" />
+                              <Button fx:id="alterButton" mnemonicParsing="false" onAction="#alterButtonEvent" text="修改" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="setButton" mnemonicParsing="false" onAction="#setButtonEvent" text="设置" />
-                           </children>
-                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
@@ -160,6 +156,9 @@
                                 </items>
                               </ContextMenu>
                            </contextMenu>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
               </children>
             </AnchorPane>

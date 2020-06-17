@@ -1,14 +1,27 @@
 package GUI.controller;
 
+import GUI.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-public class MainPage1Controller<TableData> {
-    @FXML
-    private Label username;
+import javax.swing.*;
+import java.io.File;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.Properties;
+
+public class MainPage1Controller<TableData, SimpleTools> {
 
     @FXML
     private MenuItem importMenuItem;
@@ -59,7 +72,7 @@ public class MainPage1Controller<TableData> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private Button searchButton;
+    private Label username;
 
     @FXML
     private Button statementButton;
@@ -90,6 +103,12 @@ public class MainPage1Controller<TableData> {
 
     @FXML
     private MenuItem accountbook_alterContextMenu;
+
+    @FXML
+    private TextField keywordTextField;
+
+    @FXML
+    private Button searchButton;
 
     @FXML
     private TableView<?> tableView;
@@ -130,9 +149,32 @@ public class MainPage1Controller<TableData> {
     @FXML
     private Color x4;
 
-    @FXML
-    void abutSoftMenuItemEvent(ActionEvent event) {
 
+    @FXML
+    Scene abutSoftMenuItemEvent(ActionEvent actionEvent) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/SoftInformation.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage mainFrameStage = new Stage();
+            mainFrameStage.setTitle("关于软件");
+            mainFrameStage.setResizable(true);
+            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(page);
+            mainFrameStage.setScene(scene);
+
+            scene.getStylesheets().add((getStyleValue()));
+
+            SoftInformationController controller = loader.getController();
+            controller.setDialogStage(mainFrameStage);
+            mainFrameStage.showAndWait();
+            return scene;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @FXML
@@ -161,7 +203,30 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void addBuutonEvent(ActionEvent event) {
+    Scene addBuutonEvent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/AddAccountPage.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage mainFrameStage = new Stage();
+            mainFrameStage.setTitle("添加账单");
+            mainFrameStage.setResizable(true);
+            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(page);
+            mainFrameStage.setScene(scene);
+
+            scene.getStylesheets().add((getStyleValue()));
+
+            AddAccountController controller = loader.getController();
+            controller.setDialogStage(mainFrameStage);
+            mainFrameStage.showAndWait();
+            return scene;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 
@@ -171,7 +236,30 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void alterBuuttonEvent(ActionEvent event) {
+    Scene alterButtonEvent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/AlterAccount.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage mainFrameStage = new Stage();
+            mainFrameStage.setTitle("修改账单");
+            mainFrameStage.setResizable(true);
+            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(page);
+            mainFrameStage.setScene(scene);
+
+            scene.getStylesheets().add((getStyleValue()));
+
+            AlterAccountController controller = loader.getController();
+            controller.setDialogStage(mainFrameStage);
+            mainFrameStage.showAndWait();
+            return scene;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 
@@ -201,22 +289,90 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void blackRadioMenuItemEvent(ActionEvent event) {
+    void blackRadioMenuItemEvent(ActionEvent event) throws IOException {
+        File file=new File("src\\GUI\\src\\styles.properties");
+        if (!file.exists()){
+            file.createNewFile();
+        }
+        Properties properties=new Properties();
+        properties.setProperty("black","GUI/src/black.css");
+        FileOutputStream fileOutputStream=new FileOutputStream(file);
+        properties.store(fileOutputStream,"经典黑");
+        JOptionPane.showMessageDialog(null,"切换经典黑主题成功","信息",JOptionPane.PLAIN_MESSAGE);
+        fileOutputStream.close();
+
 
     }
 
     @FXML
-    void classificationCheckMenuItemEvent(ActionEvent event) {
+    Scene classificationCheckMenuItemEvent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/classificationCheck.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage mainFrameStage = new Stage();
+            mainFrameStage.setTitle("分类查询");
+            mainFrameStage.setResizable(true);
+            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(page);
+            mainFrameStage.setScene(scene);
+
+            scene.getStylesheets().add((getStyleValue()));
+
+            classificationCheckController controller = loader.getController();
+            controller.setDialogStage(mainFrameStage);
+            mainFrameStage.showAndWait();
+            return scene;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 
     @FXML
-    void dateCheckMenuItemEvent(ActionEvent event) {
+    Scene dateCheckMenuItemEvent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/dateCheck.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage mainFrameStage = new Stage();
+            mainFrameStage.setTitle("日期查询");
+            mainFrameStage.setResizable(true);
+            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(page);
+            mainFrameStage.setScene(scene);
+
+            scene.getStylesheets().add((getStyleValue()));
+
+            dateCheckController controller = loader.getController();
+            controller.setDialogStage(mainFrameStage);
+            mainFrameStage.showAndWait();
+            return scene;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
 
     }
 
     @FXML
-    void defaultRadioMenuItemEvent(ActionEvent event) {
+    void defaultRadioMenuItemEvent(ActionEvent event) throws IOException {
+        File file=new File("src\\GUI\\src\\styles.properties");
+        if (!file.exists()){
+            file.createNewFile();
+        }
+        Properties properties=new Properties();
+        properties.setProperty("default","");
+        FileOutputStream fileOutputStream=new FileOutputStream(file);
+        properties.store(fileOutputStream,"默认");
+        JOptionPane.showMessageDialog(null,"切换默认主题成功","信息",JOptionPane.PLAIN_MESSAGE);
+        fileOutputStream.close();
 
     }
 
@@ -228,7 +384,6 @@ public class MainPage1Controller<TableData> {
     @FXML
     void exitMenuItemEvent(ActionEvent event) {
 
-        System.exit(0);
     }
 
     @FXML
@@ -243,6 +398,11 @@ public class MainPage1Controller<TableData> {
 
     @FXML
     void importMenuItemEvent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void keywordTextFieldEvent(ActionEvent event) {
 
     }
 
@@ -267,7 +427,30 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void statementButtonEvent(ActionEvent event) {
+    Scene statementButtonEvent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/report.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage mainFrameStage = new Stage();
+            mainFrameStage.setTitle("报表");
+            mainFrameStage.setResizable(true);
+            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(page);
+            mainFrameStage.setScene(scene);
+
+            scene.getStylesheets().add((getStyleValue()));
+
+            reportController controller = loader.getController();
+            controller.setDialogStage(mainFrameStage);
+            mainFrameStage.showAndWait();
+            return scene;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 
@@ -277,17 +460,55 @@ public class MainPage1Controller<TableData> {
     }
 
     @FXML
-    void whiteRadioMenuItemEvent(ActionEvent event) {
+    void whiteRadioMenuItemEvent(ActionEvent event) throws IOException {
+        File file=new File("src\\GUI\\src\\styles.properties");
+        if (!file.exists()){
+            file.createNewFile();
+        }
+        Properties properties=new Properties();
+        properties.setProperty("white", "GUI/src/white.css");
+        FileOutputStream fileOutputStream=new FileOutputStream(file);
+
+        properties.store(fileOutputStream, "优雅白");
+        JOptionPane.showMessageDialog(null,"切换优雅白主题成功","信息",JOptionPane.PLAIN_MESSAGE);
+        fileOutputStream.close();
 
     }
-    @FXML
-    void initialize(ActionEvent event){
-
+    public String getStyleValue() throws IOException {
+        File file=new File("src\\GUI\\src\\styles.properties");
+        Properties properties=new Properties();
+        FileInputStream fileInputStream=new FileInputStream(file);
+        properties.load(fileInputStream);
+        Iterator<String> iterator=properties.stringPropertyNames().iterator();
+        String Key= "";
+        while (iterator.hasNext()){
+            Key = iterator.next();
+        }
+        return properties.getProperty(Key,"");
     }
+
+   public void initThemeRadioMenuItem() {
+        String key = "";
+         try {
+            Properties properties = new Properties();
+            FileInputStream fis = new FileInputStream(new File("src\\GUI\\src\\styles.properties"));
+            Iterator<String> iterator = properties.stringPropertyNames().iterator();
+             while (iterator.hasNext()) {
+               key = iterator.next();
+               }
+             } catch (IOException e) {
+             e.printStackTrace();
+         }
+// 判断properties文件key的值
+           if (key.equals("black")) {
+            blackRadioMenuItem.setSelected(true);
+           } else if (key.equals("white")) {
+           whiteRadioMenuItem.setSelected(true);
+              } else {
+              defaultRadioMenuItem.setSelected(true);
+           }
+  }
+
+
 
 }
-
-
-
-
-

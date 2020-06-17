@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.stage.Stage;
 
 public class classificationCheckController<TableData> {
 
@@ -60,4 +61,6 @@ public class classificationCheckController<TableData> {
     }
 
 
+    public void setDialogStage(Stage mainFrameStage) {
+    }
 }
