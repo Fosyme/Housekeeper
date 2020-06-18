@@ -1,5 +1,6 @@
 package GUI.controller;
 
+import Core.User;
 import Core.UserLogin;
 import GUI.Main;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -20,6 +22,9 @@ import java.io.IOException;
 
 public class SignInController {
     private UserLogin userLogin;
+
+    @FXML
+    private Pane paneSignIn;
 
     @FXML
     private PasswordField passwordTextField;
@@ -51,36 +56,33 @@ public class SignInController {
         //登录
         if (nameTextField.getText().equals("") ||  passwordTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "请按照文本框内容提示正确填写内容", "警告", JOptionPane.ERROR_MESSAGE);
-        } else {
-             userLogin.signIn(nameTextField.getText(), passwordTextField.getText());
-            if (nameTextField.getText()!= null && passwordTextField.getText() != null) {
-                int result = JOptionPane.showConfirmDialog(null, "恭喜登录成功", "信息", JOptionPane.PLAIN_MESSAGE);
-                if (result == JOptionPane.OK_OPTION) {
-                    try {
-                        FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(Main.class.getResource("fxml/main.fxml"));
-                        VBox page = (VBox) loader.load();
-                        Stage mainFrameStage = new Stage();
-                        mainFrameStage.setTitle("HouseKeeper");
-                        mainFrameStage.setResizable(true);
-                        mainFrameStage.setAlwaysOnTop(false);
-                        mainFrameStage.initModality(Modality.APPLICATION_MODAL);
-                        Scene scene = new Scene(page);
-                        mainFrameStage.setScene(scene);
-                        MainController controller = loader.getController();
-                        controller.setDialogStage(mainFrameStage);
-                        mainFrameStage.showAndWait();
-                        return scene;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    loginStage.close();
+            return null;
+        }
+        boolean b = userLogin.signIn(nameTextField.getText(), passwordTextField.getText());
+        if (b) {
+            JOptionPane.showConfirmDialog(null, "恭喜登录成功", "信息", JOptionPane.DEFAULT_OPTION);
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(Main.class.getResource("fxml/main.fxml"));
+                VBox page = (VBox) loader.load();
+                Stage mainFrameStage = new Stage();
+                mainFrameStage.setTitle("HouseKeeper");
+                mainFrameStage.setResizable(true);
+                mainFrameStage.setAlwaysOnTop(false);
+                mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+                Scene scene = new Scene(page);
+                mainFrameStage.setScene(scene);
+                MainController controller = loader.getController();
+                controller.initialization(userLogin.getUser());
 
-                }else {
-                    JOptionPane.showMessageDialog(null,"用户名或者密码错误","信息",JOptionPane.ERROR_MESSAGE);
-                }
-
+                ((Stage) paneSignIn.getScene().getWindow()).close();
+                mainFrameStage.showAndWait();
+                return scene;
+            } catch (Throwable e) {
+                e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(null,"用户名或者密码错误","信息",JOptionPane.ERROR_MESSAGE);
         }
         return null;
     }
@@ -89,29 +91,28 @@ public class SignInController {
 
 
     @FXML
-    Scene loginButtonEvent(ActionEvent event) {
+    void loginButtonEvent(ActionEvent event) {
         //注册
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/signUp.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            Stage mainFrameStage = new Stage();
-            mainFrameStage.setTitle("注册");
-            mainFrameStage.setResizable(true);
-            mainFrameStage.setAlwaysOnTop(false);
-            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            AnchorPane page = loader.load();
+            Stage signUp = new Stage();
+            signUp.setTitle("注册");
+            signUp.setResizable(true);
+            signUp.setAlwaysOnTop(false);
+            signUp.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
-            mainFrameStage.setScene(scene);
-
+            signUp.setScene(scene);
             SignUpController controller = loader.getController();
-            controller.setDialogStage(mainFrameStage);
-            mainFrameStage.showAndWait();
-            return scene;
+
+            controller.initialization();
+            ((Stage) paneSignIn.getScene().getWindow()).close();
+
+            signUp.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     private void setDialogStage(Stage mainFrameStage) {
@@ -141,18 +142,14 @@ public class SignInController {
             e.printStackTrace();
         }
         return null;
+    }
 
-    }
-    private Stage loginStage;
-    public Stage getLoginStage() {
-        return loginStage;
-    }
-    public void setLoginStage(Stage loginStage) {
-        this.loginStage = loginStage;
+
+
 }
 
 
 
 
 
-}
+

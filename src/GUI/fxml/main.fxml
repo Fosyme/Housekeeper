@@ -74,7 +74,7 @@
                <children>
                   <ImageView fitHeight="93.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../src/记账.png" />
+                        <Image url="@../resources/记账.png" />
                      </image>
                   </ImageView>
                   <VBox layoutY="93.0" prefHeight="653.0" prefWidth="100.0">

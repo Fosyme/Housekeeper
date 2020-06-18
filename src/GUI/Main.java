@@ -2,6 +2,7 @@ package GUI;
 
 import Core.UserLogin;
 import GUI.controller.MainController;
+import GUI.controller.SignInController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,19 +11,15 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-    UserLogin userLogin = new UserLogin();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        userLogin.signIn("a", "123");
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("fxml/main.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("fxml/signIn.fxml"));
         Parent root = fxmlLoader.load();
-        MainController main = fxmlLoader.getController();
-
-        main.initialization(userLogin.getUser());
-
+        SignInController signIn = fxmlLoader.getController();
+        signIn.initialization();
         primaryStage.setTitle("Hello World");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

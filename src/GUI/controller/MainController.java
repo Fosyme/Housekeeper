@@ -299,7 +299,7 @@ public class MainController {
             file.createNewFile();
         }
         Properties properties = new Properties();
-        properties.setProperty("black", "GUI/src/black.css");
+        properties.setProperty("black", "GUI/resources/black.css");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         properties.store(fileOutputStream, "经典黑");
         JOptionPane.showMessageDialog(null, "切换经典黑主题成功", "信息", JOptionPane.PLAIN_MESSAGE);
@@ -372,7 +372,7 @@ public class MainController {
             file.createNewFile();
         }
         Properties properties = new Properties();
-        properties.setProperty("default", "");
+        properties.setProperty("default", "GUI/resources/default.css");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         properties.store(fileOutputStream, "默认");
         JOptionPane.showMessageDialog(null, "切换默认主题成功", "信息", JOptionPane.PLAIN_MESSAGE);
@@ -470,7 +470,7 @@ public class MainController {
             file.createNewFile();
         }
         Properties properties = new Properties();
-        properties.setProperty("white", "GUI/src/white.css");
+        properties.setProperty("white", "GUI/resources/white.css");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
 
         properties.store(fileOutputStream, "优雅白");
@@ -535,7 +535,5 @@ public class MainController {
         classificationColumn.setCellValueFactory(new PropertyValueFactory<>("orderCate"));;
         memoColumn.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));;
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));;
-    }
-    public void setDialogStage(Stage mainFrameStage) {
     }
 }
