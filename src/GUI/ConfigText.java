@@ -20,9 +20,9 @@ public class ConfigText {
                 "        <!ELEMENT user_name     (#PCDATA)>\n" +
                 "        <!ELEMENT user_pwd      (#PCDATA)>\n" +
                 "        <!ELEMENT user_show     (#PCDATA)>\n" +
-                "        <!ELEMENT options (remember_pwd,auto_login)>\n" +
+                "        <!ELEMENT options (remember_pwd,auto_signUp)>\n" +
                 "        <!ELEMENT remember_pwd  (#PCDATA)>\n" +
-                "        <!ELEMENT auto_login    (#PCDATA)>\n" +
+                "        <!ELEMENT auto_signUp    (#PCDATA)>\n" +
                 "        <!ELEMENT setting (language)>\n" +
                 "        <!ELEMENT language      (#PCDATA)>\n" +
                 "        ]>\n" +
@@ -42,9 +42,9 @@ public class ConfigText {
                 "        <remember_pwd>\n" +
                 "            false\n" +
                 "        </remember_pwd>\n" +
-                "        <auto_login>\n" +
+                "        <auto_signUp>\n" +
                 "            false\n" +
-                "        </auto_login>\n" +
+                "        </auto_signUp>\n" +
                 "    </options>\n" +
                 "    <setting>\n" +
                 "        <language>\n" +

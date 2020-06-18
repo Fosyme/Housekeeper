@@ -1,6 +1,5 @@
 package GUI.controller;
 
-import Core.User;
 import Core.UserLogin;
 import GUI.Main;
 import javafx.event.ActionEvent;
@@ -33,26 +32,26 @@ public class SignInController {
     private CheckBox rememberPassword;
 
     @FXML
-    private Button loginButton;
+    private Button signUpButton;
 
     @FXML
-    private Button logupButton;
+    private Button signInButton;
 
     @FXML
     private TextField nameTextField;
 
     @FXML
-    private CheckBox autLogin;
+    private CheckBox autoSignIn;
 
     @FXML
-    private Button findpassword;
+    private Button findPassword;
 
     public void initialization() {
         userLogin = new UserLogin();
     }
 
     @FXML
-    Scene logupButtonEvent(ActionEvent event) {
+    Scene signInButtonEvent(ActionEvent event) {
         //登录
         if (nameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "请按照文本框内容提示正确填写内容", "警告", JOptionPane.ERROR_MESSAGE);
@@ -89,7 +88,7 @@ public class SignInController {
 
 
     @FXML
-    void loginButtonEvent(ActionEvent event) {
+    void signUpButtonEvent(ActionEvent event) {
         //注册
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -118,7 +117,7 @@ public class SignInController {
 
 
     @FXML
-    Scene findpasswordEvent(ActionEvent event) {
+    Scene findPasswordEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/findPassword.fxml"));
@@ -133,7 +132,7 @@ public class SignInController {
             mainFrameStage.setScene(scene);
 
             FindPasswordController controller = loader.getController();
-            controller.setDialogStage(mainFrameStage);
+            controller.initialization();
             mainFrameStage.showAndWait();
             return scene;
         } catch (IOException e) {

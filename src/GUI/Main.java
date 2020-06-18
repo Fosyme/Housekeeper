@@ -1,7 +1,5 @@
 package GUI;
 
-import Core.UserLogin;
-import GUI.controller.MainController;
 import GUI.controller.SignInController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -79,7 +79,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="LoginButton" mnemonicParsing="false" onAction="#LoginButtonEvent" prefHeight="52.0" prefWidth="104.0" text="注册" />
+                        <Button fx:id="signUpButton" mnemonicParsing="false" onAction="#signUpButtonEvent" prefHeight="52.0" prefWidth="104.0" text="注册" />
                      </children>
                   </HBox>
                </children>

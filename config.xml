@@ -5,9 +5,9 @@
         <!ELEMENT user_name     (#PCDATA)>
         <!ELEMENT user_pwd      (#PCDATA)>
         <!ELEMENT user_show     (#PCDATA)>
-        <!ELEMENT options (remember_pwd,auto_login)>
+        <!ELEMENT options (remember_pwd,auto_signUp)>
         <!ELEMENT remember_pwd  (#PCDATA)>
-        <!ELEMENT auto_login    (#PCDATA)>
+        <!ELEMENT auto_signUp    (#PCDATA)>
         <!ELEMENT setting (language)>
         <!ELEMENT language      (#PCDATA)>
         ]>
@@ -27,9 +27,9 @@
         <remember_pwd>
             false
         </remember_pwd>
-        <auto_login>
+        <auto_signUp>
             false
-        </auto_login>
+        </auto_signUp>
     </options>
     <setting>
         <language>

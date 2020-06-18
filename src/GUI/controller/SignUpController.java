@@ -40,7 +40,7 @@ public class SignUpController {
     private TextField answerTextField;
 
     @FXML
-    private Button LoginButton;
+    private Button signUpButton;
 
     @FXML
     private TextField ageTextField;
@@ -55,7 +55,7 @@ public class SignUpController {
     private ComboBox<String> comBoxQuestion;
 
     @FXML
-    void LoginButtonEvent(ActionEvent event) {
+    void signUpButtonEvent(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("注册警告");
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();

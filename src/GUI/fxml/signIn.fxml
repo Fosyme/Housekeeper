@@ -7,12 +7,12 @@
 
 <Pane fx:id="paneSignIn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.SignInController">
    <children>
-      <Button fx:id="loginButton" layoutX="23.0" layoutY="457.0" mnemonicParsing="false" onAction="#loginButtonEvent" prefHeight="38.0" prefWidth="113.0" text="注册" textFill="#f80707">
+      <Button fx:id="signUpButton" layoutX="23.0" layoutY="457.0" mnemonicParsing="false" onAction="#signUpButtonEvent" prefHeight="38.0" prefWidth="113.0" text="注册" textFill="#f80707">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="logupButton" layoutX="242.0" layoutY="366.0" mnemonicParsing="false" onAction="#logupButtonEvent" prefHeight="60.0" prefWidth="348.0" style="-fx-background-color: #1faef1;" text="登录" textFill="#fbfeff">
+      <Button fx:id="signInButton" layoutX="242.0" layoutY="366.0" mnemonicParsing="false" onAction="#signInButtonEvent" prefHeight="60.0" prefWidth="348.0" style="-fx-background-color: #1faef1;" text="登录" textFill="#fbfeff">
          <font>
             <Font size="18.0" />
          </font>
@@ -40,9 +40,9 @@
             <Font name="Bell MT Bold" size="28.0" />
          </font>
       </Label>
-      <CheckBox fx:id="autLogin" layoutX="301.0" layoutY="330.0" mnemonicParsing="false" text="自动登录" />
+      <CheckBox fx:id="autoSignIn" layoutX="301.0" layoutY="330.0" mnemonicParsing="false" text="自动登录" />
       <CheckBox fx:id="rememberPassword" layoutX="441.0" layoutY="330.0" mnemonicParsing="false" text="记住密码" />
-      <Button fx:id="findpassword" layoutX="150.0" layoutY="457.0" mnemonicParsing="false" onAction="#findpasswordEvent" prefHeight="38.0" prefWidth="113.0" text="找回密码" textFill="#f80707">
+      <Button fx:id="findPassword" layoutX="150.0" layoutY="457.0" mnemonicParsing="false" onAction="#findPasswordEvent" prefHeight="38.0" prefWidth="113.0" text="找回密码" textFill="#f80707">
          <font>
             <Font size="18.0" />
          </font>
