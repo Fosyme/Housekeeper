@@ -21,7 +21,7 @@ import javax.swing.*;
 import java.io.IOException;
 
 public class SignInController {
-    private UserLogin userLogin;
+    private UserLogin userLogin = new UserLogin();
 
     @FXML
     private Pane paneSignIn;
@@ -54,7 +54,7 @@ public class SignInController {
     @FXML
     Scene logupButtonEvent(ActionEvent event) {
         //登录
-        if (nameTextField.getText().equals("") ||  passwordTextField.getText().equals("")) {
+        if (nameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "请按照文本框内容提示正确填写内容", "警告", JOptionPane.ERROR_MESSAGE);
             return null;
         }
@@ -82,12 +82,10 @@ public class SignInController {
                 e.printStackTrace();
             }
         } else {
-            JOptionPane.showMessageDialog(null,"用户名或者密码错误","信息",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "用户名或者密码错误", "信息", JOptionPane.ERROR_MESSAGE);
         }
         return null;
     }
-
-
 
 
     @FXML
@@ -145,7 +143,10 @@ public class SignInController {
     }
 
 
-
+    public void afterSignUp(String userName, String userPassword) {
+        nameTextField.setText(userName);
+        passwordTextField.setText(userPassword);
+    }
 }
 
 

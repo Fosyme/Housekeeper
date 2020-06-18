@@ -60,7 +60,7 @@ public class UserLogin {
         String[] userInfo = new String[TRANSMIT_USER_INFORMATION_LENGTH];
         if (userMsg.length == RECEIVE_USER_INFORMATION_LENGTH) {
             boolean verifyId = UserOperation.checkUserExist(userMsg[0]);
-            if (!verifyId) {
+            if (verifyId) {
                 return false;
             }
             for (int i = 0, j = 0; j < RECEIVE_USER_INFORMATION_LENGTH; i++) {
@@ -70,12 +70,9 @@ public class UserLogin {
                     userInfo[i] = String.valueOf((System.currentTimeMillis() / 1000));
                 } else {
                     userInfo[i] = userMsg[j++];
-                    j++;
                 }
             }
-            boolean regResult = UserOperation.regAccount(userInfo);
-            System.out.println(regResult);
-            return regResult;
+            return UserOperation.regAccount(userInfo);
         }
         return false;
     }
