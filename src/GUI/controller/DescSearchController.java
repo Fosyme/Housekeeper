@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 
-public class memoCheckController<TableData> {
+public class DescSearchController<TableData> {
 
     @FXML
     private Button memo_checkButton;

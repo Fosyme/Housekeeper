@@ -2,8 +2,6 @@ package GUI.controller;
 
 import Core.*;
 import GUI.Main;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +16,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
 import java.io.File;
 
 import java.io.FileInputStream;
@@ -26,9 +23,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Properties;
-import java.util.Timer;
 
-public class MainPage1Controller {
+public class MainController {
     private MainInterface main;
 
     @FXML
@@ -162,7 +158,7 @@ public class MainPage1Controller {
     Scene abutSoftMenuItemEvent(ActionEvent actionEvent) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/SoftInformation.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/softInfo.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage mainFrameStage = new Stage();
@@ -175,7 +171,7 @@ public class MainPage1Controller {
 
             scene.getStylesheets().add((getStyleValue()));
 
-            SoftInformationController controller = loader.getController();
+            SoftInfoController controller = loader.getController();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
             return scene;
@@ -214,7 +210,7 @@ public class MainPage1Controller {
     Scene addBuutonEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/AddAccountPage.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/addOrder.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage mainFrameStage = new Stage();
@@ -227,7 +223,7 @@ public class MainPage1Controller {
 
             scene.getStylesheets().add((getStyleValue()));
 
-            AddAccountController controller = loader.getController();
+            AddOrderController controller = loader.getController();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
             return scene;
@@ -247,7 +243,7 @@ public class MainPage1Controller {
     Scene alterButtonEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/AlterAccount.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/alterOrder.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage mainFrameStage = new Stage();
@@ -260,7 +256,7 @@ public class MainPage1Controller {
 
             scene.getStylesheets().add((getStyleValue()));
 
-            AlterAccountController controller = loader.getController();
+            AlterOrderController controller = loader.getController();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
             return scene;
@@ -316,7 +312,7 @@ public class MainPage1Controller {
     Scene classificationCheckMenuItemEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/classificationCheck.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/cateSearch.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage mainFrameStage = new Stage();
@@ -329,7 +325,7 @@ public class MainPage1Controller {
 
             scene.getStylesheets().add((getStyleValue()));
 
-            classificationCheckController controller = loader.getController();
+            CateSearchController controller = loader.getController();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
             return scene;
@@ -344,7 +340,7 @@ public class MainPage1Controller {
     Scene dateCheckMenuItemEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/dateCheck.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/dateSearch.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage mainFrameStage = new Stage();
@@ -357,7 +353,7 @@ public class MainPage1Controller {
 
             scene.getStylesheets().add((getStyleValue()));
 
-            dateCheckController controller = loader.getController();
+            DateSearchController controller = loader.getController();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
             return scene;
@@ -451,7 +447,7 @@ public class MainPage1Controller {
 
             scene.getStylesheets().add((getStyleValue()));
 
-            reportController controller = loader.getController();
+            ReportController controller = loader.getController();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
             return scene;
@@ -540,5 +536,6 @@ public class MainPage1Controller {
         memoColumn.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));;
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));;
     }
-
+    public void setDialogStage(Stage mainFrameStage) {
+    }
 }

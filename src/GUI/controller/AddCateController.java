@@ -7,7 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
-public class AddClassificationController {
+public class AddCateController {
 
     @FXML
     private MenuItem input_editContextMenu;

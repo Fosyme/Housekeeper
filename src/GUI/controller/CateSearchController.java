@@ -6,7 +6,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 
-public class classificationCheckController<TableData> {
+public class CateSearchController<TableData> {
 
     @FXML
     private ComboBox<?> outputClassificationComboBox;

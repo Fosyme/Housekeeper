@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class AlterAccountController {
+public class AlterOrderController {
 
     @FXML
     private TextField idTextField;

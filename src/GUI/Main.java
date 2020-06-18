@@ -1,20 +1,12 @@
 package GUI;
 
-import Core.User;
 import Core.UserLogin;
-import GUI.controller.MainPage1Controller;
+import GUI.controller.MainController;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.Properties;
 
 
 public class Main extends Application {
@@ -25,9 +17,9 @@ public class Main extends Application {
         userLogin.signIn("a", "123");
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("fxml/MainPage1.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("fxml/main.fxml"));
         Parent root = fxmlLoader.load();
-        MainPage1Controller main = fxmlLoader.getController();
+        MainController main = fxmlLoader.getController();
 
         main.initialization(userLogin.getUser());
 

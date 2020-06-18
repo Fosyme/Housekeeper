@@ -4,8 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-public class LoginController {
+public class SignUpController {
 
     @FXML
     private TextField passwordTextField;
@@ -35,5 +36,8 @@ public class LoginController {
     @FXML
     void LoginButtonEvent(ActionEvent event) {
 
+    }
+
+    public void setDialogStage(Stage mainFrameStage) {
     }
 }

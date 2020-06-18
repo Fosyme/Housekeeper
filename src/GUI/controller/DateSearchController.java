@@ -7,7 +7,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 
-public class dateCheckController<TableData> {
+public class DateSearchController<TableData> {
 
     @FXML
     private TableColumn<TableData, String> check_classificationColumn;

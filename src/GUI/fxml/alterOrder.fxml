@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="604.0" prefWidth="429.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AlterAccountController">
+<AnchorPane prefHeight="604.0" prefWidth="429.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AlterOrderController">
    <children>
       <VBox layoutX="56.0" layoutY="14.0" prefHeight="590.0" prefWidth="339.0">
          <children>

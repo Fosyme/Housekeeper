@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-public class AddAccountController {
+public class AddOrderController {
 
     @FXML
     private TextField moneyTextField;
