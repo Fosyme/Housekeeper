@@ -8,7 +8,6 @@ public class Book {
     private String bookName;        //账本名
     private String bookDesc;        //账本描述
     private String bookAddTime;     //账本添加时间
-    private String bookLastTime;    //账本最后修改时间
 
     public Book(String bookID) {
         this.bookID = bookID;
@@ -19,7 +18,6 @@ public class Book {
             bookName = bookMsg[1];
             bookDesc = bookMsg[2];
             bookAddTime = bookMsg[3];
-            bookLastTime = bookMsg[4];
     }
 
     public String getBookID() {
@@ -50,22 +48,13 @@ public class Book {
         this.bookAddTime = bookAddTime;
     }
 
-    public String getBookLastTime() {
-        return bookLastTime;
-    }
-
-    public void setBookLastTime(String bookLastTime) {
-        this.bookLastTime = bookLastTime;
-    }
-
     @Override
     public String toString() {
         return "Book{" +
-                "bookID=" + bookID +
+                "bookID='" + bookID + '\'' +
                 ", bookName='" + bookName + '\'' +
                 ", bookDesc='" + bookDesc + '\'' +
                 ", bookAddTime='" + bookAddTime + '\'' +
-                ", bookLastTime='" + bookLastTime + '\'' +
                 '}';
     }
 }

@@ -18,14 +18,23 @@ public class MainInterface {
         this.user = user;
     }
 
+    //初始化账本列表
     public ObservableList<String> initializeBookData() {
         List<String> list = new ArrayList<>();
         user.getBooks().forEach(book -> list.add(book.getBookName()));
         return FXCollections.observableList(list);
     }
 
+    //设置账单列表
     public ObservableList<Order> getOrderOfBook(int index) {
         ArrayList<Order> list = user.getOrders().get(index);
         return FXCollections.observableArrayList(list);
+    }
+
+    //刷新账本列表
+    public ObservableList<String> refreshBookData() {
+        List<String> list = new ArrayList<>();
+        user.getBooks().forEach(book -> list.add(book.getBookName()));
+        return FXCollections.observableList(list);
     }
 }

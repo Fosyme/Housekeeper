@@ -1,5 +1,6 @@
 package Core;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 public class Order {
@@ -9,10 +10,13 @@ public class Order {
     private double orderPrice;      //账单金额
     private String orderWay;        //账单支付方式
     private String orderMod;        //账单收支模式
-    private String orderTime;       //账单时间
+    private String orderTime;       //账单时间(时间戳)
+    private String orderDate;       //账单时间
     private String orderCate;       //账单分类
     private String orderDesc;       //账单详细描述
     private byte[] orderImageSrc;   //账单图片
+
+    private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
 
     public Order(String orderID) {
         this.orderID = orderID;
@@ -68,6 +72,15 @@ public class Order {
 
     public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
+        setOrderDate(dateformat.format(System.currentTimeMillis()));
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
     }
 
     public String getOrderCate() {

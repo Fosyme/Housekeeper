@@ -32,14 +32,14 @@ public class UserLogin {
      * @param userPassword 用户输入密码(明文)
      * @return 登录结果
      * */
-    public LoginStatus signIn(@NotNull String userName, String userPassword) {
+    public boolean signIn(@NotNull String userName, String userPassword) {
         String userID;
         userID = UserOperation.loginAuthentication(userName, getMD5String(userPassword));
         if (userID.isEmpty()) {
-            return LoginStatus.USERNAME_OR_PASSWORD_ERROR;
+            return false;
         }
         user = new User(userID);
-        return LoginStatus.SIGN_IN_SUCCESS;
+        return true;
     }
 
     /**
@@ -50,7 +50,7 @@ public class UserLogin {
      *                用户密保答案(明文), 性别, 年龄, 手机号, 地址, 头像
      * @return 注册结果
      */
-    public LoginStatus signUp(@NotNull String[] userMsg) {
+    public boolean signUp(@NotNull String[] userMsg) {
         final int RECEIVE_USER_INFORMATION_LENGTH = 9;    //从前端接受用户数据长度
         final int TRANSMIT_USER_INFORMATION_LENGTH = 10;  //向数据库传输用户信息长度
         final int USER_PASSWORD = 1;                      //用户密码索引
@@ -61,7 +61,7 @@ public class UserLogin {
         if (userMsg.length == RECEIVE_USER_INFORMATION_LENGTH) {
             boolean verifyId = UserOperation.checkUserExist(userMsg[0]);
             if (!verifyId) {
-                return LoginStatus.USER_IS_EXIST;
+                return false;
             }
             for (int i = 0, j = 0; j < RECEIVE_USER_INFORMATION_LENGTH; i++) {
                 if (i == USER_PASSWORD || i == USER_ENCRYPTED_ANSWER) {
@@ -75,13 +75,9 @@ public class UserLogin {
             }
             boolean regResult = UserOperation.regAccount(userInfo);
             System.out.println(regResult);
-            if (regResult) {
-                return LoginStatus.SIGN_UP_SUCCESS;
-            } else {
-                return LoginStatus.INFO_AGAINST_RULES;
-            }
+            return regResult;
         }
-        return LoginStatus.DATA_ERROR;
+        return false;
     }
 
     /**
@@ -89,11 +85,8 @@ public class UserLogin {
      *
      * @return 账号登出结果
      * */
-    public LoginStatus signOut() {
-        if (UserOperation.setUserLastTime(user.getUserID(), String.valueOf(System.currentTimeMillis() / 1000))) {
-            return LoginStatus.SIGN_OUT_SUCCESS;
-        }
-        return LoginStatus.INCORRECT_WAY;
+    public boolean signOut() {
+        return UserOperation.setUserLastTime(user.getUserID(), String.valueOf(System.currentTimeMillis() / 1000));
     }
 
     /**
@@ -115,16 +108,12 @@ public class UserLogin {
      * @param newPassword 用户新密码
      * @return 返回找回密码结果
      * */
-    public LoginStatus recoverPassword(String userName, String userEncryptedAnswer, String newPassword) {
+    public boolean recoverPassword(String userName, String userEncryptedAnswer, String newPassword) {
         String userID = UserOperation.userEncryptedVerify(userName, userEncryptedAnswer);
         if (userID == null) {
-            return LoginStatus.ENCRYPTED_ERROR;
+            return false;
         }
-        if (UserOperation.changeUserPassWord(userID, getMD5String(newPassword))) {
-            return LoginStatus.RECOVER_PASSWORD_SUCCESS;
-        } else {
-            return LoginStatus.UNKNOWN_ERROR;
-        }
+        return UserOperation.changeUserPassWord(userID, getMD5String(newPassword));
     }
 
     //对字符串进行MD5加密
@@ -139,7 +128,6 @@ public class UserLogin {
             //BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
             //一个byte是八位二进制，也就是2位十六进制字符（2的8次方等于16的2次方）
             cipherText = new BigInteger(1, md.digest()).toString(16);
-            System.out.println(cipherText);
             return fillMD5(cipherText);
         } catch (Exception e) {
             e.printStackTrace();

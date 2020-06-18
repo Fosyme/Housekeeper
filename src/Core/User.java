@@ -27,9 +27,9 @@ public class User {
     private byte[] userHeadThumb;   //用户头像
 
     //账本信息
-    private ArrayList<Book> books;
+    private final ArrayList<Book> books;
     //账单信息
-    private ArrayList<ArrayList<Order>> orders;
+    private final ArrayList<ArrayList<Order>> orders;
 
     {
         userName = null;
@@ -119,7 +119,6 @@ public class User {
                 book.setBookName(bookRS.getString("book_name"));
                 book.setBookDesc(bookRS.getString("book_desc"));
                 book.setBookAddTime(bookRS.getString("book_add_time"));
-                book.setBookLastTime(bookRS.getString("book_last_time"));
                 books.add(book);
                 //在数据库中搜索一个账本的所有账单信息, 将一个账单信息保存到账单类中, 将一个账本的所有账单保存到ArrayList中
                 ordersRS = OrderOperation.queryOrderMsg(bookRS.getString("book_id"));

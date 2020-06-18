@@ -61,3 +61,4 @@ insert into `order` values (0, 1, '下午茶', 20, null, null, unix_timestamp(no
 insert into `order` values (0, 2, '电脑', 4000, null, null, unix_timestamp(now()), '电子产品', null, null);
 insert into `order` values (0, 2, '打印机', 1500, null, null, unix_timestamp(now()), '电子产品', null, null);
 insert into `order` values (0, 3, '房租', 11232.58, null, null, unix_timestamp(now()), '生活', null, null);
+insert into `order` values (0, 1, '大头鬼', 100, '现金', null, unix_timestamp(now()), '生活', '锤子', null);
