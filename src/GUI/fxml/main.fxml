@@ -5,16 +5,12 @@
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -26,48 +22,6 @@
 
 <VBox prefHeight="830.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainController">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="文件">
-          <items>
-            <MenuItem fx:id="importMenuItem" mnemonicParsing="false" onAction="#importMenuItemEvent" text="导入" />
-                  <MenuItem fx:id="exportMenuItem" mnemonicParsing="false" onAction="#exportMenuItemEvent" text="导出" />
-                  <MenuItem fx:id="backupMenuItem" mnemonicParsing="false" onAction="#backupMenuItemEvent" text="恢复" />
-                  <MenuItem fx:id="recoverMenuItem" mnemonicParsing="false" onAction="#recoverMenuItemEvent" text="备份" />
-                  <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitMenuItemEvent" text="退出" />
-          </items>
-        </Menu>
-            <Menu mnemonicParsing="false" text="查询">
-               <items>
-                <MenuItem fx:id="dateCheckMenuItem" mnemonicParsing="false" onAction="#dateCheckMenuItemEvent" text="日期查询" />
-                  <MenuItem fx:id="classificationCheckMenuItem" mnemonicParsing="false" onAction="#classificationCheckMenuItemEvent" text="分类查询" />
-                  <MenuItem fx:id="memoCheckMenuItem" mnemonicParsing="false" onAction="#memoCheckMenuItemEvent" text="备注查询" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="主题">
-               <items>
-                  <RadioMenuItem fx:id="defaultRadioMenuItem" mnemonicParsing="false" onAction="#defaultRadioMenuItemEvent" text="默认">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="RadioMenuItem" />
-                     </toggleGroup></RadioMenuItem>
-                  <RadioMenuItem fx:id="blackRadioMenuItem" mnemonicParsing="false" onAction="#blackRadioMenuItemEvent" text="经典黑" toggleGroup="$RadioMenuItem" />
-                  <RadioMenuItem fx:id="whiteRadioMenuItem" mnemonicParsing="false" onAction="#whiteRadioMenuItemEvent" text="优雅白" toggleGroup="$RadioMenuItem" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="选项">
-               <items>
-                  <MenuItem fx:id="addClassificationMenuItem" mnemonicParsing="false" onAction="#addClassificationMenuItemEvent" text="添加分类" />
-                  <MenuItem fx:id="userinfo" mnemonicParsing="false" onAction="#userinfoEvent" text="用户信息" />
-               </items>
-            </Menu>
-        <Menu mnemonicParsing="false" text="帮助">
-          <items>
-            <MenuItem fx:id="abutSoftMenuItem" mnemonicParsing="false" onAction="#abutSoftMenuItemEvent" text="关于软件" />
-                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#helpMenuItemEvent" text="帮助" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
     <SplitPane dividerPositions="0.09059233449477352, 0.3945993031358885" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
         <AnchorPane prefHeight="777.0" prefWidth="143.0">
@@ -96,15 +50,18 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonEvent" text="删除" />
+                              <Button fx:id="alterButton" mnemonicParsing="false" onAction="#alterButtonEvent" text="修改" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="alterButton" mnemonicParsing="false" onAction="#alterButtonEvent" text="修改" />
+                              <Button fx:id="chackButton" mnemonicParsing="false" onAction="#chackButtonEvent" text="查询" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="setButton" mnemonicParsing="false" onAction="#setButtonEvent" text="设置" />
+                           </children></HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>

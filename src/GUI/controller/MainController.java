@@ -15,11 +15,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.File;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Properties;
@@ -27,54 +25,9 @@ import java.util.Properties;
 public class MainController {
     private MainInterface main;
 
-    @FXML
-    private MenuItem importMenuItem;
 
     @FXML
-    private MenuItem exportMenuItem;
-
-    @FXML
-    private MenuItem backupMenuItem;
-
-    @FXML
-    private MenuItem recoverMenuItem;
-
-    @FXML
-    private MenuItem exitMenuItem;
-
-    @FXML
-    private MenuItem dateCheckMenuItem;
-
-    @FXML
-    private MenuItem classificationCheckMenuItem;
-
-    @FXML
-    private MenuItem memoCheckMenuItem;
-
-    @FXML
-    private RadioMenuItem defaultRadioMenuItem;
-
-    @FXML
-    private ToggleGroup RadioMenuItem;
-
-    @FXML
-    private RadioMenuItem blackRadioMenuItem;
-
-    @FXML
-    private RadioMenuItem whiteRadioMenuItem;
-
-    @FXML
-    private MenuItem addClassificationMenuItem;
-
-    @FXML
-    private MenuItem userinfo;
-
-    @FXML
-    private MenuItem abutSoftMenuItem;
-
-    @FXML
-    private MenuItem helpMenuItem;
-
+    private Button chackButton;
     @FXML
     private Label username;
 
@@ -85,10 +38,7 @@ public class MainController {
     private Button addBuuton;
 
     @FXML
-    private Button deleteButton;
-
-    @FXML
-    private Button alterBuutton;
+    private Button alterButton;
 
     @FXML
     private Button setButton;
@@ -155,33 +105,6 @@ public class MainController {
 
 
     @FXML
-    Scene abutSoftMenuItemEvent(ActionEvent actionEvent) throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/softInfo.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            Stage mainFrameStage = new Stage();
-            mainFrameStage.setTitle("关于软件");
-            mainFrameStage.setResizable(true);
-            mainFrameStage.setAlwaysOnTop(false);
-            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
-            Scene scene = new Scene(page);
-            mainFrameStage.setScene(scene);
-
-            scene.getStylesheets().add((getStyleValue()));
-
-            SoftInfoController controller = loader.getController();
-            controller.setDialogStage(mainFrameStage);
-            mainFrameStage.showAndWait();
-            return scene;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @FXML
     void accountbookListViewEvent(ActionEvent event) {
 
     }
@@ -220,10 +143,9 @@ public class MainController {
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
-
             scene.getStylesheets().add((getStyleValue()));
-
             AddOrderController controller = loader.getController();
+            controller.initialization();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
             return scene;
@@ -233,12 +155,6 @@ public class MainController {
         return null;
 
     }
-
-    @FXML
-    void addClassificationMenuItemEvent(ActionEvent event) {
-
-    }
-
     @FXML
     Scene alterButtonEvent(ActionEvent event) {
         try {
@@ -257,6 +173,7 @@ public class MainController {
             scene.getStylesheets().add((getStyleValue()));
 
             AlterOrderController controller = loader.getController();
+            controller.initialization();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
             return scene;
@@ -264,11 +181,6 @@ public class MainController {
             e.printStackTrace();
         }
         return null;
-
-    }
-
-    @FXML
-    void backupMenuItemEvent(ActionEvent event) {
 
     }
 
@@ -289,22 +201,6 @@ public class MainController {
 
     @FXML
     void bill_refreshContextMenuEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void blackRadioMenuItemEvent(ActionEvent event) throws IOException {
-        File file = new File("src\\GUI\\src\\styles.properties");
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-        Properties properties = new Properties();
-        properties.setProperty("black", "GUI/resources/black.css");
-        FileOutputStream fileOutputStream = new FileOutputStream(file);
-        properties.store(fileOutputStream, "经典黑");
-        JOptionPane.showMessageDialog(null, "切换经典黑主题成功", "信息", JOptionPane.PLAIN_MESSAGE);
-        fileOutputStream.close();
-
 
     }
 
@@ -337,91 +233,13 @@ public class MainController {
     }
 
     @FXML
-    Scene dateCheckMenuItemEvent(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/dateSearch.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            Stage mainFrameStage = new Stage();
-            mainFrameStage.setTitle("日期查询");
-            mainFrameStage.setResizable(true);
-            mainFrameStage.setAlwaysOnTop(false);
-            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
-            Scene scene = new Scene(page);
-            mainFrameStage.setScene(scene);
-
-            scene.getStylesheets().add((getStyleValue()));
-
-            DateSearchController controller = loader.getController();
-            controller.setDialogStage(mainFrameStage);
-            mainFrameStage.showAndWait();
-            return scene;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-
-
-    }
-
-    @FXML
-    void defaultRadioMenuItemEvent(ActionEvent event) throws IOException {
-        File file = new File("src\\GUI\\src\\styles.properties");
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-        Properties properties = new Properties();
-        properties.setProperty("default", "GUI/resources/default.css");
-        FileOutputStream fileOutputStream = new FileOutputStream(file);
-        properties.store(fileOutputStream, "默认");
-        JOptionPane.showMessageDialog(null, "切换默认主题成功", "信息", JOptionPane.PLAIN_MESSAGE);
-        fileOutputStream.close();
-
-    }
-
-    @FXML
-    void deleteButtonEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void exitMenuItemEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void exportMenuItemEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void helpMenuItemEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void importMenuItemEvent(ActionEvent event) {
-
-    }
-
-    @FXML
     void keywordTextFieldEvent(ActionEvent event) {
 
     }
 
     @FXML
-    void memoCheckMenuItemEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void recoverMenuItemEvent(ActionEvent event) {
-
-    }
-
-    @FXML
     void searchButtonEvent(ActionEvent event) {
+        //搜索
 
     }
 
@@ -459,26 +277,6 @@ public class MainController {
     }
 
     @FXML
-    void userinfoEvent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void whiteRadioMenuItemEvent(ActionEvent event) throws IOException {
-        File file = new File("src\\GUI\\src\\styles.properties");
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-        Properties properties = new Properties();
-        properties.setProperty("white", "GUI/resources/white.css");
-        FileOutputStream fileOutputStream = new FileOutputStream(file);
-
-        properties.store(fileOutputStream, "优雅白");
-        JOptionPane.showMessageDialog(null, "切换优雅白主题成功", "信息", JOptionPane.PLAIN_MESSAGE);
-        fileOutputStream.close();
-
-    }
-
     public String getStyleValue() throws IOException {
         File file = new File("src\\GUI\\src\\styles.properties");
         Properties properties = new Properties();
@@ -492,7 +290,7 @@ public class MainController {
         return properties.getProperty(Key, "");
     }
 
-    public void initThemeRadioMenuItem() {
+/*    public void initThemeRadioMenuItem() {
         String key = "";
         try {
             Properties properties = new Properties();
@@ -512,7 +310,7 @@ public class MainController {
         } else {
             defaultRadioMenuItem.setSelected(true);
         }
-    }
+    }*/
 
     public void initialization(User user) {
         main = new MainInterface(user);
@@ -535,5 +333,33 @@ public class MainController {
         classificationColumn.setCellValueFactory(new PropertyValueFactory<>("orderCate"));;
         memoColumn.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));;
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));;
+    }
+
+     @FXML
+     Scene chackButtonEvent(ActionEvent actionEvent) {
+        //查询
+         try {
+             FXMLLoader loader = new FXMLLoader();
+             loader.setLocation(Main.class.getResource("fxml/dateSearch.fxml"));
+             AnchorPane page = (AnchorPane) loader.load();
+
+             Stage mainFrameStage = new Stage();
+             mainFrameStage.setTitle("日期查询");
+             mainFrameStage.setResizable(true);
+             mainFrameStage.setAlwaysOnTop(false);
+             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+             Scene scene = new Scene(page);
+             mainFrameStage.setScene(scene);
+
+             scene.getStylesheets().add((getStyleValue()));
+
+             DateSearchController controller = loader.getController();
+             controller.setDialogStage(mainFrameStage);
+             mainFrameStage.showAndWait();
+             return scene;
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+         return null;
     }
 }
