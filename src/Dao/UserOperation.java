@@ -106,7 +106,7 @@ public class UserOperation {
      * * @param userEncryptedAnswer 密保答案,
      */
     public static String userEncryptedVerify(String userName, String userEncryptedAnswer) {
-        String uerId = null;
+        String userId = null;
         resultSet = null;
         String sql = "select user_id from `user` where `user_name`=? and user_encrypted_answer=?";
         try {
@@ -115,13 +115,14 @@ public class UserOperation {
             preparedStatement.setString(2, userEncryptedAnswer);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                uerId = resultSet.getString(1);
+                userId = resultSet.getString(1);
                 resultSet = null;
             }
+            return userId;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return uerId;
+        return null;
     }
 
     /**

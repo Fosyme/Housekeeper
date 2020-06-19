@@ -2,6 +2,7 @@ package GUI.controller;
 
 import Core.UserLogin;
 import GUI.Main;
+import GUI.OpenFormAfterThis;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -120,24 +121,7 @@ public class SignUpController {
             alert.setHeaderText(null);
             alert.setContentText("账号注册成功");
             alert.showAndWait();
-            try {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("fxml/signIn.fxml"));
-                Pane page = loader.load();
-                Stage signIn = new Stage();
-                signIn.setTitle("登录");
-                signIn.setResizable(true);
-                signIn.setAlwaysOnTop(false);
-                signIn.initModality(Modality.APPLICATION_MODAL);
-                Scene scene = new Scene(page);
-                signIn.setScene(scene);
-                SignInController controller = loader.getController();
-                controller.afterSignUp(userName, userPassword);
-                ((Stage) paneSignUp.getScene().getWindow()).close();
-                signIn.showAndWait();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            OpenFormAfterThis.signIn((Stage) paneSignUp.getScene().getWindow(),userName,userPassword);
         }
     }
 

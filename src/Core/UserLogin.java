@@ -106,7 +106,7 @@ public class UserLogin {
      * @return 返回找回密码结果
      * */
     public boolean recoverPassword(String userName, String userEncryptedAnswer, String newPassword) {
-        String userID = UserOperation.userEncryptedVerify(userName, userEncryptedAnswer);
+        String userID = UserOperation.userEncryptedVerify(userName, getMD5String(userEncryptedAnswer));
         if (userID == null) {
             return false;
         }

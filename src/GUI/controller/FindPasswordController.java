@@ -1,20 +1,19 @@
 package GUI.controller;
 
 import Core.UserLogin;
+import GUI.OpenFormAfterThis;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import javax.swing.*;
 
 public class FindPasswordController {
     private UserLogin userLogin;
     private String userName;
 
+    @FXML
+    public AnchorPane paneFindPwd;
 
     @FXML
     public Label lblQuestion;
@@ -26,28 +25,30 @@ public class FindPasswordController {
     private TextField AnswerTextField;
 
     @FXML
-    private ComboBox<?> FindPasswordComboBox;
-
-    @FXML
     private Button ConfirmButton;
 
-    @FXML
-    void FindPasswordComboBoxEvent(ActionEvent event) {
-
-    }
     public void initialization() {
         userLogin = new UserLogin();
     }
 
     @FXML
     void ConfirmButtonEvent(ActionEvent event) {
-
-       boolean a=userLogin.recoverPassword(userName,AnswerTextField.getText(),NewPasswordTexField.getText());
-       if (a){
-           JOptionPane.showMessageDialog(null,"找回密码成功","找回密码",JOptionPane.INFORMATION_MESSAGE);
-        }else {
-           JOptionPane.showMessageDialog(null,"回答不正确","警告",JOptionPane.ERROR_MESSAGE);
-       }
+        String encryptedAnswer = AnswerTextField.getText();
+        String newPassword = NewPasswordTexField.getText();
+        boolean b = userLogin.recoverPassword(userName, encryptedAnswer, newPassword);
+        if (b) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle(null);
+            alert.setHeaderText("密码修改成功！");
+            alert.setContentText("请记住你的密码是：" + newPassword);
+            alert.showAndWait();
+            OpenFormAfterThis.signIn((Stage) paneFindPwd.getScene().getWindow(), userName, newPassword);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "密保答案错误！");
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.showAndWait();
+        }
     }
 
     public void setContent(String userName, String question) {

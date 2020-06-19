@@ -7,12 +7,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
+
 
 public class Main extends Application {
-
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        //TODO 程序开始时读取配置文件两个值，和用户名与密码
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("fxml/signIn.fxml"));
         Parent root = fxmlLoader.load();
@@ -23,38 +24,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-//    public String getStyleValue() throws IOException {
-//        File file=new File("src\\GUI\\src\\styles.theme");
-//        Properties properties=new Properties();
-//        FileInputStream fileInputStream=new FileInputStream(file);
-//        properties.load(fileInputStream);
-//        Iterator<String> iterator=properties.stringPropertyNames().iterator();
-//        String Key="";
-//        while (iterator.hasNext()){
-//            Key=iterator.next();
-//        }
-//        return properties.getProperty(Key,"");
-//
-//    }
-
-
-/*    @Override
-    public void init() {
-        File file = new File("config.xml");
-        ConfigText configText = new ConfigText(file);
-
-        if (file.exists()) {
-            System.out.println("文件已存在！");
-            configText.readConfig();
-        }else {
-            System.out.println("文件不存在！");
-            if (configText.newConfig()) {
-                System.out.println("文件创建成功！");
-            } else {
-                System.out.println("文件创建失败！");
-            }
-        }
-    }*/
 
     public static void main(String[] args) {
         launch(args);
