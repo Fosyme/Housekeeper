@@ -14,16 +14,21 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.awt.print.Book;
 import java.io.File;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.Properties;
 
 public class MainController {
     private MainInterface main;
+    private BookInterface bookInterface;
+
 
 
     @FXML
@@ -121,11 +126,27 @@ public class MainController {
 
     @FXML
     void accountbook_deleteContextMenuEvent(ActionEvent event) {
+        //删除
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("提示");
+        alert.setContentText("请问是否删除");
+        alert.setHeaderText("提示");
+        Optional<ButtonType> result=alert.showAndWait();
+        if (result.get()==ButtonType.OK){
+            int accountbookIndex=tableView.getSelectionModel().getFocusedIndex();
+            bookInterface.deleteBook(accountbookIndex);
+        }else {
+            ;
+        }
+        main.refreshBookData();
 
     }
 
     @FXML
     void accountbook_refreshContextMenuEvent(ActionEvent event) {
+        //刷新
+        main.refreshBookData();
+
 
     }
 
@@ -143,11 +164,12 @@ public class MainController {
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
-            scene.getStylesheets().add((getStyleValue()));
+
+//            scene.getStylesheets().add((getStyleValue()));
             AddOrderController controller = loader.getController();
             controller.initialization();
             controller.setDialogStage(mainFrameStage);
-            mainFrameStage.showAndWait();
+            mainFrameStage.show();
             return scene;
         } catch (IOException e) {
             e.printStackTrace();
@@ -170,7 +192,7 @@ public class MainController {
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
 
-            scene.getStylesheets().add((getStyleValue()));
+//            scene.getStylesheets().add((getStyleValue()));
 
             AlterOrderController controller = loader.getController();
             controller.initialization();
@@ -263,8 +285,7 @@ public class MainController {
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
 
-            scene.getStylesheets().add((getStyleValue()));
-
+//            scene.getStylesheets().add((getStyleValue()));
             ReportController controller = loader.getController();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
@@ -276,9 +297,10 @@ public class MainController {
 
     }
 
+
     @FXML
     public String getStyleValue() throws IOException {
-        File file = new File("src\\GUI\\src\\styles.properties");
+        File file = new File("GUI\\resources\\styles.properties");
         Properties properties = new Properties();
         FileInputStream fileInputStream = new FileInputStream(file);
         properties.load(fileInputStream);
@@ -289,7 +311,6 @@ public class MainController {
         }
         return properties.getProperty(Key, "");
     }
-
 /*    public void initThemeRadioMenuItem() {
         String key = "";
         try {
@@ -351,7 +372,7 @@ public class MainController {
              Scene scene = new Scene(page);
              mainFrameStage.setScene(scene);
 
-             scene.getStylesheets().add((getStyleValue()));
+//             scene.getStylesheets().add((getStyleValue()));
 
              DateSearchController controller = loader.getController();
              controller.setDialogStage(mainFrameStage);
