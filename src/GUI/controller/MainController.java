@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -28,6 +27,7 @@ import java.util.Properties;
 public class MainController {
     private MainInterface main;
     private BookInterface bookInterface;
+    private OrderInterface orderInterface;
 
     @FXML
     private Button checkButton;
@@ -57,9 +57,6 @@ public class MainController {
     public TableColumn<Book, String> bookDesc;
 
     @FXML
-    private MenuItem ctmRefreshBook;
-
-    @FXML
     private MenuItem ctmAddBook;
 
     @FXML
@@ -81,7 +78,7 @@ public class MainController {
     private TableColumn<Order, String> nameColumn;
 
     @FXML
-    private TableColumn<Order, String> typeColumn;
+    private TableColumn<Order, String> modColumn;
 
     @FXML
     public TableColumn<Order, String> wayColumn;
@@ -90,16 +87,13 @@ public class MainController {
     private TableColumn<Order, String> moneyColumn;
 
     @FXML
-    private TableColumn<Order, String> classificationColumn;
+    private TableColumn<Order, String> cateColumn;
 
     @FXML
-    private TableColumn<Order, String> memoColumn;
+    private TableColumn<Order, String> descColumn;
 
     @FXML
     private TableColumn<Order, String> dateColumn;
-
-    @FXML
-    private MenuItem ctmRefreshOrder;
 
     @FXML
     private MenuItem ctmAddOrder;
@@ -131,8 +125,6 @@ public class MainController {
         //定义"确定"按钮
         ButtonType buttonType = new ButtonType("确定",ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(buttonType, ButtonType.CANCEL);
-        //定义"确定"按钮的功能
-        Node loginButton = dialog.getDialogPane().lookupButton(buttonType);
         //将面板加入对话框
         dialog.getDialogPane().setContent(pane);
         //设置焦点
@@ -205,35 +197,35 @@ public class MainController {
     @FXML
     void ctmDeleteBookEvent(ActionEvent event) {
         int index = bookTableView.getSelectionModel().getSelectedIndex();
-        if (index != -1) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("提示");
-            alert.setHeaderText(null);
-            alert.setContentText("请问是否删除？");
-            Optional<ButtonType> result = alert.showAndWait();
-            result.ifPresent(buttonType -> {
-                if (buttonType == ButtonType.OK) {
-                    if (!bookInterface.deleteBook(index)) {
-                        Alert delete = new Alert(Alert.AlertType.ERROR);
-                        delete.setTitle("提示");
-                        delete.setHeaderText(null);
-                        delete.setContentText("删除出错，请重试！");
-                        delete.show();
-                    }
-                }
-            });
-            ctmRefreshBookEvent();
-            orderTableView.setItems(null);
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("提示");
+        if (index == -1) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("警告");
             alert.setHeaderText(null);
             alert.setContentText("请选择账本！");
             alert.show();
+            return;
         }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("提示");
+        alert.setHeaderText(null);
+        alert.setContentText("请问是否删除？");
+        Optional<ButtonType> result = alert.showAndWait();
+        result.ifPresent(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                if (!bookInterface.deleteBook(index)) {
+                    Alert delete = new Alert(Alert.AlertType.ERROR);
+                    delete.setTitle("提示");
+                    delete.setHeaderText(null);
+                    delete.setContentText("删除出错，请重试！");
+                    delete.show();
+                }
+            }
+        });
+        ctmRefreshBookEvent();
+        orderTableView.setItems(null);
     }
 
-    //刷新
+    //刷新账本信息
     void ctmRefreshBookEvent() {
         ObservableList<Book> list = main.refreshBookData();
         bookTableView.refresh();
@@ -271,8 +263,8 @@ public class MainController {
                 return;
             }
             controller.setBookIndex(index);
-            mainFrameStage.show();
-            ctmRefreshBookEvent();
+            mainFrameStage.showAndWait();
+            changeSelectedBookItem(index);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -307,11 +299,13 @@ public class MainController {
             AlterOrderController controller = loader.getController();
             controller.initialization(main.getUser());
             controller.dataPadding(bookIndex, orderIndex);
-            mainFrameStage.show();
+            mainFrameStage.showAndWait();
+            changeSelectedBookItem(bookIndex);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void ctmAddOrderEvent(ActionEvent event) {
@@ -325,7 +319,33 @@ public class MainController {
 
     @FXML
     void ctmDeleteOrderEvent(ActionEvent event) {
-
+        int bookIndex = bookTableView.getSelectionModel().getSelectedIndex();
+        int orderIndex = orderTableView.getSelectionModel().getSelectedIndex();
+        if (bookIndex == -1 || orderIndex == -1) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("警告");
+            alert.setHeaderText(null);
+            alert.setContentText("请选择账本和账单！");
+            alert.show();
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("提示");
+        alert.setHeaderText(null);
+        alert.setContentText("请问是否删除？");
+        Optional<ButtonType> result = alert.showAndWait();
+        result.ifPresent(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                if (!orderInterface.deleteOrder(bookIndex, orderIndex)) {
+                    Alert delete = new Alert(Alert.AlertType.ERROR);
+                    delete.setTitle("提示");
+                    delete.setHeaderText(null);
+                    delete.setContentText("删除出错，请重试！");
+                    delete.show();
+                }
+            }
+        });
+        changeSelectedBookItem(bookIndex);
     }
 
     @FXML
@@ -436,6 +456,7 @@ public class MainController {
     public void initialization(User user) {
         main = new MainInterface(user);
         bookInterface = new BookInterface(user);
+        orderInterface = new OrderInterface(user);
         username.setText(user.getUserName());
         bookTableView
                 .getSelectionModel()
@@ -452,13 +473,14 @@ public class MainController {
             return;
         }
         ObservableList<Order> list = main.getOrderOfBook(bookIndex);
+        orderTableView.refresh();
         orderTableView.setItems(list);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("orderName"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("orderMod"));
+        modColumn.setCellValueFactory(new PropertyValueFactory<>("orderMod"));
         wayColumn.setCellValueFactory(new PropertyValueFactory<>("orderWay"));
         moneyColumn.setCellValueFactory(new PropertyValueFactory<>("orderPrice"));
-        classificationColumn.setCellValueFactory(new PropertyValueFactory<>("orderCate"));
-        memoColumn.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));
+        cateColumn.setCellValueFactory(new PropertyValueFactory<>("orderCate"));
+        descColumn.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
     }
 

@@ -101,11 +101,11 @@
                         <TableView fx:id="orderTableView" editable="true" layoutX="-3.0" prefHeight="779.0" prefWidth="770.0" tableMenuButtonVisible="true">
                           <columns>
                             <TableColumn fx:id="nameColumn" prefWidth="120.0" resizable="false" text="账单名" />
-                            <TableColumn fx:id="typeColumn" resizable="false" text="类型" />
+                            <TableColumn fx:id="modColumn" resizable="false" text="类型" />
                               <TableColumn fx:id="wayColumn" resizable="false" text="方式" />
                               <TableColumn fx:id="moneyColumn" prefWidth="100.0" resizable="false" text="金额" />
-                              <TableColumn fx:id="classificationColumn" prefWidth="100.0" resizable="false" text="分类" />
-                              <TableColumn fx:id="memoColumn" prefWidth="180.0" resizable="false" text="备注" />
+                              <TableColumn fx:id="cateColumn" prefWidth="100.0" resizable="false" text="分类" />
+                              <TableColumn fx:id="descColumn" prefWidth="180.0" resizable="false" text="备注" />
                               <TableColumn fx:id="dateColumn" prefWidth="100.0" resizable="false" text="日期" />
                           </columns>
                            <contextMenu>

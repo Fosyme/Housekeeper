@@ -65,7 +65,7 @@ public class AddOrderController {
             return;
         }
         String date = datePicker.getValue().toString(); //账单日期
-        if (type == null || name.isEmpty() || money.isEmpty() || way == null || cate == null || desc.isEmpty()) {
+        if (type == null || name.isEmpty() || money.isEmpty() || way == null || cate == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("警告");
             alert.setHeaderText(null);
@@ -86,7 +86,7 @@ public class AddOrderController {
         boolean b = orderInterface.addOrder(bookIndex, orderMsg);
         Alert alert;
         if (b) {
-            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("提示");
             alert.setHeaderText(null);
             alert.setContentText("添加成功！");

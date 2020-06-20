@@ -68,7 +68,7 @@ public class OrderOperation {
     /**
      * 修改账单信息，修改成功时返回true，修改失败时返回false
      * @param id 账单id
-     * @param newData 字符串数组（账单名、金额、支付方式、收支模式、时间、分类、描述、图片）
+     * @param newData 字符串数组（账本id(待用)、账单名、金额、支付方式、收支模式、时间、分类、描述、图片）
      * @return boolean
      * */
 
@@ -80,14 +80,14 @@ public class OrderOperation {
                 "`order_desc`=?,`order_image_src`=? where `order_id`=?";
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
-            preparedStatement.setString(1, newData[0]);
-            preparedStatement.setDouble(2, Double.parseDouble(newData[1]));
-            preparedStatement.setString(3, newData[2]);
-            preparedStatement.setString(4, newData[3]);
-            preparedStatement.setString(5, newData[4]);
-            preparedStatement.setString(6, newData[5]);
-            preparedStatement.setString(7, newData[6]);
-            preparedStatement.setString(8, newData[7]);
+            preparedStatement.setString(1, newData[1]);
+            preparedStatement.setDouble(2, Double.parseDouble(newData[2]));
+            preparedStatement.setString(3, newData[3]);
+            preparedStatement.setString(4, newData[4]);
+            preparedStatement.setString(5, newData[5]);
+            preparedStatement.setString(6, newData[6]);
+            preparedStatement.setString(7, newData[7]);
+            preparedStatement.setString(8, newData[8]);
             preparedStatement.setInt(9, Integer.parseInt(id));
             existence = preparedStatement.executeUpdate();
             preparedStatement.clearParameters();
