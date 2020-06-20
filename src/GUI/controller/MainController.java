@@ -30,7 +30,7 @@ public class MainController {
     private BookInterface bookInterface;
 
     @FXML
-    private Button chackButton;
+    private Button checkButton;
 
     @FXML
     private Label username;
@@ -113,6 +113,7 @@ public class MainController {
     //自定义一个对话框, 用于账本的操作
     private Optional<Pair<String, String>> bookDialog(String title, String bookName, String bookDesc) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle(title);
         dialog.setHeaderText(null);
         //定义一个面板
         GridPane pane = new GridPane();
@@ -343,7 +344,7 @@ public class MainController {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/set.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
 
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("报表");
@@ -372,7 +373,7 @@ public class MainController {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/report.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
 
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("报表");
@@ -439,9 +440,7 @@ public class MainController {
         bookTableView
                 .getSelectionModel()
                 .selectedIndexProperty()
-                .addListener((observableValue, number, t1) -> {
-                    changeSelectedBookItem((Integer) t1);
-                });
+                .addListener((observableValue, number, t1) -> changeSelectedBookItem((Integer) t1));
         ObservableList<Book> list = main.initializeBookData();
         bookTableView.setItems(list);
         bookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
@@ -464,7 +463,7 @@ public class MainController {
     }
 
      @FXML
-     Scene chackButtonEvent(ActionEvent actionEvent) {
+     void chackButtonEvent(ActionEvent actionEvent) {
         //查询
          try {
              FXMLLoader loader = new FXMLLoader();
@@ -484,10 +483,8 @@ public class MainController {
              DateSearchController controller = loader.getController();
              controller.setDialogStage(mainFrameStage);
              mainFrameStage.showAndWait();
-             return scene;
          } catch (IOException e) {
              e.printStackTrace();
          }
-         return null;
     }
 }

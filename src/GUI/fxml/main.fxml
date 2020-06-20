@@ -56,7 +56,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="chackButton" mnemonicParsing="false" onAction="#chackButtonEvent" text="查询" />
+                              <Button fx:id="checkButton" mnemonicParsing="false" onAction="#chackButtonEvent" text="查询" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
