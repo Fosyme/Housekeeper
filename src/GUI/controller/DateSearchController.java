@@ -38,6 +38,9 @@ public class DateSearchController<TableData> {
 
     @FXML
     void dateCheckButtonEvent(ActionEvent event) {
+        String startDate=String.valueOf(starDatePicker.getValue());
+        String endDate=String.valueOf(endDatePicker.getValue());
+
 
     }
 
