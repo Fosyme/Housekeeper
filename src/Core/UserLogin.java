@@ -30,11 +30,16 @@ public class UserLogin {
      *
      * @param userName 用户名, 不能为空
      * @param userPassword 用户输入密码(明文)
+     * @param plaintext 是否为明文
      * @return 登录结果
      * */
-    public boolean signIn(@NotNull String userName, String userPassword) {
+    public boolean signIn(@NotNull String userName, String userPassword, boolean plaintext) {
         String userID;
-        userID = UserOperation.loginAuthentication(userName, getMD5String(userPassword));
+        String encryptedPassword = userPassword;
+        if (plaintext) {
+            encryptedPassword = getMD5String(userPassword);
+        }
+        userID = UserOperation.loginAuthentication(userName, encryptedPassword);
         if (userID == null) {
             return false;
         }

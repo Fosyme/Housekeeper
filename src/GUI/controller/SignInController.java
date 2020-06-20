@@ -67,11 +67,10 @@ public class SignInController {
             JOptionPane.showMessageDialog(null, "请按照文本框内容提示正确填写内容", "警告", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        boolean b = userLogin.signIn(nameTextField.getText(), passwordTextField.getText());
+        boolean b = userLogin.signIn(nameTextField.getText(), passwordTextField.getText(), true);
         if (b) {
             JOptionPane.showConfirmDialog(null, "恭喜登录成功", "信息", JOptionPane.DEFAULT_OPTION);
             try {
-                readeConfig();
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(Main.class.getResource("fxml/main.fxml"));
                 VBox page = (VBox) loader.load();
@@ -85,6 +84,7 @@ public class SignInController {
                 MainController controller = loader.getController();
                 controller.initialization(userLogin.getUser());
                 ((Stage) paneSignIn.getScene().getWindow()).close();
+                writeConfig();
                 mainFrameStage.showAndWait();
             } catch (Throwable e) {
                 e.printStackTrace();
@@ -94,12 +94,17 @@ public class SignInController {
         }
     }
 
-    private void readeConfig() {
+    private void writeConfig() {
         try {
             FileOutputStream fos = new FileOutputStream("src/config");
             Properties prop = new Properties();
             prop.put("auto_sign_in", String.valueOf(autoSignIn.isSelected()));
             prop.put("remember_password", String.valueOf(rememberPassword.isSelected()));
+            prop.put("user_name", nameTextField.getText());
+            if (rememberPassword.isSelected()) {
+                String password = passwordTextField.getText();
+                prop.put("user_password", UserLogin.getMD5String(password));
+            }
             prop.store(fos,"Config");
             fos.close();
         } catch (IOException e) {
@@ -186,6 +191,10 @@ public class SignInController {
     public void afterSignUp(String userName, String userPassword) {
         nameTextField.setText(userName);
         passwordTextField.setText(userPassword);
+    }
+
+    public void afterSignUp(String userName) {
+        nameTextField.setText(userName);
     }
 }
 
