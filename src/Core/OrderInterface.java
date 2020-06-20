@@ -61,7 +61,11 @@ public class OrderInterface {
                         .get(bookIndex)
                         .get(orderIndex)
                         .getOrderID();
-        return BookOperation.deleteBook(deletingOrderID);
+        if (OrderOperation.deleteOrder(deletingOrderID)) {
+            user.getOrders().get(bookIndex).remove(orderIndex);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -79,14 +83,24 @@ public class OrderInterface {
             return false;
         }
         String alteringOrderID;
-        String[] newOrderInfo = new String[8];
+        String[] newOrderInfo = new String[9];
         alteringOrderID =
                 user.getOrders()
                         .get(bookIndex)
                         .get(orderIndex)
                         .getOrderID();
-        System.arraycopy(newOrderMsg, 0, newOrderInfo, 0, 7);
-        newOrderInfo[7] = null;
-        return OrderOperation.changeOrderInfo(alteringOrderID, newOrderInfo);
+        newOrderInfo[0] = user.getBooks().get(bookIndex).getBookID();
+        System.arraycopy(newOrderMsg, 0, newOrderInfo, 1, 7);
+        try {
+            newOrderInfo[5] = String.valueOf(Order.dateFormat.parse(newOrderMsg[4]).getTime() / 1000);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        newOrderInfo[8] = null;
+        if (OrderOperation.changeOrderInfo(alteringOrderID, newOrderInfo)) {
+            user.getOrders().get(bookIndex).get(orderIndex).setOrder(newOrderInfo);
+            return true;
+        }
+        return false;
     }
 }

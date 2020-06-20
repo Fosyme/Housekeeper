@@ -11,6 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +71,7 @@ public class AlterOrderController {
             return;
         }
         String date = datePicker.getValue().toString(); //账单日期
-        if (type == null || name.isEmpty() || money.isEmpty() || way == null || cate == null || desc.isEmpty()) {
+        if (type == null || name.isEmpty() || money.isEmpty() || way == null || cate == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("警告");
             alert.setHeaderText(null);
@@ -89,7 +92,7 @@ public class AlterOrderController {
         boolean b = orderInterface.alterOrder(bookIndex, orderIndex, orderMsg);
         Alert alert;
         if (b) {
-            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("提示");
             alert.setHeaderText(null);
             alert.setContentText("修改成功！");
@@ -159,6 +162,7 @@ public class AlterOrderController {
         combWay.getSelectionModel().select(order.getOrderWay());
         combCate.getSelectionModel().select(order.getOrderCate());
         descTextArea.setText(order.getOrderDesc());
-        datePicker.getEditor().setText(order.getOrderDate());
+        datePicker.setValue(LocalDate.parse(order.getOrderDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        datePicker.setEditable(false);
     }
 }
