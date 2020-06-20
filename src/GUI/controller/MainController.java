@@ -117,9 +117,12 @@ public class MainController {
     }
 
     @FXML
+    <TableData>
     void accountbook_alterContextMenuEvent(ActionEvent event) {
-
+        //修改就调用修改页面
+        Order order=tableView.getSelectionModel().getSelectedItem();
     }
+
 
     @FXML
     void accountbook_deleteContextMenuEvent(ActionEvent event) {
@@ -133,6 +136,7 @@ public class MainController {
             int accountbookIndex=tableView.getSelectionModel().getFocusedIndex();
             bookInterface.deleteBook(accountbookIndex);
         }else {
+            //TODO
             ;
         }
         main.refreshBookData();
@@ -143,8 +147,6 @@ public class MainController {
     void accountbook_refreshContextMenuEvent(ActionEvent event) {
         //刷新
         main.refreshBookData();
-
-
     }
 
     @FXML

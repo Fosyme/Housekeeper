@@ -1,11 +1,13 @@
 package GUI.controller;
 
 import Core.OrderInterface;
+import GUI.OpenFormAfterThis;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -16,6 +18,8 @@ public class AddOrderController {
 
     private OrderInterface orderInterface;
 
+    @FXML
+    public AnchorPane paneFindPwd;
     @FXML
     private ToggleGroup way;
     @FXML
@@ -57,11 +61,11 @@ public class AddOrderController {
        boolean c=  orderInterface.addOrder(2,orderMsg);//要获取账本索引，没做
        if (c){
            Alert alert = new Alert(Alert.AlertType.WARNING);
-           alert.setTitle("添加");
-           alert.setContentText("添加成功");
-           alert.setHeaderText("信息");
-           Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-           stage.initStyle(StageStyle.UTILITY);
+           alert.setTitle(null);
+           alert.setHeaderText("密码修改成功！");
+           alert.setContentText("请记住你的密码是：" );
+           alert.showAndWait();
+           OpenFormAfterThis.signIn((Stage) paneFindPwd.getScene().getWindow());
 
        }
     }
