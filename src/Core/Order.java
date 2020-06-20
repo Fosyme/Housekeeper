@@ -19,7 +19,7 @@ public class Order {
     private String orderDesc;       //账单详细描述
     private byte[] orderImageSrc;   //账单图片
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public Order(String orderID) {
         this.orderID = orderID;
@@ -32,14 +32,10 @@ public class Order {
         orderPrice = Double.parseDouble(orderMsg[2]);
         orderWay = orderMsg[3];
         orderMod = orderMsg[4];
-        try {
-            setOrderTime(String.valueOf(dateFormat.parse(orderMsg[5]).getTime()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        setOrderTime(orderMsg[5]);
         orderCate = orderMsg[6];
         orderDesc = orderMsg[7];
-        orderImageSrc = orderMsg[8].getBytes();
+        orderImageSrc = null;
     }
 
     public String getOrderID() {
@@ -92,7 +88,7 @@ public class Order {
 
     public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
-        setOrderDate(dateFormat.format(orderDate));
+        setOrderDate(dateFormat.format(Long.parseLong(orderTime) * 1000));
     }
 
     public String getOrderDate() {
@@ -130,13 +126,14 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "orderID=" + orderID +
-                ", bookID=" + bookID +
+                "orderID='" + orderID + '\'' +
+                ", bookID='" + bookID + '\'' +
                 ", orderName='" + orderName + '\'' +
                 ", orderPrice=" + orderPrice +
                 ", orderWay='" + orderWay + '\'' +
                 ", orderMod='" + orderMod + '\'' +
                 ", orderTime='" + orderTime + '\'' +
+                ", orderDate='" + orderDate + '\'' +
                 ", orderCate='" + orderCate + '\'' +
                 ", orderDesc='" + orderDesc + '\'' +
                 ", orderImageSrc=" + Arrays.toString(orderImageSrc) +
