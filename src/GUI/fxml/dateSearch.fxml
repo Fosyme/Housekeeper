@@ -45,14 +45,15 @@
             <Separator prefHeight="0.0" prefWidth="797.0" />
          </children>
       </HBox>
-      <TableView layoutY="160.0" prefHeight="611.0" prefWidth="806.0" styleClass="background" tableMenuButtonVisible="true">
+      <TableView layoutY="160.0" prefHeight="607.0" prefWidth="806.0" styleClass="background" tableMenuButtonVisible="true">
         <columns>
-          <TableColumn fx:id="check_idColumn" prefWidth="104.0" text="序号" />
-          <TableColumn fx:id="chack_typeColumn" prefWidth="127.0" text="类型" />
-            <TableColumn fx:id="check_moneyColumn" prefWidth="115.0" text="金额" />
-            <TableColumn fx:id="check_classificationColumn" prefWidth="131.0" text="分类" />
-            <TableColumn fx:id="check_memoColumn" prefWidth="134.0" text="备注" />
-            <TableColumn fx:id="check_dateColumn" prefWidth="178.0" text="日期" />
+          <TableColumn fx:id="chack_nameColumn" prefWidth="81.0" text="名字" />
+          <TableColumn fx:id="chack_typeColumn" prefWidth="91.0" text="类型" />
+            <TableColumn fx:id="chack_wayColumn" prefWidth="102.0" text="方式" />
+            <TableColumn fx:id="check_moneyColumn" prefWidth="99.0" text="金额" />
+            <TableColumn fx:id="check_classificationColumn" prefWidth="102.0" text="分类" />
+            <TableColumn fx:id="check_memoColumn" prefWidth="143.0" text="备注" />
+            <TableColumn fx:id="check_dateColumn" prefWidth="170.0" text="日期" />
         </columns>
       </TableView>
    </children>

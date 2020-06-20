@@ -65,11 +65,17 @@ public class SetController {
         return null;
 
     }
+    private Stage dialogStage;
+    public Stage getDialogStage() {
+        return dialogStage;
+    }
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
 
     @FXML
     void CloseButtonEvent(ActionEvent event) {
-        System.exit(0);
-
+        dialogStage.close();
     }
 
     @FXML
@@ -152,6 +158,7 @@ public class SetController {
             defaultRadioButton.setSelected(true);
         }
     }
+
 
 
 }

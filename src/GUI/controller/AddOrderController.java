@@ -105,6 +105,7 @@ public class AddOrderController {
     }
 
     public void setSelectedBookIndex(int selectedBookIndex) {
+
         this.selectedBookIndex = selectedBookIndex;
     }
 

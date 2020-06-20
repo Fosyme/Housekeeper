@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -39,6 +40,7 @@
                               <Font size="28.0" />
                            </font>
                         </Label>
+                        <PieChart fx:id="thisDayPieChart" layoutX="334.0" layoutY="122.0" prefHeight="245.0" prefWidth="309.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -65,6 +67,7 @@
                               <Font size="28.0" />
                            </font>
                         </Label>
+                        <PieChart fx:id="thisWeekPieChart" layoutX="334.0" layoutY="122.0" prefHeight="245.0" prefWidth="309.0" />
                         <Label fx:id="thisWeekOutputShowLabel1" layoutX="128.0" layoutY="225.0" textFill="#04e87a">
                            <font>
                               <Font size="28.0" />
@@ -96,6 +99,7 @@
                               <Font size="28.0" />
                            </font>
                         </Label>
+                        <PieChart fx:id="thismonthPieChart" layoutX="334.0" layoutY="122.0" prefHeight="245.0" prefWidth="309.0" />
                         <Label fx:id="thisMonthOutputShowLabel3" layoutX="128.0" layoutY="225.0" textFill="#04e87a">
                            <font>
                               <Font size="28.0" />
@@ -132,6 +136,7 @@
                               <Font size="28.0" />
                            </font>
                         </Label>
+                        <PieChart fx:id="thisSeasonPieChart" layoutX="334.0" layoutY="122.0" prefHeight="245.0" prefWidth="309.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -163,6 +168,7 @@
                               <Font size="28.0" />
                            </font>
                         </Label>
+                        <PieChart fx:id="thisYearPieChart" layoutX="334.0" layoutY="122.0" prefHeight="245.0" prefWidth="309.0" />
                      </children>
                   </AnchorPane>
                </content>

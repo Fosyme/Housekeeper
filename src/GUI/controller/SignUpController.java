@@ -145,4 +145,5 @@ public class SignUpController {
 
     public void setDialogStage(Stage mainFrameStage) {
     }
+
 }

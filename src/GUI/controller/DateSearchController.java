@@ -40,6 +40,8 @@ public class DateSearchController<TableData> {
     void dateCheckButtonEvent(ActionEvent event) {
         String startDate=String.valueOf(starDatePicker.getValue());
         String endDate=String.valueOf(endDatePicker.getValue());
+        //通过开始时间和结束时间
+        // 返回账单内容
 
 
     }
