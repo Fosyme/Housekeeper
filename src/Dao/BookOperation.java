@@ -111,15 +111,17 @@ public class BookOperation {
     /**
      * 验证账本是否存在，
      * 如果账本存在返回true，反之
+     * @param userId  用户id
      * @param bookName 账本名
      * @return boolean
      * */
-    public static boolean checkBookExist(String bookName)
+    public static boolean checkBookExist(String userId,String bookName)
     {
-        String sql = "select * from `book` where  `book_name` = ?";
+        String sql = "select * from `book` where `user_id`=?  and `book_name` = ?";
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
-            preparedStatement.setString(1, bookName);
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, bookName);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
