@@ -13,17 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddOrderController {
+
     private OrderInterface orderInterface;
-    @FXML
-    private ToggleGroup way;
 
     @FXML
-    private TextField accountbookname;
+    private ToggleGroup way;
+    @FXML
+    private TextField billnameTextField;
+
+
     @FXML
     private TextField moneyTextField;
 
     @FXML
-    private ComboBox<?> classificationComboBox;
+    private ComboBox<String> classificationComboBox;
 
     @FXML
     private DatePicker datePickerTextField;
@@ -38,29 +41,20 @@ public class AddOrderController {
     private RadioButton outputRadioButton;
 
     @FXML
-    private ToggleGroup RadioButton;
-
-    @FXML
     private RadioButton inputRadioButton;
 
-    @FXML
-    private ComboBox<String> accountbookComboBox;
 
-    @FXML
-    void accountbookComboBoxEvent(ActionEvent event) {
-
-    }
 
     @FXML
     void addButtonEvent(ActionEvent event) {
         String type=(String)way.getSelectedToggle().getUserData();//账单类型
+        String name=billnameTextField.getText();//账单名字
         String money=moneyTextField.getText();//账单金额
-        String classification=accountbookComboBox.getSelectionModel().getSelectedItem();//账单分类
+        String classification= (String) classificationComboBox.getSelectionModel().getSelectedItem();//账单分类
         String memo=memoTextArea.getText();//账单备注
         String date=datePickerTextField.getValue().toString();//账单日期
-        String orderMsg[]={type,money,classification,memo,date};
-
-       boolean c=  orderInterface.addOrder(1,orderMsg);//要获取账本索引，没做
+        String orderMsg[]={type,name,money,classification,memo,date};
+       boolean c=  orderInterface.addOrder(2,orderMsg);//要获取账本索引，没做
        if (c){
            Alert alert = new Alert(Alert.AlertType.WARNING);
            alert.setTitle("添加");
@@ -83,12 +77,8 @@ public class AddOrderController {
         list.add("网购");
         list.add("电费");
         list.add("水费");
-        list.add("");
-        list.add("");
-        list.add("");
-        list.add("");
         ObservableList<String> observableList = FXCollections.observableList(list);
-        accountbookComboBox.setItems(observableList);
+        classificationComboBox.setItems(observableList);
 
         outputRadioButton.setUserData("支出");
         inputRadioButton.setUserData("收入");

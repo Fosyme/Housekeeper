@@ -96,7 +96,7 @@
               <children>
                         <TableView fx:id="tableView" editable="true" layoutX="-3.0" prefHeight="779.0" prefWidth="691.0" tableMenuButtonVisible="true">
                           <columns>
-                            <TableColumn fx:id="idColumn" prefWidth="77.0" text="序号" />
+                            <TableColumn fx:id="nameColumn" prefWidth="77.0" text="名字" />
                             <TableColumn fx:id="typeColumn" prefWidth="85.0" text="类型" />
                               <TableColumn fx:id="moneyColumn" prefWidth="76.0" text="金额" />
                               <TableColumn fx:id="classificationColumn" prefWidth="87.0" text="分类" />

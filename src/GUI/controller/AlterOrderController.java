@@ -72,6 +72,7 @@ public class AlterOrderController {
         String memo=memoTextArea.getText();//账单备注
         String date=datePickerText.getValue().toString();//账单日期
         String neworderMsg []={type,money,classification,memo,date};
+
         boolean a=orderInterface.alterOrder(1,2,neworderMsg);//索引都没有做
         if (a){
             Alert alert = new Alert(Alert.AlertType.WARNING);
