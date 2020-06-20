@@ -13,6 +13,10 @@ public class OrderInterface {
         this.user = user;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     /**
      * 添加新的账单
      *

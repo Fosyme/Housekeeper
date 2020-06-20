@@ -15,7 +15,7 @@ import java.util.List;
 
 public class AddOrderController {
     private OrderInterface orderInterface;
-    private int selectedBookIndex;
+    private int bookIndex;
 
     @FXML
     public AnchorPane paneAddOrder;
@@ -24,7 +24,7 @@ public class AddOrderController {
     private ToggleGroup togGpMod;
 
     @FXML
-    private TextField billnameTextField;
+    private TextField nameTextField;
 
     @FXML
     private TextField moneyTextField;
@@ -36,13 +36,10 @@ public class AddOrderController {
     private ComboBox<String> combCate;
 
     @FXML
-    private DatePicker datePickerTextField;
+    private DatePicker datePicker;
 
     @FXML
-    private Button addButton;
-
-    @FXML
-    private TextArea memoTextArea;
+    private TextArea descTextArea;
 
     @FXML
     private RadioButton outputRadioButton;
@@ -54,12 +51,12 @@ public class AddOrderController {
     void addButtonEvent(ActionEvent event) {
         String moneyRegex = "^\\d{0,8}|\\d{0,8}\\.\\d{1,2}$";
         String type = (String) togGpMod.getSelectedToggle().getUserData();  //账单类型
-        String name = billnameTextField.getText();                          //账单名字
+        String name = nameTextField.getText();                              //账单名字
         String money = moneyTextField.getText();                            //账单金额
         String way = combWay.getSelectionModel().getSelectedItem();         //账单方式
         String cate = combCate.getSelectionModel().getSelectedItem();       //账单分类
-        String desc = memoTextArea.getText();                               //账单备注
-        if (datePickerTextField.getValue() == null) {
+        String desc = descTextArea.getText();                               //账单备注
+        if (datePicker.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("警告");
             alert.setHeaderText(null);
@@ -67,7 +64,7 @@ public class AddOrderController {
             alert.showAndWait();
             return;
         }
-        String date = datePickerTextField.getValue().toString();            //账单日期
+        String date = datePicker.getValue().toString(); //账单日期
         if (type == null || name.isEmpty() || money.isEmpty() || way == null || cate == null || desc.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("警告");
@@ -86,7 +83,7 @@ public class AddOrderController {
         String[] orderMsg = {
             name, money, way, type, date, cate, desc
         };
-        boolean b = orderInterface.addOrder(selectedBookIndex, orderMsg);
+        boolean b = orderInterface.addOrder(bookIndex, orderMsg);
         Alert alert;
         if (b) {
             alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -104,13 +101,8 @@ public class AddOrderController {
         }
     }
 
-    public void setSelectedBookIndex(int selectedBookIndex) {
-
-        this.selectedBookIndex = selectedBookIndex;
-    }
-
-    public void setDialogStage(Stage mainFrameStage) {
-
+    public void setBookIndex(int bookIndex) {
+        this.bookIndex = bookIndex;
     }
 
     //初始化

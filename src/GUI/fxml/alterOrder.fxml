@@ -5,88 +5,100 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="660.0" prefWidth="429.0" styleClass="background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AlterOrderController">
-   <children>
-      <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="660.0" prefWidth="440.0">
-         <children>
-            <Label alignment="CENTER" prefHeight="75.0" prefWidth="339.0" text="修改账单" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="339.0">
-               <children>
-                  <Label text="类型：    ">
-                     <HBox.margin>
-                        <Insets right="35.0" />
-                     </HBox.margin></Label>
-                  <RadioButton fx:id="outputRadioButton" alignment="CENTER_RIGHT" lineSpacing="50.0" mnemonicParsing="false" onAction="#outputRadioButtonEvent" selected="true" text="支出" wrapText="true">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="cate" />
-                     </toggleGroup>
-                     <padding>
-                        <Insets right="50.0" />
-                     </padding>
-                  </RadioButton>
-                  <RadioButton fx:id="inputRadioButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#inputRadioButtonEvent" text="收入" toggleGroup="$cate">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </RadioButton>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="81.0" prefWidth="339.0">
-               <children>
-                  <Label text="账单：" />
-                  <TextField fx:id="nameTextField" prefHeight="30.0" prefWidth="273.0" promptText="请输入账单名字" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="81.0" prefWidth="339.0">
-               <children>
-                  <Label text="金额：" />
-                  <TextField fx:id="moneyTextField" prefHeight="30.0" prefWidth="273.0" promptText="请输入金额" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="87.0" prefWidth="339.0">
-               <children>
-                  <Label text="方式：" />
-                  <ComboBox fx:id="combType" editable="true" prefHeight="30.0" prefWidth="273.0" promptText="请选择方式" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="87.0" prefWidth="339.0">
-               <children>
-                  <Label text="分类：" />
-                  <ComboBox fx:id="classificationComboBox" editable="true" onAction="#classificationComboBoxEvent" prefHeight="30.0" prefWidth="273.0" promptText="请选择分类" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="78.0" prefWidth="339.0">
-               <children>
-                  <Label text="备注：" />
-                  <TextArea fx:id="memoTextArea" minHeight="0.0" minWidth="0.0" prefHeight="41.0" prefWidth="272.0" promptText="请输入备注：">
-                     <HBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </HBox.margin>
-                  </TextArea>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="88.0" prefWidth="339.0">
-               <children>
-                  <Label text="日期：" />
-                  <DatePicker fx:id="datePickerText" editable="false" prefHeight="30.0" prefWidth="273.0" promptText="请选择日期" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-               <children>
-                  <Button fx:id="alterButton" alignment="CENTER" mnemonicParsing="false" onAction="#alterButtonEvent" prefHeight="47.0" prefWidth="165.0" text="更改" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font></Button>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane fx:id="paneAlterOrder" prefHeight="660.0" prefWidth="429.0" styleClass="background"
+            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="GUI.controller.AlterOrderController">
+    <children>
+        <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="660.0" prefWidth="440.0">
+            <children>
+                <Label alignment="CENTER" prefHeight="66.0" prefWidth="451.0" text="修改账单" textAlignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="30.0"/>
+                    </font>
+                </Label>
+                <HBox alignment="CENTER" prefHeight="60.0" prefWidth="339.0">
+                    <children>
+                        <Label text="类型：    ">
+                            <HBox.margin>
+                                <Insets right="35.0"/>
+                            </HBox.margin>
+                        </Label>
+                        <RadioButton fx:id="outputRadioButton" alignment="CENTER_RIGHT" lineSpacing="50.0"
+                                     mnemonicParsing="false"
+                                     selected="true" text="支出" wrapText="true">
+                            <HBox.margin>
+                                <Insets/>
+                            </HBox.margin>
+                            <toggleGroup>
+                                <ToggleGroup fx:id="togGpMod"/>
+                            </toggleGroup>
+                            <padding>
+                                <Insets right="50.0"/>
+                            </padding>
+                        </RadioButton>
+                        <RadioButton fx:id="inputRadioButton" alignment="CENTER_RIGHT" mnemonicParsing="false" text="收入"
+                                     toggleGroup="$togGpMod">
+                            <HBox.margin>
+                                <Insets/>
+                            </HBox.margin>
+                        </RadioButton>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="81.0" prefWidth="339.0">
+                    <children>
+                        <Label text="账单："/>
+                        <TextField fx:id="nameTextField" prefHeight="30.0" prefWidth="273.0" promptText="请输入账单名字"/>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="81.0" prefWidth="339.0">
+                    <children>
+                        <Label text="金额："/>
+                        <TextField fx:id="moneyTextField" prefHeight="30.0" prefWidth="273.0" promptText="请输入金额"/>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="87.0" prefWidth="339.0">
+                    <children>
+                        <Label text="方式："/>
+                        <ComboBox fx:id="combWay" editable="true" prefHeight="30.0" prefWidth="273.0"
+                                  promptText="请选择方式"/>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="87.0" prefWidth="339.0">
+                    <children>
+                        <Label text="分类："/>
+                        <ComboBox fx:id="combCate" editable="true" prefHeight="30.0" prefWidth="273.0"
+                                  promptText="请选择分类"/>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="78.0" prefWidth="339.0">
+                    <children>
+                        <Label text="备注："/>
+                        <TextArea fx:id="descTextArea" minHeight="0.0" minWidth="0.0" prefHeight="41.0"
+                                  prefWidth="272.0" promptText="请输入备注：">
+                            <HBox.margin>
+                                <Insets bottom="10.0" top="10.0"/>
+                            </HBox.margin>
+                        </TextArea>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="88.0" prefWidth="339.0">
+                    <children>
+                        <Label text="日期："/>
+                        <DatePicker fx:id="datePicker" editable="false" prefHeight="30.0" prefWidth="273.0"
+                                    promptText="请选择日期"/>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                    <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#alterButtonEvent"
+                                prefHeight="47.0" prefWidth="165.0" text="更改" textAlignment="CENTER">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

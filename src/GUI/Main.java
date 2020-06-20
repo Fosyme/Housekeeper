@@ -59,6 +59,7 @@ public class Main extends Application {
             SignInController controller = loader.getController();
             controller.afterSignUp(userName, userPassword);
             controller.setRemember(rememberPassword);
+            controller.initialization();
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
