@@ -28,7 +28,10 @@ public class OrderInterface {
         orderInfo[0] = user.getBooks().get(bookIndex).getBookID();
         System.arraycopy(orderMsg, 0, orderInfo, 1, 7);
         orderInfo[8] = null;
-        OrderOperation.addOrder(orderInfo);
+        String orderID = OrderOperation.addOrder(orderInfo);
+        Order order = new Order(orderID);
+        order.setOrder(orderInfo);
+        user.getOrders().get(bookIndex).add(order);
         return true;
     }
 
