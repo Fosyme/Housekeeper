@@ -14,9 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.awt.print.Book;
 import java.io.File;
 
 import java.io.FileInputStream;
@@ -29,10 +27,9 @@ public class MainController {
     private MainInterface main;
     private BookInterface bookInterface;
 
-
-
     @FXML
     private Button chackButton;
+
     @FXML
     private Label username;
 
@@ -73,7 +70,7 @@ public class MainController {
     private TableView<Order> tableView;
 
     @FXML
-    private TableColumn<Order, String> idColumn;
+    private TableColumn<Order, String> nameColumn;
 
     @FXML
     private TableColumn<Order, String> typeColumn;
@@ -348,7 +345,7 @@ public class MainController {
     public void changeSelectedItem(MainInterface main, int bookIndex) {
         ObservableList<Order> list = main.getOrderOfBook(bookIndex);
         tableView.setItems(list);
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("orderID"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("orderName"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("orderMod"));
         moneyColumn.setCellValueFactory(new PropertyValueFactory<>("orderPrice"));
         classificationColumn.setCellValueFactory(new PropertyValueFactory<>("orderCate"));;
