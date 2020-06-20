@@ -331,15 +331,39 @@ public class MainController {
     void keywordTextFieldEvent(ActionEvent event) {
 
     }
-
+    //搜索
     @FXML
     void searchButtonEvent(ActionEvent event) {
-        //搜索
+        //通过去匹配关键字，返回账本名和账本描述，定位到
 
     }
 
     @FXML
-    void setButtonEvent(ActionEvent event) {
+    Scene setButtonEvent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/set.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage mainFrameStage = new Stage();
+            mainFrameStage.setTitle("报表");
+            mainFrameStage.setResizable(true);
+            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(page);
+            mainFrameStage.setScene(scene);
+
+//            scene.getStylesheets().add((getStyleValue()));
+
+            SetController controller = loader.getController();
+            controller.setDialogStage(mainFrameStage);
+            mainFrameStage.showAndWait();
+            return scene;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
 
     }
 
@@ -358,7 +382,9 @@ public class MainController {
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
 
-//            scene.getStylesheets().add((getStyleValue()));
+
+            scene.getStylesheets().add((getStyleValue()));
+
             ReportController controller = loader.getController();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();

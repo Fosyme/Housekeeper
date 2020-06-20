@@ -126,7 +126,7 @@ public class SetController {
     }
     @FXML
     public String getStyleValue() throws IOException {
-        File file = new File("src\\GUI\\src\\styles.properties");
+        File file = new File("src\\GUI\\resources\\styles.properties");
         Properties properties = new Properties();
         FileInputStream fileInputStream = new FileInputStream(file);
         properties.load(fileInputStream);
