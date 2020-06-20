@@ -23,9 +23,8 @@ public class MainInterface {
     }
 
     //初始化账本列表
-    public ObservableList<String> initializeBookData() {
-        List<String> list = new ArrayList<>();
-        user.getBooks().forEach(book -> list.add(book.getBookName()));
+    public ObservableList<Book> initializeBookData() {
+        List<Book> list = user.getBooks();
         return FXCollections.observableList(list);
     }
 
@@ -36,9 +35,8 @@ public class MainInterface {
     }
 
     //刷新账本列表
-    public ObservableList<String> refreshBookData() {
-        List<String> list = new ArrayList<>();
-        user.getBooks().forEach(book -> list.add(book.getBookName()));
+    public ObservableList<Book> refreshBookData() {
+        List<Book> list = user.getBooks();
         return FXCollections.observableList(list);
     }
 }

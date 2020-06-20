@@ -2,18 +2,23 @@ package GUI.controller;
 
 import Core.*;
 import GUI.Main;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.io.File;
 
@@ -37,7 +42,7 @@ public class MainController {
     private Button statementButton;
 
     @FXML
-    private Button addBuuton;
+    private Button addButton;
 
     @FXML
     private Button alterButton;
@@ -46,19 +51,25 @@ public class MainController {
     private Button setButton;
 
     @FXML
-    private ListView<String> accountbookListView;
+    private TableView<Book> bookTableView;
 
     @FXML
-    private MenuItem accountbook_refreshContextMenu;
+    public TableColumn<Book, String> bookName;
 
     @FXML
-    private MenuItem accountbook_addContextMenu;
+    public TableColumn<Book, String> bookDesc;
 
     @FXML
-    private MenuItem accountbook_deleteContextMenu;
+    private MenuItem ctmRefreshBook;
 
     @FXML
-    private MenuItem accountbook_alterContextMenu;
+    private MenuItem ctmAddBook;
+
+    @FXML
+    private MenuItem ctmDeleteBook;
+
+    @FXML
+    private MenuItem ctmAlterBook;
 
     @FXML
     private TextField keywordTextField;
@@ -67,11 +78,10 @@ public class MainController {
     private Button searchButton;
 
     @FXML
-    private TableView<Order> tableView;
+    private TableView<Order> orderTableView;
 
     @FXML
     private TableColumn<Order, String> nameColumn;
-
 
     @FXML
     private TableColumn<Order, String> typeColumn;
@@ -92,70 +102,149 @@ public class MainController {
     private TableColumn<Order, String> dateColumn;
 
     @FXML
-    private MenuItem bill_refreshContextMenu;
+    private MenuItem ctmRefreshOrder;
 
     @FXML
-    private MenuItem bill_addContextMenu;
+    private MenuItem ctmAddOrder;
 
     @FXML
-    private MenuItem bill_deleteContextMenu;
+    private MenuItem ctmDeleteOrder;
 
     @FXML
-    private MenuItem bill_alterContextMenu;
+    private MenuItem ctmAlterOrder;
 
-    @FXML
-    private Font x3;
-
-    @FXML
-    private Color x4;
-
-
-    @FXML
-    void accountbookListViewEvent(ActionEvent event) {
-
+    private Optional<Pair<String, String>> bookDialog(String title, String bookName, String bookDesc) {
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        //自定义一个对话框
+        dialog.setHeaderText(null);
+        //定义一个面板
+        GridPane pane = new GridPane();
+        pane.setPadding(new Insets(20, 150, 10, 10));
+        //定义一个文本框和一个文本域
+        TextField bookNameText = new TextField();
+        TextArea bookDescText = new TextArea();
+        bookNameText.setText(bookName);
+        bookDescText.setText(bookDesc);
+        //向面板加入四个Node
+        pane.add(new Label("账  本  名："), 0, 0);
+        pane.add(new Label("账本描述："), 0, 1);
+        pane.add(bookNameText, 1, 0);
+        pane.add(bookDescText, 1, 1);
+        //定义"确定"按钮
+        ButtonType buttonType = new ButtonType("确定",ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(buttonType, ButtonType.CANCEL);
+        //定义"确定"按钮的功能
+        Node loginButton = dialog.getDialogPane().lookupButton(buttonType);
+        //将面板加入对话框
+        dialog.getDialogPane().setContent(pane);
+        //设置焦点
+        Platform.runLater(bookNameText::requestFocus);
+        //定义结果集的触发方式和内容
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == buttonType) {
+                return new Pair<>(bookNameText.getText(), bookDescText.getText());
+            }
+            return null;
+        });
+        //运行对话框
+        return dialog.showAndWait();
     }
 
     @FXML
-    void accountbook_addContextMenuEVent(ActionEvent event) {
-
+    void ctmAddBookEVent(ActionEvent event) {
+        Optional<Pair<String, String>> result = this.bookDialog("添加账本", "", "");
+        //对结果进行处理
+        result.ifPresent(pair -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            if (bookInterface.isBookExist(pair.getKey())) {
+                alert.setContentText("账本已存在！");
+                alert.showAndWait();
+                this.ctmAddBookEVent(event);
+            } else {
+                if (bookInterface.addBook(pair.getKey(), pair.getValue())) {
+                    alert.setContentText("账本添加成功！");
+                } else {
+                    alert.setContentText("账本添加失败，请重试！");
+                }
+                alert.show();
+            }
+        });
+        this.ctmRefreshBookEvent();
     }
 
     @FXML
-    <TableData>
-    void accountbook_alterContextMenuEvent(ActionEvent event) {
-        //修改就调用修改页面
-        Order order=tableView.getSelectionModel().getSelectedItem();
-    }
-
-
-    @FXML
-    void accountbook_deleteContextMenuEvent(ActionEvent event) {
-        //删除
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("提示");
-        alert.setContentText("请问是否删除");
-        alert.setHeaderText("提示");
-        Optional<ButtonType> result=alert.showAndWait();
-        if (result.get()==ButtonType.OK){
-            int accountbookIndex=tableView.getSelectionModel().getFocusedIndex();
-            bookInterface.deleteBook(accountbookIndex);
-        }else {
-            //TODO
-            ;
+    void ctmAlterBookEvent(ActionEvent event) {
+        int index = bookTableView.getSelectionModel().getSelectedIndex();
+        if (index != -1) {
+            Book book = main.getUser().getBooks().get(index);
+            String bookName = book.getBookName();
+            String bookDesc = book.getBookDesc();
+            Optional<Pair<String, String>> result = this.bookDialog("修改账本", bookName, bookDesc);
+            result.ifPresent(pair -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("提示");
+                alert.setHeaderText(null);
+                    if (bookInterface.alterBook(index, pair.getKey(), pair.getValue())) {
+                        alert.setContentText("账本修改成功！");
+                    } else {
+                        alert.setContentText("账本修改失败，请重试！");
+                    }
+                    alert.show();
+            });
+            this.ctmRefreshBookEvent();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("请选择账本！");
+            alert.show();
         }
-        main.refreshBookData();
+    }
 
+
+    @FXML
+    void ctmDeleteBookEvent(ActionEvent event) {
+        int index = bookTableView.getSelectionModel().getSelectedIndex();
+        if (index != -1) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("请问是否删除？");
+            Optional<ButtonType> result = alert.showAndWait();
+            result.ifPresent(buttonType -> {
+                if (buttonType == ButtonType.OK) {
+                    if (!bookInterface.deleteBook(index)) {
+                        Alert delete = new Alert(Alert.AlertType.ERROR);
+                        delete.setTitle("提示");
+                        delete.setHeaderText(null);
+                        delete.setContentText("删除出错，请重试！");
+                        delete.show();
+                    }
+                }
+            });
+            this.ctmRefreshBookEvent();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            alert.setContentText("请选择账本！");
+            alert.show();
+        }
+    }
+
+    //刷新
+    void ctmRefreshBookEvent() {
+        ObservableList<Book> list = main.refreshBookData();
+        bookTableView.refresh();
+        bookTableView.setItems(list);
+        bookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
+        bookDesc.setCellValueFactory(new PropertyValueFactory<>("bookDesc"));
     }
 
     @FXML
-    void accountbook_refreshContextMenuEvent(ActionEvent event) {
-        //刷新
-        ObservableList<String> list = main.refreshBookData();
-        accountbookListView.setItems(list);
-    }
-
-    @FXML
-    void addBuutonEvent(ActionEvent event) {
+    void addButtonEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/addOrder.fxml"));
@@ -173,7 +262,7 @@ public class MainController {
             AddOrderController controller = loader.getController();
             controller.initialization(main.getUser());
             //判断是否选择了账本
-            int index = accountbookListView.getSelectionModel().getSelectedIndex();
+            int index = bookTableView.getSelectionModel().getSelectedIndex();
             if (index == -1) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("警告");
@@ -185,7 +274,7 @@ public class MainController {
             controller.setSelectedBookIndex(index);
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
-            this.accountbook_refreshContextMenuEvent(event);
+            this.ctmRefreshBookEvent();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -220,22 +309,22 @@ public class MainController {
     }
 
     @FXML
-    void bill_addContextMenuEvent(ActionEvent event) {
+    void ctmAddOrderEvent(ActionEvent event) {
 
     }
 
     @FXML
-    void bill_alterContextMenuEvent(ActionEvent event) {
+    void ctmAlterOrderEvent(ActionEvent event) {
 
     }
 
     @FXML
-    void bill_deleteContextMenuEvent(ActionEvent event) {
+    void ctmDeleteOrderEvent(ActionEvent event) {
 
     }
 
     @FXML
-    void bill_refreshContextMenuEvent(ActionEvent event) {
+    void ctmRefreshOrderEvent(ActionEvent event) {
 
     }
 
@@ -348,15 +437,18 @@ public class MainController {
 
     public void initialization(User user) {
         main = new MainInterface(user);
+        bookInterface = new BookInterface(user);
         username.setText(user.getUserName());
-        accountbookListView
+        bookTableView
                 .getSelectionModel()
                 .selectedIndexProperty()
                 .addListener((observableValue, number, t1) -> {
                     changeSelectedBookItem((Integer) t1);
                 });
-        ObservableList<String> list = main.initializeBookData();
-        accountbookListView.setItems(list);
+        ObservableList<Book> list = main.initializeBookData();
+        bookTableView.setItems(list);
+        bookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
+        bookDesc.setCellValueFactory(new PropertyValueFactory<>("bookDesc"));
     }
 
     public void changeSelectedBookItem(int bookIndex) {
@@ -364,7 +456,7 @@ public class MainController {
             return;
         }
         ObservableList<Order> list = main.getOrderOfBook(bookIndex);
-        tableView.setItems(list);
+        orderTableView.setItems(list);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("orderName"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("orderMod"));
         wayColumn.setCellValueFactory(new PropertyValueFactory<>("orderWay"));

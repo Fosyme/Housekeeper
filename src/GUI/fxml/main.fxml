@@ -42,7 +42,10 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="username" text="Label" />
+                              <Label fx:id="username" text="Label">
+                                 <font>
+                                    <Font name="Microsoft YaHei" size="24.0" />
+                                 </font></Label>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -52,7 +55,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="addBuuton" mnemonicParsing="false" onAction="#addBuutonEvent" text="添加" />
+                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonEvent" text="添加" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -76,18 +79,21 @@
         </AnchorPane>
         <AnchorPane prefHeight="777.0" prefWidth="345.0">
                <children>
-                  <ListView fx:id="accountbookListView" layoutY="86.0" onEditCommit="#accountbookListViewEvent" prefHeight="691.0" prefWidth="341.0">
+                  <TableView fx:id="bookTableView" layoutY="86.0" prefHeight="683.0" prefWidth="341.0">
+                    <columns>
+                      <TableColumn fx:id="bookName" prefWidth="106.0" text="账本名" />
+                      <TableColumn fx:id="bookDesc" minWidth="0.0" prefWidth="234.0" text="描述" />
+                    </columns>
                      <contextMenu>
                         <ContextMenu>
                           <items>
-                              <MenuItem fx:id="accountbook_refreshContextMenu" mnemonicParsing="false" onAction="#accountbook_refreshContextMenuEvent" text="刷新" />
-                              <MenuItem fx:id="accountbook_addContextMenu" mnemonicParsing="false" onAction="#accountbook_addContextMenuEVent" text="添加" />
-                            <MenuItem fx:id="accountbook_deleteContextMenu" mnemonicParsing="false" onAction="#accountbook_deleteContextMenuEvent" text="删除" />
-                              <MenuItem fx:id="accountbook_alterContextMenu" mnemonicParsing="false" onAction="#accountbook_alterContextMenuEvent" text="修改" />
+                              <MenuItem fx:id="ctmAddBook" mnemonicParsing="false" onAction="#ctmAddBookEVent" text="添加" />
+                              <MenuItem fx:id="ctmAlterBook" mnemonicParsing="false" onAction="#ctmAlterBookEvent" text="修改" />
+                            <MenuItem fx:id="ctmDeleteBook" mnemonicParsing="false" onAction="#ctmDeleteBookEvent" text="删除" />
                           </items>
                         </ContextMenu>
                      </contextMenu>
-                  </ListView>
+                  </TableView>
                   <Pane prefHeight="86.0" prefWidth="334.0">
                      <children>
                         <Label layoutX="15.0" layoutY="33.0" text="关键字：" />
@@ -101,9 +107,9 @@
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="677.0" prefWidth="480.0" style="-fx-border-radius: 20px;">
               <children>
-                        <TableView fx:id="tableView" editable="true" layoutX="-3.0" prefHeight="779.0" prefWidth="770.0" tableMenuButtonVisible="true">
+                        <TableView fx:id="orderTableView" editable="true" layoutX="-3.0" prefHeight="779.0" prefWidth="770.0" tableMenuButtonVisible="true">
                           <columns>
-                            <TableColumn fx:id="nameColumn" prefWidth="120.0" resizable="false" text="名字" />
+                            <TableColumn fx:id="nameColumn" prefWidth="120.0" resizable="false" text="账单名" />
                             <TableColumn fx:id="typeColumn" resizable="false" text="类型" />
                               <TableColumn fx:id="wayColumn" resizable="false" text="方式" />
                               <TableColumn fx:id="moneyColumn" prefWidth="100.0" resizable="false" text="金额" />
@@ -114,10 +120,9 @@
                            <contextMenu>
                               <ContextMenu>
                                 <items>
-                                    <MenuItem fx:id="bill_refreshContextMenu" mnemonicParsing="false" onAction="#bill_refreshContextMenuEvent" text="刷新" />
-                                  <MenuItem fx:id="bill_addContextMenu" mnemonicParsing="false" onAction="#bill_addContextMenuEvent" text="添加" />
-                                    <MenuItem fx:id="bill_deleteContextMenu" mnemonicParsing="false" onAction="#bill_deleteContextMenuEvent" text="删除" />
-                                    <MenuItem fx:id="bill_alterContextMenu" mnemonicParsing="false" onAction="#bill_alterContextMenuEvent" text="修改" />
+                                  <MenuItem fx:id="ctmAddOrder" mnemonicParsing="false" onAction="#ctmAddOrderEvent" text="添加" />
+                                    <MenuItem fx:id="ctmAlterOrder" mnemonicParsing="false" onAction="#ctmAlterOrderEvent" text="修改" />
+                                    <MenuItem fx:id="ctmDeleteOrder" mnemonicParsing="false" onAction="#ctmDeleteOrderEvent" text="删除" />
                                 </items>
                               </ContextMenu>
                            </contextMenu>

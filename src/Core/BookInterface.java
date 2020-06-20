@@ -19,7 +19,7 @@ public class BookInterface {
      * */
     public boolean isBookExist(String bookName) {
         //判断同名账本是否存在
-        return BookOperation.checkBookExist(bookName);
+        return BookOperation.checkBookExist(user.getUserID(), bookName);
     }
 
     /**
@@ -30,6 +30,9 @@ public class BookInterface {
      * @return 账本是否添加成功
      */
     public boolean addBook(String bookName, String bookDesc) {
+        if (bookName.isEmpty()) {
+            return false;
+        }
         //使用数组将所有信息传递到数据库端
         String[] bookMsg = new String[4];  //对应数据库4列
         bookMsg[0] = user.getUserID();
@@ -75,11 +78,20 @@ public class BookInterface {
      * @return 是否修改成功
      * */
     public boolean alterBook(int bookIndex, String newBookName, String newBookDesc) {
+        if (newBookName.isEmpty()) {
+            return false;
+        }
         String[] newBookMsg = new String[3];
         String bookID = user.getBooks().get(bookIndex).getBookID();
         newBookMsg[0] = newBookName;
         newBookMsg[1] = newBookDesc;
         newBookMsg[2] = String.valueOf(System.currentTimeMillis() / 1000);
-        return BookOperation.changeBookInfo(bookID, newBookMsg);
+        if (BookOperation.changeBookInfo(bookID, newBookMsg)) {
+            Book book = user.getBooks().get(bookIndex);
+            book.setBookName(newBookName);
+            book.setBookDesc(newBookDesc);
+            return true;
+        }
+        return false;
     }
 }
