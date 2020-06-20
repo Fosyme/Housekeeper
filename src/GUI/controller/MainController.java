@@ -334,6 +334,7 @@ public class MainController {
 
     public void initialization(User user) {
         main = new MainInterface(user);
+        username.setText(user.getUserName());
         accountbookListView
                 .getSelectionModel()
                 .selectedIndexProperty()

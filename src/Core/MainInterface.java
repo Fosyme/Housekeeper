@@ -18,6 +18,10 @@ public class MainInterface {
         this.user = user;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     //初始化账本列表
     public ObservableList<String> initializeBookData() {
         List<String> list = new ArrayList<>();

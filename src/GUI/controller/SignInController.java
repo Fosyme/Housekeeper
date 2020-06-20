@@ -67,7 +67,7 @@ public class SignInController {
             JOptionPane.showMessageDialog(null, "请按照文本框内容提示正确填写内容", "警告", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        boolean b = userLogin.signIn(nameTextField.getText(), passwordTextField.getText(), true);
+        boolean b = userLogin.signIn(nameTextField.getText(), passwordTextField.getText());
         if (b) {
             JOptionPane.showConfirmDialog(null, "恭喜登录成功", "信息", JOptionPane.DEFAULT_OPTION);
             try {
@@ -102,8 +102,7 @@ public class SignInController {
             prop.put("remember_password", String.valueOf(rememberPassword.isSelected()));
             prop.put("user_name", nameTextField.getText());
             if (rememberPassword.isSelected()) {
-                String password = passwordTextField.getText();
-                prop.put("user_password", UserLogin.getMD5String(password));
+                prop.put("user_password", passwordTextField.getText());
             }
             prop.store(fos,"Config");
             fos.close();
@@ -193,8 +192,8 @@ public class SignInController {
         passwordTextField.setText(userPassword);
     }
 
-    public void afterSignUp(String userName) {
-        nameTextField.setText(userName);
+    public void setRemember(boolean remember) {
+        this.rememberPassword.setSelected(remember);
     }
 }
 
