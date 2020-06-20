@@ -85,7 +85,7 @@ public class SetController {
             file.createNewFile();
         }
         Properties properties = new Properties();
-        properties.setProperty("white", "GUI/resources/white.css");
+        properties.setProperty("Lemonyellow", "GUI/resources/Lemonyellow.css");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
 
         properties.store(fileOutputStream, "柠檬黄");
@@ -102,7 +102,7 @@ public class SetController {
             file.createNewFile();
         }
         Properties properties = new Properties();
-        properties.setProperty("black", "GUI/resources/black.css");
+        properties.setProperty("Palegray", "GUI/resources/Palegray.css");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         properties.store(fileOutputStream, "苍白灰");
         JOptionPane.showMessageDialog(null, "切换苍白灰主题成功", "信息", JOptionPane.PLAIN_MESSAGE);
@@ -123,8 +123,9 @@ public class SetController {
         JOptionPane.showMessageDialog(null, "切换默认主题成功", "信息", JOptionPane.PLAIN_MESSAGE);
         fileOutputStream.close();
 
+
     }
-    @FXML
+   /* @FXML
     public String getStyleValue() throws IOException {
         File file = new File("src\\GUI\\resources\\styles.properties");
         Properties properties = new Properties();
@@ -136,12 +137,12 @@ public class SetController {
             Key = iterator.next();
         }
         return properties.getProperty(Key, "");
-    }
+    }*/
     public void initThemeRadioMenuItem() {
         String key = "";
         try {
             Properties properties = new Properties();
-            FileInputStream fis = new FileInputStream(new File("src\\GUI\\src\\styles.properties"));
+            FileInputStream fis = new FileInputStream(new File("src\\GUI\\resources\\styles.properties"));
             Iterator<String> iterator = properties.stringPropertyNames().iterator();
             while (iterator.hasNext()) {
                 key = iterator.next();
@@ -150,9 +151,9 @@ public class SetController {
             e.printStackTrace();
         }
         // 判断properties文件key的值
-        if (key.equals("black")) {
+        if (key.equals("Palegray")) {
             PalegrayRadioButton.setSelected(true);
-        } else if (key.equals("white")) {
+        } else if (key.equals("Lemonyellow")) {
             LemonyellowRadioButton.setSelected(true);
         } else {
             defaultRadioButton.setSelected(true);

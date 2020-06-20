@@ -45,7 +45,7 @@
             <Separator prefHeight="0.0" prefWidth="797.0" />
          </children>
       </HBox>
-      <TableView layoutY="160.0" prefHeight="607.0" prefWidth="806.0" styleClass="background" tableMenuButtonVisible="true">
+      <TableView fx:id="check_tableView" layoutY="160.0" prefHeight="607.0" prefWidth="806.0" styleClass="background" tableMenuButtonVisible="true">
         <columns>
           <TableColumn fx:id="chack_nameColumn" prefWidth="81.0" text="名字" />
           <TableColumn fx:id="chack_typeColumn" prefWidth="91.0" text="类型" />

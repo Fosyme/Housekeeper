@@ -1,16 +1,22 @@
 package GUI.controller;
 
+import Core.Order;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-public class DateSearchController<TableData> {
+public class DateSearchController {
 
     @FXML
-    private TableColumn<TableData, String> check_classificationColumn;
+    private TableView<Order> check_tableView;
+    @FXML
+    private TableColumn<Order, String>chack_nameColumn;
+    @FXML
+    private TableColumn<Order, String> check_classificationColumn;
 
     @FXML
     private DatePicker starDatePicker;
@@ -19,22 +25,22 @@ public class DateSearchController<TableData> {
     private DatePicker endDatePicker;
 
     @FXML
-    private TableColumn<TableData, String> check_idColumn;
+    private TableColumn<Order, String> check_idColumn;
 
     @FXML
-    private TableColumn<TableData, String> check_typeColumn;
+    private TableColumn<Order, String> check_typeColumn;
 
     @FXML
-    private TableColumn<TableData, String> check_memoColumn;
+    private TableColumn<Order, String> check_memoColumn;
 
     @FXML
     private Button dateCheckButton;
 
     @FXML
-    private TableColumn<TableData, String> check_moneyColumn;
+    private TableColumn<Order, String> check_moneyColumn;
 
     @FXML
-    private TableColumn<TableData, String> check_dateColumn;
+    private TableColumn<Order, String> check_dateColumn;
 
     @FXML
     void dateCheckButtonEvent(ActionEvent event) {
@@ -42,7 +48,6 @@ public class DateSearchController<TableData> {
         String endDate=String.valueOf(endDatePicker.getValue());
         //通过开始时间和结束时间
         // 返回账单内容
-
 
     }
 

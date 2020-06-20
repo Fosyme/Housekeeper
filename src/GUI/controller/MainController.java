@@ -21,6 +21,7 @@ import javafx.util.Pair;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Properties;
@@ -257,7 +258,8 @@ public class MainController {
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
 
-//            scene.getStylesheets().add((getStyleValue()));
+            //加载CSS样式文件
+            scene.getStylesheets().add((getStyleValue()));
             AddOrderController controller = loader.getController();
             controller.initialization(main.getUser());
             //判断是否选择了账本
@@ -302,7 +304,8 @@ public class MainController {
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
-//            scene.getStylesheets().add((getStyleValue()));
+            //加载CSS样式文件
+            scene.getStylesheets().add((getStyleValue()));
 
             AlterOrderController controller = loader.getController();
             controller.initialization(main.getUser());
@@ -323,6 +326,7 @@ public class MainController {
         alterButtonEvent(event);
     }
 
+
     @FXML
     void ctmDeleteOrderEvent(ActionEvent event) {
 
@@ -337,6 +341,7 @@ public class MainController {
     void searchButtonEvent(ActionEvent event) {
         //通过去匹配关键字，返回账本名和账本描述，定位到
 
+
     }
 
     @FXML
@@ -347,14 +352,15 @@ public class MainController {
             AnchorPane page = loader.load();
 
             Stage mainFrameStage = new Stage();
-            mainFrameStage.setTitle("报表");
+            mainFrameStage.setTitle("设置");
             mainFrameStage.setResizable(true);
             mainFrameStage.setAlwaysOnTop(false);
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
 
-//            scene.getStylesheets().add((getStyleValue()));
+            //加载CSS样式文件
+            scene.getStylesheets().add((getStyleValue()));
 
             SetController controller = loader.getController();
             controller.setDialogStage(mainFrameStage);
@@ -383,7 +389,7 @@ public class MainController {
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
 
-
+            //加载CSS样式文件
             scene.getStylesheets().add((getStyleValue()));
 
             ReportController controller = loader.getController();
@@ -398,9 +404,11 @@ public class MainController {
     }
 
 
+
+
     @FXML
     public String getStyleValue() throws IOException {
-        File file = new File("GUI\\resources\\styles.properties");
+        File file = new File("src\\GUI\\resources\\styles.properties");
         Properties properties = new Properties();
         FileInputStream fileInputStream = new FileInputStream(file);
         properties.load(fileInputStream);
@@ -478,7 +486,7 @@ public class MainController {
              Scene scene = new Scene(page);
              mainFrameStage.setScene(scene);
 
-//             scene.getStylesheets().add((getStyleValue()));
+             scene.getStylesheets().add((getStyleValue()));
 
              DateSearchController controller = loader.getController();
              controller.setDialogStage(mainFrameStage);

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.*;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -81,6 +82,9 @@ public class SignInController {
                 mainFrameStage.initModality(Modality.APPLICATION_MODAL);
                 Scene scene = new Scene(page);
                 mainFrameStage.setScene(scene);
+                //加载CSS样式文件
+                scene.getStylesheets().add((getStyleValue()));
+
                 MainController controller = loader.getController();
                 controller.initialization(userLogin.getUser());
                 ((Stage) paneSignIn.getScene().getWindow()).close();
@@ -127,6 +131,9 @@ public class SignInController {
             signUp.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             signUp.setScene(scene);
+            //加载CSS样式文件
+            scene.getStylesheets().add((getStyleValue()));
+
             SignUpController controller = loader.getController();
             controller.initialization();
             ((Stage) paneSignIn.getScene().getWindow()).close();
@@ -168,6 +175,9 @@ public class SignInController {
                     mainFrameStage.initModality(Modality.APPLICATION_MODAL);
                     Scene scene = new Scene(page);
                     mainFrameStage.setScene(scene);
+                    //加载CSS样式文件
+                    scene.getStylesheets().add((getStyleValue()));
+
                     FindPasswordController controller = loader.getController();
                     controller.initialization();
                     controller.setContent(userNameOfFind, encryptedQuestion);
@@ -194,6 +204,19 @@ public class SignInController {
 
     public void setRemember(boolean remember) {
         this.rememberPassword.setSelected(remember);
+    }
+    @FXML
+    public String getStyleValue() throws IOException {
+        File file = new File("src\\GUI\\resources\\styles.properties");
+        Properties properties = new Properties();
+        FileInputStream fileInputStream = new FileInputStream(file);
+        properties.load(fileInputStream);
+        Iterator<String> iterator = properties.stringPropertyNames().iterator();
+        String Key = "";
+        while (iterator.hasNext()) {
+            Key = iterator.next();
+        }
+        return properties.getProperty(Key, "");
     }
 }
 
