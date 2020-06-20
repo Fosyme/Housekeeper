@@ -20,14 +20,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.Properties;
 
 public class MainController {
     private MainInterface main;
-
+    private BookInterface bookInterface;
 
     @FXML
     private Button chackButton;
+
     @FXML
     private Label username;
 
@@ -68,10 +70,14 @@ public class MainController {
     private TableView<Order> tableView;
 
     @FXML
-    private TableColumn<Order, String> idColumn;
+    private TableColumn<Order, String> nameColumn;
+
 
     @FXML
     private TableColumn<Order, String> typeColumn;
+
+    @FXML
+    public TableColumn<Order, String> wayColumn;
 
     @FXML
     private TableColumn<Order, String> moneyColumn;
@@ -115,22 +121,41 @@ public class MainController {
     }
 
     @FXML
+    <TableData>
     void accountbook_alterContextMenuEvent(ActionEvent event) {
-
+        //修改就调用修改页面
+        Order order=tableView.getSelectionModel().getSelectedItem();
     }
+
 
     @FXML
     void accountbook_deleteContextMenuEvent(ActionEvent event) {
+        //删除
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("提示");
+        alert.setContentText("请问是否删除");
+        alert.setHeaderText("提示");
+        Optional<ButtonType> result=alert.showAndWait();
+        if (result.get()==ButtonType.OK){
+            int accountbookIndex=tableView.getSelectionModel().getFocusedIndex();
+            bookInterface.deleteBook(accountbookIndex);
+        }else {
+            //TODO
+            ;
+        }
+        main.refreshBookData();
 
     }
 
     @FXML
     void accountbook_refreshContextMenuEvent(ActionEvent event) {
-
+        //刷新
+        ObservableList<String> list = main.refreshBookData();
+        accountbookListView.setItems(list);
     }
 
     @FXML
-    Scene addBuutonEvent(ActionEvent event) {
+    void addBuutonEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/addOrder.fxml"));
@@ -143,17 +168,27 @@ public class MainController {
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
-            scene.getStylesheets().add((getStyleValue()));
+
+//            scene.getStylesheets().add((getStyleValue()));
             AddOrderController controller = loader.getController();
-            controller.initialization();
+            controller.initialization(main.getUser());
+            //判断是否选择了账本
+            int index = accountbookListView.getSelectionModel().getSelectedIndex();
+            if (index == -1) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("警告");
+                alert.setHeaderText(null);
+                alert.setContentText("请选择账本！");
+                alert.showAndWait();
+                return;
+            }
+            controller.setSelectedBookIndex(index);
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
-            return scene;
+            this.accountbook_refreshContextMenuEvent(event);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
-
     }
     @FXML
     Scene alterButtonEvent(ActionEvent event) {
@@ -170,7 +205,7 @@ public class MainController {
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
 
-            scene.getStylesheets().add((getStyleValue()));
+//            scene.getStylesheets().add((getStyleValue()));
 
             AlterOrderController controller = loader.getController();
             controller.initialization();
@@ -263,8 +298,7 @@ public class MainController {
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
 
-            scene.getStylesheets().add((getStyleValue()));
-
+//            scene.getStylesheets().add((getStyleValue()));
             ReportController controller = loader.getController();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
@@ -276,9 +310,10 @@ public class MainController {
 
     }
 
+
     @FXML
     public String getStyleValue() throws IOException {
-        File file = new File("src\\GUI\\src\\styles.properties");
+        File file = new File("GUI\\resources\\styles.properties");
         Properties properties = new Properties();
         FileInputStream fileInputStream = new FileInputStream(file);
         properties.load(fileInputStream);
@@ -289,7 +324,6 @@ public class MainController {
         }
         return properties.getProperty(Key, "");
     }
-
 /*    public void initThemeRadioMenuItem() {
         String key = "";
         try {
@@ -314,25 +348,30 @@ public class MainController {
 
     public void initialization(User user) {
         main = new MainInterface(user);
+        username.setText(user.getUserName());
         accountbookListView
                 .getSelectionModel()
                 .selectedIndexProperty()
                 .addListener((observableValue, number, t1) -> {
-                    changeSelectedItem(main, (Integer) t1);
+                    changeSelectedBookItem((Integer) t1);
                 });
         ObservableList<String> list = main.initializeBookData();
         accountbookListView.setItems(list);
     }
 
-    public void changeSelectedItem(MainInterface main, int bookIndex) {
+    public void changeSelectedBookItem(int bookIndex) {
+        if (bookIndex == -1) {
+            return;
+        }
         ObservableList<Order> list = main.getOrderOfBook(bookIndex);
         tableView.setItems(list);
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("orderID"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("orderName"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("orderMod"));
+        wayColumn.setCellValueFactory(new PropertyValueFactory<>("orderWay"));
         moneyColumn.setCellValueFactory(new PropertyValueFactory<>("orderPrice"));
-        classificationColumn.setCellValueFactory(new PropertyValueFactory<>("orderCate"));;
-        memoColumn.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));;
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));;
+        classificationColumn.setCellValueFactory(new PropertyValueFactory<>("orderCate"));
+        memoColumn.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
     }
 
      @FXML
@@ -351,7 +390,7 @@ public class MainController {
              Scene scene = new Scene(page);
              mainFrameStage.setScene(scene);
 
-             scene.getStylesheets().add((getStyleValue()));
+//             scene.getStylesheets().add((getStyleValue()));
 
              DateSearchController controller = loader.getController();
              controller.setDialogStage(mainFrameStage);

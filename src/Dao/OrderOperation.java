@@ -26,8 +26,8 @@ public class OrderOperation {
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setInt(1, Integer.parseInt(data[0]));
-            preparedStatement.setDouble(2, Double.parseDouble(data[1]));
-            preparedStatement.setString(3, data[2]);
+            preparedStatement.setString(2, data[1]);
+            preparedStatement.setDouble(3, Double.parseDouble(data[2]));
             preparedStatement.setString(4, data[3]);
             preparedStatement.setString(5, data[4]);
             preparedStatement.setString(6, data[5]);

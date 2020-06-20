@@ -34,7 +34,8 @@ public class UserLogin {
      * */
     public boolean signIn(@NotNull String userName, String userPassword) {
         String userID;
-        userID = UserOperation.loginAuthentication(userName, getMD5String(userPassword));
+        String encryptedPassword = getMD5String(userPassword);
+        userID = UserOperation.loginAuthentication(userName, encryptedPassword);
         if (userID == null) {
             return false;
         }

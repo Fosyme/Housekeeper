@@ -1,5 +1,8 @@
 package Core;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
@@ -16,10 +19,23 @@ public class Order {
     private String orderDesc;       //账单详细描述
     private byte[] orderImageSrc;   //账单图片
 
-    private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public Order(String orderID) {
         this.orderID = orderID;
+    }
+
+    //整体设置order类的实例域
+    public void setOrder(@NotNull String[] orderMsg) {
+        bookID = orderMsg[0];
+        orderName = orderMsg[1];
+        orderPrice = Double.parseDouble(orderMsg[2]);
+        orderWay = orderMsg[3];
+        orderMod = orderMsg[4];
+        setOrderTime(orderMsg[5]);
+        orderCate = orderMsg[6];
+        orderDesc = orderMsg[7];
+        orderImageSrc = null;
     }
 
     public String getOrderID() {
@@ -72,7 +88,7 @@ public class Order {
 
     public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
-        setOrderDate(dateformat.format(System.currentTimeMillis()));
+        setOrderDate(dateFormat.format(Long.parseLong(orderTime) * 1000));
     }
 
     public String getOrderDate() {
@@ -110,13 +126,14 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "orderID=" + orderID +
-                ", bookID=" + bookID +
+                "orderID='" + orderID + '\'' +
+                ", bookID='" + bookID + '\'' +
                 ", orderName='" + orderName + '\'' +
                 ", orderPrice=" + orderPrice +
                 ", orderWay='" + orderWay + '\'' +
                 ", orderMod='" + orderMod + '\'' +
                 ", orderTime='" + orderTime + '\'' +
+                ", orderDate='" + orderDate + '\'' +
                 ", orderCate='" + orderCate + '\'' +
                 ", orderDesc='" + orderDesc + '\'' +
                 ", orderImageSrc=" + Arrays.toString(orderImageSrc) +

@@ -1,37 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="598.0" prefWidth="440.0" styleClass="background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddOrderController">
+<AnchorPane fx:id="paneAddOrder" prefHeight="598.0" prefWidth="440.0" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.AddOrderController">
    <children>
-      <AnchorPane layoutY="4.0" prefHeight="600.0" prefWidth="440.0">
+      <AnchorPane layoutY="1.0" prefHeight="600.0" prefWidth="440.0">
          <children>
-            <Label layoutX="68.0" layoutY="199.0" text="金额：" />
-            <Label alignment="CENTER" layoutX="160.0" layoutY="44.0" text="添加帐单">
+            <Label layoutX="70.0" layoutY="210.0" text="金额：" />
+            <Label alignment="CENTER" layoutX="160.0" layoutY="31.0" text="添加帐单">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <Label layoutX="69.0" layoutY="140.0" text="类型：" />
-            <Label layoutX="68.0" layoutY="258.0" text="分类：" />
-            <Label layoutX="68.0" layoutY="319.0" text="备注：" />
-            <Label layoutX="68.0" layoutY="399.0" text="日期：" />
-            <RadioButton fx:id="outputRadioButton" layoutX="151.0" layoutY="140.0" mnemonicParsing="false" onAction="#outputRadioButtonEvent" selected="true" text="支出">
+            <Label layoutX="70.0" layoutY="106.0" text="类型：" />
+            <Label layoutX="70.0" layoutY="316.0" text="分类：" />
+            <Label layoutX="70.0" layoutY="368.0" text="备注：" />
+            <Label layoutX="70.0" layoutY="444.0" text="日期：" />
+            <RadioButton fx:id="outputRadioButton" layoutX="152.0" layoutY="106.0" mnemonicParsing="false" text="支出">
                <toggleGroup>
-                  <ToggleGroup fx:id="way" />
+                  <ToggleGroup fx:id="togGpMod" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="inputRadioButton" layoutX="269.0" layoutY="140.0" mnemonicParsing="false" onAction="#inputRadioButtonEvent" text="收入" toggleGroup="$way" />
-            <TextField fx:id="moneyTextField" layoutX="131.0" layoutY="190.0" prefHeight="30.0" prefWidth="233.0" promptText="请填入金额：" />
-            <ComboBox fx:id="classificationComboBox" editable="true" layoutX="131.0" layoutY="250.0" onAction="#classificationComboBoxEvetn" prefHeight="30.0" prefWidth="233.0" promptText="请选择分类" />
-            <DatePicker fx:id="datePickerTextField" layoutX="131.0" layoutY="392.0" prefHeight="30.0" prefWidth="233.0" promptText="请选择日期" />
-            <Button fx:id="addButton" layoutX="138.0" layoutY="466.0" mnemonicParsing="false" onAction="#addButtonEvent" prefHeight="45.0" prefWidth="165.0" text="添加" textAlignment="CENTER" textFill="#0c430c">
+            <RadioButton fx:id="inputRadioButton" layoutX="264.0" layoutY="106.0" mnemonicParsing="false" text="收入" toggleGroup="$togGpMod" />
+            <TextField fx:id="moneyTextField" layoutX="131.0" layoutY="204.0" prefHeight="30.0" prefWidth="233.0" promptText="请填入金额：" />
+            <ComboBox fx:id="combCate" editable="true" layoutX="131.0" layoutY="308.0" prefHeight="30.0" prefWidth="233.0" promptText="请选择分类" />
+            <DatePicker fx:id="datePickerTextField" layoutX="131.0" layoutY="439.0" prefHeight="30.0" prefWidth="233.0" promptText="请选择日期" />
+            <Button fx:id="addButton" layoutX="138.0" layoutY="513.0" mnemonicParsing="false" onAction="#addButtonEvent" prefHeight="45.0" prefWidth="165.0" text="添加" textAlignment="CENTER" textFill="#0c430c">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <TextArea layoutX="131.0" layoutY="312.0" prefHeight="45.0" prefWidth="233.0" promptText="请填入备注：" />
+            <TextArea fx:id="memoTextArea" layoutX="131.0" layoutY="364.0" prefHeight="45.0" prefWidth="233.0" promptText="请填入备注：" />
+            <Label layoutX="58.0" layoutY="155.0" text="账单名字：" />
+            <TextField fx:id="billnameTextField" layoutX="132.0" layoutY="150.0" prefHeight="30.0" prefWidth="233.0" promptText="请输入账单名字：" />
+            <ComboBox fx:id="combWay" editable="true" layoutX="131.0" layoutY="254.0" prefHeight="30.0" prefWidth="233.0" promptText="请选择分类" />
+            <Label layoutX="70.0" layoutY="262.0" text="方式：" />
          </children>
       </AnchorPane>
    </children>
