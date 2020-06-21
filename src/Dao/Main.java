@@ -150,5 +150,14 @@ public class Main {
         b=BookOperation.checkBookExist("book");
         System.out.println(b);*/
 
+/*        //验证queryTimeInterval
+        ResultSet resultSet= OrderOperation.queryTimeInterval("2", "1", "1000");
+        try {
+            while (resultSet.next()) {
+                System.out.println(resultSet.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
     }
 }

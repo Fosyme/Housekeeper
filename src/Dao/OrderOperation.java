@@ -133,6 +133,20 @@ public class OrderOperation {
             e.printStackTrace();
         }
         return resultSet;
+    }
 
+    public static ResultSet queryTimeInterval(String bookId, String startTime, String endTime) {
+        String sql="select * from `order` where `book_id`=? and `order_time` between ? and ? ";
+        try {
+            preparedStatement = CONNECTION.prepareStatement(sql);
+            preparedStatement.setInt(1, Integer.parseInt(bookId));
+            preparedStatement.setInt(2, Integer.parseInt(startTime));
+            preparedStatement.setInt(3, Integer.parseInt(endTime));
+            resultSet=preparedStatement.executeQuery();
+            return resultSet;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
