@@ -2,16 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.SetController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="681.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.SetController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="807.0">
+      <VBox layoutX="-1.0" prefHeight="681.0" prefWidth="306.0">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -22,33 +23,45 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <Label lineSpacing="20.0" text="主题：" />
-                  <RadioButton fx:id="defaultRadioButton" mnemonicParsing="false" onAction="#defaultRadioButtonEvent" text="默认">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="theme" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="PalegrayRadioButton" mnemonicParsing="false" onAction="#PalegrayRadioButtonEvent" text="苍白灰" toggleGroup="$theme" />
-                  <RadioButton fx:id="LemonyellowRadioButton" mnemonicParsing="false" onAction="#LemonyellowRadioButtonEvent" text="柠檬黄" toggleGroup="$theme" />
+                  <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="108.0" text="主题">
+                    <items>
+                        <RadioMenuItem fx:id="defaultRadioMenulten" mnemonicParsing="false" onAction="#defaultRadioMenultenEvent" text="默认">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="theme" />
+                           </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem fx:id="PalegrayRadioMenultem" mnemonicParsing="false" onAction="#PalegrayRadioMenultemEvent" text="苍白灰" toggleGroup="$theme" />
+                        <RadioMenuItem fx:id="LemonyellowRadioMenultem" mnemonicParsing="false" onAction="#LemonyellowRadioMenultemEvent" text="柠檬黄" toggleGroup="$theme" />
+                    </items>
+                  </MenuButton>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="306.0">
                <children>
-                  <Button fx:id="AboutsoftwarButton" mnemonicParsing="false" onAction="#AboutsoftwarButtonEvent" text="关于软件" />
+                  <Button fx:id="AboutsoftwarButton" mnemonicParsing="false" onAction="#AboutsoftwarButtonEvent" prefHeight="73.0" prefWidth="306.0" text="关于软件" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="71.0" prefWidth="306.0">
                <children>
-                  <Button fx:id="CloseButton" mnemonicParsing="false" onAction="#CloseButtonEvent" prefHeight="56.0" prefWidth="124.0" text="关闭">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Button>
+                  <Button fx:id="Userinfo" mnemonicParsing="false" onAction="#UserinfoEvent" prefHeight="73.0" prefWidth="306.0" text="用户信息" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="73.0" prefWidth="306.0">
+               <children>
+                  <HBox prefHeight="73.0" prefWidth="318.0">
+                     <children>
+                        <Button fx:id="SwitchAccount" mnemonicParsing="false" onAction="#SwitchAccountEvent" prefHeight="73.0" prefWidth="314.0" text="切换账号" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
+            <HBox prefHeight="86.0" prefWidth="306.0" />
+            <Button fx:id="Exit" mnemonicParsing="false" onAction="#ExitEvent" prefHeight="73.0" prefWidth="306.0" text="退出" textFill="#e40202">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </children>

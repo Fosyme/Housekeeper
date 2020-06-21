@@ -50,7 +50,4 @@
       </Button>
       <Text layoutX="284.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HouseKeeper-Text" text="HouseKeeper" />
    </children>
-<!--   <stylesheets>-->
-<!--           <URl value="@signIn.css">-->
-<!--   <stylesheets>-->
 </Pane>

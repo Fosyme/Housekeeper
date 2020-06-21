@@ -143,7 +143,7 @@ public class SignInController {
         }
     }
 
-    private void setDialogStage(Stage mainFrameStage) {
+    void setDialogStage(Stage mainFrameStage) {
     }
 
 
@@ -205,6 +205,7 @@ public class SignInController {
     public void setRemember(boolean remember) {
         this.rememberPassword.setSelected(remember);
     }
+
     @FXML
     public String getStyleValue() throws IOException {
         File file = new File("src\\GUI\\resources\\styles.properties");

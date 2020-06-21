@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -23,23 +23,28 @@ import java.util.Properties;
 public class SetController {
 
     @FXML
-    private RadioButton defaultRadioButton;
+    private RadioMenuItem defaultRadioMenulten;
 
     @FXML
     private ToggleGroup theme;
 
     @FXML
-    private RadioButton PalegrayRadioButton;
+    private RadioMenuItem PalegrayRadioMenultem;
 
     @FXML
-    private RadioButton LemonyellowRadioButton;
+    private RadioMenuItem LemonyellowRadioMenultem;
 
     @FXML
     private Button AboutsoftwarButton;
 
     @FXML
-    private Button CloseButton;
+    private Button Userinfo;
 
+    @FXML
+    private Button SwitchAccount;
+
+    @FXML
+    private Button Exit;
     @FXML
     Scene AboutsoftwarButtonEvent(ActionEvent event) {
         try {
@@ -65,21 +70,67 @@ public class SetController {
         return null;
 
     }
-    private Stage dialogStage;
-    public Stage getDialogStage() {
-        return dialogStage;
+    @FXML
+    Scene UserinfoEvent(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/userinfo.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage mainFrameStage = new Stage();
+            mainFrameStage.setTitle("用户界面");
+            mainFrameStage.setResizable(true);
+            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(page);
+            mainFrameStage.setScene(scene);
+
+            scene.getStylesheets().add((getStyleValue()));
+
+            UserinfoController controller = loader.getController();
+            controller.setDialogStage(mainFrameStage);
+            mainFrameStage.showAndWait();
+            return scene;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
+    @FXML
+    Scene SwitchAccountEvent(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/signIn.fxml"));
+
+
+            Stage mainFrameStage = new Stage();
+            mainFrameStage.setTitle("用户界面");
+            mainFrameStage.setResizable(true);
+            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(page);
+            mainFrameStage.setScene(scene);
+
+            scene.getStylesheets().add((getStyleValue()));
+
+            SignInController controller = loader.getController();
+            controller.setDialogStage(mainFrameStage);
+            mainFrameStage.showAndWait();
+            return scene;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+    @FXML
+    void ExitEvent(ActionEvent event){
+        System.exit(0);
     }
 
     @FXML
-    void CloseButtonEvent(ActionEvent event) {
-        dialogStage.close();
-    }
-
-    @FXML
-    void LemonyellowRadioButtonEvent(ActionEvent event) throws IOException {
+    void LemonyellowRadioMenultemEvent(ActionEvent event) throws IOException {
         File file = new File("src\\GUI\\resources\\styles.properties");
         if (!file.exists()) {
             file.createNewFile();
@@ -96,7 +147,7 @@ public class SetController {
     }
 
     @FXML
-    void PalegrayRadioButtonEvent(ActionEvent event) throws IOException {
+    void PalegrayRadioMenultemEvent(ActionEvent event) throws IOException {
         File file = new File("src\\GUI\\resources\\styles.properties");
         if (!file.exists()) {
             file.createNewFile();
@@ -111,7 +162,7 @@ public class SetController {
     }
 
     @FXML
-    void defaultRadioButtonEvent(ActionEvent event) throws IOException {
+    void defaultRadioMenultenEvent(ActionEvent event) throws IOException {
         File file = new File("src\\GUI\\resources\\styles.properties");
         if (!file.exists()) {
             file.createNewFile();
@@ -122,10 +173,9 @@ public class SetController {
         properties.store(fileOutputStream, "默认");
         JOptionPane.showMessageDialog(null, "切换默认主题成功", "信息", JOptionPane.PLAIN_MESSAGE);
         fileOutputStream.close();
-
-
     }
-   /* @FXML
+
+    @FXML
     public String getStyleValue() throws IOException {
         File file = new File("src\\GUI\\resources\\styles.properties");
         Properties properties = new Properties();
@@ -137,7 +187,8 @@ public class SetController {
             Key = iterator.next();
         }
         return properties.getProperty(Key, "");
-    }*/
+    }
+
     public void initThemeRadioMenuItem() {
         String key = "";
         try {
@@ -152,14 +203,13 @@ public class SetController {
         }
         // 判断properties文件key的值
         if (key.equals("Palegray")) {
-            PalegrayRadioButton.setSelected(true);
+            PalegrayRadioMenultem.setSelected(true);
         } else if (key.equals("Lemonyellow")) {
-            LemonyellowRadioButton.setSelected(true);
+            LemonyellowRadioMenultem.setSelected(true);
         } else {
-            defaultRadioButton.setSelected(true);
+            defaultRadioMenulten.setSelected(true);
         }
     }
-
-
-
+    public void setDialogStage(Stage mainFrameStage) {
+    }
 }
