@@ -42,15 +42,6 @@ public class SetController {
     @FXML
     private Button AboutsoftwarButton;
 
-    @FXML
-    private Button Userinfo;
-
-    @FXML
-    private Button SwitchAccount;
-
-    @FXML
-    private Button Exit;
-
     public void setParent(Stage parent) {
         this.parent = parent;
     }

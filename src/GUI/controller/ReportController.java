@@ -128,7 +128,4 @@ public class ReportController {
 
     public void thisDayComboBoxEvent(ActionEvent actionEvent) {
     }
-
-    public void setDialogStage(Stage mainFrameStage) {
-    }
 }

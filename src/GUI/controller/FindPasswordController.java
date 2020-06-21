@@ -27,8 +27,6 @@ public class FindPasswordController {
     @FXML
     private TextField AnswerTextField;
 
-    @FXML
-    private Button ConfirmButton;
 
     public void initialization() {
         userLogin = new UserLogin();

@@ -36,9 +36,6 @@ public class SignUpController {
     private TextField answerTextField;
 
     @FXML
-    private Button signUpButton;
-
-    @FXML
     private TextField ageTextField;
 
     @FXML
