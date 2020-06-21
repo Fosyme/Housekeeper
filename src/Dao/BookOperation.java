@@ -1,8 +1,11 @@
 package Dao;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * @author 李建强
@@ -55,10 +58,7 @@ public class BookOperation {
         } catch (Exception e) {
             e.printStackTrace();
         }
-            if (existences!=0) {
-                return true;
-        }
-        return false;
+        return existences != 0;
     }
 
     /**
@@ -100,7 +100,7 @@ public class BookOperation {
         String sql = "select * from `book` where `user_id`=?";
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
-            preparedStatement.setString(1, UserId);
+            preparedStatement.setInt(1, Integer.parseInt(UserId));
             resultSet = preparedStatement.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,7 +120,7 @@ public class BookOperation {
         String sql = "select * from `book` where `user_id`=?  and `book_name` = ?";
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
-            preparedStatement.setString(1, userId);
+            preparedStatement.setInt(1, Integer.parseInt(userId));
             preparedStatement.setString(2, bookName);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -131,5 +131,26 @@ public class BookOperation {
             e.printStackTrace();
         }
         return  false;
+    }
+
+    /**
+     * 通过账本ID获得账本名
+     *
+     * @param bookID 账本ID
+     * @return 账本名
+     */
+    public static String getIDFromName(String bookID) {
+        String sql = "select `book_name` from `book` where book_id = ?";
+        try {
+            preparedStatement = CONNECTION.prepareStatement(sql);
+            preparedStatement.setInt(1, Integer.parseInt(bookID));
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("book_name");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

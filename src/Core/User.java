@@ -12,8 +12,7 @@ import java.util.HashMap;
 
 /**
  * 用户类, 管理用户的所有的信息
- * @author Fosyme
- * @version 1.0.0
+ * @author Fosyme(向世杰)
  * */
 public class User {
     private final String userID;    //用户ID

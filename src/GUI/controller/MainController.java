@@ -11,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
@@ -20,7 +21,7 @@ import javafx.util.Pair;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Properties;
@@ -52,10 +53,10 @@ public class MainController {
     private TableView<Book> bookTableView;
 
     @FXML
-    public TableColumn<Book, String> bookName;
+    private TableColumn<Book, String> bookName;
 
     @FXML
-    public TableColumn<Book, String> bookDesc;
+    private TableColumn<Book, String> bookDesc;
 
     @FXML
     private MenuItem ctmAddBook;
@@ -70,6 +71,9 @@ public class MainController {
     private TextField keywordTextField;
 
     @FXML
+    private Label lblClear;
+
+    @FXML
     private Button searchButton;
 
     @FXML
@@ -82,7 +86,7 @@ public class MainController {
     private TableColumn<Order, String> modColumn;
 
     @FXML
-    public TableColumn<Order, String> wayColumn;
+    private TableColumn<Order, String> wayColumn;
 
     @FXML
     private TableColumn<Order, String> moneyColumn;
@@ -359,9 +363,32 @@ public class MainController {
     //搜索
     @FXML
     void searchButtonEvent(ActionEvent event) {
-        //通过去匹配关键字，返回账本名和账本描述，定位到
-
-
+        //模糊查询关键字
+        String keyword = keywordTextField.getText();
+        if (keyword.isBlank()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("警告");
+            alert.setHeaderText(null);
+            alert.setContentText("内容不能为空！");
+            alert.show();
+        } else {
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(Main.class.getResource("fxml/screenOrder.fxml"));
+                Scene scene = new Scene(loader.load());
+                Stage stage = new Stage();
+                stage.setTitle("模糊查询");
+                stage.setResizable(false);
+                stage.setScene(scene);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                ScreenOrder controller = loader.getController();
+                controller.initialization(main.getUser());
+                controller.setTabScreen(orderInterface.fuzzyQueryOrder(keyword));
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -373,7 +400,7 @@ public class MainController {
 
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("设置");
-            mainFrameStage.setResizable(true);
+            mainFrameStage.setResizable(false);
             mainFrameStage.setAlwaysOnTop(false);
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
@@ -390,8 +417,6 @@ public class MainController {
             e.printStackTrace();
         }
         return null;
-
-
     }
 
     @FXML
@@ -422,9 +447,6 @@ public class MainController {
         return null;
 
     }
-
-
-
 
     @FXML
     public String getStyleValue() throws IOException {
@@ -470,6 +492,17 @@ public class MainController {
                 .getSelectionModel()
                 .selectedIndexProperty()
                 .addListener((observableValue, number, t1) -> changeSelectedBookItem((Integer) t1));
+        lblClear.setVisible(false);
+        keywordTextField
+                .textProperty()
+                .addListener((observableValue, s, t1) -> {
+                    if (s.isEmpty() && !t1.isEmpty()) {
+                        lblClear.setVisible(true);
+                    }
+                    if (!s.isEmpty() && t1.isEmpty()) {
+                        lblClear.setVisible(false);
+                    }
+                });
         ObservableList<Book> list = main.initializeBookData();
         bookTableView.setItems(list);
         bookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
@@ -493,7 +526,7 @@ public class MainController {
     }
 
      @FXML
-     void chackButtonEvent(ActionEvent actionEvent) {
+     void checkButtonEvent(ActionEvent actionEvent) {
         //查询
          try {
              FXMLLoader loader = new FXMLLoader();
@@ -516,5 +549,9 @@ public class MainController {
          } catch (IOException e) {
              e.printStackTrace();
          }
+    }
+
+    public void lblClearClicked(MouseEvent mouseEvent) {
+        keywordTextField.clear();
     }
 }

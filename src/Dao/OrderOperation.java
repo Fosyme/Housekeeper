@@ -122,12 +122,12 @@ public class OrderOperation {
     }
 
     public  static  ResultSet fuzzyQueryOrderMsg(String bookId,String keyWord){
-        String sql = "select * from `order` where `book_id`=? and `order_name`like '%?%' or `order_desc` like '%?%' ";
+        String sql = "select * from `order` where `book_id`=? and `order_name`like ? or `order_desc` like ?";
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setInt(1, Integer.parseInt(bookId));
-            preparedStatement.setString(2, keyWord);
-            preparedStatement.setString(3, keyWord);
+            preparedStatement.setString(2, "%"+keyWord+"%");
+            preparedStatement.setString(3, "%"+keyWord+"%");
             resultSet=preparedStatement.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();

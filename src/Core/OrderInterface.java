@@ -1,10 +1,11 @@
 package Core;
 
-import Dao.BookOperation;
 import Dao.OrderOperation;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.ResultSet;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 public class OrderInterface {
     private final User user;
@@ -15,6 +16,27 @@ public class OrderInterface {
 
     public User getUser() {
         return user;
+    }
+
+    /**
+     * 通过账单号，查询订单名
+     *
+     * @param orderID 账单号
+     * @return 账本号
+     */
+    public String OrderNameFromBook(String orderID) {
+        for (ArrayList<Order> orders : user.getOrders()) {
+            for (Order order : orders) {
+                if (order.getOrderID().equals(orderID)) {
+                    for (Book book : user.getBooks()) {
+                        if (book.getBookID().equals(order.getBookID())) {
+                            return book.getBookName();
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -102,5 +124,37 @@ public class OrderInterface {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 模糊查询账单
+     *
+     * @param keyword 关键字
+     * @return 搜索账单集
+     * */
+    public ArrayList<Order> fuzzyQueryOrder(String keyword) {
+        //搜索出来的账单
+        ArrayList<Order> orders = new ArrayList<>();
+        user.getBooks().forEach(book -> {
+            ResultSet ordersRS = OrderOperation.fuzzyQueryOrderMsg(book.getBookID(), keyword);
+            try {
+                while (ordersRS.next()) {
+                    Order order = new Order(ordersRS.getString("order_id"));
+                    order.setBookID(ordersRS.getString("book_id"));
+                    order.setOrderName(ordersRS.getString("order_name"));
+                    order.setOrderPrice(ordersRS.getDouble("order_price"));
+                    order.setOrderWay(ordersRS.getString("order_way"));
+                    order.setOrderMod(ordersRS.getString("order_mod"));
+                    order.setOrderTime(ordersRS.getString("order_time"));
+                    order.setOrderCate(ordersRS.getString("order_cate"));
+                    order.setOrderDesc(ordersRS.getString("order_desc"));
+                    order.setOrderImageSrc(ordersRS.getBytes("order_image_src"));
+                    orders.add(order);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return orders;
     }
 }

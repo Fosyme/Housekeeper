@@ -1,5 +1,6 @@
 package Core;
 
+import Dao.BookOperation;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 public class Order {
     private final String orderID;   //账单ID
     private String bookID;          //所属账本ID
+    private String bookName;        //所属账本名(非数据库)
     private String orderName;       //账单名
     private double orderPrice;      //账单金额
     private String orderWay;        //账单支付方式
@@ -27,27 +29,36 @@ public class Order {
 
     //整体设置order类的实例域
     public void setOrder(@NotNull String[] orderMsg) {
-        bookID = orderMsg[0];
-        orderName = orderMsg[1];
-        orderPrice = Double.parseDouble(orderMsg[2]);
-        orderWay = orderMsg[3];
-        orderMod = orderMsg[4];
+        setBookID(orderMsg[0]);
+        setOrderName(orderMsg[1]);
+        setOrderPrice(Double.parseDouble(orderMsg[2]));
+        setOrderWay(orderMsg[3]);
+        setOrderMod(orderMsg[4]);
         setOrderTime(orderMsg[5]);
-        orderCate = orderMsg[6];
-        orderDesc = orderMsg[7];
-        orderImageSrc = null;
+        setOrderCate(orderMsg[6]);
+        setOrderDesc(orderMsg[7]);
+        setOrderImageSrc(null);
     }
 
     public String getOrderID() {
         return orderID;
     }
 
-    public void setBookID(String bookID) {
-        this.bookID = bookID;
-    }
-
     public String getBookID() {
         return bookID;
+    }
+
+    public void setBookID(String bookID) {
+        this.bookID = bookID;
+        setBookName(BookOperation.getIDFromName(bookID));
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
     public String getOrderName() {

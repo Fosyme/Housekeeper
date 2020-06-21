@@ -10,8 +10,7 @@ import java.security.MessageDigest;
  * 此类是一个登录界面调用类，包括了登录时所含的所有参数
  * 此类有登录、注册、找回密码等方法
  *
- * @author Fosyme
- * @version 1.0.0
+ * @author Fosyme(向世杰)
  */
 
 public class UserLogin {

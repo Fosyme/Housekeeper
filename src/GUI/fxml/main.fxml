@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
@@ -16,9 +21,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.text.Font?>
-<VBox prefHeight="780.0" prefWidth="1238.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainController">
+
+<VBox prefHeight="780.0" prefWidth="1238.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainController">
   <children>
     <SplitPane dividerPositions="0.09055425448868072, 0.36143637782982047" focusTraversable="true" VBox.vgrow="ALWAYS">
       <items>
@@ -41,27 +46,27 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="statementButton" mnemonicParsing="false" onAction="#statementButtonEvent" text="报表" />
+                              <Button fx:id="statementButton" mnemonicParsing="false" onAction="#statementButtonEvent" prefHeight="40.0" prefWidth="60.0" text="报表" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonEvent" text="添加" />
+                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonEvent" prefHeight="40.0" prefWidth="60.0" text="添加" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="alterButton" mnemonicParsing="false" onAction="#alterButtonEvent" text="修改" />
+                              <Button fx:id="alterButton" mnemonicParsing="false" onAction="#alterButtonEvent" prefHeight="40.0" prefWidth="60.0" text="修改" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="checkButton" mnemonicParsing="false" onAction="#chackButtonEvent" text="查询" />
+                              <Button fx:id="checkButton" mnemonicParsing="false" onAction="#checkButtonEvent" prefHeight="40.0" prefWidth="60.0" text="查询" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="setButton" mnemonicParsing="false" onAction="#setButtonEvent" text="设置" />
+                              <Button fx:id="setButton" mnemonicParsing="false" onAction="#setButtonEvent" prefHeight="40.0" prefWidth="60.0" text="设置" />
                            </children></HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
                      </children>
@@ -87,9 +92,14 @@
                   </TableView>
                   <Pane prefHeight="86.0" prefWidth="334.0">
                      <children>
-                        <Label layoutX="15.0" layoutY="33.0" text="关键字：" />
-                        <TextField fx:id="keywordTextField" layoutX="74.0" layoutY="28.0" onAction="#keywordTextFieldEvent" promptText="请输入关键字：" />
-                        <Button fx:id="searchButton" layoutX="283.0" layoutY="28.0" mnemonicParsing="false" onAction="#searchButtonEvent" text="搜索" />
+                        <Label layoutX="25.0" layoutY="36.0" text="关键字：" />
+                        <TextField fx:id="keywordTextField" layoutX="86.0" layoutY="32.0" onAction="#keywordTextFieldEvent" promptText="请输入关键字" />
+                        <Button fx:id="searchButton" layoutX="270.0" layoutY="32.0" mnemonicParsing="false" onAction="#searchButtonEvent" text="搜索" />
+                        <Label fx:id="lblClear" layoutX="232.0" layoutY="34.0" onMouseClicked="#lblClearClicked" prefHeight="15.0" prefWidth="15.0" text="×">
+                           <font>
+                              <Font name="System Italic" size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                </children>
