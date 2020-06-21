@@ -137,24 +137,44 @@ public class OrderInterface {
         ArrayList<Order> orders = new ArrayList<>();
         user.getBooks().forEach(book -> {
             ResultSet ordersRS = OrderOperation.fuzzyQueryOrderMsg(book.getBookID(), keyword);
-            try {
-                while (ordersRS.next()) {
-                    Order order = new Order(ordersRS.getString("order_id"));
-                    order.setBookID(ordersRS.getString("book_id"));
-                    order.setOrderName(ordersRS.getString("order_name"));
-                    order.setOrderPrice(ordersRS.getDouble("order_price"));
-                    order.setOrderWay(ordersRS.getString("order_way"));
-                    order.setOrderMod(ordersRS.getString("order_mod"));
-                    order.setOrderTime(ordersRS.getString("order_time"));
-                    order.setOrderCate(ordersRS.getString("order_cate"));
-                    order.setOrderDesc(ordersRS.getString("order_desc"));
-                    order.setOrderImageSrc(ordersRS.getBytes("order_image_src"));
-                    orders.add(order);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            setOrderOfUser(orders, ordersRS);
         });
         return orders;
+    }
+
+    /**
+     * 时间段查询账单
+     *
+     * @param startTime 起始时间
+     * @param endTime 结束时间
+     * @return 搜索账单集
+     * */
+    public ArrayList<Order> queryPeriodOrder(String startTime, String endTime) {
+        ArrayList<Order> orders = new ArrayList<>();
+        user.getBooks().forEach(book -> {
+            ResultSet ordersRS = OrderOperation.queryTimeInterval(book.getBookID(), startTime, endTime);
+            setOrderOfUser(orders, ordersRS);
+        });
+        return orders;
+    }
+
+    public static void setOrderOfUser(ArrayList<Order> orders, ResultSet ordersRS) {
+        try {
+            while (ordersRS.next()) {
+                Order order = new Order(ordersRS.getString("order_id"));
+                order.setBookID(ordersRS.getString("book_id"));
+                order.setOrderName(ordersRS.getString("order_name"));
+                order.setOrderPrice(ordersRS.getDouble("order_price"));
+                order.setOrderWay(ordersRS.getString("order_way"));
+                order.setOrderMod(ordersRS.getString("order_mod"));
+                order.setOrderTime(ordersRS.getString("order_time"));
+                order.setOrderCate(ordersRS.getString("order_cate"));
+                order.setOrderDesc(ordersRS.getString("order_desc"));
+                order.setOrderImageSrc(ordersRS.getBytes("order_image_src"));
+                orders.add(order);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

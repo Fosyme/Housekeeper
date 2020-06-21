@@ -1,6 +1,8 @@
 package GUI.controller;
 
 import Core.Order;
+import Core.OrderInterface;
+import Core.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,7 +10,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import java.text.ParseException;
+
 public class DateSearchController {
+    private OrderInterface orderInterface;
+
     @FXML
     private TableView<Order> tabDateSearch;
     @FXML
@@ -38,5 +44,16 @@ public class DateSearchController {
     void dateCheckButtonEvent(ActionEvent event) {
         String startDate=String.valueOf(starDatePicker.getValue());
         String endDate=String.valueOf(endDatePicker.getValue());
+        try {
+            String startTime = String.valueOf(Order.dateFormat.parse(startDate).getTime() / 1000);
+            String endTime = String.valueOf(Order.dateFormat.parse(endDate).getTime() / 1000);
+            orderInterface.queryPeriodOrder(startTime, endTime);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void initialization(User user) {
+        orderInterface = new OrderInterface(user);
     }
 }
