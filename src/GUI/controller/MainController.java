@@ -544,12 +544,10 @@ public class MainController {
              mainFrameStage.initModality(Modality.APPLICATION_MODAL);
              Scene scene = new Scene(page);
              mainFrameStage.setScene(scene);
-
              scene.getStylesheets().add((getStyleValue()));
-
              DateSearchController controller = loader.getController();
-             controller.setDialogStage(mainFrameStage);
-             mainFrameStage.showAndWait();
+
+             mainFrameStage.show();
          } catch (IOException e) {
              e.printStackTrace();
          }

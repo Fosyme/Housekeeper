@@ -7,51 +7,36 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
 
 public class DateSearchController {
-
     @FXML
-    private TableView<Order> check_tableView;
+    private TableView<Order> tabDateSearch;
     @FXML
-    private TableColumn<Order, String>chack_nameColumn;
+    private TableColumn<Order,String> colBookName;
     @FXML
-    private TableColumn<Order, String> check_classificationColumn;
-
+    private TableColumn<Order,String> colOrderName;
+    @FXML
+    private TableColumn<Order,String> colOrderMod;
+    @FXML
+    private TableColumn<Order,String> colOrderWay;
+    @FXML
+    private TableColumn<Order,String> colOrderPrice;
+    @FXML
+    private TableColumn<Order,String> colOrderCate;
+    @FXML
+    private TableColumn<Order,String> colOrderDesc;
+    @FXML
+    private TableColumn<Order,String> colOrderDate;
     @FXML
     private DatePicker starDatePicker;
-
     @FXML
     private DatePicker endDatePicker;
-
-    @FXML
-    private TableColumn<Order, String> check_idColumn;
-
-    @FXML
-    private TableColumn<Order, String> check_typeColumn;
-
-    @FXML
-    private TableColumn<Order, String> check_memoColumn;
-
     @FXML
     private Button dateCheckButton;
-
-    @FXML
-    private TableColumn<Order, String> check_moneyColumn;
-
-    @FXML
-    private TableColumn<Order, String> check_dateColumn;
 
     @FXML
     void dateCheckButtonEvent(ActionEvent event) {
         String startDate=String.valueOf(starDatePicker.getValue());
         String endDate=String.valueOf(endDatePicker.getValue());
-        //通过开始时间和结束时间
-        // 返回账单内容
-
-    }
-
-
-    public void setDialogStage(Stage mainFrameStage) {
     }
 }

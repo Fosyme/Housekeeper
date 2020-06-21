@@ -7,15 +7,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.ScreenOrder">
    <children>
-      <Label alignment="CENTER" layoutX="391.0" layoutY="14.0" text="账单筛选">
+      <Label alignment="CENTER" layoutX="391.0" layoutY="8.0" text="账单筛选">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="tabScreen" layoutY="46.0">
+      <TableView fx:id="tabScreen" layoutY="46.0" prefHeight="400.0" prefWidth="877.0" tableMenuButtonVisible="true">
         <columns>
           <TableColumn fx:id="colBookName" prefWidth="120.0" text="账本名" />
           <TableColumn fx:id="colOrderName" prefWidth="120.0" text="账单名" />
