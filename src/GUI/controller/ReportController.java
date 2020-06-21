@@ -113,7 +113,7 @@ public class ReportController {
     @FXML
     private Label thisDayBalanceLabel;
 
-    
+
     public void thisWeekComboBoxEvent(ActionEvent actionEvent) {
     }
 

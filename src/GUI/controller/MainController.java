@@ -22,7 +22,6 @@ import javafx.util.Pair;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Properties;
@@ -132,7 +131,7 @@ public class MainController {
         pane.add(bookNameText, 1, 0);
         pane.add(bookDescText, 1, 1);
         //定义"确定"按钮
-        ButtonType buttonType = new ButtonType("确定",ButtonBar.ButtonData.OK_DONE);
+        ButtonType buttonType = new ButtonType("确定", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(buttonType, ButtonType.CANCEL);
         //将面板加入对话框
         dialog.getDialogPane().setContent(pane);
@@ -185,12 +184,12 @@ public class MainController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("提示");
                 alert.setHeaderText(null);
-                    if (bookInterface.alterBook(index, pair.getKey(), pair.getValue())) {
-                        alert.setContentText("账本修改成功！");
-                    } else {
-                        alert.setContentText("账本修改失败，请重试！");
-                    }
-                    alert.show();
+                if (bookInterface.alterBook(index, pair.getKey(), pair.getValue())) {
+                    alert.setContentText("账本修改成功！");
+                } else {
+                    alert.setContentText("账本修改失败，请重试！");
+                }
+                alert.show();
             });
             ctmRefreshBookEvent();
         } else {
@@ -364,6 +363,7 @@ public class MainController {
     void keywordTextFieldEvent(ActionEvent event) {
 
     }
+
     //搜索
     @FXML
     void searchButtonEvent(ActionEvent event) {
@@ -453,6 +453,35 @@ public class MainController {
     }
 
     @FXML
+    void checkButtonEvent(ActionEvent actionEvent) {
+        //查询
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/dateSearch.fxml"));
+            AnchorPane page = loader.load();
+
+            Stage mainFrameStage = new Stage();
+            mainFrameStage.setTitle("日期查询");
+            mainFrameStage.setResizable(true);
+            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(page);
+            mainFrameStage.setScene(scene);
+            scene.getStylesheets().add((getStyleValue()));
+            DateSearchController controller = loader.getController();
+            controller.initialization(main.getUser());
+            mainFrameStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void lblClearClicked(MouseEvent mouseEvent) {
+        keywordTextField.clear();
+    }
+
+    @FXML
     public String getStyleValue() throws IOException {
         File file = new File("src\\GUI\\resources\\styles.properties");
         Properties properties = new Properties();
@@ -465,27 +494,6 @@ public class MainController {
         }
         return properties.getProperty(Key, "");
     }
-/*    public void initThemeRadioMenuItem() {
-        String key = "";
-        try {
-            Properties properties = new Properties();
-            FileInputStream fis = new FileInputStream(new File("src\\GUI\\src\\styles.properties"));
-            Iterator<String> iterator = properties.stringPropertyNames().iterator();
-            while (iterator.hasNext()) {
-                key = iterator.next();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // 判断properties文件key的值
-        if (key.equals("black")) {
-            blackRadioMenuItem.setSelected(true);
-        } else if (key.equals("white")) {
-            whiteRadioMenuItem.setSelected(true);
-        } else {
-            defaultRadioMenuItem.setSelected(true);
-        }
-    }*/
 
     public void initialization(User user) {
         main = new MainInterface(user);
@@ -527,33 +535,5 @@ public class MainController {
         cateColumn.setCellValueFactory(new PropertyValueFactory<>("orderCate"));
         descColumn.setCellValueFactory(new PropertyValueFactory<>("orderDesc"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
-    }
-
-     @FXML
-     void checkButtonEvent(ActionEvent actionEvent) {
-        //查询
-         try {
-             FXMLLoader loader = new FXMLLoader();
-             loader.setLocation(Main.class.getResource("fxml/dateSearch.fxml"));
-             AnchorPane page = (AnchorPane) loader.load();
-
-             Stage mainFrameStage = new Stage();
-             mainFrameStage.setTitle("日期查询");
-             mainFrameStage.setResizable(true);
-             mainFrameStage.setAlwaysOnTop(false);
-             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
-             Scene scene = new Scene(page);
-             mainFrameStage.setScene(scene);
-             scene.getStylesheets().add((getStyleValue()));
-             DateSearchController controller = loader.getController();
-
-             mainFrameStage.show();
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
-    }
-
-    public void lblClearClicked(MouseEvent mouseEvent) {
-        keywordTextField.clear();
     }
 }

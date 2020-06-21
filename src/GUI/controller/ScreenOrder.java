@@ -19,19 +19,19 @@ public class ScreenOrder {
     @FXML
     private TableColumn<Order, String> colBookName;
     @FXML
-    private TableColumn<Order,String> colOrderName;
+    private TableColumn<Order, String> colOrderName;
     @FXML
-    private TableColumn<Order,String> colOrderMod;
+    private TableColumn<Order, String> colOrderMod;
     @FXML
-    private TableColumn<Order,String> colOrderWay;
+    private TableColumn<Order, String> colOrderWay;
     @FXML
-    private TableColumn<Order,String> colOrderPrice;
+    private TableColumn<Order, String> colOrderPrice;
     @FXML
-    private TableColumn<Order,String> colOrderCate;
+    private TableColumn<Order, String> colOrderCate;
     @FXML
-    private TableColumn<Order,String> colOrderDesc;
+    private TableColumn<Order, String> colOrderDesc;
     @FXML
-    private TableColumn<Order,String> colOrderDate;
+    private TableColumn<Order, String> colOrderDate;
 
     public void initialization(User user) {
         orderInterface = new OrderInterface(user);

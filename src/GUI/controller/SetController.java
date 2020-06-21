@@ -60,7 +60,7 @@ public class SetController {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/softInfo.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
 
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("关于软件");
@@ -80,12 +80,13 @@ public class SetController {
         return null;
 
     }
+
     @FXML
-    Scene UserinfoEvent(ActionEvent event){
+    Scene UserinfoEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/userinfo.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
 
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("用户界面");
@@ -107,14 +108,15 @@ public class SetController {
         return null;
 
     }
+
     @FXML
-    void SwitchAccountEvent(ActionEvent event){
+    void SwitchAccountEvent(ActionEvent event) {
         try {
             ((Stage) paneSet.getScene().getWindow()).close();
             parent.close();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/signIn.fxml"));
-            Pane page =  loader.load();
+            Pane page = loader.load();
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("登录");
             mainFrameStage.setResizable(true);
@@ -130,7 +132,7 @@ public class SetController {
     }
 
     @FXML
-    void ExitEvent(ActionEvent event){
+    void ExitEvent(ActionEvent event) {
         System.exit(0);
     }
 

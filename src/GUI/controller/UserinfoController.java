@@ -2,22 +2,11 @@ package GUI.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class UserinfoController {
     private Stage dialogStage;
-    public Stage getDialogStage() {
-        return dialogStage;
-    }
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
 
     @FXML
     private Label UserName;
@@ -49,6 +38,10 @@ public class UserinfoController {
     @FXML
     private Button UserClose;
 
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+
     @FXML
     void UserChangeEvent(ActionEvent event) {
         //更改按钮
@@ -58,6 +51,4 @@ public class UserinfoController {
     void UserCloseEvent(ActionEvent event) {
         dialogStage.close();
     }
-
-
 }

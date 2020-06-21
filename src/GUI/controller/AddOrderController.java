@@ -81,7 +81,7 @@ public class AddOrderController {
             alert.showAndWait();
         }
         String[] orderMsg = {
-            name, money, way, type, date, cate, desc
+                name, money, way, type, date, cate, desc
         };
         boolean b = orderInterface.addOrder(bookIndex, orderMsg);
         Alert alert;
@@ -91,7 +91,7 @@ public class AddOrderController {
             alert.setHeaderText(null);
             alert.setContentText("添加成功！");
             alert.showAndWait();
-            ((Stage)paneAddOrder.getScene().getWindow()).close();
+            ((Stage) paneAddOrder.getScene().getWindow()).close();
         } else {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("提示");

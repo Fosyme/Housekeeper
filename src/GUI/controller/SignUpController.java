@@ -1,18 +1,13 @@
 package GUI.controller;
 
 import Core.UserLogin;
-import GUI.Main;
 import GUI.OpenFormAfterThis;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -121,7 +116,7 @@ public class SignUpController {
             alert.setHeaderText(null);
             alert.setContentText("账号注册成功");
             alert.showAndWait();
-            OpenFormAfterThis.signIn((Stage) paneSignUp.getScene().getWindow(),userName,userPassword);
+            OpenFormAfterThis.signIn((Stage) paneSignUp.getScene().getWindow(), userName, userPassword);
         }
     }
 

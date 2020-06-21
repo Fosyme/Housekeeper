@@ -15,7 +15,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.swing.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Properties;
@@ -74,7 +77,7 @@ public class SignInController {
             try {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(Main.class.getResource("fxml/main.fxml"));
-                VBox page = (VBox) loader.load();
+                VBox page = loader.load();
                 Stage mainFrameStage = new Stage();
                 mainFrameStage.setTitle("HouseKeeper");
                 mainFrameStage.setResizable(true);
@@ -108,7 +111,7 @@ public class SignInController {
             if (rememberPassword.isSelected()) {
                 prop.put("user_password", passwordTextField.getText());
             }
-            prop.store(fos,"Config");
+            prop.store(fos, "Config");
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
