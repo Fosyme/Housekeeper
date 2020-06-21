@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -30,6 +31,9 @@ public class MainController {
     private MainInterface main;
     private BookInterface bookInterface;
     private OrderInterface orderInterface;
+
+    @FXML
+    private VBox paneMain;
 
     @FXML
     private Button checkButton;
@@ -410,8 +414,8 @@ public class MainController {
             scene.getStylesheets().add((getStyleValue()));
 
             SetController controller = loader.getController();
-            controller.setDialogStage(mainFrameStage);
-            mainFrameStage.showAndWait();
+            controller.setParent((Stage) paneMain.getScene().getWindow());
+            mainFrameStage.show();
             return scene;
         } catch (IOException e) {
             e.printStackTrace();

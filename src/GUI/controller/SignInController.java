@@ -143,10 +143,6 @@ public class SignInController {
         }
     }
 
-    void setDialogStage(Stage mainFrameStage) {
-    }
-
-
     @FXML
     void findPasswordEvent(ActionEvent event) {
         //找回密码

@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -21,6 +22,10 @@ import java.util.Iterator;
 import java.util.Properties;
 
 public class SetController {
+    private Stage parent;
+
+    @FXML
+    private AnchorPane paneSet;
 
     @FXML
     private RadioMenuItem defaultRadioMenulten;
@@ -45,6 +50,11 @@ public class SetController {
 
     @FXML
     private Button Exit;
+
+    public void setParent(Stage parent) {
+        this.parent = parent;
+    }
+
     @FXML
     Scene AboutsoftwarButtonEvent(ActionEvent event) {
         try {
@@ -98,32 +108,27 @@ public class SetController {
 
     }
     @FXML
-    Scene SwitchAccountEvent(ActionEvent event){
+    void SwitchAccountEvent(ActionEvent event){
         try {
+            ((Stage) paneSet.getScene().getWindow()).close();
+            parent.close();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/signIn.fxml"));
-
-
+            Pane page =  loader.load();
             Stage mainFrameStage = new Stage();
-            mainFrameStage.setTitle("用户界面");
+            mainFrameStage.setTitle("登录");
             mainFrameStage.setResizable(true);
             mainFrameStage.setAlwaysOnTop(false);
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
-
             scene.getStylesheets().add((getStyleValue()));
-
-            SignInController controller = loader.getController();
-            controller.setDialogStage(mainFrameStage);
-            mainFrameStage.showAndWait();
-            return scene;
+            mainFrameStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
-
     }
+
     @FXML
     void ExitEvent(ActionEvent event){
         System.exit(0);
@@ -209,7 +214,5 @@ public class SetController {
         } else {
             defaultRadioMenulten.setSelected(true);
         }
-    }
-    public void setDialogStage(Stage mainFrameStage) {
     }
 }
