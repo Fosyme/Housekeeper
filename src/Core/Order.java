@@ -3,11 +3,12 @@ package Core;
 import Dao.BookOperation;
 import org.jetbrains.annotations.NotNull;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 public class Order {
+    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     private final String orderID;   //账单ID
     private String bookID;          //所属账本ID
     private String bookName;        //所属账本名(非数据库)
@@ -20,8 +21,6 @@ public class Order {
     private String orderCate;       //账单分类
     private String orderDesc;       //账单详细描述
     private byte[] orderImageSrc;   //账单图片
-
-    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public Order(String orderID) {
         this.orderID = orderID;

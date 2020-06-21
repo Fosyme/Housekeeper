@@ -1,7 +1,5 @@
 package Dao;
 
-import java.sql.ResultSet;
-
 /**
  * @author 李建强
  */

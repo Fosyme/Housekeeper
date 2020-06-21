@@ -13,9 +13,10 @@ import java.util.List;
 
 /**
  * 主程序, 用于操作主界面
+ *
  * @author Fosyme
  * @version 1.0.0
- * */
+ */
 public class MainInterface {
     private final User user;
 

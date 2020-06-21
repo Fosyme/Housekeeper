@@ -3,8 +3,8 @@ package Core;
 import org.jetbrains.annotations.NotNull;
 
 public class Book {
-    private final String bookID;       //账本ID
-//    private String userID;          //所属用户ID, 可舍去
+    private final String bookID;    //账本ID
+    //private String userID;        //所属用户ID, 可舍去
     private String bookName;        //账本名
     private String bookDesc;        //账本描述
     private String bookAddTime;     //账本添加时间
@@ -15,9 +15,9 @@ public class Book {
 
     //整体设置book类的实例域
     public void setBook(@NotNull String[] bookMsg) {
-            bookName = bookMsg[1];
-            bookDesc = bookMsg[2];
-            bookAddTime = bookMsg[3];
+        bookName = bookMsg[1];
+        bookDesc = bookMsg[2];
+        bookAddTime = bookMsg[3];
     }
 
     public String getBookID() {

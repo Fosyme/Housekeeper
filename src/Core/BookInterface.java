@@ -5,7 +5,7 @@ import Dao.BookOperation;
 import java.util.ArrayList;
 
 public class BookInterface {
-    private User user;
+    private final User user;
 
     public BookInterface(User user) {
         this.user = user;
@@ -16,7 +16,7 @@ public class BookInterface {
      *
      * @param bookName 账本名
      * @return 账本是否存在
-     * */
+     */
     public boolean isBookExist(String bookName) {
         //判断同名账本是否存在
         return BookOperation.checkBookExist(user.getUserID(), bookName);
@@ -72,11 +72,11 @@ public class BookInterface {
     /**
      * 修改账本信息
      *
-     * @param bookIndex 账本在展示列表中的索引
+     * @param bookIndex   账本在展示列表中的索引
      * @param newBookName 账本新的名称
      * @param newBookDesc 账本新的描述
      * @return 是否修改成功
-     * */
+     */
     public boolean alterBook(int bookIndex, String newBookName, String newBookDesc) {
         if (newBookName.isEmpty()) {
             return false;

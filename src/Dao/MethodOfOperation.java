@@ -2,20 +2,14 @@ package Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.*;
+import java.sql.ResultSet;
 
 
 /**
  * @author 李建强
  * @date 2020-6-11
- * */
+ */
 public class MethodOfOperation {
-    /**
-     * 在大多情况下，使用PreparedStatement 来代替Statement,防止sql注入
-     */
-
-    private static PreparedStatement preparedStatement = null;
-    private static ResultSet resultSet = null;
     protected final static Connection connection = jdbcUtil.getConnection();
 
     /**
@@ -23,16 +17,16 @@ public class MethodOfOperation {
      */
     protected static String queryMaxId(String table) {
         String id = null;
-        resultSet = null;
+        ResultSet resultSet;
         String sqlAboutId = table + "_id";
         String sql = "select max(`" + sqlAboutId + "`)  from  `" + table + "`";
         try {
-            preparedStatement = connection.prepareStatement(sql);
+            //在大多情况下，使用PreparedStatement来代替Statement,防止sql注入
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 id = resultSet.getString(1);
             }
-            resultSet = null;
             preparedStatement.clearParameters();
         } catch (Exception e) {
             e.printStackTrace();

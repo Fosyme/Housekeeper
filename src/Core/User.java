@@ -1,19 +1,13 @@
 package Core;
 
-import Dao.BookOperation;
-import Dao.OrderOperation;
-import Dao.UserOperation;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 /**
  * 用户类, 管理用户的所有的信息
+ *
  * @author Fosyme(向世杰)
- * */
+ */
 public class User {
     private final String userID;    //用户ID
     private String userName;        //用户名
