@@ -41,7 +41,7 @@ public class MainController {
     private Label username;
 
     @FXML
-    private Button statementButton;
+    private Button reportButton;
 
     @FXML
     private Button addButton;
@@ -424,7 +424,7 @@ public class MainController {
     }
 
     @FXML
-    Scene statementButtonEvent(ActionEvent event) {
+    Scene reportButtonEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/report.fxml"));
@@ -440,9 +440,6 @@ public class MainController {
 
             //加载CSS样式文件
             scene.getStylesheets().add((getStyleValue()));
-
-            ReportController controller = loader.getController();
-            controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
             return scene;
         } catch (IOException e) {

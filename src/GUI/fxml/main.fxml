@@ -28,7 +28,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="statementButton" mnemonicParsing="false" onAction="#statementButtonEvent" prefHeight="40.0" prefWidth="60.0" text="报表" />
+                              <Button fx:id="reportButton" mnemonicParsing="false" onAction="#reportButtonEvent" prefHeight="40.0" prefWidth="60.0" text="报表" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

@@ -1,12 +1,29 @@
 package GUI.controller;
 
-import javafx.event.ActionEvent;
+import Core.Order;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.scene.input.DataFormat;
+
+import java.text.ParseException;
+import java.time.LocalDate;
 
 public class ReportController {
+    @FXML
+    private PieChart thisDayPieChart;
+
+    @FXML
+    private PieChart thisWeekPieChart;
+
+    @FXML
+    private PieChart thismonthPieChart;
+
+    @FXML
+    private PieChart thisSeasonPieChart;
+
+    @FXML
+    private PieChart thisYearPieChart;
 
     @FXML
     private Label thisYearOutputShowLabel;
@@ -18,9 +35,6 @@ public class ReportController {
     private Label thisSeasonOutputShowLabel4;
 
     @FXML
-    private Label thisYearBalanceShowLabel5;
-
-    @FXML
     private Label thisDayInputShowLabel;
 
     @FXML
@@ -30,40 +44,10 @@ public class ReportController {
     private Label thisMonthOutputShowLabel3;
 
     @FXML
-    private ComboBox<?> thisMonthComboBox3;
-
-    @FXML
-    private Label thisMonthBalanceLabel3;
-
-    @FXML
-    private ComboBox<?> thisDayComboBox;
-
-    @FXML
     private Label thisDayOutputLabel;
 
     @FXML
-    private ComboBox<?> thisWeekComboBox1;
-
-    @FXML
-    private Label thisSeasonBalanceShowLabel4;
-
-    @FXML
     private Label thisMonthOutputLabel3;
-
-    @FXML
-    private Label thisWeekBalanceShowLabel1;
-
-    @FXML
-    private Label thisSeasonBalanceLabel3;
-
-    @FXML
-    private ComboBox<?> thisSeasonComboBox4;
-
-    @FXML
-    private Label thisDayBalanceShowLabel;
-
-    @FXML
-    private Label thisWeekBalanceLabel1;
 
     @FXML
     private Label thisWeekOutputShowLabel1;
@@ -73,9 +57,6 @@ public class ReportController {
 
     @FXML
     private Label thisWeekInputShowLabel1;
-
-    @FXML
-    private ComboBox<?> thisYearComboBox5;
 
     @FXML
     private Label thisDayOutputShowLabel;
@@ -93,9 +74,6 @@ public class ReportController {
     private Label thisWeekOutputLabel1;
 
     @FXML
-    private Label thisYearBalanceLabel5;
-
-    @FXML
     private Label thisYearInputLabel5;
 
     @FXML
@@ -110,22 +88,7 @@ public class ReportController {
     @FXML
     private Label thisDayInputLabel;
 
-    @FXML
-    private Label thisDayBalanceLabel;
+    public void initialization() {
 
-
-    public void thisWeekComboBoxEvent(ActionEvent actionEvent) {
-    }
-
-    public void thisMonthComboBoxEvent(ActionEvent actionEvent) {
-    }
-
-    public void thisSeasonComboBoxEvent(ActionEvent actionEvent) {
-    }
-
-    public void thisYearComboBoxEvent(ActionEvent actionEvent) {
-    }
-
-    public void thisDayComboBoxEvent(ActionEvent actionEvent) {
     }
 }
