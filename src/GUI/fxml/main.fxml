@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="paneMain" prefHeight="780.0" prefWidth="1238.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainController">
+<VBox fx:id="paneMain" prefHeight="780.0" prefWidth="1238.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.MainController">
   <children>
     <SplitPane dividerPositions="0.09055425448868072, 0.36143637782982047" focusTraversable="true" VBox.vgrow="ALWAYS">
       <items>
         <AnchorPane prefHeight="777.0" prefWidth="143.0">
                <children>
-                  <ImageView fitHeight="93.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="94.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/记账.png" />
                      </image>
@@ -72,7 +72,7 @@
                         </ContextMenu>
                      </contextMenu>
                   </TableView>
-                  <Pane prefHeight="86.0" prefWidth="334.0">
+                  <Pane prefHeight="86.0" prefWidth="341.0">
                      <children>
                         <Label layoutX="25.0" layoutY="36.0" text="关键字：" />
                         <TextField fx:id="keywordTextField" layoutX="86.0" layoutY="32.0" promptText="请输入关键字" />

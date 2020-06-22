@@ -88,32 +88,16 @@ public class SignInController {
                 scene.getStylesheets().add((getStyleValue()));
 
                 MainController controller = loader.getController();
+                userLogin.getUser().setUserPassword(passwordTextField.getText());
                 controller.initialization(userLogin.getUser());
                 ((Stage) paneSignIn.getScene().getWindow()).close();
-                writeConfig();
+                userLogin.writeConfig(autoSignIn.isSelected(), rememberPassword.isSelected());
                 mainFrameStage.showAndWait();
             } catch (Throwable e) {
                 e.printStackTrace();
             }
         } else {
             JOptionPane.showMessageDialog(null, "用户名或者密码错误", "信息", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void writeConfig() {
-        try {
-            FileOutputStream fos = new FileOutputStream("src/config");
-            Properties prop = new Properties();
-            prop.put("auto_sign_in", String.valueOf(autoSignIn.isSelected()));
-            prop.put("remember_password", String.valueOf(rememberPassword.isSelected()));
-            prop.put("user_name", nameTextField.getText());
-            if (rememberPassword.isSelected()) {
-                prop.put("user_password", passwordTextField.getText());
-            }
-            prop.store(fos, "Config");
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
