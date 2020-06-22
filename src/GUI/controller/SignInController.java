@@ -126,7 +126,7 @@ public class SignInController {
             AnchorPane page = loader.load();
             Stage signUp = new Stage();
             signUp.setOnCloseRequest(windowEvent ->
-                    OpenFormAfterThis.signIn((Stage) paneSignIn.getScene().getWindow()));
+                    OpenFormAfterThis.signIn((Stage) paneSignIn.getScene().getWindow(),"",""));
             signUp.setTitle("注册");
             signUp.setResizable(false);
             signUp.initModality(Modality.APPLICATION_MODAL);
@@ -165,7 +165,7 @@ public class SignInController {
                     AnchorPane page = loader.load();
                     Stage mainFrameStage = new Stage();
                     mainFrameStage.setOnCloseRequest(windowEvent ->
-                            OpenFormAfterThis.signIn((Stage) paneSignIn.getScene().getWindow()));
+                            OpenFormAfterThis.signIn((Stage) paneSignIn.getScene().getWindow(), "", ""));
                     mainFrameStage.setTitle("找回密码");
                     mainFrameStage.setResizable(false);
                     mainFrameStage.initModality(Modality.APPLICATION_MODAL);
