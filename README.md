@@ -1,7 +1,7 @@
 # Housekeeper 管家婆家庭记账系统
 
 此项目为成都文理学院信息工程学院2018级大二下Java实践开发  
-This project is a Java practice development under the sophomore year of the 2018 College of Information Engineering, Chengdu University of Arts and Sciences.
+This project is a Java practice development under the sophomore year of the 2018 College of Information Engineering, Chengdu College of Arts and Sciences.
 
 初次开发时间为：2020年5月7日2020年6月22日  
 Initial development time: May 7, 2020, June 22, 2020.
