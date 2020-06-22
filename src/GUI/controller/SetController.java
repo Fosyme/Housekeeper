@@ -1,5 +1,6 @@
 package GUI.controller;
 
+import Core.UserLogin;
 import GUI.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ import java.util.Iterator;
 import java.util.Properties;
 
 public class SetController {
+    private UserLogin userLogin;
     private Stage parent;
 
     @FXML
@@ -124,6 +126,7 @@ public class SetController {
 
     @FXML
     void ExitEvent(ActionEvent event) {
+        userLogin.signOut();
         System.exit(0);
     }
 
@@ -140,8 +143,6 @@ public class SetController {
         properties.store(fileOutputStream, "柠檬黄");
         JOptionPane.showMessageDialog(null, "切换柠檬黄主题成功", "信息", JOptionPane.PLAIN_MESSAGE);
         fileOutputStream.close();
-
-
     }
 
     @FXML
@@ -192,9 +193,8 @@ public class SetController {
         try {
             Properties properties = new Properties();
             FileInputStream fis = new FileInputStream(new File("src\\GUI\\resources\\styles.properties"));
-            Iterator<String> iterator = properties.stringPropertyNames().iterator();
-            while (iterator.hasNext()) {
-                key = iterator.next();
+            for (String s : properties.stringPropertyNames()) {
+                key = s;
             }
         } catch (IOException e) {
             e.printStackTrace();
