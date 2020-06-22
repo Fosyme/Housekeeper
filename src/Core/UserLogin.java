@@ -47,7 +47,7 @@ public class UserLogin {
      *
      * @param userMsg 从前端接受来的用户信息数组
      *                包含: 用户名, 用户密码(明文), 用户密保问题,
-     *                用户密保答案(明文), 性别, 年龄, 手机号, 地址, 头像
+     *                用户密保答案(明文), 性别, 年龄, 手机号, 地址, 头像(null)
      * @return 注册结果
      */
     public boolean signUp(@NotNull String[] userMsg) {
@@ -99,7 +99,7 @@ public class UserLogin {
      * 根据密保问题及答案, 找回用户密码
      *
      * @param userName 用户名
-     * @param userEncryptedAnswer 用户密码答案
+     * @param userEncryptedAnswer 用户密保答案
      * @param newPassword 用户新密码
      * @return 返回找回密码结果
      * */

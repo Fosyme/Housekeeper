@@ -50,7 +50,7 @@ public class ReportInterface {
         long endDayTime = nextDayStartCalender(calendar).getTimeInMillis() - 1;
         long startWeekTime = thisWeekStartCalender(calendar).getTimeInMillis();
         long endWeekTime = nextWeekStartCalender(calendar).getTimeInMillis() - 1;
-        long startMonthTime = thisWeekStartCalender(calendar).getTimeInMillis();
+        long startMonthTime = thisMonthStartCalender(calendar).getTimeInMillis();
         long endMonthTime = nextMonthStartCalender(calendar).getTimeInMillis() - 1;
         long startYearTime = thisYearStartCalender(calendar).getTimeInMillis();
         long endYearTime = nextYearStartCalender(calendar).getTimeInMillis() - 1;

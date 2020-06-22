@@ -49,7 +49,7 @@ public class Order {
 
     public void setBookID(String bookID) {
         this.bookID = bookID;
-        setBookName(BookOperation.getIDFromName(bookID));
+        setBookName(BookOperation.getNameFromID(bookID));
     }
 
     public String getBookName() {

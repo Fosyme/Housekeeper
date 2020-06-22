@@ -139,7 +139,7 @@ public class BookOperation {
      * @param bookID 账本ID
      * @return 账本名
      */
-    public static String getIDFromName(String bookID) {
+    public static String getNameFromID(String bookID) {
         String sql = "select `book_name` from `book` where book_id = ?";
         try {
             preparedStatement = CONNECTION.prepareStatement(sql);
