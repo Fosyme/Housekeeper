@@ -15,8 +15,7 @@ public class OpenFormAfterThis {
             Pane page = loader.load();
             Stage signIn = new Stage();
             signIn.setTitle("用户登录");
-            signIn.setResizable(true);
-            signIn.setAlwaysOnTop(false);
+            signIn.setResizable(false);
             signIn.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             signIn.setScene(scene);
@@ -36,8 +35,7 @@ public class OpenFormAfterThis {
             Pane page = loader.load();
             Stage signIn = new Stage();
             signIn.setTitle("用户登录");
-            signIn.setResizable(true);
-            signIn.setAlwaysOnTop(false);
+            signIn.setResizable(false);
             signIn.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             signIn.setScene(scene);

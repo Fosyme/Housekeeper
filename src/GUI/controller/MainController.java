@@ -201,7 +201,6 @@ public class MainController {
         }
     }
 
-
     @FXML
     void ctmDeleteBookEvent(ActionEvent event) {
         int index = bookTableView.getSelectionModel().getSelectedIndex();
@@ -251,8 +250,7 @@ public class MainController {
 
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("添加账单");
-            mainFrameStage.setResizable(true);
-            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.setResizable(false);
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
@@ -298,8 +296,7 @@ public class MainController {
 
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("修改账单");
-            mainFrameStage.setResizable(true);
-            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.setResizable(false);
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
@@ -316,7 +313,6 @@ public class MainController {
         }
     }
 
-
     @FXML
     void ctmAddOrderEvent(ActionEvent event) {
         addButtonEvent(event);
@@ -326,7 +322,6 @@ public class MainController {
     void ctmAlterOrderEvent(ActionEvent event) {
         alterButtonEvent(event);
     }
-
 
     @FXML
     void ctmDeleteOrderEvent(ActionEvent event) {
@@ -357,11 +352,6 @@ public class MainController {
             }
         });
         changeSelectedBookItem(bookIndex);
-    }
-
-    @FXML
-    void keywordTextFieldEvent(ActionEvent event) {
-
     }
 
     //搜索
@@ -405,7 +395,6 @@ public class MainController {
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("设置");
             mainFrameStage.setResizable(false);
-            mainFrameStage.setAlwaysOnTop(false);
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
@@ -438,8 +427,7 @@ public class MainController {
             AnchorPane page = loader.load();
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("报表");
-            mainFrameStage.setResizable(true);
-            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.setResizable(false);
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
@@ -464,8 +452,7 @@ public class MainController {
 
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("日期查询");
-            mainFrameStage.setResizable(true);
-            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.setResizable(false);
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);

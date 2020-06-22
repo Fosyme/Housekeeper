@@ -80,8 +80,7 @@ public class SignInController {
                 VBox page = loader.load();
                 Stage mainFrameStage = new Stage();
                 mainFrameStage.setTitle("HouseKeeper");
-                mainFrameStage.setResizable(true);
-                mainFrameStage.setAlwaysOnTop(false);
+                mainFrameStage.setResizable(false);
                 mainFrameStage.initModality(Modality.APPLICATION_MODAL);
                 Scene scene = new Scene(page);
                 mainFrameStage.setScene(scene);
@@ -129,8 +128,7 @@ public class SignInController {
             signUp.setOnCloseRequest(windowEvent ->
                     OpenFormAfterThis.signIn((Stage) paneSignIn.getScene().getWindow()));
             signUp.setTitle("注册");
-            signUp.setResizable(true);
-            signUp.setAlwaysOnTop(false);
+            signUp.setResizable(false);
             signUp.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             signUp.setScene(scene);
@@ -169,8 +167,7 @@ public class SignInController {
                     mainFrameStage.setOnCloseRequest(windowEvent ->
                             OpenFormAfterThis.signIn((Stage) paneSignIn.getScene().getWindow()));
                     mainFrameStage.setTitle("找回密码");
-                    mainFrameStage.setResizable(true);
-                    mainFrameStage.setAlwaysOnTop(false);
+                    mainFrameStage.setResizable(false);
                     mainFrameStage.initModality(Modality.APPLICATION_MODAL);
                     Scene scene = new Scene(page);
                     mainFrameStage.setScene(scene);

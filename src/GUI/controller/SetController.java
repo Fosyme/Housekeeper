@@ -57,8 +57,7 @@ public class SetController {
 
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("关于软件");
-            mainFrameStage.setResizable(true);
-            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.setResizable(false);
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
@@ -83,8 +82,7 @@ public class SetController {
 
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("用户界面");
-            mainFrameStage.setResizable(true);
-            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.setResizable(false);
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
@@ -112,8 +110,7 @@ public class SetController {
             Pane page = loader.load();
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("登录");
-            mainFrameStage.setResizable(true);
-            mainFrameStage.setAlwaysOnTop(false);
+            mainFrameStage.setResizable(false);
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);

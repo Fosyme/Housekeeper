@@ -1,15 +1,12 @@
 package GUI.controller;
 
-import Core.OrderInterface;
 import Core.ReportInterface;
 import Core.User;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReportController {

@@ -75,7 +75,7 @@
                   <Pane prefHeight="86.0" prefWidth="334.0">
                      <children>
                         <Label layoutX="25.0" layoutY="36.0" text="关键字：" />
-                        <TextField fx:id="keywordTextField" layoutX="86.0" layoutY="32.0" onAction="#keywordTextFieldEvent" promptText="请输入关键字" />
+                        <TextField fx:id="keywordTextField" layoutX="86.0" layoutY="32.0" promptText="请输入关键字" />
                         <Button fx:id="searchButton" layoutX="270.0" layoutY="32.0" mnemonicParsing="false" onAction="#searchButtonEvent" text="搜索" />
                         <Label fx:id="lblClear" layoutX="232.0" layoutY="34.0" onMouseClicked="#lblClearClicked" prefHeight="15.0" prefWidth="15.0" text="×">
                            <font>
