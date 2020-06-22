@@ -409,10 +409,8 @@ public class MainController {
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
-
             //加载CSS样式文件
             scene.getStylesheets().add((getStyleValue()));
-
             SetController controller = loader.getController();
             controller.setParent((Stage) paneMain.getScene().getWindow());
             mainFrameStage.show();
@@ -424,12 +422,20 @@ public class MainController {
     }
 
     @FXML
-    Scene reportButtonEvent(ActionEvent event) {
+    void reportButtonEvent(ActionEvent event) {
+        int bookIndex = bookTableView.getSelectionModel().getSelectedIndex();
+        if (bookIndex == -1) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("警告");
+            alert.setHeaderText(null);
+            alert.setContentText("请选择账本！");
+            alert.showAndWait();
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/report.fxml"));
             AnchorPane page = loader.load();
-
             Stage mainFrameStage = new Stage();
             mainFrameStage.setTitle("报表");
             mainFrameStage.setResizable(true);
@@ -437,16 +443,15 @@ public class MainController {
             mainFrameStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
-
             //加载CSS样式文件
             scene.getStylesheets().add((getStyleValue()));
+            ReportController controller = loader.getController();
+            controller.initialization(main.getUser());
+            controller.setPieChar(bookIndex);
             mainFrameStage.showAndWait();
-            return scene;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
-
     }
 
     @FXML

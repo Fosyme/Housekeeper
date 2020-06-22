@@ -79,11 +79,9 @@ public class UserLogin {
 
     /**
      * 登出方法, 用于用户登出账号或切换账号
-     *
-     * @return 账号登出结果
      * */
-    public boolean signOut() {
-        return UserOperation.setUserLastTime(user.getUserID(), String.valueOf(System.currentTimeMillis() / 1000));
+    public void signOut() {
+        UserOperation.setUserLastTime(user.getUserID(), String.valueOf(System.currentTimeMillis() / 1000));
     }
 
     /**

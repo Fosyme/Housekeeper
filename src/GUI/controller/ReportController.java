@@ -1,94 +1,112 @@
 package GUI.controller;
 
-import Core.Order;
+import Core.OrderInterface;
+import Core.ReportInterface;
+import Core.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
-import javafx.scene.input.DataFormat;
 
-import java.text.ParseException;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReportController {
-    @FXML
-    private PieChart thisDayPieChart;
+    ReportInterface reportInterface;
 
     @FXML
-    private PieChart thisWeekPieChart;
+    private Label dayInputLabel;
+    @FXML
+    private Label dayOutputLabel;
+    @FXML
+    private Label weekInputLabel;
+    @FXML
+    private Label weekOutputLabel;
+    @FXML
+    private Label monthInputLabel;
+    @FXML
+    private Label monthOutputLabel;
+    @FXML
+    private Label yearInputLabel;
+    @FXML
+    private Label yearOutputLabel;
 
     @FXML
-    private PieChart thismonthPieChart;
+    private Label dayInputShowLabel;
+    @FXML
+    private Label dayOutputShowLabel;
+    @FXML
+    private Label weekInputShowLabel;
+    @FXML
+    private Label weekOutputShowLabel;
+    @FXML
+    private Label monthInputShowLabel;
+    @FXML
+    private Label monthOutputShowLabel;
+    @FXML
+    private Label yearInputShowLabel;
+    @FXML
+    private Label yearOutputShowLabel;
 
     @FXML
-    private PieChart thisSeasonPieChart;
-
+    private PieChart dayPieChart;
     @FXML
-    private PieChart thisYearPieChart;
-
+    private PieChart weekPieChart;
     @FXML
-    private Label thisYearOutputShowLabel;
-
+    private PieChart monthPieChart;
     @FXML
-    private Label thisWeekInputLabel1;
+    private PieChart yearPieChart;
 
-    @FXML
-    private Label thisSeasonOutputShowLabel4;
+    public void initialization(User user) {
+        reportInterface = new ReportInterface(user);
+    }
 
-    @FXML
-    private Label thisDayInputShowLabel;
+    public void setPieChar(int bookIndex) {
+        List<List<PieChart.Data>> lists = reportInterface.reportData(bookIndex, System.currentTimeMillis());
 
-    @FXML
-    private Label thisMonthBalanceShowLabel3;
+        double dayOut = lists.get(0).get(0).getPieValue();
+        double dayIn = lists.get(0).get(1).getPieValue();
+        double weekOut = lists.get(1).get(0).getPieValue();
+        double weekIn = lists.get(1).get(1).getPieValue();
+        double monthOut = lists.get(2).get(0).getPieValue();
+        double monthIn = lists.get(2).get(1).getPieValue();
+        double yearOut = lists.get(3).get(0).getPieValue();
+        double yearIn = lists.get(3).get(1).getPieValue();
 
-    @FXML
-    private Label thisMonthOutputShowLabel3;
+        if (dayOut == 0 && dayIn == 0) {
+            setEmptyPic(dayPieChart, dayOutputShowLabel, dayInputShowLabel);
+        } else {
+            dayOutputShowLabel.setText(String.valueOf(dayOut));
+            dayInputShowLabel.setText(String.valueOf(dayIn));
+            dayPieChart.setData(FXCollections.observableArrayList(lists.get(0)));
+        }
+        if (weekOut == 0 && weekIn == 0) {
+            setEmptyPic(weekPieChart, weekOutputShowLabel, weekInputShowLabel);
+        } else {
+            weekOutputShowLabel.setText(String.valueOf(weekOut));
+            weekInputShowLabel.setText(String.valueOf(weekIn));
+            weekPieChart.setData(FXCollections.observableArrayList(lists.get(1)));
+        }
+        if (monthOut == 0 && monthIn == 0) {
+            setEmptyPic(monthPieChart, monthOutputShowLabel, monthInputShowLabel);
+        } else {
+            monthOutputShowLabel.setText(String.valueOf(monthOut));
+            monthInputShowLabel.setText(String.valueOf(monthIn));
+            monthPieChart.setData(FXCollections.observableArrayList(lists.get(2)));
+        }
+        if (yearOut == 0 && yearIn == 0) {
+            setEmptyPic(yearPieChart, yearOutputShowLabel, yearInputShowLabel);
+        } else {
+            yearOutputShowLabel.setText(String.valueOf(yearOut));
+            yearInputShowLabel.setText(String.valueOf(yearIn));
+            yearPieChart.setData(FXCollections.observableArrayList(lists.get(3)));
+        }
+    }
 
-    @FXML
-    private Label thisDayOutputLabel;
-
-    @FXML
-    private Label thisMonthOutputLabel3;
-
-    @FXML
-    private Label thisWeekOutputShowLabel1;
-
-    @FXML
-    private Label thisYearInputShowLabel5;
-
-    @FXML
-    private Label thisWeekInputShowLabel1;
-
-    @FXML
-    private Label thisDayOutputShowLabel;
-
-    @FXML
-    private Label thisSeasonInputLabel4;
-
-    @FXML
-    private Label thisSeasonOutputLabel4;
-
-    @FXML
-    private Label thisYearOutputLabel5;
-
-    @FXML
-    private Label thisWeekOutputLabel1;
-
-    @FXML
-    private Label thisYearInputLabel5;
-
-    @FXML
-    private Label thisSeasonInputShowLabel4;
-
-    @FXML
-    private Label thisMonthInputLabel3;
-
-    @FXML
-    private Label thisMonthInputShowLabel3;
-
-    @FXML
-    private Label thisDayInputLabel;
-
-    public void initialization() {
-
+    private void setEmptyPic(PieChart pie, Label out, Label in) {
+        pie.setData(FXCollections.observableList(List.of(new PieChart.Data("空", 1))));
+        out.setText("0");
+        in.setText("0");
     }
 }

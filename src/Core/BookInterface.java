@@ -1,6 +1,7 @@
 package Core;
 
 import Dao.BookOperation;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class BookInterface {
      * @param bookDesc 账本描述
      * @return 账本是否添加成功
      */
-    public boolean addBook(String bookName, String bookDesc) {
+    public boolean addBook(@NotNull String bookName, String bookDesc) {
         if (bookName.isEmpty()) {
             return false;
         }
@@ -77,7 +78,7 @@ public class BookInterface {
      * @param newBookDesc 账本新的描述
      * @return 是否修改成功
      */
-    public boolean alterBook(int bookIndex, String newBookName, String newBookDesc) {
+    public boolean alterBook(int bookIndex, @NotNull String newBookName, String newBookDesc) {
         if (newBookName.isEmpty()) {
             return false;
         }

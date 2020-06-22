@@ -148,7 +148,7 @@ public class OrderInterface {
      * @param endTime   结束时间
      * @return 搜索账单集
      */
-    public ArrayList<Order> queryPeriodOrder(String startTime, String endTime) {
+    public ArrayList<Order> queryPeriodOrder(long startTime, long endTime) {
         ArrayList<Order> orders = new ArrayList<>();
         user.getBooks().forEach(book -> {
             ResultSet ordersRS = OrderOperation.queryTimeInterval(book.getBookID(), startTime, endTime);

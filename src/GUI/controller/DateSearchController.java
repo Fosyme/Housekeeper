@@ -48,8 +48,8 @@ public class DateSearchController {
         String startDate = String.valueOf(starDatePicker.getValue());
         String endDate = String.valueOf(endDatePicker.getValue());
         try {
-            String startTime = String.valueOf(Order.dateFormat.parse(startDate).getTime() / 1000);
-            String endTime = String.valueOf(Order.dateFormat.parse(endDate).getTime() / 1000);
+            long startTime = Order.dateFormat.parse(startDate).getTime() / 1000;
+            long endTime = Order.dateFormat.parse(endDate).getTime() / 1000;
             ArrayList<Order> orders = orderInterface.queryPeriodOrder(startTime, endTime);
             ObservableList<Order> list = FXCollections.observableList(orders);
             tabDateSearch.setItems(list);
