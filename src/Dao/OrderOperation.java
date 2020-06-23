@@ -119,6 +119,12 @@ public class OrderOperation {
         return resultSet;
     }
 
+    /**
+     * 模糊查询
+     * @param bookId 账本id，
+     * @param keyWord 要查寻的关键字（在描述和账单名内查找）
+     * @return ResultSet 该账本订单名和订单描述包含keyWord的所有订单
+     * */
     public static ResultSet fuzzyQueryOrderMsg(String bookId, String keyWord) {
         String sql = "select * from `order` where `book_id`=? and `order_name`like ? or `order_desc` like ?";
         try {
@@ -133,6 +139,13 @@ public class OrderOperation {
         return resultSet;
     }
 
+    /**
+    * 查询时间间隔内的账单，
+     * @param bookId 账本id
+     * @param startTime 时间段的开始时间
+     * @param endTime 时间段的结束时间
+     * @return ResultSet 该账本时间段内的所有订单
+    * */
     public static ResultSet queryTimeInterval(String bookId, long startTime, long endTime) {
         String sql = "select * from `order` where `book_id`=? and `order_time` between ? and ? ";
         try {
