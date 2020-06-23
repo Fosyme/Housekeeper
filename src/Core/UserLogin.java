@@ -3,8 +3,11 @@ package Core;
 import Dao.UserOperation;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.Properties;
 
 /**
  * 此类是一个登录界面调用类，包括了登录时所含的所有参数
@@ -17,7 +20,10 @@ public class UserLogin {
     private User user;  //用户信息
 
     public UserLogin() {
+    }
 
+    public UserLogin(User user) {
+        this.user = user;
     }
 
     public User getUser() {
@@ -109,6 +115,29 @@ public class UserLogin {
             return false;
         }
         return UserOperation.changeUserPassWord(userID, getMD5String(newPassword));
+    }
+
+    /**
+     * 将登录信息写入配置文件
+     *
+     * @param autoSignIn 自动登录标识
+     * @param rememberPassword 记住密码标识
+     * */
+    public void writeConfig(boolean autoSignIn, boolean rememberPassword) {
+        try {
+            FileOutputStream fos = new FileOutputStream("src/config");
+            Properties prop = new Properties();
+            prop.put("auto_sign_in", String.valueOf(autoSignIn));
+            prop.put("remember_password", String.valueOf(rememberPassword));
+            prop.put("user_name", user.getUserName());
+            if (rememberPassword) {
+                prop.put("user_password", user.getUserPassword());
+            }
+            prop.store(fos, "Config");
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //对字符串进行MD5加密

@@ -401,6 +401,7 @@ public class MainController {
             //加载CSS样式文件
             scene.getStylesheets().add((getStyleValue()));
             SetController controller = loader.getController();
+            controller.initialization(main.getUser());
             controller.setParent((Stage) paneMain.getScene().getWindow());
             mainFrameStage.show();
             return scene;

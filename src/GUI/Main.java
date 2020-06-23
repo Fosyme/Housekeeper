@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -41,7 +40,9 @@ public class Main extends Application {
                         primaryStage.setTitle("HouseKeeper");
                         Scene scene = new Scene(root);
                         primaryStage.setScene(scene);
-                        ((MainController) loader.getController()).initialization(login.getUser());
+                        primaryStage.setOnCloseRequest(windowEvent -> OpenFormAfterThis.exitApp(windowEvent, login));
+                        MainController controller = loader.getController();
+                        controller.initialization(login.getUser());
                         primaryStage.show();
                         return;
                     }
@@ -56,6 +57,7 @@ public class Main extends Application {
             primaryStage.setResizable(false);
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
+            primaryStage.setOnCloseRequest(windowEvent -> OpenFormAfterThis.exitApp(windowEvent, login));
             SignInController controller = loader.getController();
             controller.afterSignUp(userName, userPassword);
             controller.setRemember(rememberPassword);

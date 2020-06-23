@@ -127,6 +127,7 @@ public class SignUpController {
         list.add("你的母校名称是什么?");
         ObservableList<String> observableList = FXCollections.observableList(list);
         comBoxQuestion.setItems(observableList);
+        comBoxQuestion.getSelectionModel().selectFirst();
 
         man.setUserData("男");
         female.setUserData("女");
@@ -134,8 +135,4 @@ public class SignUpController {
 
         userLogin = new UserLogin();
     }
-
-    public void setDialogStage(Stage mainFrameStage) {
-    }
-
 }

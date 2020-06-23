@@ -1,5 +1,6 @@
 package GUI.controller;
 
+import Core.User;
 import Core.UserLogin;
 import GUI.Main;
 import javafx.event.ActionEvent;
@@ -115,6 +116,9 @@ public class SetController {
             Scene scene = new Scene(page);
             mainFrameStage.setScene(scene);
             scene.getStylesheets().add((getStyleValue()));
+            SignInController controller = loader.getController();
+            controller.initialization();
+            userLogin.writeConfig(false, false);
             mainFrameStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -185,7 +189,12 @@ public class SetController {
         return properties.getProperty(Key, "");
     }
 
-    public void initThemeRadioMenuItem() {
+    public void initialization(User user) {
+        userLogin = new UserLogin(user);
+        initThemeRadioMenuItem();
+    }
+
+    private void initThemeRadioMenuItem() {
         String key = "";
         try {
             Properties properties = new Properties();

@@ -10,6 +10,7 @@ import java.util.Arrays;
  */
 public class User {
     private final String userID;    //用户ID
+    private String userPassword;    //用户密码(明文), 通过用户输入获得非数据库
     private String userName;        //用户名
     private String userRegTime;     //用户注册时间
     private String userLastTime;    //用户上次登录时间
@@ -26,6 +27,7 @@ public class User {
 
     {
         userName = null;
+        userPassword = null;
         userRegTime = null;
         userLastTime = null;
         userSex = null;
@@ -51,6 +53,14 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     public String getUserRegTime() {

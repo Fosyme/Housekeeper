@@ -14,7 +14,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="tabScreen" layoutY="46.0" prefHeight="400.0" prefWidth="877.0" tableMenuButtonVisible="true">
+      <TableView fx:id="tabScreen" layoutY="46.0" tableMenuButtonVisible="true">
         <columns>
           <TableColumn fx:id="colBookName" prefWidth="120.0" text="账本名" />
           <TableColumn fx:id="colOrderName" prefWidth="120.0" text="账单名" />
