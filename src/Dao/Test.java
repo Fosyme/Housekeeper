@@ -3,7 +3,7 @@ package Dao;
 /**
  * @author 李建强
  */
-public class Main {
+public class Test {
     public static void main(String[] args) {
 /*      //检测UserLoginOperation.regAccount方法的测试方法
       String[] string = new String[10];

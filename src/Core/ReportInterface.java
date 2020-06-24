@@ -17,24 +17,6 @@ public class ReportInterface {
         this.user = user;
     }
 
-    public static void main(String[] args) {
-        long time1 = System.currentTimeMillis();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//要转换的时间格式
-
-        Calendar calendar = Calendar.getInstance();// 获取当前日期
-
-        long time2 = thisDayStartCalender(calendar).getTimeInMillis();
-        long time3 = thisWeekStartCalender(calendar).getTimeInMillis();
-        long time4 = thisMonthStartCalender(calendar).getTimeInMillis();
-        long time5 = thisYearStartCalender(calendar).getTimeInMillis();
-
-        System.out.println("now time: \t\t" + sdf.format(time1) + " " + time1);
-        System.out.println("day time: \t\t" + sdf.format(time2) + " " + time2);
-        System.out.println("week time: \t\t" + sdf.format(time3) + " " + time3);
-        System.out.println("month time: \t" + sdf.format(time4) + " " + time4);
-        System.out.println("year time: \t" + sdf.format(time5) + " " + time5);
-    }
-
     /**
      * 报表数据生成
      *
