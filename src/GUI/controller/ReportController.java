@@ -1,7 +1,7 @@
 package GUI.controller;
 
-import Core.ReportInterface;
-import Core.User;
+import Core.process.Report;
+import Core.model.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
@@ -10,25 +10,6 @@ import javafx.scene.control.Label;
 import java.util.List;
 
 public class ReportController {
-    ReportInterface reportInterface;
-
-    @FXML
-    private Label dayInputLabel;
-    @FXML
-    private Label dayOutputLabel;
-    @FXML
-    private Label weekInputLabel;
-    @FXML
-    private Label weekOutputLabel;
-    @FXML
-    private Label monthInputLabel;
-    @FXML
-    private Label monthOutputLabel;
-    @FXML
-    private Label yearInputLabel;
-    @FXML
-    private Label yearOutputLabel;
-
     @FXML
     private Label dayInputShowLabel;
     @FXML
@@ -55,12 +36,8 @@ public class ReportController {
     @FXML
     private PieChart yearPieChart;
 
-    public void initialization(User user) {
-        reportInterface = new ReportInterface(user);
-    }
-
-    public void setPieChar(int bookIndex) {
-        List<List<PieChart.Data>> lists = reportInterface.reportData(bookIndex, System.currentTimeMillis());
+    public void setPieChar(User user, int bookIndex) {
+        List<List<PieChart.Data>> lists = Report.reportData(user, bookIndex, System.currentTimeMillis());
 
         double dayOut = lists.get(0).get(0).getPieValue();
         double dayIn = lists.get(0).get(1).getPieValue();

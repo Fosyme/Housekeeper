@@ -1,8 +1,8 @@
 package GUI.controller;
 
-import Core.Order;
-import Core.OrderInterface;
-import Core.User;
+import Core.model.Order;
+import Core.mutual.Info;
+import Core.model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 
 public class ScreenOrder {
-    OrderInterface orderInterface;
+    Info info;
     @FXML
     private TableView<Order> tabScreen;
     @FXML
@@ -34,7 +34,7 @@ public class ScreenOrder {
     private TableColumn<Order, String> colOrderDate;
 
     public void initialization(User user) {
-        orderInterface = new OrderInterface(user);
+        info = new Info(user);
     }
 
     public void setTabScreen(ArrayList<Order> orders) {

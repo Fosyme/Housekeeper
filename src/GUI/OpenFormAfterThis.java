@@ -1,6 +1,6 @@
 package GUI;
 
-import Core.UserLogin;
+import Core.mutual.Login;
 import GUI.controller.SignInController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ import javafx.stage.WindowEvent;
 import java.util.Optional;
 
 public class OpenFormAfterThis {
-    public static void signIn(Stage window, String userName, String userPassword) {
+    public static void signIn(String userName, String userPassword) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/signIn.fxml"));
@@ -27,33 +27,14 @@ public class OpenFormAfterThis {
             signIn.setScene(scene);
             SignInController controller = loader.getController();
             controller.initialization();
-            controller.afterSignUp(userName, userPassword);
-            window.close();
+            controller.smartFill(userName, userPassword);
             signIn.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void signIn(Stage window) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/signIn.fxml"));
-            Pane page = loader.load();
-            Stage signIn = new Stage();
-            signIn.setTitle("用户登录");
-            signIn.setResizable(false);
-            signIn.initModality(Modality.APPLICATION_MODAL);
-            Scene scene = new Scene(page);
-            signIn.setScene(scene);
-            window.close();
-            signIn.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void exitApp(WindowEvent windowEvent, UserLogin userLogin) {
+    public static void exitApp(WindowEvent windowEvent, Login login) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("提示");
         alert.setHeaderText(null);
@@ -61,7 +42,7 @@ public class OpenFormAfterThis {
         Optional<ButtonType> optional = alert.showAndWait();
         optional.ifPresent(buttonType -> {
             if (buttonType == ButtonType.OK) {
-                userLogin.signOut();
+                login.signOut();
                 System.exit(0);
             }
         });

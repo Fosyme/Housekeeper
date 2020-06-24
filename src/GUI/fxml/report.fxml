@@ -5,95 +5,79 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.ReportController">
-   <children>
-      <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="日报告">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="dayOutputLabel" layoutX="120.0" layoutY="150.0" text="本日支出：" />
-                        <Label fx:id="dayOutputShowLabel" layoutX="120.0" layoutY="200.0" textFill="#04e87a">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="dayInputLabel" layoutX="120.0" layoutY="300.0" text="本日收入：" />
-                        <Label fx:id="dayInputShowLabel" layoutX="120.0" layoutY="350.0" textFill="#04e87a">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <PieChart fx:id="dayPieChart" layoutX="300.0" layoutY="70.0" prefHeight="400.0" prefWidth="400.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="周报告">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="weekOutputLabel" layoutX="120.0" layoutY="150.0" text="本周支出：" />
-                        <Label fx:id="weekOutputShowLabel" layoutX="120.0" layoutY="200.0" textFill="#04e87a">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="weekInputLabel" layoutX="120.0" layoutY="300.0" text="本周收入：" />
-                        <Label fx:id="weekInputShowLabel" layoutX="120.0" layoutY="350.0" textFill="#04e87a">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <PieChart fx:id="weekPieChart" layoutX="300.0" layoutY="70.0" prefHeight="400.0" prefWidth="400.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="月报告">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="monthOutputLabel" layoutX="120.0" layoutY="150.0" text="本月支出：" />
-                        <Label fx:id="monthOutputShowLabel" layoutX="120.0" layoutY="200.0" textFill="#04e87a">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="monthInputLabel" layoutX="120.0" layoutY="300.0" text="本月收入：" />
-                        <Label fx:id="monthInputShowLabel" layoutX="120.0" layoutY="350.0" textFill="#04e87a">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <PieChart fx:id="monthPieChart" layoutX="300.0" layoutY="70.0" prefHeight="400.0" prefWidth="400.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="年报告">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="yearOutputLabel" layoutX="120.0" layoutY="150.0" text="本年支出：" />
-                        <Label fx:id="yearOutputShowLabel" layoutX="120.0" layoutY="200.0" textFill="#04e87a">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="yearInputLabel" layoutX="120.0" layoutY="300.0" text="本年收入：" />
-                        <Label fx:id="yearInputShowLabel" layoutX="120.0" layoutY="350.0" textFill="#04e87a">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <PieChart fx:id="yearPieChart" layoutX="300.0" layoutY="70.0" prefHeight="400.0" prefWidth="400.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.ReportController">
+   <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+      <Tab text="日报告">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Label layoutX="120.0" layoutY="150.0" text="本日支出："/>
+            <Label fx:id="dayOutputShowLabel" layoutX="120.0" layoutY="200.0" textFill="#04e87a">
+               <font>
+                  <Font size="28.0"/>
+               </font>
+            </Label>
+            <Label layoutX="120.0" layoutY="300.0" text="本日收入："/>
+            <Label fx:id="dayInputShowLabel" layoutX="120.0" layoutY="350.0" textFill="#04e87a">
+               <font>
+                  <Font size="28.0"/>
+               </font>
+            </Label>
+            <PieChart fx:id="dayPieChart" layoutX="300.0" layoutY="70.0" prefHeight="400.0" prefWidth="400.0"/>
+         </AnchorPane>
+      </Tab>
+      <Tab text="周报告">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Label layoutX="120.0" layoutY="150.0" text="本周支出："/>
+            <Label fx:id="weekOutputShowLabel" layoutX="120.0" layoutY="200.0" textFill="#04e87a">
+               <font>
+                  <Font size="28.0"/>
+               </font>
+            </Label>
+            <Label layoutX="120.0" layoutY="300.0" text="本周收入："/>
+            <Label fx:id="weekInputShowLabel" layoutX="120.0" layoutY="350.0" textFill="#04e87a">
+               <font>
+                  <Font size="28.0"/>
+               </font>
+            </Label>
+            <PieChart fx:id="weekPieChart" layoutX="300.0" layoutY="70.0" prefHeight="400.0"
+                      prefWidth="400.0"/>
+         </AnchorPane>
+      </Tab>
+      <Tab text="月报告">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Label layoutX="120.0" layoutY="150.0" text="本月支出："/>
+            <Label fx:id="monthOutputShowLabel" layoutX="120.0" layoutY="200.0" textFill="#04e87a">
+               <font>
+                  <Font size="28.0"/>
+               </font>
+            </Label>
+            <Label layoutX="120.0" layoutY="300.0" text="本月收入："/>
+            <Label fx:id="monthInputShowLabel" layoutX="120.0" layoutY="350.0" textFill="#04e87a">
+               <font>
+                  <Font size="28.0"/>
+               </font>
+            </Label>
+            <PieChart fx:id="monthPieChart" layoutX="300.0" layoutY="70.0" prefHeight="400.0"
+                      prefWidth="400.0"/>
+         </AnchorPane>
+      </Tab>
+      <Tab text="年报告">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Label layoutX="120.0" layoutY="150.0" text="本年支出："/>
+            <Label fx:id="yearOutputShowLabel" layoutX="120.0" layoutY="200.0" textFill="#04e87a">
+               <font>
+                  <Font size="28.0"/>
+               </font>
+            </Label>
+            <Label layoutX="120.0" layoutY="300.0" text="本年收入："/>
+            <Label fx:id="yearInputShowLabel" layoutX="120.0" layoutY="350.0" textFill="#04e87a">
+               <font>
+                  <Font size="28.0"/>
+               </font>
+            </Label>
+            <PieChart fx:id="yearPieChart" layoutX="300.0" layoutY="70.0" prefHeight="400.0"
+                      prefWidth="400.0"/>
+         </AnchorPane>
+      </Tab>
+   </TabPane>
 </AnchorPane>

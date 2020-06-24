@@ -1,6 +1,6 @@
 package GUI.controller;
 
-import Core.UserLogin;
+import Core.mutual.Login;
 import GUI.OpenFormAfterThis;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class FindPasswordController {
-    private UserLogin userLogin;
+    private Login login;
     private String userName;
 
     @FXML
@@ -28,21 +28,22 @@ public class FindPasswordController {
 
 
     public void initialization() {
-        userLogin = new UserLogin();
+        login = new Login();
     }
 
     @FXML
     void ConfirmButtonEvent(ActionEvent event) {
         String encryptedAnswer = AnswerTextField.getText();
         String newPassword = NewPasswordTexField.getText();
-        boolean b = userLogin.recoverPassword(userName, encryptedAnswer, newPassword);
+        boolean b = login.recoverPassword(userName, encryptedAnswer, newPassword);
         if (b) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(null);
             alert.setHeaderText("密码修改成功！");
             alert.setContentText("请记住你的密码是：" + newPassword);
             alert.showAndWait();
-            OpenFormAfterThis.signIn((Stage) paneFindPwd.getScene().getWindow(), userName, newPassword);
+            ((Stage) paneFindPwd.getScene().getWindow()).close();
+            OpenFormAfterThis.signIn(userName, newPassword);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING, "密保答案错误！");
             alert.setTitle(null);

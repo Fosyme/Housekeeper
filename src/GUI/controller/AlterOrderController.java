@@ -1,8 +1,8 @@
 package GUI.controller;
 
-import Core.Order;
-import Core.OrderInterface;
-import Core.User;
+import Core.model.Order;
+import Core.mutual.Info;
+import Core.model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlterOrderController {
-    private OrderInterface orderInterface;
+    private Info info;
 
     @FXML
     public AnchorPane paneAlterOrder;
@@ -88,7 +88,7 @@ public class AlterOrderController {
         String[] orderMsg = {
                 name, money, way, type, date, cate, desc
         };
-        boolean b = orderInterface.alterOrder(bookIndex, orderIndex, orderMsg);
+        boolean b = info.alterOrder(bookIndex, orderIndex, orderMsg);
         Alert alert;
         if (b) {
             alert = new Alert(Alert.AlertType.INFORMATION);
@@ -108,7 +108,7 @@ public class AlterOrderController {
 
     //初始化
     public void initialization(User user) {
-        orderInterface = new OrderInterface(user);
+        info = new Info(user);
         //order_way
         List<String> listWay = new ArrayList<>();
         listWay.add("现金");
@@ -148,7 +148,7 @@ public class AlterOrderController {
     public void dataPadding(int bookIndex, int orderIndex) {
         this.bookIndex = bookIndex;
         this.orderIndex = orderIndex;
-        Order order = orderInterface.getUser().getOrders().get(bookIndex).get(orderIndex);
+        Order order = info.getUser().getOrders().get(bookIndex).get(orderIndex);
         if (order.getOrderMod().equals("支出")) {
             outputRadioButton.setSelected(true);
             inputRadioButton.setSelected(false);

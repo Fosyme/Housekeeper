@@ -1,7 +1,7 @@
 package GUI.controller;
 
-import Core.OrderInterface;
-import Core.User;
+import Core.mutual.Info;
+import Core.model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddOrderController {
-    private OrderInterface orderInterface;
+    private Info info;
     private int bookIndex;
 
     @FXML
@@ -84,7 +84,7 @@ public class AddOrderController {
         String[] orderMsg = {
                 name, money, way, type, date, cate, desc
         };
-        boolean b = orderInterface.addOrder(bookIndex, orderMsg);
+        boolean b = info.addOrder(bookIndex, orderMsg);
         Alert alert;
         if (b) {
             alert = new Alert(Alert.AlertType.INFORMATION);
@@ -108,7 +108,7 @@ public class AddOrderController {
 
     //初始化
     public void initialization(User user) {
-        orderInterface = new OrderInterface(user);
+        info = new Info(user);
         //order_way
         List<String> listWay = new ArrayList<>();
         listWay.add("现金");

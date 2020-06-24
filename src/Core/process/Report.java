@@ -1,22 +1,15 @@
-package Core;
+package Core.process;
 
+import Core.model.User;
 import Dao.OrderOperation;
 import javafx.scene.chart.PieChart;
 
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-public class ReportInterface {
-    private User user;
-
-    public ReportInterface(User user) {
-        this.user = user;
-    }
-
+public class Report {
     /**
      * 报表数据生成
      *
@@ -24,7 +17,7 @@ public class ReportInterface {
      * @param nowTime 当前时间时间戳
      * @return 饼状图数据
      */
-    public List<List<PieChart.Data>> reportData(int bookIndex, long nowTime) {
+    public static List<List<PieChart.Data>> reportData(User user, int bookIndex, long nowTime) {
         String bookID = user.getBooks().get(bookIndex).getBookID();
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(nowTime);
@@ -36,10 +29,10 @@ public class ReportInterface {
         long endMonthTime = nextMonthStartCalender(calendar).getTimeInMillis() - 1;
         long startYearTime = thisYearStartCalender(calendar).getTimeInMillis();
         long endYearTime = nextYearStartCalender(calendar).getTimeInMillis() - 1;
-        ResultSet dayRS = OrderOperation.queryTimeInterval(bookID, startDayTime / 1000, endDayTime / 1000);
-        ResultSet weekRS = OrderOperation.queryTimeInterval(bookID, startWeekTime / 1000, endWeekTime / 1000);
-        ResultSet monthRS = OrderOperation.queryTimeInterval(bookID, startMonthTime / 1000, endMonthTime / 1000);
-        ResultSet yearRS = OrderOperation.queryTimeInterval(bookID, startYearTime / 1000, endYearTime / 1000);
+        ResultSet dayRS = OrderOperation.queryTimePeriod(bookID, startDayTime / 1000, endDayTime / 1000);
+        ResultSet weekRS = OrderOperation.queryTimePeriod(bookID, startWeekTime / 1000, endWeekTime / 1000);
+        ResultSet monthRS = OrderOperation.queryTimePeriod(bookID, startMonthTime / 1000, endMonthTime / 1000);
+        ResultSet yearRS = OrderOperation.queryTimePeriod(bookID, startYearTime / 1000, endYearTime / 1000);
         List<List<PieChart.Data>> list = new ArrayList<>();
         list.add(writeData(dayRS));
         list.add(writeData(weekRS));
@@ -48,7 +41,7 @@ public class ReportInterface {
         return list;
     }
 
-    private List<PieChart.Data> writeData(ResultSet rs) {
+    private static List<PieChart.Data> writeData(ResultSet rs) {
         List<PieChart.Data> data = new ArrayList<>();
         try {
             double out = 0;

@@ -1,4 +1,4 @@
-package Core;
+package Core.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class User {
     private final String userID;    //用户ID
-    private String userPassword;    //用户密码(明文), 通过用户输入获得非数据库
+    private String userPassword;    //用户密码
     private String userName;        //用户名
     private String userRegTime;     //用户注册时间
     private String userLastTime;    //用户上次登录时间
@@ -21,26 +21,28 @@ public class User {
     private byte[] userHeadThumb;   //用户头像
 
     //账本信息
-    private final ArrayList<Book> books;
+    private ArrayList<Book> books = new ArrayList<>();
     //账单信息
-    private final ArrayList<ArrayList<Order>> orders;
+    private ArrayList<ArrayList<Order>> orders = new ArrayList<>();
 
-    {
-        userName = null;
-        userPassword = null;
-        userRegTime = null;
-        userLastTime = null;
-        userSex = null;
-        userAge = 0;
-        userPhone = null;
-        userAddress = null;
-        userHeadThumb = null;
-        books = new ArrayList<>();
-        orders = new ArrayList<>();
-    }
 
     public User(String userID) {
         this.userID = userID;
+    }
+
+    public User(String userID, String userPassword, String userName, String userRegTime, String userLastTime, String userSex, int userAge, String userPhone, String userAddress, byte[] userHeadThumb, ArrayList<Book> books, ArrayList<ArrayList<Order>> orders) {
+        this.userID = userID;
+        this.userPassword = userPassword;
+        this.userName = userName;
+        this.userRegTime = userRegTime;
+        this.userLastTime = userLastTime;
+        this.userSex = userSex;
+        this.userAge = userAge;
+        this.userPhone = userPhone;
+        this.userAddress = userAddress;
+        this.userHeadThumb = userHeadThumb;
+        this.books = books;
+        this.orders = orders;
     }
 
     public String getUserID() {

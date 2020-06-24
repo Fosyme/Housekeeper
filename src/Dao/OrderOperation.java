@@ -3,16 +3,11 @@ package Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-/**
- * @author 李建强
- * @date 2020-6-11
- */
+import java.sql.SQLException;
 
 public class OrderOperation {
+    private static final Connection CONNECTION = DBLeader.connection;
     private static PreparedStatement preparedStatement = null;
-    private static ResultSet resultSet = null;
-    private static final Connection CONNECTION = MethodOfOperation.connection;
 
     /**
      * 添加账单,返回账单id。
@@ -20,11 +15,10 @@ public class OrderOperation {
      * @param data 字符串数组（账本id、账单名、金额、支付方式、收支模式、时间、分类、描述、图片）
      * @return orderId，账单id
      **/
-    public static String addOrder(String[] data) {
-        String id = null;
-        String sql = "insert into `order`(`book_id`,`order_name`,`order_price`,`order_way`,`order_mod`,`order_time`,`order_cate`,`order_desc`,`order_image_src`)" +
-                "values(?,?,?,?,?,?,?,?,?)";
+    public static String add(String[] data) {
+        String sql;
         try {
+            sql = "insert into `order` values (0, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setInt(1, Integer.parseInt(data[0]));
             preparedStatement.setString(2, data[1]);
@@ -36,11 +30,11 @@ public class OrderOperation {
             preparedStatement.setString(8, data[7]);
             preparedStatement.setString(9, data[8]);
             preparedStatement.execute();
-            id = MethodOfOperation.queryMaxId("order");
-        } catch (Exception e) {
+            return DBLeader.getIDAfterAdd("order");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return id;
+        return null;
     }
 
     /**
@@ -51,16 +45,19 @@ public class OrderOperation {
      * @param id 账单id
      * @return boolean
      */
-    public static boolean deleteOrder(String id) {
-        String sql = "delete from `order` where `order_id`=" + id;
-        int existence = 0;
+    public static boolean delete(String id) {
+        String sql;
         try {
+            sql = "delete from `order` where `order_id` = ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
-            existence = preparedStatement.executeUpdate();
-        } catch (Exception e) {
+            preparedStatement.setInt(1, Integer.parseInt(id));
+            if (preparedStatement.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return existence != 0;
+        return false;
     }
 
     /**
@@ -71,12 +68,11 @@ public class OrderOperation {
      * @return boolean
      */
 
-    public static boolean changeOrderInfo(String id, String[] newData) {
-        boolean returnValue = false;
-        int existence = 0;
-        String sql = "update  `order` set `order_name`=?,`order_price`=?,`order_way`=?,`order_mod`=?,`order_time`=?,`order_cate`=?," +
-                "`order_desc`=?,`order_image_src`=? where `order_id`=?";
+    public static boolean changeInfo(String id, String[] newData) {
+        String sql;
         try {
+            sql = "update `order` set `order_name` = ?, `order_price` = ?, `order_way` = ?, `order_mod` = ?, " +
+                    "`order_time` = ?, `order_cate` = ?, `order_desc` = ?, `order_image_src` = ? where `order_id` = ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setString(1, newData[1]);
             preparedStatement.setDouble(2, Double.parseDouble(newData[2]));
@@ -87,17 +83,14 @@ public class OrderOperation {
             preparedStatement.setString(7, newData[7]);
             preparedStatement.setString(8, newData[8]);
             preparedStatement.setInt(9, Integer.parseInt(id));
-            existence = preparedStatement.executeUpdate();
-            preparedStatement.clearParameters();
-        } catch (Exception e) {
+            if (preparedStatement.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (existence == 1) {
-            returnValue = true;
-        }
-        return returnValue;
+        return false;
     }
-
 
     /**
      * 账本账单查询，
@@ -106,17 +99,17 @@ public class OrderOperation {
      * @param BookId 账本id，
      * @return resultSet
      */
-    public static ResultSet queryOrderMsg(String BookId) {
-        resultSet = null;
-        String sql = "select * from `order` where `book_id`=?";
+    public static ResultSet queryInfo(String BookId) {
+        String sql;
         try {
+            sql = "select * from `order` where `book_id` = ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setString(1, BookId);
-            resultSet = preparedStatement.executeQuery();
-        } catch (Exception e) {
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultSet;
+        return null;
     }
 
     /**
@@ -125,18 +118,19 @@ public class OrderOperation {
      * @param keyWord 要查寻的关键字（在描述和账单名内查找）
      * @return ResultSet 该账本订单名和订单描述包含keyWord的所有订单
      * */
-    public static ResultSet fuzzyQueryOrderMsg(String bookId, String keyWord) {
-        String sql = "select * from `order` where `book_id`=? and `order_name`like ? or `order_desc` like ?";
+    public static ResultSet fuzzyQueryInfo(String bookId, String keyWord) {
+        String sql;
         try {
+            sql = "select * from `order` where `book_id` = ? and `order_name` like ? or `order_desc` like ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setInt(1, Integer.parseInt(bookId));
             preparedStatement.setString(2, "%" + keyWord + "%");
             preparedStatement.setString(3, "%" + keyWord + "%");
-            resultSet = preparedStatement.executeQuery();
-        } catch (Exception e) {
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultSet;
+        return null;
     }
 
     /**
@@ -146,17 +140,18 @@ public class OrderOperation {
      * @param endTime 时间段的结束时间
      * @return ResultSet 该账本时间段内的所有订单
     * */
-    public static ResultSet queryTimeInterval(String bookId, long startTime, long endTime) {
-        String sql = "select * from `order` where `book_id`=? and `order_time` between ? and ? ";
+    public static ResultSet queryTimePeriod(String bookId, long startTime, long endTime) {
+        String sql;
         try {
+            sql = "select * from `order` where `book_id` = ? and `order_time` between ? and ? ";
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setInt(1, Integer.parseInt(bookId));
             preparedStatement.setLong(2, startTime);
             preparedStatement.setLong(3, endTime);
-            resultSet = preparedStatement.executeQuery();
-        } catch (Exception e) {
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultSet;
+        return null;
     }
 }

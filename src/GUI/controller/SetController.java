@@ -1,7 +1,7 @@
 package GUI.controller;
 
-import Core.User;
-import Core.UserLogin;
+import Core.model.User;
+import Core.mutual.Login;
 import GUI.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.Properties;
 
 public class SetController {
-    private UserLogin userLogin;
+    private Login login;
     private Stage parent;
 
     @FXML
@@ -118,7 +118,7 @@ public class SetController {
             scene.getStylesheets().add((getStyleValue()));
             SignInController controller = loader.getController();
             controller.initialization();
-            userLogin.writeConfig(false, false);
+            login.writeConfig(false, false);
             mainFrameStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -127,7 +127,7 @@ public class SetController {
 
     @FXML
     void ExitEvent(ActionEvent event) {
-        userLogin.signOut();
+        login.signOut();
         System.exit(0);
     }
 
@@ -138,7 +138,7 @@ public class SetController {
             file.createNewFile();
         }
         Properties properties = new Properties();
-        properties.setProperty("Lemonyellow", "GUI/resources/Lemonyellow.css");
+        properties.setProperty("Lemonyellow", "GUI/resources/lemon_yellow.css");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
 
         properties.store(fileOutputStream, "柠檬黄");
@@ -153,7 +153,7 @@ public class SetController {
             file.createNewFile();
         }
         Properties properties = new Properties();
-        properties.setProperty("Palegray", "GUI/resources/Palegray.css");
+        properties.setProperty("Palegray", "GUI/resources/palegray.css");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         properties.store(fileOutputStream, "苍白灰");
         JOptionPane.showMessageDialog(null, "切换苍白灰主题成功", "信息", JOptionPane.PLAIN_MESSAGE);
@@ -190,7 +190,7 @@ public class SetController {
     }
 
     public void initialization(User user) {
-        userLogin = new UserLogin(user);
+        login = new Login(user);
         initThemeRadioMenuItem();
     }
 

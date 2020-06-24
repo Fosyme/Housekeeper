@@ -1,6 +1,4 @@
-package Core;
-
-import org.jetbrains.annotations.NotNull;
+package Core.model;
 
 public class Book {
     private final String bookID;    //账本ID
@@ -14,10 +12,10 @@ public class Book {
     }
 
     //整体设置book类的实例域
-    public void setBook(@NotNull String[] bookMsg) {
-        bookName = bookMsg[1];
-        bookDesc = bookMsg[2];
-        bookAddTime = bookMsg[3];
+    public void setBook(String[] bookMsg) {
+        setBookName(bookMsg[0]);
+        setBookDesc(bookMsg[1]);
+        setBookAddTime(bookMsg[2]);
     }
 
     public String getBookID() {

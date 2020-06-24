@@ -1,6 +1,6 @@
 package GUI;
 
-import Core.UserLogin;
+import Core.mutual.Login;
 import GUI.controller.MainController;
 import GUI.controller.SignInController;
 import javafx.application.Application;
@@ -16,11 +16,11 @@ import java.util.Properties;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
-        UserLogin login = new UserLogin();
+        Login login = new Login();
         String userName = null;
         String userPassword = null;
         boolean rememberPassword = false;
-        //程序开始时读取配置文件两个值，和已保存用户名与密码
+        //程序开始时读取配置文件两个值，和已保存用户名与密码(密文)
         File file = new File("src/config");
         if (file.exists()) {
             FileInputStream fis = new FileInputStream(file);
@@ -38,8 +38,7 @@ public class Main extends Application {
                         loader.setLocation(getClass().getResource("fxml/main.fxml"));
                         Parent root = loader.load();
                         primaryStage.setTitle("HouseKeeper");
-                        Scene scene = new Scene(root);
-                        primaryStage.setScene(scene);
+                        primaryStage.setScene(new Scene(root));
                         primaryStage.setOnCloseRequest(windowEvent -> OpenFormAfterThis.exitApp(windowEvent, login));
                         MainController controller = loader.getController();
                         controller.initialization(login.getUser());
@@ -55,13 +54,12 @@ public class Main extends Application {
             Parent root = loader.load();
             primaryStage.setTitle("用户登录");
             primaryStage.setResizable(false);
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
+            primaryStage.setScene(new Scene(root));
             primaryStage.setOnCloseRequest(windowEvent -> OpenFormAfterThis.exitApp(windowEvent, login));
             SignInController controller = loader.getController();
-            controller.afterSignUp(userName, userPassword);
-            controller.setRemember(rememberPassword);
             controller.initialization();
+            controller.smartFill(userName, userPassword);
+            controller.setRemember(rememberPassword);
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

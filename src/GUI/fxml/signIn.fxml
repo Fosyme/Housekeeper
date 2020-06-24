@@ -11,43 +11,47 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="paneSignIn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="739.0" stylesheets="@signIn.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.SignInController">
-   <children>
-      <Button fx:id="signUpButton" layoutX="240.0" layoutY="438.0" mnemonicParsing="false" onAction="#signUpButtonEvent" prefHeight="38.0" prefWidth="113.0" text="注册" textFill="#1b1a1a">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="signInButton" layoutX="198.0" layoutY="343.0" mnemonicParsing="false" onAction="#signInButtonEvent" prefHeight="60.0" prefWidth="382.0" style="-fx-background-color: #1faef1;" text="登录" textFill="#fbfeff">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Label layoutX="160.0" layoutY="244.0" />
-      <Label layoutX="177.0" layoutY="167.0" prefHeight="52.0" prefWidth="93.0" text="用户名：">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Label layoutX="177.0" layoutY="230.0" prefHeight="52.0" prefWidth="93.0" text="密码：">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <TextField fx:id="nameTextField" layoutX="278.0" layoutY="174.0" prefHeight="38.0" prefWidth="290.0" promptText="请输入您的用户名" />
-      <PasswordField fx:id="passwordTextField" layoutX="278.0" layoutY="238.0" prefHeight="38.0" prefWidth="290.0" promptText="请输入您的密码" />
-      <ImageView fitHeight="92.0" fitWidth="93.0" layoutX="160.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../resources/记账.png" />
-         </image>
-      </ImageView>
-      <CheckBox fx:id="autoSignIn" layoutX="224.0" layoutY="302.0" mnemonicParsing="false" text="自动登录" />
-      <CheckBox fx:id="rememberPassword" layoutX="425.0" layoutY="302.0" mnemonicParsing="false" text="记住密码" />
-      <Button fx:id="findPassword" layoutX="412.0" layoutY="438.0" mnemonicParsing="false" onAction="#findPasswordEvent" prefHeight="38.0" prefWidth="113.0" text="找回密码" textFill="#1b1a1a">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Text layoutX="284.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HouseKeeper-Text" text="HouseKeeper" />
-   </children>
+<Pane fx:id="paneSignIn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="509.0" prefWidth="739.0" stylesheets="@signIn.css" xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.SignInController">
+   <Button layoutX="240.0" layoutY="438.0" mnemonicParsing="false" onAction="#signUpButtonEvent"
+           prefHeight="38.0" prefWidth="113.0" text="注册" textFill="#1b1a1a">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Button>
+   <Button layoutX="198.0" layoutY="343.0" mnemonicParsing="false" onAction="#signInButtonEvent"
+           prefHeight="60.0" prefWidth="382.0" style="-fx-background-color: #1faef1;" text="登录" textFill="#fbfeff">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Button>
+   <Label layoutX="160.0" layoutY="244.0"/>
+   <Label layoutX="177.0" layoutY="167.0" prefHeight="52.0" prefWidth="93.0" text="用户名：">
+      <font>
+         <Font size="21.0"/>
+      </font>
+   </Label>
+   <Label layoutX="177.0" layoutY="230.0" prefHeight="52.0" prefWidth="93.0" text="密码：">
+      <font>
+         <Font size="21.0"/>
+      </font>
+   </Label>
+   <TextField fx:id="nameTextField" layoutX="278.0" layoutY="174.0" prefHeight="38.0" prefWidth="290.0"
+              promptText="请输入您的用户名"/>
+   <PasswordField fx:id="passwordTextField" layoutX="278.0" layoutY="238.0" prefHeight="38.0" prefWidth="290.0"
+                  promptText="请输入您的密码"/>
+   <ImageView fitHeight="92.0" fitWidth="93.0" layoutX="160.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../resources/记账.png"/>
+   </ImageView>
+   <CheckBox fx:id="autoSignIn" layoutX="224.0" layoutY="302.0" mnemonicParsing="false" text="自动登录"/>
+   <CheckBox fx:id="rememberPassword" layoutX="425.0" layoutY="302.0" mnemonicParsing="false" text="记住密码"/>
+   <Button layoutX="412.0" layoutY="438.0" mnemonicParsing="false" onAction="#findPasswordEvent"
+           prefHeight="38.0" prefWidth="113.0" text="找回密码" textFill="#1b1a1a">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Button>
+   <Text layoutX="284.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HouseKeeper-Text"
+         text="HouseKeeper"/>
 </Pane>

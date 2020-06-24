@@ -1,7 +1,6 @@
-package Core;
+package Core.model;
 
 import Dao.BookOperation;
-import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -27,7 +26,7 @@ public class Order {
     }
 
     //整体设置order类的实例域
-    public void setOrder(@NotNull String[] orderMsg) {
+    public void setOrder(String[] orderMsg) {
         setBookID(orderMsg[0]);
         setOrderName(orderMsg[1]);
         setOrderPrice(Double.parseDouble(orderMsg[2]));
@@ -36,7 +35,7 @@ public class Order {
         setOrderTime(orderMsg[5]);
         setOrderCate(orderMsg[6]);
         setOrderDesc(orderMsg[7]);
-        setOrderImageSrc(null);
+        setOrderImageSrc(orderMsg[8].getBytes());
     }
 
     public String getOrderID() {
@@ -49,7 +48,7 @@ public class Order {
 
     public void setBookID(String bookID) {
         this.bookID = bookID;
-        setBookName(BookOperation.getNameFromID(bookID));
+        setBookName(BookOperation.queryNameFromID(bookID));
     }
 
     public String getBookName() {
@@ -135,7 +134,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "setOrder{" +
                 "orderID='" + orderID + '\'' +
                 ", bookID='" + bookID + '\'' +
                 ", orderName='" + orderName + '\'' +

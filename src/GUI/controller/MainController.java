@@ -1,6 +1,10 @@
 package GUI.controller;
 
-import Core.*;
+import Core.model.Book;
+import Core.model.Order;
+import Core.model.User;
+import Core.mutual.Display;
+import Core.mutual.Info;
 import GUI.Main;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -27,9 +31,8 @@ import java.util.Optional;
 import java.util.Properties;
 
 public class MainController {
-    private MainInterface main;
-    private BookInterface bookInterface;
-    private OrderInterface orderInterface;
+    Info info;
+    Display display;
 
     @FXML
     private VBox paneMain;
@@ -156,12 +159,12 @@ public class MainController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("提示");
             alert.setHeaderText(null);
-            if (bookInterface.isBookExist(pair.getKey())) {
+            if (info.isBookExist(pair.getKey())) {
                 alert.setContentText("账本已存在！");
                 alert.showAndWait();
                 ctmAddBookEVent(event);
             } else {
-                if (bookInterface.addBook(pair.getKey(), pair.getValue())) {
+                if (info.addBook(pair.getKey(), pair.getValue())) {
                     alert.setContentText("账本添加成功！");
                 } else {
                     alert.setContentText("账本添加失败，请重试！");
@@ -176,7 +179,7 @@ public class MainController {
     void ctmAlterBookEvent(ActionEvent event) {
         int index = bookTableView.getSelectionModel().getSelectedIndex();
         if (index != -1) {
-            Book book = main.getUser().getBooks().get(index);
+            Book book = display.getUser().getBooks().get(index);
             String bookName = book.getBookName();
             String bookDesc = book.getBookDesc();
             Optional<Pair<String, String>> result = bookDialog("修改账本", bookName, bookDesc);
@@ -184,7 +187,7 @@ public class MainController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("提示");
                 alert.setHeaderText(null);
-                if (bookInterface.alterBook(index, pair.getKey(), pair.getValue())) {
+                if (info.alterBook(index, pair.getKey(), pair.getValue())) {
                     alert.setContentText("账本修改成功！");
                 } else {
                     alert.setContentText("账本修改失败，请重试！");
@@ -219,7 +222,7 @@ public class MainController {
         Optional<ButtonType> result = alert.showAndWait();
         result.ifPresent(buttonType -> {
             if (buttonType == ButtonType.OK) {
-                if (!bookInterface.deleteBook(index)) {
+                if (!info.deleteBook(index)) {
                     Alert delete = new Alert(Alert.AlertType.ERROR);
                     delete.setTitle("提示");
                     delete.setHeaderText(null);
@@ -234,7 +237,7 @@ public class MainController {
 
     //刷新账本信息
     void ctmRefreshBookEvent() {
-        ObservableList<Book> list = main.refreshBookData();
+        ObservableList<Book> list = display.refreshBookData();
         bookTableView.refresh();
         bookTableView.setItems(list);
         bookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
@@ -258,7 +261,7 @@ public class MainController {
             //加载CSS样式文件
             scene.getStylesheets().add((getStyleValue()));
             AddOrderController controller = loader.getController();
-            controller.initialization(main.getUser());
+            controller.initialization(display.getUser());
             //判断是否选择了账本
             int index = bookTableView.getSelectionModel().getSelectedIndex();
             if (index == -1) {
@@ -304,7 +307,7 @@ public class MainController {
             scene.getStylesheets().add((getStyleValue()));
 
             AlterOrderController controller = loader.getController();
-            controller.initialization(main.getUser());
+            controller.initialization(display.getUser());
             controller.dataPadding(bookIndex, orderIndex);
             mainFrameStage.showAndWait();
             changeSelectedBookItem(bookIndex);
@@ -342,7 +345,7 @@ public class MainController {
         Optional<ButtonType> result = alert.showAndWait();
         result.ifPresent(buttonType -> {
             if (buttonType == ButtonType.OK) {
-                if (!orderInterface.deleteOrder(bookIndex, orderIndex)) {
+                if (!info.deleteOrder(bookIndex, orderIndex)) {
                     Alert delete = new Alert(Alert.AlertType.ERROR);
                     delete.setTitle("提示");
                     delete.setHeaderText(null);
@@ -376,8 +379,8 @@ public class MainController {
                 stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL);
                 ScreenOrder controller = loader.getController();
-                controller.initialization(main.getUser());
-                controller.setTabScreen(orderInterface.fuzzyQueryOrder(keyword));
+                controller.initialization(display.getUser());
+                controller.setTabScreen(info.queryOrder(keyword));
                 stage.show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -401,7 +404,7 @@ public class MainController {
             //加载CSS样式文件
             scene.getStylesheets().add((getStyleValue()));
             SetController controller = loader.getController();
-            controller.initialization(main.getUser());
+            controller.initialization(display.getUser());
             controller.setParent((Stage) paneMain.getScene().getWindow());
             mainFrameStage.show();
             return scene;
@@ -435,8 +438,7 @@ public class MainController {
             //加载CSS样式文件
             scene.getStylesheets().add((getStyleValue()));
             ReportController controller = loader.getController();
-            controller.initialization(main.getUser());
-            controller.setPieChar(bookIndex);
+            controller.setPieChar(display.getUser(), bookIndex);
             mainFrameStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -459,7 +461,7 @@ public class MainController {
             mainFrameStage.setScene(scene);
             scene.getStylesheets().add((getStyleValue()));
             DateSearchController controller = loader.getController();
-            controller.initialization(main.getUser());
+            controller.initialization(display.getUser());
             mainFrameStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -486,9 +488,8 @@ public class MainController {
     }
 
     public void initialization(User user) {
-        main = new MainInterface(user);
-        bookInterface = new BookInterface(user);
-        orderInterface = new OrderInterface(user);
+        display = new Display(user);
+        info = new Info(user);
         username.setText(user.getUserName());
         bookTableView
                 .getSelectionModel()
@@ -505,7 +506,7 @@ public class MainController {
                         lblClear.setVisible(false);
                     }
                 });
-        ObservableList<Book> list = main.initializeBookData();
+        ObservableList<Book> list = display.initializeBookData();
         bookTableView.setItems(list);
         bookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
         bookDesc.setCellValueFactory(new PropertyValueFactory<>("bookDesc"));
@@ -515,7 +516,7 @@ public class MainController {
         if (bookIndex == -1) {
             return;
         }
-        ObservableList<Order> list = main.getOrderOfBook(bookIndex);
+        ObservableList<Order> list = display.getOrderOfBook(bookIndex);
         orderTableView.refresh();
         orderTableView.setItems(list);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("orderName"));

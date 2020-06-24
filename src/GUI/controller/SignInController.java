@@ -1,6 +1,6 @@
 package GUI.controller;
 
-import Core.UserLogin;
+import Core.mutual.Login;
 import GUI.Main;
 import GUI.OpenFormAfterThis;
 import javafx.event.ActionEvent;
@@ -15,16 +15,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Optional;
-import java.util.Properties;
 
 public class SignInController {
-    private UserLogin userLogin = new UserLogin();
+    private Login login = new Login();
 
     @FXML
     private Pane paneSignIn;
@@ -36,22 +31,15 @@ public class SignInController {
     private CheckBox rememberPassword;
 
     @FXML
-    private Button signUpButton;
-
-    @FXML
-    private Button signInButton;
-
-    @FXML
     private TextField nameTextField;
 
     @FXML
     private CheckBox autoSignIn;
 
-    @FXML
-    private Button findPassword;
-
+    //登录界面加载初始化
     public void initialization() {
-        userLogin = new UserLogin();
+        login = new Login();
+        //对记住密码和自动登录选项卡添加监听器, 来实现两个选项卡的智能化
         rememberPassword.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
             if (aBoolean && !t1) {
                 autoSignIn.setSelected(false);
@@ -64,15 +52,28 @@ public class SignInController {
         });
     }
 
+    //自动键入用户上次输入的用户名和密码
+    public void smartFill(String userName, String userPassword) {
+        nameTextField.setText(userName);
+        passwordTextField.setText(userPassword);
+    }
+
+    //显示用户上次设置的记住密码选项
+    public void setRemember(boolean remember) {
+        this.rememberPassword.setSelected(remember);
+    }
+
     @FXML
     void signInButtonEvent(ActionEvent event) {
         //登录
         if (nameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
+            //TODO 改写成Alert
             JOptionPane.showMessageDialog(null, "请按照文本框内容提示正确填写内容", "警告", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        boolean b = userLogin.signIn(nameTextField.getText(), passwordTextField.getText());
+        boolean b = login.signIn(nameTextField.getText(), passwordTextField.getText());
         if (b) {
+            //TODO 改写 xxx，欢迎回来！
             JOptionPane.showConfirmDialog(null, "恭喜登录成功", "信息", JOptionPane.DEFAULT_OPTION);
             try {
                 FXMLLoader loader = new FXMLLoader();
@@ -84,14 +85,11 @@ public class SignInController {
                 mainFrameStage.initModality(Modality.APPLICATION_MODAL);
                 Scene scene = new Scene(page);
                 mainFrameStage.setScene(scene);
-                //加载CSS样式文件
-                scene.getStylesheets().add((getStyleValue()));
-
                 MainController controller = loader.getController();
-                userLogin.getUser().setUserPassword(passwordTextField.getText());
-                controller.initialization(userLogin.getUser());
+                login.getUser().setUserPassword(passwordTextField.getText());
+                controller.initialization(login.getUser());
                 ((Stage) paneSignIn.getScene().getWindow()).close();
-                userLogin.writeConfig(autoSignIn.isSelected(), rememberPassword.isSelected());
+                login.writeConfig(autoSignIn.isSelected(), rememberPassword.isSelected());
                 mainFrameStage.showAndWait();
             } catch (Throwable e) {
                 e.printStackTrace();
@@ -109,16 +107,15 @@ public class SignInController {
             loader.setLocation(Main.class.getResource("fxml/signUp.fxml"));
             AnchorPane page = loader.load();
             Stage signUp = new Stage();
-            signUp.setOnCloseRequest(windowEvent ->
-                    OpenFormAfterThis.signIn((Stage) paneSignIn.getScene().getWindow(),"",""));
+            signUp.setOnCloseRequest(windowEvent -> {
+                ((Stage) paneSignIn.getScene().getWindow()).close();
+                OpenFormAfterThis.signIn("", "");
+            });
             signUp.setTitle("注册");
             signUp.setResizable(false);
             signUp.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
             signUp.setScene(scene);
-            //加载CSS样式文件
-            scene.getStylesheets().add((getStyleValue()));
-
             SignUpController controller = loader.getController();
             controller.initialization();
             ((Stage) paneSignIn.getScene().getWindow()).close();
@@ -142,22 +139,21 @@ public class SignInController {
                     break;
                 }
                 String userNameOfFind = rs.get();
-                String encryptedQuestion = userLogin.queryUserEncrypted(userNameOfFind);
+                String encryptedQuestion = login.queryUserEncrypted(userNameOfFind);
                 if (encryptedQuestion != null) {
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(Main.class.getResource("fxml/findPassword.fxml"));
                     AnchorPane page = loader.load();
                     Stage mainFrameStage = new Stage();
-                    mainFrameStage.setOnCloseRequest(windowEvent ->
-                            OpenFormAfterThis.signIn((Stage) paneSignIn.getScene().getWindow(), "", ""));
+                    mainFrameStage.setOnCloseRequest(windowEvent -> {
+                        ((Stage) paneSignIn.getScene().getWindow()).close();
+                        OpenFormAfterThis.signIn("", "");
+                    });
                     mainFrameStage.setTitle("找回密码");
                     mainFrameStage.setResizable(false);
                     mainFrameStage.initModality(Modality.APPLICATION_MODAL);
                     Scene scene = new Scene(page);
                     mainFrameStage.setScene(scene);
-                    //加载CSS样式文件
-                    scene.getStylesheets().add((getStyleValue()));
-
                     FindPasswordController controller = loader.getController();
                     controller.initialization();
                     controller.setContent(userNameOfFind, encryptedQuestion);
@@ -175,29 +171,6 @@ public class SignInController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void afterSignUp(String userName, String userPassword) {
-        nameTextField.setText(userName);
-        passwordTextField.setText(userPassword);
-    }
-
-    public void setRemember(boolean remember) {
-        this.rememberPassword.setSelected(remember);
-    }
-
-    @FXML
-    public String getStyleValue() throws IOException {
-        File file = new File("src\\GUI\\resources\\styles.properties");
-        Properties properties = new Properties();
-        FileInputStream fileInputStream = new FileInputStream(file);
-        properties.load(fileInputStream);
-        Iterator<String> iterator = properties.stringPropertyNames().iterator();
-        String Key = "";
-        while (iterator.hasNext()) {
-            Key = iterator.next();
-        }
-        return properties.getProperty(Key, "");
     }
 }
 

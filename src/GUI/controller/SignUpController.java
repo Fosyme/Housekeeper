@@ -1,6 +1,6 @@
 package GUI.controller;
 
-import Core.UserLogin;
+import Core.mutual.Login;
 import GUI.OpenFormAfterThis;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SignUpController {
-    private UserLogin userLogin;
+    private Login login;
 
     @FXML
     public AnchorPane paneSignUp;
@@ -69,6 +69,7 @@ public class SignUpController {
         String userAge = ageTextField.getText();                            //用户年龄
         String userPhone = PhoneTextField.getText();                        //电话号码
         String userAddress = AddressTextField.getText();                    //地址
+        String userHeadThumb = null;                                        //头像
 
         if (!userName.matches(userNameRegex)) {
             alert.setHeaderText("用户名不合法！");
@@ -101,11 +102,11 @@ public class SignUpController {
             return;
         }
         String[] userMsg = new String[]{
-                userName, userPassword, userEncryptedQuestion,
-                userEncryptedAnswer, userSex, userAge,
-                userPhone, userAddress, null
+                userName, Login.getMD5String(userPassword),
+                userEncryptedQuestion, Login.getMD5String(userEncryptedAnswer),
+                userSex, userAge, userPhone, userAddress, userHeadThumb
         };
-        if (!userLogin.signUp(userMsg)) {
+        if (!login.signUp(userMsg)) {
             alert.setHeaderText(null);
             alert.setContentText("用户名已存在");
             alert.showAndWait();
@@ -113,7 +114,8 @@ public class SignUpController {
             alert.setHeaderText(null);
             alert.setContentText("账号注册成功");
             alert.showAndWait();
-            OpenFormAfterThis.signIn((Stage) paneSignUp.getScene().getWindow(), userName, userPassword);
+            ((Stage) paneSignUp.getScene().getWindow()).close();
+            OpenFormAfterThis.signIn(userName, userPassword);
         }
     }
 
@@ -133,6 +135,6 @@ public class SignUpController {
         female.setUserData("女");
         secret.setUserData("保密");
 
-        userLogin = new UserLogin();
+        login = new Login();
     }
 }

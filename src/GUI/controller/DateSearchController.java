@@ -1,8 +1,8 @@
 package GUI.controller;
 
-import Core.Order;
-import Core.OrderInterface;
-import Core.User;
+import Core.model.Order;
+import Core.mutual.Info;
+import Core.model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 
 public class DateSearchController {
-    private OrderInterface orderInterface;
+    private Info info;
 
     @FXML
     private TableView<Order> tabDateSearch;
@@ -50,7 +50,7 @@ public class DateSearchController {
         try {
             long startTime = Order.dateFormat.parse(startDate).getTime() / 1000;
             long endTime = Order.dateFormat.parse(endDate).getTime() / 1000;
-            ArrayList<Order> orders = orderInterface.queryPeriodOrder(startTime, endTime);
+            ArrayList<Order> orders = info.queryOrder(startTime, endTime);
             ObservableList<Order> list = FXCollections.observableList(orders);
             tabDateSearch.setItems(list);
             colBookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
@@ -67,6 +67,6 @@ public class DateSearchController {
     }
 
     public void initialization(User user) {
-        orderInterface = new OrderInterface(user);
+        info = new Info(user);
     }
 }
