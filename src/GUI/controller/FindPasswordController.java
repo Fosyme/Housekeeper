@@ -13,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class FindPasswordController implements Controller {
-    private Login login;
     private String userName;
 
     @FXML
@@ -27,11 +26,11 @@ public class FindPasswordController implements Controller {
 
     @Override
     public void initialize(User user) {
-        login = new Login();
     }
 
     @FXML
     void ConfirmButtonEvent(ActionEvent event) {
+        Login login = new Login();
         String encryptedAnswer = AnswerTextField.getText();
         String newPassword = NewPasswordTexField.getText();
         boolean b = login.recoverPassword(userName, encryptedAnswer, newPassword);

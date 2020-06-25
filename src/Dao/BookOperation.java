@@ -86,15 +86,15 @@ public class BookOperation {
      * 用户账本查询，
      * 返回用户的账本信息集合。
      *
-     * @param UserId 用户id，
+     * @param userID 用户id，
      * @return resultSet
      */
-    public static ResultSet queryInfo(String UserId) {
+    public static ResultSet queryInfo(String userID) {
         String sql;
         try {
             sql = "select * from `book` where `user_id` = ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
-            preparedStatement.setInt(1, Integer.parseInt(UserId));
+            preparedStatement.setInt(1, Integer.parseInt(userID));
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,17 +105,17 @@ public class BookOperation {
     /**
      * 验证账本是否存在，
      *
-     * @param userId   用户id
+     * @param userID   用户id
      * @param bookName 账本名
      * @return 如果账本存在返回true
      */
-    public static boolean isExist(String userId, String bookName) {
+    public static boolean isExist(String userID, String bookName) {
         String sql;
         ResultSet resultSet;
         try {
             sql = "select * from `book` where `user_id`=?  and `book_name` = ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
-            preparedStatement.setInt(1, Integer.parseInt(userId));
+            preparedStatement.setInt(1, Integer.parseInt(userID));
             preparedStatement.setString(2, bookName);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {

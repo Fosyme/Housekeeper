@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SignUpController implements Controller {
-    private Login login;
-
     @FXML
     private AnchorPane paneSignUp;
     @FXML
@@ -44,6 +42,7 @@ public class SignUpController implements Controller {
 
     @FXML
     void signUpButtonEvent(ActionEvent event) {
+        Login login = new Login();
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("注册警告");
 
@@ -114,7 +113,6 @@ public class SignUpController implements Controller {
 
     @Override
     public void initialize(User user) {
-        login = new Login();
         List<String> list = new ArrayList<>();
         list.add("你第个宠物的名字是什么?");
         list.add("你出生城市的名称是什么?");

@@ -11,9 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -22,7 +20,6 @@ import java.util.Optional;
 
 public class SignInController implements Controller {
     private User user;
-    private Login login;
     private int passwordType;
 
     @FXML
@@ -40,7 +37,6 @@ public class SignInController implements Controller {
     @Override
     public void initialize(User user) {
         this.user = user;
-        login = new Login();
         //对记住密码和自动登录选项卡添加监听器, 来实现两个选项卡的智能化
         rememberPassword.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
             if (aBoolean && !t1) {
@@ -68,8 +64,10 @@ public class SignInController implements Controller {
         this.rememberPassword.setSelected(remember);
     }
 
+    //登录事件
     @FXML
     void signInButtonEvent(ActionEvent event) {
+        Login login = new Login();
         //登录
         if (nameTextField.getText().isBlank() || passwordTextField.getText().isBlank()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -80,6 +78,7 @@ public class SignInController implements Controller {
         }
         user = login.signIn(nameTextField.getText(), passwordTextField.getText(), passwordType);
         if (user != null) {
+            System.out.println("!!!TEST!!!");
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setTitle("欢迎");
             alert.setHeaderText(null);
@@ -139,6 +138,7 @@ public class SignInController implements Controller {
 
     @FXML
     void findPasswordEvent(ActionEvent event) {
+        Login login = new Login();
         //找回密码
         try {
             TextInputDialog textInputDialog = new TextInputDialog();

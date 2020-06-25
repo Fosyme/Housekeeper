@@ -12,85 +12,63 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneSignUp" prefHeight="800.0" prefWidth="800.0" stylesheets="@signUp.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.SignUpController">
-   <children>
-      <AnchorPane prefHeight="683.0" prefWidth="810.0">
-         <children>
-            <VBox layoutX="219.0" layoutY="-8.0" prefHeight="806.0" prefWidth="377.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="99.0" prefWidth="462.0">
-                     <children>
-                        <Label alignment="CENTER" text="注册">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="387.0">
-                     <children>
-                        <Label text="用户名：    " />
-                        <TextField fx:id="nameTextField" prefHeight="30.0" prefWidth="250.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="411.0">
-                     <children>
-                        <Label text="密码：       " />
-                        <TextField fx:id="passwordTextField" prefHeight="30.0" prefWidth="250.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="411.0" spacing="40.0">
-                     <children>
-                        <Label text="性别：       " />
-                        <RadioButton fx:id="man" mnemonicParsing="false" text="男">
-                           <HBox.margin>
-                              <Insets left="-20.0" />
-                           </HBox.margin>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="sex" />
-                           </toggleGroup></RadioButton>
-                        <RadioButton fx:id="female" mnemonicParsing="false" text="女" toggleGroup="$sex" />
-                        <RadioButton fx:id="secret" mnemonicParsing="false" selected="true" text="保密" toggleGroup="$sex" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
-                     <children>
-                        <Label text="年龄：       " />
-                        <TextField fx:id="ageTextField" prefHeight="30.0" prefWidth="250.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
-                     <children>
-                        <Label text="密保问题： " />
-                        <ComboBox fx:id="comBoxQuestion" prefHeight="30.0" prefWidth="247.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
-                     <children>
-                        <Label text="答案：       " />
-                        <TextField fx:id="answerTextField" prefHeight="30.0" prefWidth="250.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
-                     <children>
-                        <Label text="手机号：    " />
-                        <TextField fx:id="PhoneTextField" prefHeight="30.0" prefWidth="249.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
-                     <children>
-                        <Label text="地址：       " />
-                        <TextField fx:id="AddressTextField" prefHeight="30.0" prefWidth="249.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="signUpButton" mnemonicParsing="false" onAction="#signUpButtonEvent" prefHeight="52.0" prefWidth="104.0" text="注册" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </AnchorPane>
-   </children>
+<AnchorPane fx:id="paneSignUp" prefHeight="800.0" prefWidth="800.0" stylesheets="@signUp.css"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="GUI.controller.SignUpController">
+   <AnchorPane prefHeight="683.0" prefWidth="810.0">
+      <VBox layoutX="219.0" layoutY="-8.0" prefHeight="806.0" prefWidth="377.0">
+         <HBox alignment="CENTER" prefHeight="99.0" prefWidth="462.0">
+            <Label alignment="CENTER" text="注册">
+               <font>
+                  <Font size="28.0"/>
+               </font>
+            </Label>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="387.0">
+            <Label text="用户名：    "/>
+            <TextField fx:id="nameTextField" prefHeight="30.0" prefWidth="250.0"/>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="411.0">
+            <Label text="密码：       "/>
+            <TextField fx:id="passwordTextField" prefHeight="30.0" prefWidth="250.0"/>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="411.0" spacing="40.0">
+            <Label text="性别：       "/>
+            <RadioButton fx:id="man" mnemonicParsing="false" text="男">
+               <HBox.margin>
+                  <Insets left="-20.0"/>
+               </HBox.margin>
+               <toggleGroup>
+                  <ToggleGroup fx:id="sex"/>
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="female" mnemonicParsing="false" text="女" toggleGroup="$sex"/>
+            <RadioButton fx:id="secret" mnemonicParsing="false" selected="true" text="保密" toggleGroup="$sex"/>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
+            <Label text="年龄：       "/>
+            <TextField fx:id="ageTextField" prefHeight="30.0" prefWidth="250.0"/>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
+            <Label text="密保问题： "/>
+            <ComboBox fx:id="comBoxQuestion" prefHeight="30.0" prefWidth="247.0"/>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
+            <Label text="答案：       "/>
+            <TextField fx:id="answerTextField" prefHeight="30.0" prefWidth="250.0"/>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0">
+            <Label text="手机号：    "/>
+            <TextField fx:id="PhoneTextField" prefHeight="30.0" prefWidth="249.0"/>
+         </HBox>
+         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
+            <Label text="地址：       "/>
+            <TextField fx:id="AddressTextField" prefHeight="30.0" prefWidth="249.0"/>
+         </HBox>
+         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <Button mnemonicParsing="false" onAction="#signUpButtonEvent"
+                    prefHeight="52.0" prefWidth="104.0" text="注册"/>
+         </HBox>
+      </VBox>
+   </AnchorPane>
 </AnchorPane>

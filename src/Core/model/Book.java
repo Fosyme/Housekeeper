@@ -1,11 +1,15 @@
 package Core.model;
 
 public class Book {
-    private final String bookID;    //账本ID
+    private String bookID;    //账本ID
     //private String userID;        //所属用户ID, 可舍去
     private String bookName;        //账本名
     private String bookDesc;        //账本描述
     private String bookAddTime;     //账本添加时间
+
+    public Book() {
+
+    }
 
     public Book(String bookID) {
         this.bookID = bookID;

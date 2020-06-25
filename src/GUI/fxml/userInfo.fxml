@@ -12,54 +12,42 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane prefHeight="696.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.UserInfoController">
-   <children>
-      <VBox prefHeight="481.0" prefWidth="600.0">
-         <children>
-            <HBox alignment="CENTER" prefHeight="96.0" prefWidth="458.0">
-               <children>
-                  <Label text="用户名：">
-                     <HBox.margin>
-                        <Insets right="70.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="UserName" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
-               <children>
-                  <Label text="性别：" />
-                  <RadioButton fx:id="Man" mnemonicParsing="false" text="男">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="sex" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="Woman" mnemonicParsing="false" text="女" toggleGroup="$sex" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="年龄：" />
-                  <TextField fx:id="UserAge" prefHeight="30.0" prefWidth="211.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="手机号：" />
-                  <TextField fx:id="UserNUmber" prefHeight="30.0" prefWidth="212.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="93.0" prefWidth="600.0">
-               <children>
-                  <Label text="地址：" />
-                  <TextField fx:id="UserAddress" prefHeight="30.0" prefWidth="211.0" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-      <Label layoutX="169.0" layoutY="510.0" text="密码：" />
-      <PasswordField fx:id="UserPassword" layoutX="214.0" layoutY="505.0" prefHeight="30.0" prefWidth="211.0" />
-      <Button fx:id="UserChange" layoutX="214.0" layoutY="603.0" mnemonicParsing="false" onAction="#UserChangeEvent" text="更改" />
-      <Button fx:id="UserClose" layoutX="348.0" layoutY="603.0" mnemonicParsing="false" onAction="#UserCloseEvent" text="关闭" />
-   </children>
+<AnchorPane prefHeight="696.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.UserInfoController">
+   <VBox prefHeight="481.0" prefWidth="600.0">
+      <HBox alignment="CENTER" prefHeight="96.0" prefWidth="458.0">
+         <Label text="用户名：">
+            <HBox.margin>
+               <Insets right="70.0"/>
+            </HBox.margin>
+         </Label>
+         <Label fx:id="UserName"/>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+         <Label text="性别："/>
+         <RadioButton fx:id="Man" mnemonicParsing="false" text="男">
+            <toggleGroup>
+               <ToggleGroup fx:id="sex"/>
+            </toggleGroup>
+         </RadioButton>
+         <RadioButton fx:id="Woman" mnemonicParsing="false" text="女" toggleGroup="$sex"/>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <Label text="年龄："/>
+         <TextField fx:id="UserAge" prefHeight="30.0" prefWidth="211.0"/>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <Label text="手机号："/>
+         <TextField fx:id="UserNUmber" prefHeight="30.0" prefWidth="212.0"/>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="93.0" prefWidth="600.0">
+         <Label text="地址："/>
+         <TextField fx:id="UserAddress" prefHeight="30.0" prefWidth="211.0"/>
+      </HBox>
+   </VBox>
+   <Label layoutX="169.0" layoutY="510.0" text="密码："/>
+   <PasswordField fx:id="UserPassword" layoutX="214.0" layoutY="505.0" prefHeight="30.0" prefWidth="211.0"/>
+   <Button fx:id="UserChange" layoutX="214.0" layoutY="603.0" mnemonicParsing="false" onAction="#UserChangeEvent"
+           text="更改"/>
+   <Button fx:id="UserClose" layoutX="348.0" layoutY="603.0" mnemonicParsing="false" text="关闭"/>
 </AnchorPane>

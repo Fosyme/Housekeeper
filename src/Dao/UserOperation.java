@@ -9,6 +9,7 @@ public class UserOperation {
     private static final Connection CONNECTION = DBLeader.connection;
     private static PreparedStatement preparedStatement = null;
 
+    //TODO string -> int
     /**
      * 登录验证，验证用户密码是否正确,
      * 如果执行成功返回id，否则返回null;
@@ -140,17 +141,17 @@ public class UserOperation {
      * 更改用户密码，
      * 修改成功返回true，否则返回false。
      *
-     * @param userId      用户id
+     * @param userID      用户id
      * @param newPassWord 新密码
      * @return boolean
      */
-    public static boolean changePassword(String userId, String newPassWord) {
+    public static boolean changePassword(String userID, String newPassWord) {
         String sql;
         try {
             sql = "update `user` set `user_pwd` = ? where `user_id` = ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setString(1, newPassWord);
-            preparedStatement.setInt(2, Integer.parseInt(userId));
+            preparedStatement.setInt(2, Integer.parseInt(userID));
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
             }
@@ -164,19 +165,19 @@ public class UserOperation {
      * 修改密保问题和密保答案,
      * 修改成功返回true，修改失败返回false。
      *
-     * @param userId               用户id
+     * @param userID               用户id
      * @param newEncryptedQuestion 新的用户密保问题
      * @param newEncryptedAnswer   新的用户密保答案
      * @return boolean
      */
-    public static boolean changeEncrypted(String userId, String newEncryptedQuestion, String newEncryptedAnswer) {
+    public static boolean changeEncrypted(String userID, String newEncryptedQuestion, String newEncryptedAnswer) {
         String sql;
         try {
             sql = "update `user` set `user_encrypted_question` = ?, `user_encrypted_answer` = ? where `user_id` = ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setString(1, newEncryptedQuestion);
             preparedStatement.setString(2, newEncryptedAnswer);
-            preparedStatement.setInt(3, Integer.parseInt(userId));
+            preparedStatement.setInt(3, Integer.parseInt(userID));
             if (preparedStatement.executeUpdate() != 0) {
                 return true;
             }
@@ -218,17 +219,17 @@ public class UserOperation {
      * 设置用户最后登录时间，
      * 成功返回true，失败返回false。
      *
-     * @param userId   用户id，
+     * @param userID   用户id，
      * @param lastTime 最后登录时间
      * @return boolean
      */
-    public static boolean setLastTime(String userId, String lastTime) {
+    public static boolean setLastTime(String userID, String lastTime) {
         String sql;
         try {
             sql = "update `user` set `user_last_time` = ? where `user_id` = ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setString(1, lastTime);
-            preparedStatement.setInt(2, Integer.parseInt(userId));
+            preparedStatement.setInt(2, Integer.parseInt(userID));
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
             }
@@ -265,15 +266,15 @@ public class UserOperation {
     /**
      * 查询用户信息
      *
-     * @param UserId 用户id，
+     * @param UserID 用户id，
      * @return resultSet
      */
-    public static ResultSet queryInfo(String UserId) {
+    public static ResultSet queryInfo(String UserID) {
         String sql;
         try {
             sql = "select * from `user` where `user_id` = ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
-            preparedStatement.setString(1, UserId);
+            preparedStatement.setString(1, UserID);
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();

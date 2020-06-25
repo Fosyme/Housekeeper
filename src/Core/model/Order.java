@@ -1,14 +1,12 @@
 package Core.model;
 
+import Core.mutual.Data;
 import Dao.BookOperation;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 public class Order {
-    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-    private final String orderID;   //账单ID
+    private String orderID;   //账单ID
     private String bookID;          //所属账本ID
     private String bookName;        //所属账本名(非数据库)
     private String orderName;       //账单名
@@ -20,6 +18,9 @@ public class Order {
     private String orderCate;       //账单分类
     private String orderDesc;       //账单详细描述
     private byte[] orderImageSrc;   //账单图片
+
+    public Order() {
+    }
 
     public Order(String orderID) {
         this.orderID = orderID;
@@ -97,7 +98,7 @@ public class Order {
 
     public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
-        setOrderDate(dateFormat.format(Long.parseLong(orderTime) * 1000));
+        setOrderDate(Data.dateFormat.format(Long.parseLong(orderTime) * 1000));
     }
 
     public String getOrderDate() {

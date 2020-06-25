@@ -1,65 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-
-<AnchorPane styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.DateSearchController">
-   <children>
-      <HBox alignment="CENTER_LEFT" layoutX="56.0" layoutY="71.0">
-         <children>
-            <Label alignment="CENTER" prefHeight="20.0" prefWidth="52.0" text="从：">
-               <HBox.margin>
-                  <Insets left="90.0" />
-               </HBox.margin>
-            </Label>
-            <DatePicker fx:id="starDatePicker" prefHeight="30.0" prefWidth="198.0" promptText="从选中起始日期：">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </DatePicker>
-            <Label prefHeight="20.0" prefWidth="52.0" text="到：">
-               <HBox.margin>
-                  <Insets left="30.0" />
-               </HBox.margin>
-            </Label>
-            <DatePicker fx:id="endDatePicker" prefHeight="30.0" prefWidth="198.0" promptText="请选择终止日期：">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </DatePicker>
-            <Button fx:id="dateCheckButton" alignment="CENTER" mnemonicParsing="false" onAction="#dateCheckButtonEvent" text="查询">
-               <HBox.margin>
-                  <Insets left="30.0" />
-               </HBox.margin>
-            </Button>
-         </children></HBox>
-      <HBox alignment="CENTER" layoutX="-2.0" layoutY="130.0" prefHeight="43.0" prefWidth="877.0">
-         <children>
-            <Separator prefHeight="0.0" prefWidth="797.0" />
-         </children>
-      </HBox>
-      <TableView fx:id="tabDateSearch" layoutY="160.0" styleClass="background" tableMenuButtonVisible="true">
-        <columns>
-            <TableColumn fx:id="colBookName" prefWidth="120.0" text="账本名" />
-          <TableColumn fx:id="colOrderName" prefWidth="120.0" text="账单名" />
-          <TableColumn fx:id="colOrderMod" text="类型" />
-            <TableColumn fx:id="colOrderWay" prefWidth="100.0" text="方式" />
-            <TableColumn fx:id="colOrderPrice" prefWidth="75.0" text="金额" />
-            <TableColumn fx:id="colOrderCate" prefWidth="100.0" text="分类" />
-            <TableColumn fx:id="colOrderDesc" prefWidth="180.0" text="备注" />
-            <TableColumn fx:id="colOrderDate" prefWidth="100.0" text="日期" />
-        </columns>
-      </TableView>
-   </children>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="GUI.controller.DateSearchController">
+    <HBox alignment="CENTER_LEFT" layoutX="56.0" layoutY="71.0">
+        <Label alignment="CENTER" prefHeight="20.0" prefWidth="52.0" text="从：">
+            <HBox.margin>
+                <Insets left="90.0"/>
+            </HBox.margin>
+        </Label>
+        <DatePicker fx:id="starDatePicker" prefHeight="30.0" prefWidth="198.0" promptText="从选中起始日期：">
+            <HBox.margin>
+                <Insets/>
+            </HBox.margin>
+        </DatePicker>
+        <Label prefHeight="20.0" prefWidth="52.0" text="到：">
+            <HBox.margin>
+                <Insets left="30.0"/>
+            </HBox.margin>
+        </Label>
+        <DatePicker fx:id="endDatePicker" prefHeight="30.0" prefWidth="198.0" promptText="请选择终止日期：">
+            <HBox.margin>
+                <Insets/>
+            </HBox.margin>
+        </DatePicker>
+        <Button alignment="CENTER" mnemonicParsing="false" onAction="#dateCheckButtonEvent"
+                text="查询">
+            <HBox.margin>
+                <Insets left="30.0"/>
+            </HBox.margin>
+        </Button>
+    </HBox>
+    <HBox alignment="CENTER" layoutX="-2.0" layoutY="130.0" prefHeight="43.0" prefWidth="877.0">
+        <Separator prefHeight="0.0" prefWidth="797.0"/>
+    </HBox>
+    <TableView fx:id="tabDateSearch" layoutY="160.0" tableMenuButtonVisible="true">
+      <columns>
+          <TableColumn fx:id="colBookName" prefWidth="120.0" text="账本名"/>
+          <TableColumn fx:id="colOrderName" prefWidth="120.0" text="账单名"/>
+          <TableColumn fx:id="colOrderMod" text="类型"/>
+          <TableColumn fx:id="colOrderWay" prefWidth="100.0" text="方式"/>
+          <TableColumn fx:id="colOrderPrice" prefWidth="75.0" text="金额"/>
+          <TableColumn fx:id="colOrderCate" prefWidth="100.0" text="分类"/>
+          <TableColumn fx:id="colOrderDesc" prefWidth="180.0" text="备注"/>
+          <TableColumn fx:id="colOrderDate" prefWidth="100.0" text="日期"/>
+      </columns>
+    </TableView>
 </AnchorPane>

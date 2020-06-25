@@ -1,18 +1,16 @@
 package GUI.controller;
 
-import Core.mutual.Report;
 import Core.model.User;
+import Core.mutual.Report;
 import GUI.Controller;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class ReportController extends Controller {
+public class ReportController implements Controller {
     @FXML
     private Label dayInputShowLabel;
     @FXML
@@ -39,8 +37,9 @@ public class ReportController extends Controller {
     @FXML
     private PieChart yearPieChart;
 
-    public void setPieChar(User user, int bookIndex) {
-        List<List<PieChart.Data>> lists = Report.reportData(user, bookIndex, System.currentTimeMillis());
+    public void setPieChar(String userID) {
+        Report report = new Report();
+        List<List<PieChart.Data>> lists = report.reportData(userID, System.currentTimeMillis());
 
         double dayOut = lists.get(0).get(0).getPieValue();
         double dayIn = lists.get(0).get(1).getPieValue();
@@ -88,7 +87,7 @@ public class ReportController extends Controller {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(User user) {
 
     }
 }

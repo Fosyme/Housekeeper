@@ -44,7 +44,7 @@ public class Main extends Application {
                         primaryStage.setTitle("HouseKeeper");
                         primaryStage.setScene(new Scene(root));
                         primaryStage.setOnCloseRequest(windowEvent ->
-                                OpenFormAfterThis.exitApp(windowEvent, login));
+                                OpenFormAfterThis.exitApp(windowEvent, user.getUserID()));
                         MainController controller = loader.getController();
                         controller.initialize(user);
                         primaryStage.show();
@@ -59,8 +59,6 @@ public class Main extends Application {
         primaryStage.setTitle("用户登录");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
-        primaryStage.setOnCloseRequest(windowEvent ->
-                OpenFormAfterThis.exitApp(windowEvent, login));
         SignInController controller = loader.getController();
         controller.initialize(null);
         controller.smartFill(userName, userPassword);

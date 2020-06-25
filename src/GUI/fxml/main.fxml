@@ -29,7 +29,7 @@
                     <Button mnemonicParsing="false" onAction="#alterButtonEvent" prefHeight="40.0" prefWidth="60.0" text="修改" />
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <Button mnemonicParsing="false" onAction="#checkButtonEvent" prefHeight="40.0" prefWidth="60.0" text="查询" />
+                    <Button mnemonicParsing="false" onAction="#dateSearchButtonEvent" prefHeight="40.0" prefWidth="60.0" text="查询" />
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <Button mnemonicParsing="false" onAction="#setButtonEvent" prefHeight="40.0" prefWidth="60.0" text="设置" />

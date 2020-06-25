@@ -1,5 +1,7 @@
 package GUI.controller;
 
+import Core.model.User;
+import Core.mutual.Info;
 import GUI.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,12 +11,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class AddOrderController extends Controller {
+public class AddOrderController implements Controller {
+    private Info info;
+    private String bookID;
+
     @FXML
     private AnchorPane paneAddOrder;
     @FXML
@@ -73,7 +76,7 @@ public class AddOrderController extends Controller {
         String[] orderMsg = {
                 name, money, way, type, date, cate, desc
         };
-        boolean b = info.addOrder(bookIndex, orderMsg);
+        boolean b = info.addOrder(bookID, orderMsg);
         Alert alert;
         if (b) {
             alert = new Alert(Alert.AlertType.INFORMATION);
@@ -91,13 +94,10 @@ public class AddOrderController extends Controller {
         }
     }
 
-    public void setBookIndex(int bookIndex) {
-        this.bookIndex = bookIndex;
-    }
-
     //初始化
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(User user) {
+        info = new Info();
         //order_way
         List<String> listWay = new ArrayList<>();
         listWay.add("现金");
@@ -132,6 +132,10 @@ public class AddOrderController extends Controller {
         outputRadioButton.setUserData("支出");
         inputRadioButton.setUserData("收入");
         outputRadioButton.setSelected(true);
+    }
+
+    public void setSelectedBookID(String bookID) {
+        this.bookID = bookID;
     }
 }
 

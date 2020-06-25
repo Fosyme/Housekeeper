@@ -1,6 +1,5 @@
 package Core.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -19,11 +18,6 @@ public class User {
     private String userPhone;       //用户手机号
     private String userAddress;     //用户地址
     private byte[] userHeadThumb;   //用户头像
-
-    //账本信息
-    private final ArrayList<Book> books = new ArrayList<>();
-    //账单信息
-    private final ArrayList<ArrayList<Order>> orders = new ArrayList<>();
 
     public User(String userID) {
         this.userID = userID;
@@ -105,18 +99,11 @@ public class User {
         this.userHeadThumb = userHeadThumb;
     }
 
-    public ArrayList<Book> getBooks() {
-        return books;
-    }
-
-    public ArrayList<ArrayList<Order>> getOrders() {
-        return orders;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "userID='" + userID + '\'' +
+                ", userPassword='" + userPassword + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userRegTime='" + userRegTime + '\'' +
                 ", userLastTime='" + userLastTime + '\'' +
@@ -125,8 +112,6 @@ public class User {
                 ", userPhone='" + userPhone + '\'' +
                 ", userAddress='" + userAddress + '\'' +
                 ", userHeadThumb=" + Arrays.toString(userHeadThumb) +
-                ", books=" + books +
-                ", orders=" + orders +
                 '}';
     }
 }

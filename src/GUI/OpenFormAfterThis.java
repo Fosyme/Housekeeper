@@ -3,6 +3,7 @@ package GUI;
 import Core.mutual.Login;
 import GUI.controller.SignInController;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -18,7 +19,7 @@ public class OpenFormAfterThis {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/signIn.fxml"));
-            Pane page = loader.load();
+            Parent page = loader.load();
             Stage signIn = new Stage();
             signIn.setTitle("用户登录");
             signIn.setResizable(false);

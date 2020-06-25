@@ -1,6 +1,8 @@
 package GUI.controller;
 
 import Core.model.Order;
+import Core.model.User;
+import Core.mutual.Info;
 import GUI.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,14 +12,14 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class AlterOrderController extends Controller {
+public class AlterOrderController implements Controller {
+    Order order;
+
     @FXML
     private AnchorPane paneAlterOrder;
     @FXML
@@ -39,11 +41,9 @@ public class AlterOrderController extends Controller {
     @FXML
     private ComboBox<String> combCate;
 
-    private int bookIndex;
-    private int orderIndex;
-
     @FXML
     void alterButtonEvent(ActionEvent event) {
+        Info info = new Info();
         String moneyRegex = "^\\d{0,8}|\\d{0,8}\\.\\d{1,2}$";
         String type = (String) togGpMod.getSelectedToggle().getUserData();  //账单类型
         String name = nameTextField.getText();                              //账单名字
@@ -78,7 +78,7 @@ public class AlterOrderController extends Controller {
         String[] orderMsg = {
                 name, money, way, type, date, cate, desc
         };
-        boolean b = info.alterOrder(bookIndex, orderIndex, orderMsg);
+        boolean b = info.alterOrder(order.getOrderID(), orderMsg);
         Alert alert;
         if (b) {
             alert = new Alert(Alert.AlertType.INFORMATION);
@@ -97,7 +97,7 @@ public class AlterOrderController extends Controller {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(User user) {
         //order_way
         List<String> listWay = new ArrayList<>();
         listWay.add("现金");
@@ -134,10 +134,8 @@ public class AlterOrderController extends Controller {
         outputRadioButton.setSelected(true);
     }
 
-    public void dataPadding(int bookIndex, int orderIndex) {
-        this.bookIndex = bookIndex;
-        this.orderIndex = orderIndex;
-        Order order = info.getUser().getOrders().get(bookIndex).get(orderIndex);
+    public void fillData(Order order) {
+        this.order = order;
         if (order.getOrderMod().equals("支出")) {
             outputRadioButton.setSelected(true);
             inputRadioButton.setSelected(false);

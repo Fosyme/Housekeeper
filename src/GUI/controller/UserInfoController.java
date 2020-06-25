@@ -1,17 +1,12 @@
 package GUI.controller;
 
+import Core.model.User;
 import GUI.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class UserInfoController extends Controller {
-    private Stage dialogStage;
-
+public class UserInfoController implements Controller {
     @FXML
     private Label UserName;
     @FXML
@@ -33,22 +28,13 @@ public class UserInfoController extends Controller {
     @FXML
     private Button UserClose;
 
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
-
     @FXML
     void UserChangeEvent(ActionEvent event) {
         //更改按钮
     }
 
-    @FXML
-    void UserCloseEvent(ActionEvent event) {
-        dialogStage.close();
-    }
-
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(User user) {
 
     }
 }

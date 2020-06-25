@@ -1,6 +1,5 @@
 package Core.mutual;
 
-import Core.model.User;
 import Dao.OrderOperation;
 import javafx.scene.chart.PieChart;
 
@@ -10,23 +9,15 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Report {
-    private final User user;
-
-    public Report(User user) {
-        this.user = user;
-    }
-
     /**
      * 报表数据生成
      *
-     * @param bookIndex 账本索引
-     * @param nowTime 当前时间时间戳
+     * @param time 当前时间时间戳
      * @return 饼状图数据
      */
-    public List<List<PieChart.Data>> reportData(User user, int bookIndex, long nowTime) {
-        String bookID = user.getBooks().get(bookIndex).getBookID();
+    public List<List<PieChart.Data>> reportData(String bookID , long time) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(nowTime);
+        calendar.setTimeInMillis(time);
         long startDayTime = thisDayStartCalender(calendar).getTimeInMillis();
         long endDayTime = nextDayStartCalender(calendar).getTimeInMillis() - 1;
         long startWeekTime = thisWeekStartCalender(calendar).getTimeInMillis();

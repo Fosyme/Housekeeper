@@ -10,27 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Display {
-    private final User user;
+    private final Data data = new Data();
 
-    public Display(User user) {
-        this.user = user;
-    }
-
-    //初始化账本列表
-    public ObservableList<Book> initializeBookData() {
-        List<Book> list = user.getBooks();
+    //更新账本信息
+    public ObservableList<Book> updateBooks(String userID) {
+        List<Book> list = data.loadBook(userID);
         return FXCollections.observableList(list);
     }
 
-    //设置账单列表
-    public ObservableList<Order> getOrderOfBook(int index) {
-        ArrayList<Order> list = user.getOrders().get(index);
+    //更新账单信息
+    public ObservableList<Order> updateOrders(String bookID) {
+        ArrayList<Order> list = data.loadOrder(bookID);
         return FXCollections.observableArrayList(list);
-    }
-
-    //刷新账本列表
-    public ObservableList<Book> refreshBookData() {
-        List<Book> list = user.getBooks();
-        return FXCollections.observableList(list);
     }
 }

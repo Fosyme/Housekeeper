@@ -39,9 +39,8 @@ public class Login {
             userID = UserOperation.authentication(userName, userPassword);
         }
         if (userID != null) {
-            User user = new User(userID);
-            Data.initialization(user);
-            return user;
+            Data data = new Data();
+            return data.loadUser(userID);
         }
         return null;
     }

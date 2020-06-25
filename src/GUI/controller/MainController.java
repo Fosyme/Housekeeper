@@ -13,11 +13,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -32,8 +32,7 @@ import java.util.Optional;
 import java.util.Properties;
 
 public class MainController implements Controller {
-    Info info;
-    Display display;
+    private User user;
 
     @FXML
     private VBox paneMain;
@@ -108,18 +107,19 @@ public class MainController implements Controller {
     //添加账本事件
     @FXML
     void ctmAddBookEVent(ActionEvent event) {
+        Info info = new Info();
         Optional<Pair<String, String>> result = bookDialog("添加账本", "", "");
         //对结果进行处理
         result.ifPresent(pair -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("提示");
             alert.setHeaderText(null);
-            if (info.isBookExist(pair.getKey())) {
+            if (info.isBookExist(user.getUserID(), pair.getKey())) {
                 alert.setContentText("账本已存在！");
                 alert.showAndWait();
                 ctmAddBookEVent(event);
             } else {
-                if (info.addBook(pair.getKey(), pair.getValue())) {
+                if (info.addBook(user.getUserID(), pair.getKey(), pair.getValue())) {
                     alert.setContentText("账本添加成功！");
                 } else {
                     alert.setContentText("账本添加失败，请重试！");
@@ -127,41 +127,45 @@ public class MainController implements Controller {
                 alert.show();
             }
         });
-        ctmRefreshBookEvent();
+        refreshBook();
     }
 
+    //修改账本事件
     @FXML
     void ctmAlterBookEvent(ActionEvent event) {
+        Info info = new Info();
         Book book = bookTableView.getSelectionModel().getSelectedItem();
-        if (book != null) {
-            String bookName = book.getBookName();
-            String bookDesc = book.getBookDesc();
-            Optional<Pair<String, String>> result = bookDialog("修改账本", bookName, bookDesc);
-            result.ifPresent(pair -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("提示");
-                alert.setHeaderText(null);
-                if (info.alterBook(index, pair.getKey(), pair.getValue())) {
-                    alert.setContentText("账本修改成功！");
-                } else {
-                    alert.setContentText("账本修改失败，请重试！");
-                }
-                alert.show();
-            });
-            ctmRefreshBookEvent();
-        } else {
+        if (book == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("提示");
             alert.setHeaderText(null);
             alert.setContentText("请选择账本！");
             alert.show();
+            return;
         }
+        String bookName = book.getBookName();
+        String bookDesc = book.getBookDesc();
+        Optional<Pair<String, String>> result = bookDialog("修改账本", bookName, bookDesc);
+        result.ifPresent(pair -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("提示");
+            alert.setHeaderText(null);
+            if (info.alterBook(book.getBookID(), pair.getKey(), pair.getValue())) {
+                alert.setContentText("账本修改成功！");
+            } else {
+                alert.setContentText("账本修改失败，请重试！");
+            }
+            alert.show();
+        });
+        refreshBook();
     }
 
+    //删除账本事件
     @FXML
     void ctmDeleteBookEvent(ActionEvent event) {
-        int index = bookTableView.getSelectionModel().getSelectedIndex();
-        if (index == -1) {
+        Info info = new Info();
+        Book book = bookTableView.getSelectionModel().getSelectedItem();
+        if (book == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("警告");
             alert.setHeaderText(null);
@@ -176,7 +180,7 @@ public class MainController implements Controller {
         Optional<ButtonType> result = alert.showAndWait();
         result.ifPresent(buttonType -> {
             if (buttonType == ButtonType.OK) {
-                if (!info.deleteBook(index)) {
+                if (!info.deleteBook(book.getBookID())) {
                     Alert delete = new Alert(Alert.AlertType.ERROR);
                     delete.setTitle("提示");
                     delete.setHeaderText(null);
@@ -185,60 +189,48 @@ public class MainController implements Controller {
                 }
             }
         });
-        ctmRefreshBookEvent();
+        refreshBook();
         orderTableView.setItems(null);
     }
 
-    //刷新账本信息
-    void ctmRefreshBookEvent() {
-        ObservableList<Book> list = display.refreshBookData();
-        bookTableView.refresh();
-        bookTableView.setItems(list);
-        bookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
-        bookDesc.setCellValueFactory(new PropertyValueFactory<>("bookDesc"));
-    }
-
+    //添加账单
     @FXML
     void addButtonEvent(ActionEvent event) {
+        //判断是否选择了账本
+        Book book = bookTableView.getSelectionModel().getSelectedItem();
+        if (book == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("警告");
+            alert.setHeaderText(null);
+            alert.setContentText("请选择账本！");
+            alert.show();
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/addOrder.fxml"));
-            AnchorPane page = loader.load();
-
-            Stage mainFrameStage = new Stage();
-            mainFrameStage.setTitle("添加账单");
-            mainFrameStage.setResizable(false);
-            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Parent page = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("添加账单");
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
-            mainFrameStage.setScene(scene);
-
-            //加载CSS样式文件
-            scene.getStylesheets().add((getStyleValue()));
+            stage.setScene(scene);
             AddOrderController controller = loader.getController();
-            controller.initialize(, display.getUser(), );
-            //判断是否选择了账本
-            int index = bookTableView.getSelectionModel().getSelectedIndex();
-            if (index == -1) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("警告");
-                alert.setHeaderText(null);
-                alert.setContentText("请选择账本！");
-                alert.showAndWait();
-                return;
-            }
-            controller.setBookIndex(index);
-            mainFrameStage.showAndWait();
-            changeSelectedBookItem(index);
+            controller.initialize(user);
+            controller.setSelectedBookID(book.getBookID());
+            stage.showAndWait();
+            refreshOrder(book.getBookID());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //修改账单事件
     @FXML
     void alterButtonEvent(ActionEvent event) {
-        int bookIndex = bookTableView.getSelectionModel().getSelectedIndex();
-        int orderIndex = orderTableView.getSelectionModel().getSelectedIndex();
-        if (bookIndex == -1 || orderIndex == -1) {
+        Order order = orderTableView.getSelectionModel().getSelectedItem();
+        if (order == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("警告");
             alert.setHeaderText(null);
@@ -249,42 +241,41 @@ public class MainController implements Controller {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/alterOrder.fxml"));
-            AnchorPane page = loader.load();
-
-            Stage mainFrameStage = new Stage();
-            mainFrameStage.setTitle("修改账单");
-            mainFrameStage.setResizable(false);
-            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Parent page = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("修改账单");
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
-            mainFrameStage.setScene(scene);
-            //加载CSS样式文件
-            scene.getStylesheets().add((getStyleValue()));
-
+            stage.setScene(scene);
             AlterOrderController controller = loader.getController();
-            controller.initialization(display.getUser());
-            controller.dataPadding(bookIndex, orderIndex);
-            mainFrameStage.showAndWait();
-            changeSelectedBookItem(bookIndex);
+            controller.initialize(user);
+            controller.fillData(order);
+            stage.showAndWait();
+            refreshOrder(order.getBookID());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //上下文添加账单
     @FXML
     void ctmAddOrderEvent(ActionEvent event) {
         addButtonEvent(event);
     }
 
+    //上下文修改账单
     @FXML
     void ctmAlterOrderEvent(ActionEvent event) {
         alterButtonEvent(event);
     }
 
+    //上下文删除账单
     @FXML
     void ctmDeleteOrderEvent(ActionEvent event) {
-        int bookIndex = bookTableView.getSelectionModel().getSelectedIndex();
-        int orderIndex = orderTableView.getSelectionModel().getSelectedIndex();
-        if (bookIndex == -1 || orderIndex == -1) {
+        Info info = new Info();
+        Order order = orderTableView.getSelectionModel().getSelectedItem();
+        if (order == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("警告");
             alert.setHeaderText(null);
@@ -299,7 +290,7 @@ public class MainController implements Controller {
         Optional<ButtonType> result = alert.showAndWait();
         result.ifPresent(buttonType -> {
             if (buttonType == ButtonType.OK) {
-                if (!info.deleteOrder(bookIndex, orderIndex)) {
+                if (!info.deleteOrder(order.getOrderID())) {
                     Alert delete = new Alert(Alert.AlertType.ERROR);
                     delete.setTitle("提示");
                     delete.setHeaderText(null);
@@ -308,12 +299,13 @@ public class MainController implements Controller {
                 }
             }
         });
-        changeSelectedBookItem(bookIndex);
+        refreshOrder(order.getBookID());
     }
 
     //搜索
     @FXML
     void searchButtonEvent(ActionEvent event) {
+        Info info = new Info();
         //模糊查询关键字
         String keyword = keywordTextField.getText();
         if (keyword.isBlank()) {
@@ -333,8 +325,8 @@ public class MainController implements Controller {
                 stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL);
                 ScreenOrder controller = loader.getController();
-                controller.initialization(display.getUser());
-                controller.setTabScreen(info.queryOrder(keyword));
+                controller.initialize(user);
+                controller.setData(info.queryOrder(user.getUserID(), keyword));
                 stage.show();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -342,32 +334,7 @@ public class MainController implements Controller {
         }
     }
 
-    @FXML
-    Scene setButtonEvent(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/set.fxml"));
-            AnchorPane page = loader.load();
-
-            Stage mainFrameStage = new Stage();
-            mainFrameStage.setTitle("设置");
-            mainFrameStage.setResizable(false);
-            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
-            Scene scene = new Scene(page);
-            mainFrameStage.setScene(scene);
-            //加载CSS样式文件
-            scene.getStylesheets().add((getStyleValue()));
-            SetController controller = loader.getController();
-            controller.initialization(display.getUser());
-            controller.setParent((Stage) paneMain.getScene().getWindow());
-            mainFrameStage.show();
-            return scene;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
+    //报表事件
     @FXML
     void reportButtonEvent(ActionEvent event) {
         int bookIndex = bookTableView.getSelectionModel().getSelectedIndex();
@@ -382,52 +349,72 @@ public class MainController implements Controller {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/report.fxml"));
-            AnchorPane page = loader.load();
-            Stage mainFrameStage = new Stage();
-            mainFrameStage.setTitle("报表");
-            mainFrameStage.setResizable(false);
-            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Parent page = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("报表");
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
-            mainFrameStage.setScene(scene);
-            //加载CSS样式文件
-            scene.getStylesheets().add((getStyleValue()));
+            stage.setScene(scene);
             ReportController controller = loader.getController();
-            controller.setPieChar(display.getUser(), bookIndex);
-            mainFrameStage.showAndWait();
+            controller.initialize(user);
+            controller.setPieChar(user.getUserID());
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //时间查询事件
     @FXML
-    void checkButtonEvent(ActionEvent actionEvent) {
-        //查询
+    void dateSearchButtonEvent(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("fxml/dateSearch.fxml"));
-            AnchorPane page = loader.load();
-
-            Stage mainFrameStage = new Stage();
-            mainFrameStage.setTitle("日期查询");
-            mainFrameStage.setResizable(false);
-            mainFrameStage.initModality(Modality.APPLICATION_MODAL);
+            Parent page = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("日期查询");
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
-            mainFrameStage.setScene(scene);
-            scene.getStylesheets().add((getStyleValue()));
+            stage.setScene(scene);
             DateSearchController controller = loader.getController();
-            controller.initialization(display.getUser());
-            mainFrameStage.show();
+            controller.initialize(user);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //设置事件
+    @FXML
+    void setButtonEvent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/set.fxml"));
+            Parent page = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("设置");
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+            SetController controller = loader.getController();
+            controller.initialize(user);
+            controller.setParentStage((Stage) paneMain.getScene().getWindow());
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //搜索框清空内容事件
     @FXML
     void lblClearClicked(MouseEvent mouseEvent) {
         keywordTextField.clear();
     }
 
-    @FXML
+    //获取样式值
     public String getStyleValue() throws IOException {
         File file = new File("src\\GUI\\resources\\styles.properties");
         Properties properties = new Properties();
@@ -443,11 +430,14 @@ public class MainController implements Controller {
 
     @Override
     public void initialize(User user) {
+        this.user = user;
+        Display display = new Display();
         username.setText(user.getUserName());
         bookTableView
                 .getSelectionModel()
-                .selectedIndexProperty()
-                .addListener((observableValue, number, t1) -> changeSelectedBookItem((Integer) t1));
+                .selectedItemProperty()
+                .addListener((observableValue, book, t1) ->
+                        refreshOrder(t1.getBookID()));
         lblClear.setVisible(false);
         keywordTextField
                 .textProperty()
@@ -459,17 +449,27 @@ public class MainController implements Controller {
                         lblClear.setVisible(false);
                     }
                 });
-        ObservableList<Book> list = display.initializeBookData();
+        ObservableList<Book> list = display.updateBooks(user.getUserID());
         bookTableView.setItems(list);
         bookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
         bookDesc.setCellValueFactory(new PropertyValueFactory<>("bookDesc"));
     }
 
-    public void changeSelectedBookItem(int bookIndex) {
-        if (bookIndex == -1) {
-            return;
-        }
-        ObservableList<Order> list = display.getOrderOfBook(bookIndex);
+
+    //刷新账本内容
+    void refreshBook() {
+        Display display = new Display();
+        ObservableList<Book> list = display.updateBooks(user.getUserID());
+        bookTableView.refresh();
+        bookTableView.setItems(list);
+        bookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
+        bookDesc.setCellValueFactory(new PropertyValueFactory<>("bookDesc"));
+    }
+
+    //刷新账本对应账单内容
+    public void refreshOrder(String bookID) {
+        Display display = new Display();
+        ObservableList<Order> list = display.updateOrders(bookID);
         orderTableView.refresh();
         orderTableView.setItems(list);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("orderName"));
