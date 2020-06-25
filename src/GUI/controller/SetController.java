@@ -1,7 +1,6 @@
 package GUI.controller;
 
-import Core.model.User;
-import Core.mutual.Login;
+import GUI.Controller;
 import GUI.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,34 +19,24 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
-public class SetController {
-    private Login login;
-    private Stage parent;
-
+public class SetController implements Controller {
     @FXML
     private AnchorPane paneSet;
-
     @FXML
     private RadioMenuItem defaultRadioMenulten;
-
     @FXML
     private ToggleGroup theme;
-
     @FXML
     private RadioMenuItem PalegrayRadioMenultem;
-
     @FXML
     private RadioMenuItem LemonyellowRadioMenultem;
-
     @FXML
     private Button AboutsoftwarButton;
-
-    public void setParent(Stage parent) {
-        this.parent = parent;
-    }
 
     @FXML
     Scene AboutsoftwarButtonEvent(ActionEvent event) {
@@ -71,14 +60,13 @@ public class SetController {
             e.printStackTrace();
         }
         return null;
-
     }
 
     @FXML
     Scene UserinfoEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/userinfo.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/userInfo.fxml"));
             AnchorPane page = loader.load();
 
             Stage mainFrameStage = new Stage();
@@ -90,7 +78,7 @@ public class SetController {
 
             scene.getStylesheets().add((getStyleValue()));
 
-            UserinfoController controller = loader.getController();
+            UserInfoController controller = loader.getController();
             controller.setDialogStage(mainFrameStage);
             mainFrameStage.showAndWait();
             return scene;
@@ -98,7 +86,6 @@ public class SetController {
             e.printStackTrace();
         }
         return null;
-
     }
 
     @FXML
@@ -189,11 +176,6 @@ public class SetController {
         return properties.getProperty(Key, "");
     }
 
-    public void initialization(User user) {
-        login = new Login(user);
-        initThemeRadioMenuItem();
-    }
-
     private void initThemeRadioMenuItem() {
         String key = "";
         try {
@@ -213,5 +195,10 @@ public class SetController {
         } else {
             defaultRadioMenulten.setSelected(true);
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initThemeRadioMenuItem();
     }
 }

@@ -1,11 +1,15 @@
 package GUI.controller;
 
+import GUI.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class SoftInfoController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class SoftInfoController extends Controller {
     private Stage dialogStage;
 
     @FXML
@@ -18,5 +22,10 @@ public class SoftInfoController {
     @FXML
     void closeButtonEvent(ActionEvent event) {
         dialogStage.close();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

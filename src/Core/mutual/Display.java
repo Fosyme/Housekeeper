@@ -10,14 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Display {
-    private User user;
+    private final User user;
 
     public Display(User user) {
         this.user = user;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     //初始化账本列表

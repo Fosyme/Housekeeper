@@ -5,6 +5,7 @@ import Core.model.Order;
 import Core.model.User;
 import Core.mutual.Display;
 import Core.mutual.Info;
+import GUI.Controller;
 import GUI.Main;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -30,90 +31,43 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.Properties;
 
-public class MainController {
+public class MainController implements Controller {
     Info info;
     Display display;
 
     @FXML
     private VBox paneMain;
-
-    @FXML
-    private Button checkButton;
-
     @FXML
     private Label username;
 
     @FXML
-    private Button reportButton;
-
-    @FXML
-    private Button addButton;
-
-    @FXML
-    private Button alterButton;
-
-    @FXML
-    private Button setButton;
-
-    @FXML
     private TableView<Book> bookTableView;
-
     @FXML
     private TableColumn<Book, String> bookName;
-
     @FXML
     private TableColumn<Book, String> bookDesc;
 
     @FXML
-    private MenuItem ctmAddBook;
-
-    @FXML
-    private MenuItem ctmDeleteBook;
-
-    @FXML
-    private MenuItem ctmAlterBook;
-
-    @FXML
     private TextField keywordTextField;
-
     @FXML
     private Label lblClear;
 
     @FXML
-    private Button searchButton;
-
-    @FXML
     private TableView<Order> orderTableView;
-
     @FXML
     private TableColumn<Order, String> nameColumn;
-
     @FXML
     private TableColumn<Order, String> modColumn;
-
     @FXML
     private TableColumn<Order, String> wayColumn;
-
     @FXML
     private TableColumn<Order, String> moneyColumn;
-
     @FXML
     private TableColumn<Order, String> cateColumn;
-
     @FXML
     private TableColumn<Order, String> descColumn;
-
     @FXML
     private TableColumn<Order, String> dateColumn;
-
-    @FXML
-    private MenuItem ctmAddOrder;
-
-    @FXML
-    private MenuItem ctmDeleteOrder;
-
-    @FXML
-    private MenuItem ctmAlterOrder;
 
     //自定义一个对话框, 用于账本的操作
     private Optional<Pair<String, String>> bookDialog(String title, String bookName, String bookDesc) {
@@ -151,6 +105,7 @@ public class MainController {
         return dialog.showAndWait();
     }
 
+    //添加账本事件
     @FXML
     void ctmAddBookEVent(ActionEvent event) {
         Optional<Pair<String, String>> result = bookDialog("添加账本", "", "");
@@ -177,9 +132,8 @@ public class MainController {
 
     @FXML
     void ctmAlterBookEvent(ActionEvent event) {
-        int index = bookTableView.getSelectionModel().getSelectedIndex();
-        if (index != -1) {
-            Book book = display.getUser().getBooks().get(index);
+        Book book = bookTableView.getSelectionModel().getSelectedItem();
+        if (book != null) {
             String bookName = book.getBookName();
             String bookDesc = book.getBookDesc();
             Optional<Pair<String, String>> result = bookDialog("修改账本", bookName, bookDesc);
@@ -261,7 +215,7 @@ public class MainController {
             //加载CSS样式文件
             scene.getStylesheets().add((getStyleValue()));
             AddOrderController controller = loader.getController();
-            controller.initialization(display.getUser());
+            controller.initialize(, display.getUser(), );
             //判断是否选择了账本
             int index = bookTableView.getSelectionModel().getSelectedIndex();
             if (index == -1) {
@@ -487,9 +441,8 @@ public class MainController {
         return properties.getProperty(Key, "");
     }
 
-    public void initialization(User user) {
-        display = new Display(user);
-        info = new Info(user);
+    @Override
+    public void initialize(User user) {
         username.setText(user.getUserName());
         bookTableView
                 .getSelectionModel()

@@ -14,42 +14,44 @@ import java.util.Properties;
  * 此类有登录、注册、找回密码等方法
  */
 public class Login {
-    private User user;  //用户信息
-
     public Login() {
     }
 
-    public Login(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
-    }
+    /**
+     * passwordType密码类型
+     * */
+    public static final int plain = 0;  //明文
+    public static final int cipher = 1; //密文
 
     /**
      * 登录方法, 用于用户登录认证
      *
      * @param userName     用户名, 不能为空
-     * @param userPassword 用户输入密码(密文)
-     * @return 登录结果
+     * @param userPassword 用户输入密码
+     * @param passwordType 密码方式
+     * @return 用户对象
      */
-    public boolean signIn(String userName, String userPassword) {
+    public User signIn(String userName, String userPassword, int passwordType) {
         String userID;
-        userID = UserOperation.authentication(userName, userPassword);
-        if (userID == null) {
-            return false;
+        if (passwordType == plain) {
+            userID = UserOperation.authentication(userName, getMD5String(userPassword));
+        } else {
+            userID = UserOperation.authentication(userName, userPassword);
         }
-        user = new User(userID);
-        return true;
+        if (userID != null) {
+            User user = new User(userID);
+            Data.initialization(user);
+            return user;
+        }
+        return null;
     }
 
     /**
      * 注册方法, 用于用户注册账户
      *
      * @param userMsg 从前端接受来的用户信息数组
-     *                包含: 用户名, 用户密码(密文), 用户密保问题,
-     *                用户密保答案(密文), 性别, 年龄, 手机号, 地址, 头像
+     *                包含: 用户名, 用户密码(明文), 用户密保问题,
+     *                用户密保答案(明文), 性别, 年龄, 手机号, 地址, 头像
      * @return 注册结果
      */
     public boolean signUp(String[] userMsg) {
@@ -58,7 +60,10 @@ public class Login {
         if (verifyId) {
             return false;
         }
-        System.arraycopy(userMsg, 0, userInfo, 0, 4);
+        userInfo[0] = userMsg[0];
+        userInfo[1] = getMD5String(userMsg[0]);
+        userInfo[2] = userMsg[0];
+        userInfo[3] = getMD5String(userMsg[0]);
         userInfo[4] = String.valueOf(System.currentTimeMillis() / 1000);
         System.arraycopy(userMsg, 4, userInfo, 5, 5);
         return UserOperation.add(userInfo);
@@ -66,9 +71,11 @@ public class Login {
 
     /**
      * 登出方法, 用于用户登出账号或切换账号
+     *
+     * @param userID 用户ID
      */
-    public void signOut() {
-        UserOperation.setLastTime(user.getUserID(), String.valueOf(System.currentTimeMillis() / 1000));
+    public void signOut(String userID) {
+        UserOperation.setLastTime(userID, String.valueOf(System.currentTimeMillis() / 1000));
     }
 
     /**
@@ -101,18 +108,20 @@ public class Login {
     /**
      * 将登录信息写入配置文件
      *
+     * @param userName         用户名
+     * @param userPassword     用户密码(明文)
      * @param autoSignIn       自动登录标识
      * @param rememberPassword 记住密码标识
      */
-    public void writeConfig(boolean autoSignIn, boolean rememberPassword) {
+    public void writeConfig(String userName, String userPassword, boolean autoSignIn, boolean rememberPassword) {
         try {
             FileOutputStream fos = new FileOutputStream("src/config");
             Properties prop = new Properties();
             prop.put("auto_sign_in", String.valueOf(autoSignIn));
             prop.put("remember_password", String.valueOf(rememberPassword));
-            prop.put("user_name", user.getUserName());
+            prop.put("user_name", userName);
             if (rememberPassword) {
-                prop.put("user_password", user.getUserPassword());
+                prop.put("user_password", getMD5String(userPassword));
             }
             prop.store(fos, "Config");
             fos.close();
@@ -122,7 +131,7 @@ public class Login {
     }
 
     //对字符串进行MD5加密
-    public static String getMD5String(String plainText) {
+    private static String getMD5String(String plainText) {
         String cipherText = "";
         try {
             //生成一个MD5加密计算摘要

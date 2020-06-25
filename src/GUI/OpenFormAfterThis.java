@@ -26,7 +26,7 @@ public class OpenFormAfterThis {
             Scene scene = new Scene(page);
             signIn.setScene(scene);
             SignInController controller = loader.getController();
-            controller.initialization();
+            controller.initialize(null);
             controller.smartFill(userName, userPassword);
             signIn.show();
         } catch (Exception e) {
@@ -34,7 +34,7 @@ public class OpenFormAfterThis {
         }
     }
 
-    public static void exitApp(WindowEvent windowEvent, Login login) {
+    public static void exitApp(WindowEvent windowEvent, String userID) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("提示");
         alert.setHeaderText(null);
@@ -42,7 +42,7 @@ public class OpenFormAfterThis {
         Optional<ButtonType> optional = alert.showAndWait();
         optional.ifPresent(buttonType -> {
             if (buttonType == ButtonType.OK) {
-                login.signOut();
+                new Login().signOut(userID);
                 System.exit(0);
             }
         });

@@ -1,8 +1,7 @@
 package GUI.controller;
 
 import Core.model.Order;
-import Core.mutual.Info;
-import Core.model.User;
+import GUI.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,11 +12,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class DateSearchController {
-    private Info info;
-
+public class DateSearchController extends Controller {
     @FXML
     private TableView<Order> tabDateSearch;
     @FXML
@@ -66,7 +65,8 @@ public class DateSearchController {
         }
     }
 
-    public void initialization(User user) {
-        info = new Info(user);
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

@@ -1,8 +1,7 @@
 package GUI.controller;
 
 import Core.model.Order;
-import Core.mutual.Info;
-import Core.model.User;
+import GUI.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,41 +10,32 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class AlterOrderController {
-    private Info info;
-
+public class AlterOrderController extends Controller {
     @FXML
-    public AnchorPane paneAlterOrder;
-
+    private AnchorPane paneAlterOrder;
     @FXML
     private TextField nameTextField;
-
     @FXML
     private ToggleGroup togGpMod;
-
     @FXML
     private ComboBox<String> combWay;
-
     @FXML
     private RadioButton outputRadioButton;
-
     @FXML
     private TextField moneyTextField;
-
     @FXML
     private DatePicker datePicker;
-
     @FXML
     private RadioButton inputRadioButton;
-
     @FXML
     private TextArea descTextArea;
-
     @FXML
     private ComboBox<String> combCate;
 
@@ -106,9 +96,8 @@ public class AlterOrderController {
         }
     }
 
-    //初始化
-    public void initialization(User user) {
-        info = new Info(user);
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         //order_way
         List<String> listWay = new ArrayList<>();
         listWay.add("现金");

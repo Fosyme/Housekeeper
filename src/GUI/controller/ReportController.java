@@ -1,15 +1,18 @@
 package GUI.controller;
 
-import Core.process.Report;
+import Core.mutual.Report;
 import Core.model.User;
+import GUI.Controller;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class ReportController {
+public class ReportController extends Controller {
     @FXML
     private Label dayInputShowLabel;
     @FXML
@@ -82,5 +85,10 @@ public class ReportController {
         pie.setData(FXCollections.observableList(List.of(new PieChart.Data("空", 1))));
         out.setText("0");
         in.setText("0");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

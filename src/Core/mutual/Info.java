@@ -3,7 +3,6 @@ package Core.mutual;
 import Core.model.User;
 import Core.model.Book;
 import Core.model.Order;
-import Core.process.Data;
 import Dao.BookOperation;
 import Dao.OrderOperation;
 import java.sql.ResultSet;
@@ -11,14 +10,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 public class Info {
-    User user;
+    private final User user;
 
     public Info(User user) {
         this.user = user;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     /**

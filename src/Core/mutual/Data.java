@@ -1,4 +1,4 @@
-package Core.process;
+package Core.mutual;
 
 import Core.model.User;
 import Core.model.Book;

@@ -1,4 +1,4 @@
-package Core.process;
+package Core.mutual;
 
 import Core.model.User;
 import Dao.OrderOperation;
@@ -10,6 +10,12 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Report {
+    private final User user;
+
+    public Report(User user) {
+        this.user = user;
+    }
+
     /**
      * 报表数据生成
      *
@@ -17,7 +23,7 @@ public class Report {
      * @param nowTime 当前时间时间戳
      * @return 饼状图数据
      */
-    public static List<List<PieChart.Data>> reportData(User user, int bookIndex, long nowTime) {
+    public List<List<PieChart.Data>> reportData(User user, int bookIndex, long nowTime) {
         String bookID = user.getBooks().get(bookIndex).getBookID();
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(nowTime);
@@ -41,7 +47,7 @@ public class Report {
         return list;
     }
 
-    private static List<PieChart.Data> writeData(ResultSet rs) {
+    private List<PieChart.Data> writeData(ResultSet rs) {
         List<PieChart.Data> data = new ArrayList<>();
         try {
             double out = 0;

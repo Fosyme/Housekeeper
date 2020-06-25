@@ -1,6 +1,8 @@
 package GUI.controller;
 
+import Core.model.User;
 import Core.mutual.Login;
+import GUI.Controller;
 import GUI.OpenFormAfterThis;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,41 +11,34 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignUpController {
+public class SignUpController implements Controller {
     private Login login;
 
     @FXML
-    public AnchorPane paneSignUp;
-
+    private AnchorPane paneSignUp;
     @FXML
     private TextField passwordTextField;
-
     @FXML
     private ToggleGroup sex;
-    public RadioButton man;
-    public RadioButton female;
-    public RadioButton secret;
-
+    @FXML
+    private RadioButton man;
+    @FXML
+    private RadioButton female;
+    @FXML
+    private RadioButton secret;
     @FXML
     private TextField nameTextField;
-
     @FXML
     private TextField answerTextField;
-
     @FXML
     private TextField ageTextField;
-
     @FXML
     private TextField PhoneTextField;
-
     @FXML
     private TextField AddressTextField;
-
     @FXML
     private ComboBox<String> comBoxQuestion;
 
@@ -51,11 +46,9 @@ public class SignUpController {
     void signUpButtonEvent(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("注册警告");
-        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.initStyle(StageStyle.UTILITY);
 
         String userNameRegex = "^[a-zA-Z][a-z0-9A-Z_]{2,15}$";
-        String passwordIllegalRegex = "[ _`~$^&*()=|{}':;,\\\\[\\\\].<>/?！￥…（）—【】‘；：”“’。，、？]+|\\n|\\r|\\t";
+        String passwordIllegalRegex = "[ _`~$^&*()=|{}':;,\\\\\\[\\].<>/?！￥…（）—【】‘；：”“’。，、？]+|\\n|\\r|\\t";
         String encryptedAnswerRegex = "^[\\u4e00-\\u9fa5a-zA-Z0-9]+$";
         String ageRegex = "^\\d{1,2}$";
         String phoneRegex = "^1\\d{10}$";
@@ -69,7 +62,7 @@ public class SignUpController {
         String userAge = ageTextField.getText();                            //用户年龄
         String userPhone = PhoneTextField.getText();                        //电话号码
         String userAddress = AddressTextField.getText();                    //地址
-        String userHeadThumb = null;                                        //头像
+        String userHeadThumb = "";                                          //头像
 
         if (!userName.matches(userNameRegex)) {
             alert.setHeaderText("用户名不合法！");
@@ -102,8 +95,8 @@ public class SignUpController {
             return;
         }
         String[] userMsg = new String[]{
-                userName, Login.getMD5String(userPassword),
-                userEncryptedQuestion, Login.getMD5String(userEncryptedAnswer),
+                userName, userPassword,
+                userEncryptedQuestion, userEncryptedAnswer,
                 userSex, userAge, userPhone, userAddress, userHeadThumb
         };
         if (!login.signUp(userMsg)) {
@@ -119,7 +112,9 @@ public class SignUpController {
         }
     }
 
-    public void initialization() {
+    @Override
+    public void initialize(User user) {
+        login = new Login();
         List<String> list = new ArrayList<>();
         list.add("你第个宠物的名字是什么?");
         list.add("你出生城市的名称是什么?");
@@ -130,11 +125,8 @@ public class SignUpController {
         ObservableList<String> observableList = FXCollections.observableList(list);
         comBoxQuestion.setItems(observableList);
         comBoxQuestion.getSelectionModel().selectFirst();
-
         man.setUserData("男");
         female.setUserData("女");
         secret.setUserData("保密");
-
-        login = new Login();
     }
 }

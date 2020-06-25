@@ -21,28 +21,12 @@ public class User {
     private byte[] userHeadThumb;   //用户头像
 
     //账本信息
-    private ArrayList<Book> books = new ArrayList<>();
+    private final ArrayList<Book> books = new ArrayList<>();
     //账单信息
-    private ArrayList<ArrayList<Order>> orders = new ArrayList<>();
-
+    private final ArrayList<ArrayList<Order>> orders = new ArrayList<>();
 
     public User(String userID) {
         this.userID = userID;
-    }
-
-    public User(String userID, String userPassword, String userName, String userRegTime, String userLastTime, String userSex, int userAge, String userPhone, String userAddress, byte[] userHeadThumb, ArrayList<Book> books, ArrayList<ArrayList<Order>> orders) {
-        this.userID = userID;
-        this.userPassword = userPassword;
-        this.userName = userName;
-        this.userRegTime = userRegTime;
-        this.userLastTime = userLastTime;
-        this.userSex = userSex;
-        this.userAge = userAge;
-        this.userPhone = userPhone;
-        this.userAddress = userAddress;
-        this.userHeadThumb = userHeadThumb;
-        this.books = books;
-        this.orders = orders;
     }
 
     public String getUserID() {
