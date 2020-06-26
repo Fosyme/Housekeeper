@@ -116,7 +116,7 @@ public class MainController implements Controller {
             alert.setHeaderText(null);
             if (info.isBookExist(user.getUserID(), pair.getKey())) {
                 alert.setContentText("账本已存在！");
-                alert.showAndWait();
+                alert.show();
                 ctmAddBookEVent(event);
             } else {
                 if (info.addBook(user.getUserID(), pair.getKey(), pair.getValue())) {
@@ -208,7 +208,7 @@ public class MainController implements Controller {
         }
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/addOrder.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/add_order.fxml"));
             Parent page = loader.load();
             Stage stage = new Stage();
             stage.setTitle("添加账单");
@@ -240,7 +240,7 @@ public class MainController implements Controller {
         }
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/alterOrder.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/alter_order.fxml"));
             Parent page = loader.load();
             Stage stage = new Stage();
             stage.setTitle("修改账单");
@@ -317,14 +317,14 @@ public class MainController implements Controller {
         } else {
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("fxml/screenOrder.fxml"));
+                loader.setLocation(Main.class.getResource("fxml/fuzzy_search.fxml"));
                 Scene scene = new Scene(loader.load());
                 Stage stage = new Stage();
                 stage.setTitle("模糊查询");
                 stage.setResizable(false);
                 stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL);
-                ScreenOrder controller = loader.getController();
+                FuzzySearchController controller = loader.getController();
                 controller.initialize(user);
                 controller.setData(info.queryOrder(user.getUserID(), keyword));
                 stage.show();
@@ -343,7 +343,7 @@ public class MainController implements Controller {
             alert.setTitle("警告");
             alert.setHeaderText(null);
             alert.setContentText("请选择账本！");
-            alert.showAndWait();
+            alert.show();
             return;
         }
         try {
@@ -370,7 +370,7 @@ public class MainController implements Controller {
     void dateSearchButtonEvent(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/dateSearch.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/date_search.fxml"));
             Parent page = loader.load();
             Stage stage = new Stage();
             stage.setTitle("日期查询");
@@ -412,20 +412,6 @@ public class MainController implements Controller {
     @FXML
     void lblClearClicked(MouseEvent mouseEvent) {
         keywordTextField.clear();
-    }
-
-    //获取样式值
-    public String getStyleValue() throws IOException {
-        File file = new File("src\\GUI\\resources\\styles.properties");
-        Properties properties = new Properties();
-        FileInputStream fileInputStream = new FileInputStream(file);
-        properties.load(fileInputStream);
-        Iterator<String> iterator = properties.stringPropertyNames().iterator();
-        String Key = "";
-        while (iterator.hasNext()) {
-            Key = iterator.next();
-        }
-        return properties.getProperty(Key, "");
     }
 
     @Override

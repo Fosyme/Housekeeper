@@ -66,31 +66,31 @@ public class SignUpController implements Controller {
         if (!userName.matches(userNameRegex)) {
             alert.setHeaderText("用户名不合法！");
             alert.setContentText("只能是以字母开头，可以包含字母，数字和下划线(_)，且长度为3-16位");
-            alert.showAndWait();
+            alert.show();
             return;
         }
         if (userPassword.matches(passwordIllegalRegex)) {
             alert.setHeaderText("用户密码不合法！");
             alert.setContentText("可以包含字母，数字，下划线(_)和以下字符(!@#%+-)");
-            alert.showAndWait();
+            alert.show();
             return;
         }
         if (!userEncryptedAnswer.matches(encryptedAnswerRegex)) {
             alert.setHeaderText("密保答案不合法！");
             alert.setContentText("可以包含字母，数字和中文");
-            alert.showAndWait();
+            alert.show();
             return;
         }
         if (!userAge.matches(ageRegex)) {
             alert.setHeaderText("年龄不合法！");
             alert.setContentText("只能填写0-99");
-            alert.showAndWait();
+            alert.show();
             return;
         }
         if (!userPhone.matches(phoneRegex)) {
             alert.setHeaderText("手机号不合法！");
             alert.setContentText("只能填写1开头的11位电话号码");
-            alert.showAndWait();
+            alert.show();
             return;
         }
         String[] userMsg = new String[]{
@@ -101,7 +101,7 @@ public class SignUpController implements Controller {
         if (!login.signUp(userMsg)) {
             alert.setHeaderText(null);
             alert.setContentText("用户名已存在");
-            alert.showAndWait();
+            alert.show();
         } else {
             alert.setHeaderText(null);
             alert.setContentText("账号注册成功");
@@ -114,7 +114,7 @@ public class SignUpController implements Controller {
     @Override
     public void initialize(User user) {
         List<String> list = new ArrayList<>();
-        list.add("你第个宠物的名字是什么?");
+        list.add("你第一个宠物的名字是什么?");
         list.add("你出生城市的名称是什么?");
         list.add("你孩童时期的呢称是什么?");
         list.add("你父母相遇的城市的名称是什么?");

@@ -26,7 +26,7 @@
         <RadioButton fx:id="inputRadioButton" layoutX="264.0" layoutY="106.0" mnemonicParsing="false" text="收入"
                      toggleGroup="$togGpMod"/>
         <TextField fx:id="moneyTextField" layoutX="131.0" layoutY="204.0" prefHeight="30.0" prefWidth="233.0"
-                   promptText="请填入金额："/>
+                   promptText="请填入金额"/>
         <ComboBox fx:id="combCate" editable="true" layoutX="131.0" layoutY="308.0" prefHeight="30.0"
                   prefWidth="233.0" promptText="请选择分类"/>
         <DatePicker fx:id="datePicker" layoutX="131.0" layoutY="439.0" prefHeight="30.0" prefWidth="233.0"
@@ -38,12 +38,12 @@
             </font>
         </Button>
         <TextArea fx:id="descTextArea" layoutX="131.0" layoutY="364.0" prefHeight="45.0" prefWidth="233.0"
-                  promptText="请填入备注："/>
+                  promptText="请填入备注"/>
         <Label layoutX="58.0" layoutY="155.0" text="账单名字："/>
         <TextField fx:id="nameTextField" layoutX="132.0" layoutY="150.0" prefHeight="30.0" prefWidth="233.0"
-                   promptText="请输入账单名字："/>
+                   promptText="请输入账单名字"/>
         <ComboBox fx:id="combWay" editable="true" layoutX="131.0" layoutY="254.0" prefHeight="30.0"
                   prefWidth="233.0" promptText="请选择分类"/>
-        <Label layoutX="70.0" layoutY="262.0" text="方式："/>
+        <Label layoutX="70.0" layoutY="262.0" text="方式"/>
     </AnchorPane>
 </AnchorPane>

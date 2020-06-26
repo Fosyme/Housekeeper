@@ -27,7 +27,7 @@ public class SetController implements Controller {
     void aboutSoftwareButtonEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/softInfo.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/soft_info.fxml"));
             Parent page = loader.load();
             Stage stage = new Stage();
             stage.setTitle("关于软件");
@@ -48,7 +48,7 @@ public class SetController implements Controller {
     void userInfoEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/userInfo.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/user_info.fxml"));
             Parent page = loader.load();
             Stage stage = new Stage();
             stage.setTitle("用户界面");
@@ -71,7 +71,7 @@ public class SetController implements Controller {
             ((Stage) paneSet.getScene().getWindow()).close();
             parentStage.close();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/signIn.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/sign_in.fxml"));
             Parent page = loader.load();
             Stage stage = new Stage();
             stage.setTitle("登录");

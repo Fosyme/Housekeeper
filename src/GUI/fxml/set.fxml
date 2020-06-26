@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="paneSet" minHeight="0.0" minWidth="0.0" stylesheets="@signUp.css"
+<AnchorPane fx:id="paneSet" minHeight="0.0" minWidth="0.0" stylesheets="@sign_up.css"
             xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="GUI.controller.SetController">
    <VBox layoutX="-1.0">

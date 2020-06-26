@@ -60,9 +60,9 @@ public class Login {
             return false;
         }
         userInfo[0] = userMsg[0];
-        userInfo[1] = getMD5String(userMsg[0]);
-        userInfo[2] = userMsg[0];
-        userInfo[3] = getMD5String(userMsg[0]);
+        userInfo[1] = getMD5String(userMsg[1]);
+        userInfo[2] = userMsg[2];
+        userInfo[3] = getMD5String(userMsg[3]);
         userInfo[4] = String.valueOf(System.currentTimeMillis() / 1000);
         System.arraycopy(userMsg, 4, userInfo, 5, 5);
         return UserOperation.add(userInfo);
@@ -120,7 +120,7 @@ public class Login {
             prop.put("remember_password", String.valueOf(rememberPassword));
             prop.put("user_name", userName);
             if (rememberPassword) {
-                prop.put("user_password", getMD5String(userPassword));
+                prop.put("user_password", userPassword);
             }
             prop.store(fos, "Config");
             fos.close();

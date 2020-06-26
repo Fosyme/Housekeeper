@@ -3,11 +3,8 @@ package Dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-/**
- * @author 李建强
- * @date 2020-6-11
- */
 public class DBUtil {
+    protected final static Connection connection = DBUtil.getConn();
 
     /**
      * 连接数据库参数
@@ -16,7 +13,7 @@ public class DBUtil {
     private static final String password;
     private static final String driver;
     private static final String url;
-    private static Connection connection;
+    private static Connection conn;
 
     //加载驱动
     static {
@@ -31,14 +28,14 @@ public class DBUtil {
      *
      * @return 返回Connection
      */
-    protected static Connection getConnection() {
+    protected static Connection getConn() {
         try {
             Class.forName(driver);
-            connection = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(url, username, password);
         } catch (Exception e) {
             System.err.println("获取连接失败");
             e.printStackTrace();
         }
-        return connection;
+        return conn;
     }
 }

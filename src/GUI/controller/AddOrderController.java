@@ -53,7 +53,7 @@ public class AddOrderController implements Controller {
             alert.setTitle("警告");
             alert.setHeaderText(null);
             alert.setContentText("请选择日期！");
-            alert.showAndWait();
+            alert.show();
             return;
         }
         String date = datePicker.getValue().toString(); //账单日期
@@ -62,7 +62,7 @@ public class AddOrderController implements Controller {
             alert.setTitle("警告");
             alert.setHeaderText(null);
             alert.setContentText("请填写完整的内容！");
-            alert.showAndWait();
+            alert.show();
             return;
         }
         if (!money.matches(moneyRegex)) {
@@ -70,7 +70,7 @@ public class AddOrderController implements Controller {
             alert.setTitle("警告");
             alert.setHeaderText("你输入的金额有误！");
             alert.setContentText("正确格式为'00.00'，整数位最多8位，小数位最多2位");
-            alert.showAndWait();
+            alert.show();
             return;
         }
         String[] orderMsg = {
@@ -83,14 +83,14 @@ public class AddOrderController implements Controller {
             alert.setTitle("提示");
             alert.setHeaderText(null);
             alert.setContentText("添加成功！");
-            alert.showAndWait();
+            alert.show();
             ((Stage) paneAddOrder.getScene().getWindow()).close();
         } else {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("提示");
             alert.setHeaderText(null);
             alert.setContentText("添加失败");
-            alert.showAndWait();
+            alert.show();
         }
     }
 
@@ -132,6 +132,7 @@ public class AddOrderController implements Controller {
         outputRadioButton.setUserData("支出");
         inputRadioButton.setUserData("收入");
         outputRadioButton.setSelected(true);
+        datePicker.setEditable(false);
     }
 
     public void setSelectedBookID(String bookID) {

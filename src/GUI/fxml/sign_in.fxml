@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 
 <Pane fx:id="paneSignIn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="509.0" prefWidth="739.0" stylesheets="@signIn.css" xmlns="http://javafx.com/javafx/8.0.171"
+      prefHeight="509.0" prefWidth="739.0" stylesheets="@sign_in.css" xmlns="http://javafx.com/javafx/8.0.171"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.SignInController">
    <Button layoutX="240.0" layoutY="438.0" mnemonicParsing="false" onAction="#signUpButtonEvent"
            prefHeight="38.0" prefWidth="113.0" text="注册" textFill="#1b1a1a">

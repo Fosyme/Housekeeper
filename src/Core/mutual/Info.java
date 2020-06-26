@@ -46,7 +46,7 @@ public class Info {
     /**
      * 删除账本数据
      *
-     * @param bookID 欲删除账本在展示列表中的索引
+     * @param bookID 欲删除账本ID
      * @return 账本删除是否成功
      */
     public boolean deleteBook(String bookID) {
@@ -56,7 +56,7 @@ public class Info {
     /**
      * 修改账本信息
      *
-     * @param bookID   账本在展示列表中的索引
+     * @param bookID   账本ID
      * @param newBookName 账本新的名称
      * @param newBookDesc 账本新的描述
      * @return 是否修改成功
@@ -75,7 +75,7 @@ public class Info {
     /**
      * 添加新的账单
      *
-     * @param bookID 欲添加账单所属账本在展示列表中的索引
+     * @param bookID 欲添加账本ID
      * @param orderMsg  账单信息
      *                  账单名, 金额, 方式(现金, 支付宝, 微信, 银行卡, 信用卡, 其他),
      *                  收支模式(收入, 支出), 时间, 分类, 描述
@@ -107,7 +107,7 @@ public class Info {
     /**
      * 修改账单
      *
-     * @param orderID  欲修改账单在展示列表中的索引
+     * @param orderID  欲修改账单ID
      * @param newOrderMsg 账单信息
      *                    账单名, 金额, 方式(现金, 支付宝, 微信, 银行卡, 信用卡, 其他),
      *                    收支模式(收入, 支出), 时间, 分类, 描述
@@ -117,7 +117,7 @@ public class Info {
         String[] newOrderInfo = new String[8];
         System.arraycopy(newOrderMsg, 0, newOrderInfo, 0, 7);
         try {
-            newOrderInfo[5] = String.valueOf(Data.dateFormat.parse(newOrderMsg[4]).getTime() / 1000);
+            newOrderInfo[4] = String.valueOf(Data.dateFormat.parse(newOrderMsg[4]).getTime() / 1000);
         } catch (ParseException e) {
             e.printStackTrace();
         }

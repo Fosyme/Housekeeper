@@ -6,16 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BookOperation {
-    private static final Connection CONNECTION = DBLeader.connection;
+    private static final Connection CONNECTION = DBUtil.connection;
     private static PreparedStatement preparedStatement = null;
 
     /**
      * 添加账本
      *
      * @param data 字符串数组（用户id、账本名、账本、描述、添加时间、最后修改时间）
-     * @return 账本id
+     * @return 是否添加成功
      */
-    public static String add(String[] data) {
+    public static boolean add(String[] data) {
         String sql;
         try {
             sql = "insert into `book` values(0, ?, ?, ?, ?)";
@@ -24,12 +24,11 @@ public class BookOperation {
             preparedStatement.setString(2, data[1]);
             preparedStatement.setString(3, data[2]);
             preparedStatement.setString(4, data[3]);
-            preparedStatement.execute();
-            return DBLeader.getIDAfterAdd("book");
+            return preparedStatement.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return false;
     }
 
     /**

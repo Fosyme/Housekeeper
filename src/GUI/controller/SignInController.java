@@ -5,6 +5,7 @@ import Core.mutual.Login;
 import GUI.Controller;
 import GUI.Main;
 import GUI.OpenFormAfterThis;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,13 +49,13 @@ public class SignInController implements Controller {
                 rememberPassword.setSelected(true);
             }
         });
-        passwordTextField.textProperty().addListener((observableValue, s, t1) ->
-                passwordType = Login.plain);
+        passwordTextField.textProperty().addListener((observableValue, s, t1) -> {
+            passwordType = Login.plain;
+        });
     }
 
     //自动键入用户上次输入的用户名和密码
     public void smartFill(String userName, String userPassword) {
-        passwordType = Login.cipher;
         nameTextField.setText(userName);
         passwordTextField.setText(userPassword);
     }
@@ -62,27 +63,33 @@ public class SignInController implements Controller {
     //显示用户上次设置的记住密码选项
     public void setRemember(boolean remember) {
         this.rememberPassword.setSelected(remember);
+        if (remember) {
+            passwordType = Login.cipher;
+        }
     }
 
     //登录事件
     @FXML
     void signInButtonEvent(ActionEvent event) {
         Login login = new Login();
+        String name = nameTextField.getText();
+        String password = passwordTextField.getText();
         //登录
-        if (nameTextField.getText().isBlank() || passwordTextField.getText().isBlank()) {
+        if (name == null || password == null || name.isBlank() || password.isBlank()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("警告");
             alert.setHeaderText(null);
             alert.setContentText("请输入用户名和密码！");
+            alert.show();
             return;
         }
         user = login.signIn(nameTextField.getText(), passwordTextField.getText(), passwordType);
         if (user != null) {
-            System.out.println("!!!TEST!!!");
-            Alert alert = new Alert(Alert.AlertType.NONE);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("欢迎");
             alert.setHeaderText(null);
             alert.setContentText(user.getUserName() + "，欢迎回来！");
+            alert.showAndWait();
             try {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(Main.class.getResource("fxml/main.fxml"));
@@ -98,7 +105,7 @@ public class SignInController implements Controller {
                 ((Stage) paneSignIn.getScene().getWindow()).close();
                 login.writeConfig(user.getUserName(), user.getUserPassword(),
                         autoSignIn.isSelected(), rememberPassword.isSelected());
-                stage.showAndWait();
+                stage.show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -107,6 +114,7 @@ public class SignInController implements Controller {
             alert.setTitle("警告");
             alert.setHeaderText(null);
             alert.setContentText("用户名和密码有误！");
+            alert.show();
         }
     }
 
@@ -115,7 +123,7 @@ public class SignInController implements Controller {
         //注册
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/signUp.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/sign_up.fxml"));
             Parent page = loader.load();
             Stage stage = new Stage();
             stage.setOnCloseRequest(windowEvent -> {
@@ -140,26 +148,22 @@ public class SignInController implements Controller {
     void findPasswordEvent(ActionEvent event) {
         Login login = new Login();
         //找回密码
-        try {
-            TextInputDialog textInputDialog = new TextInputDialog();
-            textInputDialog.setTitle("找回密码");
-            textInputDialog.setHeaderText(null);
-            textInputDialog.setContentText("请输入你的用户名");
-            do {
-                Optional<String> rs = textInputDialog.showAndWait();
-                if (rs.isEmpty()) {
-                    break;
-                }
-                String userName = rs.get();
-                String encryptedQuestion = login.queryUserEncrypted(userName);
-                if (encryptedQuestion != null) {
+        TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setTitle("找回密码");
+        textInputDialog.setHeaderText(null);
+        textInputDialog.setContentText("请输入你的用户名");
+        Optional<String> rs = textInputDialog.showAndWait();
+        rs.ifPresent(userName -> {
+            String encryptedQuestion = login.queryUserEncrypted(userName);
+            if (encryptedQuestion != null) {
+                try {
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(Main.class.getResource("fxml/findPassword.fxml"));
+                    loader.setLocation(Main.class.getResource("fxml/find_password.fxml"));
                     Parent page = loader.load();
                     Stage stage = new Stage();
                     stage.setOnCloseRequest(windowEvent -> {
                         ((Stage) paneSignIn.getScene().getWindow()).close();
-                        OpenFormAfterThis.signIn("", "");
+                        OpenFormAfterThis.signIn(userName, "");
                     });
                     stage.setTitle("找回密码");
                     stage.setResizable(false);
@@ -170,18 +174,18 @@ public class SignInController implements Controller {
                     controller.initialize(null);
                     controller.setContent(userName, encryptedQuestion);
                     ((Stage) paneSignIn.getScene().getWindow()).close();
-                    stage.showAndWait();
-                    break;
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle(null);
-                    alert.setHeaderText(null);
-                    alert.setContentText("输入的用户名有误");
-                    alert.showAndWait();
+                    stage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } while (true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle(null);
+                alert.setHeaderText(null);
+                alert.setContentText("输入的用户名有误，或该用户无密保！");
+                alert.showAndWait();
+                findPasswordEvent(event);
+            }
+        });
     }
 }

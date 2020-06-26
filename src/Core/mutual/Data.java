@@ -28,7 +28,7 @@ public class Data {
             //将用户数据从数据库中提取到用户类中
             if (userRS != null && userRS.next()) {
                 user.setUserName(userRS.getString("user_name"));
-                user.setUserPassword(userRS.getString("user_password"));
+                user.setUserPassword(userRS.getString("user_pwd"));
                 user.setUserRegTime(userRS.getString("user_reg_time"));
                 user.setUserLastTime(userRS.getString("user_last_time"));
                 user.setUserSex(userRS.getString("user_sex"));

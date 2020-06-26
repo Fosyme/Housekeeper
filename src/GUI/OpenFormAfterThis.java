@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -16,20 +15,25 @@ import java.util.Optional;
 
 public class OpenFormAfterThis {
     public static void signIn(String userName, String userPassword) {
+        Login login = new Login();
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("fxml/signIn.fxml"));
+            loader.setLocation(Main.class.getResource("fxml/sign_in.fxml"));
             Parent page = loader.load();
-            Stage signIn = new Stage();
-            signIn.setTitle("用户登录");
-            signIn.setResizable(false);
-            signIn.initModality(Modality.APPLICATION_MODAL);
+            Stage stage = new Stage();
+            stage.setTitle("用户登录");
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(page);
-            signIn.setScene(scene);
+            stage.setScene(scene);
             SignInController controller = loader.getController();
-            controller.initialize(null);
+            //先赋予信息再做初始化(含监听器)
             controller.smartFill(userName, userPassword);
-            signIn.show();
+            controller.setRemember(false);
+            controller.initialize(null);
+            stage.setOnCloseRequest(windowEvent ->
+                    login.writeConfig(userName, "", false, false));
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

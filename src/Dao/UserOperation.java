@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserOperation {
-    private static final Connection CONNECTION = DBLeader.connection;
+    private static final Connection CONNECTION = DBUtil.connection;
     private static PreparedStatement preparedStatement = null;
 
     //TODO string -> int
@@ -80,7 +80,6 @@ public class UserOperation {
             preparedStatement.setString(8, userMsg[7]);
             preparedStatement.setString(9, userMsg[8]);
             preparedStatement.setString(10, userMsg[9]);
-            preparedStatement.clearParameters();
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
             }

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OrderOperation {
-    private static final Connection CONNECTION = DBLeader.connection;
+    private static final Connection CONNECTION = DBUtil.connection;
     private static PreparedStatement preparedStatement = null;
 
     /**
@@ -29,7 +29,7 @@ public class OrderOperation {
             preparedStatement.setString(7, data[6]);
             preparedStatement.setString(8, data[7]);
             preparedStatement.setString(9, data[8]);
-            return preparedStatement.execute();
+            return preparedStatement.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -72,14 +72,14 @@ public class OrderOperation {
             sql = "update `order` set `order_name` = ?, `order_price` = ?, `order_way` = ?, `order_mod` = ?, " +
                     "`order_time` = ?, `order_cate` = ?, `order_desc` = ?, `order_image_src` = ? where `order_id` = ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
-            preparedStatement.setString(1, newData[1]);
-            preparedStatement.setDouble(2, Double.parseDouble(newData[2]));
-            preparedStatement.setString(3, newData[3]);
-            preparedStatement.setString(4, newData[4]);
-            preparedStatement.setString(5, newData[5]);
-            preparedStatement.setString(6, newData[6]);
-            preparedStatement.setString(7, newData[7]);
-            preparedStatement.setString(8, newData[8]);
+            preparedStatement.setString(1, newData[0]);
+            preparedStatement.setDouble(2, Double.parseDouble(newData[1]));
+            preparedStatement.setString(3, newData[2]);
+            preparedStatement.setString(4, newData[3]);
+            preparedStatement.setString(5, newData[4]);
+            preparedStatement.setString(6, newData[5]);
+            preparedStatement.setString(7, newData[6]);
+            preparedStatement.setString(8, newData[7]);
             preparedStatement.setInt(9, Integer.parseInt(id));
             if (preparedStatement.executeUpdate() == 1) {
                 return true;

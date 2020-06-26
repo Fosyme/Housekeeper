@@ -6,7 +6,7 @@ import Dao.BookOperation;
 import java.util.Arrays;
 
 public class Order {
-    private String orderID;   //账单ID
+    private String orderID;         //账单ID
     private String bookID;          //所属账本ID
     private String bookName;        //所属账本名(非数据库)
     private String orderName;       //账单名

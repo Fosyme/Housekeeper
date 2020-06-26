@@ -12,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 
-public class ScreenOrder implements Controller {
+public class FuzzySearchController implements Controller {
     @FXML
     private TableView<Order> tabScreen;
     @FXML

@@ -33,9 +33,17 @@ public class FindPasswordController implements Controller {
         Login login = new Login();
         String encryptedAnswer = AnswerTextField.getText();
         String newPassword = NewPasswordTexField.getText();
+        if (encryptedAnswer == null || newPassword == null || encryptedAnswer.isBlank() || newPassword.isBlank()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("警告");
+            alert.setHeaderText(null);
+            alert.setContentText("密码不能为空！");
+            alert.showAndWait();
+            return;
+        }
         boolean b = login.recoverPassword(userName, encryptedAnswer, newPassword);
         if (b) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle(null);
             alert.setHeaderText("密码修改成功！");
             alert.setContentText("请记住你的新密码：" + newPassword);
@@ -43,11 +51,11 @@ public class FindPasswordController implements Controller {
             ((Stage) paneFindPwd.getScene().getWindow()).close();
             OpenFormAfterThis.signIn(userName, newPassword);
         } else {
-            //TODO Test
-            Alert alert = new Alert(Alert.AlertType.WARNING, "密保答案错误！");
-            alert.setTitle(null);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("警告");
             alert.setHeaderText(null);
-            alert.showAndWait();
+            alert.setContentText("密保答案错误！");
+            alert.show();
         }
     }
 

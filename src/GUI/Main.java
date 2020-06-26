@@ -16,10 +16,10 @@ import java.util.Properties;
 
 public class Main extends Application {
     User user;
-    Login login;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Login login = new Login();
         String userName = "";
         String userPassword = "";
         boolean rememberPassword = false;
@@ -54,15 +54,16 @@ public class Main extends Application {
             }
         }
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("fxml/signIn.fxml"));
+        loader.setLocation(getClass().getResource("fxml/sign_in.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("用户登录");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
         SignInController controller = loader.getController();
-        controller.initialize(null);
+        //先赋予信息再做初始化(含监听器)
         controller.smartFill(userName, userPassword);
         controller.setRemember(rememberPassword);
+        controller.initialize(null);
         primaryStage.show();
     }
 
