@@ -24,12 +24,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Optional;
-import java.util.Properties;
 
 public class MainController implements Controller {
     private User user;
@@ -109,14 +105,16 @@ public class MainController implements Controller {
     void ctmAddBookEVent(ActionEvent event) {
         Info info = new Info();
         Optional<Pair<String, String>> result = bookDialog("添加账本", "", "");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         //对结果进行处理
         result.ifPresent(pair -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            if (pair.getKey().isBlank()) {
+                alert.setContentText("内容不能为空！");
+            }
             alert.setTitle("提示");
             alert.setHeaderText(null);
             if (info.isBookExist(user.getUserID(), pair.getKey())) {
                 alert.setContentText("账本已存在！");
-                alert.show();
                 ctmAddBookEVent(event);
             } else {
                 if (info.addBook(user.getUserID(), pair.getKey(), pair.getValue())) {
@@ -124,8 +122,8 @@ public class MainController implements Controller {
                 } else {
                     alert.setContentText("账本添加失败，请重试！");
                 }
-                alert.show();
             }
+            alert.show();
         });
         refreshBook();
     }
@@ -302,11 +300,9 @@ public class MainController implements Controller {
         refreshOrder(order.getBookID());
     }
 
-    //搜索
+    //模糊查询关键字
     @FXML
     void searchButtonEvent(ActionEvent event) {
-        Info info = new Info();
-        //模糊查询关键字
         String keyword = keywordTextField.getText();
         if (keyword.isBlank()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -314,31 +310,31 @@ public class MainController implements Controller {
             alert.setHeaderText(null);
             alert.setContentText("内容不能为空！");
             alert.show();
-        } else {
-            try {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("fxml/fuzzy_search.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage = new Stage();
-                stage.setTitle("模糊查询");
-                stage.setResizable(false);
-                stage.setScene(scene);
-                stage.initModality(Modality.APPLICATION_MODAL);
-                FuzzySearchController controller = loader.getController();
-                controller.initialize(user);
-                controller.setData(info.queryOrder(user.getUserID(), keyword));
-                stage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("fxml/fuzzy_search.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.setTitle("模糊查询");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            FuzzySearchController controller = loader.getController();
+            controller.initialize(user);
+            controller.setData(keyword);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     //报表事件
     @FXML
     void reportButtonEvent(ActionEvent event) {
-        int bookIndex = bookTableView.getSelectionModel().getSelectedIndex();
-        if (bookIndex == -1) {
+        Book book = bookTableView.getSelectionModel().getSelectedItem();
+        if (book == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("警告");
             alert.setHeaderText(null);
@@ -358,7 +354,7 @@ public class MainController implements Controller {
             stage.setScene(scene);
             ReportController controller = loader.getController();
             controller.initialize(user);
-            controller.setPieChar(user.getUserID());
+            controller.setPieChar(book.getBookID());
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -422,8 +418,10 @@ public class MainController implements Controller {
         bookTableView
                 .getSelectionModel()
                 .selectedItemProperty()
-                .addListener((observableValue, book, t1) ->
-                        refreshOrder(t1.getBookID()));
+                .addListener((observableValue, book, t1) -> {
+                    if (t1 != null)
+                        refreshOrder(t1.getBookID());
+                });
         lblClear.setVisible(false);
         keywordTextField
                 .textProperty()

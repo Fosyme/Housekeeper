@@ -10,23 +10,23 @@ public class UserInfoController implements Controller {
     @FXML
     private Label UserName;
     @FXML
-    private RadioButton Man;
-    @FXML
     private ToggleGroup sex;
     @FXML
-    private RadioButton Woman;
+    private RadioButton male;
     @FXML
-    private TextField UserAge;
+    private RadioButton secrecy;
     @FXML
-    private TextField UserNUmber;
+    private RadioButton female;
     @FXML
-    private TextField UserAddress;
+    private TextField userAge;
     @FXML
-    private PasswordField UserPassword;
+    private TextField userPhone;
     @FXML
-    private Button UserChange;
+    private TextField userAddress;
     @FXML
-    private Button UserClose;
+    private Button userChange;
+    @FXML
+    private Button userClose;
 
     @FXML
     void UserChangeEvent(ActionEvent event) {
@@ -35,6 +35,16 @@ public class UserInfoController implements Controller {
 
     @Override
     public void initialize(User user) {
-
+        UserName.setText(user.getUserName());
+        if (user.getUserSex().equals("男")) {
+            male.setSelected(true);
+        } else if (user.getUserSex().equals("女")) {
+            female.setSelected(true);
+        } else {
+            secrecy.setSelected(true);
+        }
+        userAge.setText(String.valueOf(user.getUserAge()));
+        userPhone.setText(user.getUserPhone());
+        userAddress.setText(user.getUserAddress());
     }
 }

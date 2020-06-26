@@ -39,8 +39,7 @@ public class Info {
         bookMsg[2] = bookDesc;
         bookMsg[3] = String.valueOf(System.currentTimeMillis() / 1000);
         //添加账本并获取账本ID
-        String bookID = BookOperation.add(bookMsg);
-        return bookID != null;
+        return BookOperation.add(bookMsg);
     }
 
     /**
@@ -136,13 +135,11 @@ public class Info {
         Data data = new Data();
         ArrayList<Order> orders = new ArrayList<>();
         ResultSet bookRS = BookOperation.queryInfo(userID);
-        String bookID;
-        ResultSet ordersRS;
         try {
             if (bookRS != null) {
                 while (bookRS.next()) {
-                    bookID = bookRS.getString("book_id");
-                    ordersRS = OrderOperation.fuzzyQueryInfo(bookID, keyword);
+                    String bookID = bookRS.getString("book_id");
+                    ResultSet ordersRS = OrderOperation.fuzzyQueryInfo(bookID, keyword);
                     data.fillOrder(orders, ordersRS);
                 }
             }

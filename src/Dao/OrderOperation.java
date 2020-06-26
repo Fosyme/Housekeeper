@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OrderOperation {
-    private static final Connection CONNECTION = DBUtil.connection;
+    private static final Connection CONNECTION = DBUtil.getConn();
     private static PreparedStatement preparedStatement = null;
 
     /**
@@ -119,7 +119,7 @@ public class OrderOperation {
     public static ResultSet fuzzyQueryInfo(String bookID, String keyWord) {
         String sql;
         try {
-            sql = "select * from `order` where `book_id` = ? and `order_name` like ? or `order_desc` like ?";
+            sql = "select * from `order` where `book_id` = ? and (`order_name` like ? or `order_desc` like ?)";
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setInt(1, Integer.parseInt(bookID));
             preparedStatement.setString(2, "%" + keyWord + "%");

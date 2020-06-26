@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserOperation {
-    private static final Connection CONNECTION = DBUtil.connection;
+    private static final Connection CONNECTION = DBUtil.getConn();
     private static PreparedStatement preparedStatement = null;
 
     //TODO string -> int

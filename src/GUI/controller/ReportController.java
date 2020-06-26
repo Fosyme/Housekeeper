@@ -37,9 +37,9 @@ public class ReportController implements Controller {
     @FXML
     private PieChart yearPieChart;
 
-    public void setPieChar(String userID) {
+    public void setPieChar(String bookID) {
         Report report = new Report();
-        List<List<PieChart.Data>> lists = report.reportData(userID, System.currentTimeMillis());
+        List<List<PieChart.Data>> lists = report.reportData(bookID, System.currentTimeMillis());
 
         double dayOut = lists.get(0).get(0).getPieValue();
         double dayIn = lists.get(0).get(1).getPieValue();

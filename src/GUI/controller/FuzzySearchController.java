@@ -2,6 +2,7 @@ package GUI.controller;
 
 import Core.model.Order;
 import Core.model.User;
+import Core.mutual.Info;
 import GUI.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 
 public class FuzzySearchController implements Controller {
+    private User user;
+
     @FXML
     private TableView<Order> tabScreen;
     @FXML
@@ -32,7 +35,10 @@ public class FuzzySearchController implements Controller {
     @FXML
     private TableColumn<Order, String> colOrderDate;
 
-    public void setData(ArrayList<Order> orders) {
+    public void setData(String keyword) {
+        Info info = new Info();
+        ArrayList<Order> orders = info.queryOrder(user.getUserID(), keyword);
+
         ObservableList<Order> list = FXCollections.observableList(orders);
         tabScreen.setItems(list);
         colBookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
@@ -47,6 +53,6 @@ public class FuzzySearchController implements Controller {
 
     @Override
     public void initialize(User user) {
-
+        this.user = user;
     }
 }
