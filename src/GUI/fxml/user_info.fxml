@@ -2,41 +2,46 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<AnchorPane prefHeight="560.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.UserInfoController">
-   <VBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
-         <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="50.0" text="用户名：" textAlignment="RIGHT" />
-         <Label fx:id="UserName" prefHeight="30.0" prefWidth="200.0">
-            <font>
-               <Font size="18.0" />
-            </font>
-         </Label>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
-         <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="50.0" text="性别：" />
-         <RadioButton fx:id="male" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="66.0" text="男" textAlignment="CENTER">
-            <toggleGroup>
-               <ToggleGroup fx:id="sex" />
-            </toggleGroup>
-         </RadioButton>
-         <RadioButton fx:id="female" mnemonicParsing="false" prefWidth="66.0" text="女" textAlignment="CENTER" toggleGroup="$sex" />
-         <RadioButton fx:id="secrecy" mnemonicParsing="false" prefWidth="66.0" text="保密" textAlignment="CENTER" toggleGroup="$sex" />
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
-         <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="50.0" text="年龄：" textAlignment="RIGHT" />
-         <TextField fx:id="userAge" prefHeight="30.0" prefWidth="200.0" />
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
-         <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="50.0" text="手机号：" textAlignment="RIGHT" />
-         <TextField fx:id="userPhone" prefHeight="30.0" prefWidth="200.0" />
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
-         <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="50.0" text="地址：" textAlignment="RIGHT" />
-         <TextField fx:id="userAddress" prefHeight="30.0" prefWidth="200.0" />
-      </HBox>
-   </VBox>
-   <Button fx:id="userClose" layoutX="248.0" layoutY="500.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0" text="关闭" />
-   <Button fx:id="userChange" layoutX="107.0" layoutY="500.0" mnemonicParsing="false" onAction="#UserChangeEvent" prefHeight="40.0" prefWidth="70.0" text="更改" />
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="560.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8"
+            fx:controller="GUI.controller.UserInfoController">
+    <VBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
+            <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="50.0" text="用户名：" textAlignment="RIGHT"/>
+            <Label fx:id="UserName" prefHeight="30.0" prefWidth="200.0">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
+            <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="50.0" text="性别："/>
+            <RadioButton fx:id="male" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="66.0" text="男"
+                         textAlignment="CENTER">
+                <toggleGroup>
+                    <ToggleGroup fx:id="sex"/>
+                </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="female" mnemonicParsing="false" prefWidth="66.0" text="女" textAlignment="CENTER"
+                         toggleGroup="$sex"/>
+            <RadioButton fx:id="secrecy" mnemonicParsing="false" prefWidth="66.0" text="保密" textAlignment="CENTER"
+                         toggleGroup="$sex"/>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
+            <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="50.0" text="年龄：" textAlignment="RIGHT"/>
+            <TextField fx:id="userAge" prefHeight="30.0" prefWidth="200.0"/>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
+            <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="50.0" text="手机号：" textAlignment="RIGHT"/>
+            <TextField fx:id="userPhone" prefHeight="30.0" prefWidth="200.0"/>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
+            <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="50.0" text="地址：" textAlignment="RIGHT"/>
+            <TextField fx:id="userAddress" prefHeight="30.0" prefWidth="200.0"/>
+        </HBox>
+    </VBox>
+    <Button fx:id="userChange" layoutX="107.0" layoutY="500.0" mnemonicParsing="false" onAction="#UserChangeEvent"
+            prefHeight="40.0" prefWidth="70.0" text="更改"/>
+    <Button fx:id="userClose" layoutX="248.0" layoutY="500.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="70.0"
+            text="关闭"/>
 </AnchorPane>
