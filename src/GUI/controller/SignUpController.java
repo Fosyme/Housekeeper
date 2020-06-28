@@ -103,8 +103,9 @@ public class SignUpController implements Controller {
             alert.setContentText("用户名已存在");
             alert.show();
         } else {
-            alert.setHeaderText(null);
-            alert.setContentText("账号注册成功");
+            alert.setTitle("注册提醒");
+            alert.setHeaderText("账号注册成功");
+            alert.setContentText("请牢记你的账号和密码！\n账号：" + userName + "\n密码：" + userPassword);
             alert.showAndWait();
             ((Stage) paneSignUp.getScene().getWindow()).close();
             OpenFormAfterThis.signIn(userName, userPassword);
