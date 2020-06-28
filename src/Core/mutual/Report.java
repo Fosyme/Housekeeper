@@ -20,10 +20,13 @@ public class Report {
         calendar.setTimeInMillis(time);
         long startDayTime = thisDayStartCalender(calendar).getTimeInMillis();
         long endDayTime = nextDayStartCalender(calendar).getTimeInMillis() - 1;
+        calendar.setTimeInMillis(time);
         long startWeekTime = thisWeekStartCalender(calendar).getTimeInMillis();
         long endWeekTime = nextWeekStartCalender(calendar).getTimeInMillis() - 1;
+        calendar.setTimeInMillis(time);
         long startMonthTime = thisMonthStartCalender(calendar).getTimeInMillis();
         long endMonthTime = nextMonthStartCalender(calendar).getTimeInMillis() - 1;
+        calendar.setTimeInMillis(time);
         long startYearTime = thisYearStartCalender(calendar).getTimeInMillis();
         long endYearTime = nextYearStartCalender(calendar).getTimeInMillis() - 1;
         ResultSet dayRS = OrderOperation.queryTimePeriod(bookID, startDayTime / 1000, endDayTime / 1000);
@@ -71,11 +74,13 @@ public class Report {
     //获取下一天0点时间戳
     private static Calendar nextDayStartCalender(Calendar calendar) {
         calendar.add(Calendar.DAY_OF_WEEK, 1);
+        thisDayStartCalender(calendar);
         return calendar;
     }
 
     //获取当周0点时间戳
     private static Calendar thisWeekStartCalender(Calendar calendar) {
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         thisDayStartCalender(calendar);
         return calendar;
@@ -83,7 +88,9 @@ public class Report {
 
     //获取下一周0点时间戳
     private static Calendar nextWeekStartCalender(Calendar calendar) {
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
         calendar.add(Calendar.WEEK_OF_MONTH, 1);
+        thisWeekStartCalender(calendar);
         return calendar;
     }
 
@@ -97,6 +104,7 @@ public class Report {
     //获取下一月0点时间戳
     private static Calendar nextMonthStartCalender(Calendar calendar) {
         calendar.add(Calendar.MONTH, 1);
+        thisMonthStartCalender(calendar);
         return calendar;
     }
 
@@ -110,6 +118,7 @@ public class Report {
     //获取下一年0点时间戳
     private static Calendar nextYearStartCalender(Calendar calendar) {
         calendar.add(Calendar.YEAR, 1);
+        thisYearStartCalender(calendar);
         return calendar;
     }
 }
