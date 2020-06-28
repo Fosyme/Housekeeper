@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -43,6 +44,7 @@ public class Main extends Application {
                         Parent root = loader.load();
                         primaryStage.setTitle("HouseKeeper");
                         primaryStage.setScene(new Scene(root));
+                        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("resources/记账.png")));
                         primaryStage.setOnCloseRequest(windowEvent ->
                                 OpenFormAfterThis.exitApp(windowEvent, user.getUserID()));
                         MainController controller = loader.getController();
@@ -59,6 +61,7 @@ public class Main extends Application {
         primaryStage.setTitle("用户登录");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("resources/记账.png")));
         SignInController controller = loader.getController();
         //先赋予信息再做初始化(含监听器)
         controller.smartFill(userName, userPassword);

@@ -12,10 +12,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -49,9 +51,8 @@ public class SignInController implements Controller {
                 rememberPassword.setSelected(true);
             }
         });
-        passwordTextField.textProperty().addListener((observableValue, s, t1) -> {
-            passwordType = Login.plain;
-        });
+        passwordTextField.textProperty().addListener((observableValue, s, t1) ->
+                passwordType = Login.plain);
     }
 
     //自动键入用户上次输入的用户名和密码
@@ -100,6 +101,7 @@ public class SignInController implements Controller {
                 stage.initModality(Modality.APPLICATION_MODAL);
                 Scene scene = new Scene(page);
                 stage.setScene(scene);
+                stage.getIcons().add(new Image(new FileInputStream("src/GUI/resources/记账.png")));
                 MainController controller = loader.getController();
                 controller.initialize(user);
                 ((Stage) paneSignIn.getScene().getWindow()).close();
