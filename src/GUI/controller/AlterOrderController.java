@@ -74,6 +74,7 @@ public class AlterOrderController implements Controller {
             alert.setHeaderText("你输入的金额有误！");
             alert.setContentText("正确格式为'00.00'，整数位最多8位，小数位最多2位");
             alert.show();
+            return;
         }
         String[] orderMsg = {
                 name, money, way, type, date, cate, desc

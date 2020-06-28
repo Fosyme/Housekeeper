@@ -3,8 +3,6 @@ package Core.model;
 import Core.mutual.Data;
 import Dao.BookOperation;
 
-import java.util.Arrays;
-
 public class Order {
     private String orderID;         //账单ID
     private String bookID;          //所属账本ID
@@ -17,7 +15,6 @@ public class Order {
     private String orderDate;       //账单时间
     private String orderCate;       //账单分类
     private String orderDesc;       //账单详细描述
-    private byte[] orderImageSrc;   //账单图片
 
     public Order() {
     }
@@ -36,7 +33,6 @@ public class Order {
         setOrderTime(orderMsg[5]);
         setOrderCate(orderMsg[6]);
         setOrderDesc(orderMsg[7]);
-        setOrderImageSrc(orderMsg[8].getBytes());
     }
 
     public String getOrderID() {
@@ -125,19 +121,12 @@ public class Order {
         this.orderDesc = orderDesc;
     }
 
-    public byte[] getOrderImageSrc() {
-        return orderImageSrc;
-    }
-
-    public void setOrderImageSrc(byte[] orderImageSrc) {
-        this.orderImageSrc = orderImageSrc;
-    }
-
     @Override
     public String toString() {
-        return "setOrder{" +
+        return "Order{" +
                 "orderID='" + orderID + '\'' +
                 ", bookID='" + bookID + '\'' +
+                ", bookName='" + bookName + '\'' +
                 ", orderName='" + orderName + '\'' +
                 ", orderPrice=" + orderPrice +
                 ", orderWay='" + orderWay + '\'' +
@@ -146,7 +135,6 @@ public class Order {
                 ", orderDate='" + orderDate + '\'' +
                 ", orderCate='" + orderCate + '\'' +
                 ", orderDesc='" + orderDesc + '\'' +
-                ", orderImageSrc=" + Arrays.toString(orderImageSrc) +
                 '}';
     }
 }

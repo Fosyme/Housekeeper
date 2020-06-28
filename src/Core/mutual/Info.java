@@ -81,7 +81,7 @@ public class Info {
      * @return 账单是否添加成功
      */
     public boolean addOrder(String bookID, String[] orderMsg) {
-        String[] orderInfo = new String[9];
+        String[] orderInfo = new String[8];
         orderInfo[0] = bookID;
         System.arraycopy(orderMsg, 0, orderInfo, 1, 7);
         try {
@@ -89,7 +89,6 @@ public class Info {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        orderInfo[8] = "";
         return OrderOperation.add(orderInfo);
     }
 
@@ -120,7 +119,6 @@ public class Info {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        newOrderInfo[7] = null;
         return OrderOperation.changeInfo(orderID, newOrderInfo);
     }
 
@@ -176,5 +174,4 @@ public class Info {
         }
         return orders;
     }
-
 }

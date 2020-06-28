@@ -1,7 +1,5 @@
 package Core.model;
 
-import java.util.Arrays;
-
 /**
  * 用户类, 管理用户的所有的信息
  *
@@ -17,7 +15,6 @@ public class User {
     private int userAge;            //用户年龄
     private String userPhone;       //用户手机号
     private String userAddress;     //用户地址
-    private byte[] userHeadThumb;   //用户头像
 
     public User(String userID) {
         this.userID = userID;
@@ -91,14 +88,6 @@ public class User {
         this.userAddress = userAddress;
     }
 
-    public byte[] getUserHeadThumb() {
-        return userHeadThumb;
-    }
-
-    public void setUserHeadThumb(byte[] userHeadThumb) {
-        this.userHeadThumb = userHeadThumb;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -111,7 +100,6 @@ public class User {
                 ", userAge=" + userAge +
                 ", userPhone='" + userPhone + '\'' +
                 ", userAddress='" + userAddress + '\'' +
-                ", userHeadThumb=" + Arrays.toString(userHeadThumb) +
                 '}';
     }
 }

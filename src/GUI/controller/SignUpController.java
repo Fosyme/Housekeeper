@@ -61,7 +61,6 @@ public class SignUpController implements Controller {
         String userAge = ageTextField.getText();                            //用户年龄
         String userPhone = PhoneTextField.getText();                        //电话号码
         String userAddress = AddressTextField.getText();                    //地址
-        String userHeadThumb = "";                                          //头像
 
         if (!userName.matches(userNameRegex)) {
             alert.setHeaderText("用户名不合法！");
@@ -96,8 +95,9 @@ public class SignUpController implements Controller {
         String[] userMsg = new String[]{
                 userName, userPassword,
                 userEncryptedQuestion, userEncryptedAnswer,
-                userSex, userAge, userPhone, userAddress, userHeadThumb
+                userSex, userAge, userPhone, userAddress
         };
+        //调用注册方法
         if (!login.signUp(userMsg)) {
             alert.setHeaderText(null);
             alert.setContentText("用户名已存在");

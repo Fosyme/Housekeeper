@@ -12,13 +12,13 @@ public class OrderOperation {
     /**
      * 添加账单,返回账单id。
      *
-     * @param data 字符串数组（账本id、账单名、金额、支付方式、收支模式、时间、分类、描述、图片）
+     * @param data 字符串数组（账本id、账单名、金额、支付方式、收支模式、时间、分类、描述）
      * @return 是否添加成功
      **/
     public static boolean add(String[] data) {
         String sql;
         try {
-            sql = "insert into `order` values (0, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "insert into `order` values (0, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setInt(1, Integer.parseInt(data[0]));
             preparedStatement.setString(2, data[1]);
@@ -28,7 +28,6 @@ public class OrderOperation {
             preparedStatement.setString(6, data[5]);
             preparedStatement.setString(7, data[6]);
             preparedStatement.setString(8, data[7]);
-            preparedStatement.setString(9, data[8]);
             return preparedStatement.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,14 +62,14 @@ public class OrderOperation {
      * 修改账单信息，修改成功时返回true，修改失败时返回false
      *
      * @param id      账单id
-     * @param newData 字符串数组（账单名、金额、支付方式、收支模式、时间、分类、描述、图片）
+     * @param newData 字符串数组（账单名、金额、支付方式、收支模式、时间、分类、描述）
      * @return boolean
      */
     public static boolean changeInfo(String id, String[] newData) {
         String sql;
         try {
             sql = "update `order` set `order_name` = ?, `order_price` = ?, `order_way` = ?, `order_mod` = ?, " +
-                    "`order_time` = ?, `order_cate` = ?, `order_desc` = ?, `order_image_src` = ? where `order_id` = ?";
+                    "`order_time` = ?, `order_cate` = ?, `order_desc` = ? where `order_id` = ?";
             preparedStatement = CONNECTION.prepareStatement(sql);
             preparedStatement.setString(1, newData[0]);
             preparedStatement.setDouble(2, Double.parseDouble(newData[1]));
@@ -79,8 +78,7 @@ public class OrderOperation {
             preparedStatement.setString(5, newData[4]);
             preparedStatement.setString(6, newData[5]);
             preparedStatement.setString(7, newData[6]);
-            preparedStatement.setString(8, newData[7]);
-            preparedStatement.setInt(9, Integer.parseInt(id));
+            preparedStatement.setInt(8, Integer.parseInt(id));
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
             }

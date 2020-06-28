@@ -35,7 +35,6 @@ public class Data {
                 user.setUserAge(userRS.getInt("user_age"));
                 user.setUserPhone(userRS.getString("user_phone"));
                 user.setUserAddress(userRS.getString("user_address"));
-                user.setUserHeadThumb(userRS.getBytes("user_head_thumb"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,7 +99,6 @@ public class Data {
                     order.setOrderTime(orderRS.getString("order_time"));
                     order.setOrderCate(orderRS.getString("order_cate"));
                     order.setOrderDesc(orderRS.getString("order_desc"));
-                    order.setOrderImageSrc(orderRS.getBytes("order_image_src"));
                     orders.add(order);
                 }
             }

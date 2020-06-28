@@ -50,11 +50,11 @@ public class Login {
      *
      * @param userMsg 从前端接受来的用户信息数组
      *                包含: 用户名, 用户密码(明文), 用户密保问题,
-     *                用户密保答案(明文), 性别, 年龄, 手机号, 地址, 头像
+     *                用户密保答案(明文), 性别, 年龄, 手机号, 地址
      * @return 注册结果
      */
     public boolean signUp(String[] userMsg) {
-        String[] userInfo = new String[10];
+        String[] userInfo = new String[9];
         boolean verifyId = UserOperation.isExist(userMsg[0]);
         if (verifyId) {
             return false;
@@ -64,7 +64,7 @@ public class Login {
         userInfo[2] = userMsg[2];
         userInfo[3] = getMD5String(userMsg[3]);
         userInfo[4] = String.valueOf(System.currentTimeMillis() / 1000);
-        System.arraycopy(userMsg, 4, userInfo, 5, 5);
+        System.arraycopy(userMsg, 4, userInfo, 5, 4);
         return UserOperation.add(userInfo);
     }
 
